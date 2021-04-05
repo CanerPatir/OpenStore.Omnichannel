@@ -1,0 +1,20 @@
+<Project>
+    <PropertyGroup>
+        <VersionPrefix>0.0.1</VersionPrefix>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Authors>Caner Patir</Authors>
+        <Company>OpenStore</Company>
+        <Product>OpenStore.Omnichannel</Product>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/canerpatir/OpenStore</RepositoryUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/canerpatir/OpenStore/master/icon.png</PackageIconUrl>
+        <Copyright>OpenStore Community</Copyright>
+        <PackageLicenseUrl>https://github.com/canerpatir/OpenStore/blob/master/LICENCE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/canerpatir/OpenStore</PackageProjectUrl>
+        <LangVersion>latest</LangVersion>
+        <OpenStoreBuildingBlocksVersion>0.2.23</OpenStoreBuildingBlocksVersion>
+        <NetPackagesVersion>5.0.4</NetPackagesVersion>
+
+        <!--     <Nullable>enable</Nullable>-->
+    </PropertyGroup>
+</Project>
