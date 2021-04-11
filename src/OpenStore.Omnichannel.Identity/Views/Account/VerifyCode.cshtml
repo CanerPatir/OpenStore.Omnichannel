@@ -1,0 +1,35 @@
+﻿@model OpenStore.Omnichannel.Identity.ViewModels.Account.VerifyCodeViewModel
+@{
+    ViewData["Title"] = "Verify";
+}
+
+<div class="pt-32pt pt-sm-64pt pb-32pt">
+    <div class="container page__container">
+
+        <form asp-controller="Account" asp-action="VerifyCode" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+            <partial name="AccountValidationSummary"/>
+            <input asp-for="Provider" type="hidden"/>
+            <input asp-for="RememberMe" type="hidden"/>
+            <h4>@ViewData["Status"]</h4>
+            <hr/>
+            <div class="form-group">
+                <label asp-for="Code"></label>
+                <div class="col-md-10">
+                    <input asp-for="Code" class="form-control"/>
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        <input asp-for="RememberBrowser"/>
+                        <label asp-for="RememberBrowser"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

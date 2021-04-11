@@ -1,0 +1,97 @@
+﻿@using OpenStore.Omnichannel.Domain.IdentityContext
+@model OpenStore.Omnichannel.Identity.ViewModels.Account.LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = L["Account.Login"];
+    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+}
+
+<div class="pt-32pt pt-sm-64pt pb-32pt">
+    <div class="container page__container">
+        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="col-md-5 p-0 mx-auto">
+            <partial name="AccountValidationSummary"/>
+            <div class="form-group">
+                <label class="form-label" asp-for="Email">@L["Account.Login.UserName"]</label>
+                <input asp-for="Email" class="form-control" placeholder="@L["Account.Login.UserName"]">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="Password">@L["Account.Login.Password"]</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="@L["Account.Login.Password"]">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <p class="text-right">
+                    <a asp-action="ForgotPassword" class="small">@L["Account.Login.ForgetPassword"]</a>
+                </p>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary"> @L["Account.Login"]</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (loginProviders.Count > 0)
+{
+    <div class="page-separator justify-content-center m-0">
+        <div class="page-separator__text">veya</div>
+    </div>
+    <div class="bg-body pt-32pt pb-32pt pb-md-64pt text-center">
+        <div class="container page__container">
+
+            <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+                <div>
+                    <p>
+                        @foreach (var provider in loginProviders)
+                        {
+                            <button type="submit" class="btn btn-secondary btn-block-xs" name="provider" value="@provider.Name">
+                                @provider.DisplayName
+                            </button>
+                        }
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<p class="text-center mt-4" style="font-size: 12pt">
+    @L["Account.DontHaveAccount"] <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" style="color: rgb(85 103 255);">@L["Account.SignUp"]</a>
+</p>
+
+
+<!-- BEGIN login -->
+<div class="login">
+    <!-- BEGIN login-content -->
+    <div class="login-content">
+        <form action="index.html" method="POST" name="login_form">
+            <h1 class="text-center">Sign In</h1>
+            <div class="text-muted text-center mb-4">
+                For your protection, please verify your identity.
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input type="text" class="form-control form-control-lg fs-15px" value="" placeholder="username@address.com"/>
+            </div>
+            <div class="mb-3">
+                <div class="d-flex">
+                    <label class="form-label">Password</label>
+                    <a href="#" class="ms-auto text-muted">Forgot password?</a>
+                </div>
+                <input type="password" class="form-control form-control-lg fs-15px" value="" placeholder="Enter your password"/>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="customCheck1"/>
+                    <label class="form-check-label fw-500" for="customCheck1">Remember me</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
+            <div class="text-center text-muted">
+                Don't have an account yet? <a href="page_register.html">Sign up</a>.
+            </div>
+        </form>
+    </div>
+    <!-- END login-content -->
+</div>
+<!-- END login -->

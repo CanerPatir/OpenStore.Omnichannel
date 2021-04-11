@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="7.0.1" />
+        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="2.4.1" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="$(OpenIddictVersion)" />
+        <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Infrastructure.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
+    </ItemGroup>
+</Project>

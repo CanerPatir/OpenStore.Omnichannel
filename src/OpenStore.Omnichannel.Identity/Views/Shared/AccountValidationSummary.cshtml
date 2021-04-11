@@ -1,0 +1,12 @@
+@if (!ViewContext.ModelState.IsValid)
+{
+    <div class="text-danger validation-summary-errors" data-valmsg-summary="true">
+        <ul>
+            @foreach (var error in ViewContext.ModelState.SelectMany(x => x.Value.Errors))
+            {
+                <li>@L[error.ErrorMessage]</li>
+            }
+        </ul>
+    </div>
+    @* <div asp-validation-summary="All" class="text-danger"></div> *@
+}

@@ -1,0 +1,142 @@
+﻿@using OpenStore.Omnichannel.Domain.IdentityContext
+@model OpenStore.Omnichannel.Identity.ViewModels.Account.RegisterViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = L["Account.Register"];
+    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+}
+
+@section Scripts
+{
+    <script>
+    
+    $(function() {
+      $('#register-form').submit(function(e) {
+          return handleSubmit();
+      });
+    });
+function popupCenter(url, title, w, h) {
+    // Fixes dual-screen position                             Most browsers      Firefox
+    const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
+    const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+
+    const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    const systemZoom = width / window.screen.availWidth;
+    const left = (width - w) / 2 / systemZoom + dualScreenLeft
+    const top = (height - h) / 2 / systemZoom + dualScreenTop
+    const newWindow = window.open(url, title,
+        `
+      location=no,toolbar=no,
+      scrollbars=yes,
+      width=${w / systemZoom}, 
+      height=${h / systemZoom}, 
+      top=${top}, 
+      left=${left}
+      `
+    )
+
+    if (window.focus) newWindow.focus();
+}
+
+function handleSubmit(){
+    if(document.getElementById('privacy-policy').checked) {
+        return true;
+    } 
+    // alert('Gizlilik politikası ve kullanım koşullarını  onaylamadınız !');
+    
+    const validation = document.getElementById('privacy-policy-invalid');
+    validation.style.display = 'block';
+    return false;
+}
+
+function privacyOnChange()
+{
+  const validation = document.getElementById('privacy-policy-invalid');
+  if(document.getElementById('privacy-policy').checked) 
+  {
+      validation.style.display = 'none';
+  } else {
+      validation.style.display = 'block';
+  }
+    }
+    </script>
+}
+
+<div class="page-section container page__container">
+    <div class="col-lg-10 p-0 mx-auto">
+        <form id="register-form" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@ViewData["returnUrl"]" method="post" role="form" autocomplete="off">
+            <div class="row">
+                <div class="col-md-6 mb-24pt mb-md-0">
+                    <partial name="AccountValidationSummary"/>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Name">@L["Account.Register.Firstname"]</label>
+                        <input asp-for="Name" class="form-control" placeholder="@L["Account.Register.Firstname"]">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Surname">@L["Account.Register.Surname"]</label>
+                        <input asp-for="Surname" class="form-control" placeholder="@L["Account.Register.Surname"]">
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Email">@L["Account.Register.Email"]</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="@L["Account.Register.Email"]">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-24pt">
+                        <label class="form-label" asp-for="Password">@L["Account.Register.Password"]</label>
+                        <input asp-for="Password" class="form-control" placeholder="@L["Account.Register.Password"]">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-24pt">
+                        <label class="form-label" asp-for="ConfirmPassword">@L["Account.Register.ConfirmPassword"]</label>
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="@L["Account.Register.ConfirmPassword"]">
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">@L["Account.Register"]</button>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-0">
+                        <div class="card-body">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" id="privacy-policy" on class="custom-control-input" onclick="privacyOnChange();">
+                                <label for="privacy-policy" class="custom-control-label">
+                                    <a href="/home/terms" onclick="popupCenter('/home/terms?noheaderfooter=true', '', 900, 500);return false;">Gizlilik politikası ve kullanım koşullarını </a> okudum onaylıyorum
+                                </label>
+                                <span id="privacy-policy-invalid" style="display: none" class="text-danger">
+                                    Gizlilik politikası ve kullanım koşullarını onaylamalısınız !
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@if (loginProviders.Count > 0)
+{
+    <div class="page-separator justify-content-center m-0">
+        <div class="page-separator__text">veya</div>
+    </div>
+    <div class="bg-body pt-32pt pb-32pt pb-md-64pt text-center">
+        <div class="container page__container">
+            @foreach (var provider in loginProviders)
+            {
+                <button type="submit" class="btn btn-secondary btn-block-xs" name="provider" value="@provider.Name">
+                    @provider.DisplayName
+                </button>
+            }
+        </div>
+    </div>
+}
+
+<p class="text-center mt-4">
+    @L["Account.DoHaveAccount"] <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">@L["Account.Login"]</a>
+</p>

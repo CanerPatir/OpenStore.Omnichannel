@@ -3,8 +3,15 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
-
+    
     <ItemGroup>
         <PackageReference Include="OpenStore.Domain" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(NetPackagesVersion)" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore.Models" Version="$(OpenIddictVersion)" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

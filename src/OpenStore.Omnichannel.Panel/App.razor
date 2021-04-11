@@ -1,0 +1,44 @@
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            <AuthorizeView>
+                <Authorizing>
+                    <Preloader/>
+                    <p>Checking authorization...</p>
+                </Authorizing>
+                <Authorized>
+                    <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+                </Authorized>
+                <NotAuthorized>
+                    <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(NotAuthorizedLayout)">
+                        <NotAuthorized Context="otherState">
+                            @if (!otherState.User.Identity.IsAuthenticated)
+                            {
+                                <RedirectToLogin/>
+                            }
+                            else
+                            {
+                                <RedirectToHome/>
+                            }
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+                </NotAuthorized>
+            </AuthorizeView>
+        </Found>
+        <NotFound>
+            <CascadingAuthenticationState>
+                <AuthorizeView>
+                    <NotAuthorized>
+                        @if (!context.User.Identity.IsAuthenticated)
+                        {
+                            <RedirectToLogin/>
+                        }
+                    </NotAuthorized>
+                    <Authorized>
+                        <RedirectToHome/>
+                    </Authorized>
+                </AuthorizeView>
+            </CascadingAuthenticationState>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

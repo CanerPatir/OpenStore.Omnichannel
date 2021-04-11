@@ -1,0 +1,17 @@
+@model OpenStore.Omnichannel.Identity.ViewModels.Shared.ErrorViewModel
+
+<div class="pt-32pt pt-sm-64pt pb-32pt">
+    <div class="container page__container">
+
+        @if (Model.StatusCode.HasValue)
+        {
+            <h1>@Model.StatusCode</h1>
+        }
+        Identity Error:
+        <br>
+        @Model.Error
+        <br>
+        @Model.ErrorDescription
+
+    </div>
+</div>

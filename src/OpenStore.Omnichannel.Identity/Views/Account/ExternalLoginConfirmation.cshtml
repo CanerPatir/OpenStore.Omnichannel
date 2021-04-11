@@ -1,0 +1,29 @@
+﻿@model OpenStore.Omnichannel.Identity.ViewModels.Account.ExternalLoginConfirmationViewModel
+@{
+    ViewData["Title"] = L["Account.Register"];
+}
+
+<div class="pt-32pt pt-sm-64pt pb-32pt">
+    <div class="container page__container">
+        <h2>@ViewData["Title"].</h2>
+        <h3>Associate your @ViewData["LoginProvider"] account.</h3>
+        <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+
+            <partial name="AccountValidationSummary"/>
+
+            <p class="text-info">
+                You've successfully authenticated with <strong>@ViewData["LoginProvider"]</strong>.
+                Please enter a user name for this site below and click the Register button to finish
+                logging in.
+            </p>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">@L["Account.Register"]</button>
+            </div>
+        </form>
+    </div>
+</div>

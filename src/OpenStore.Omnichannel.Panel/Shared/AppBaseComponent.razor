@@ -1,0 +1,21 @@
+@inherits ComponentBase
+
+@code {
+        protected const string DontShowOnMobile = "d-none d-md-block";
+        protected const string JustShowOnMobile = "d-block d-md-none";
+
+    [Inject]
+    protected IJSRuntime JsRuntime { get; init; }
+
+    protected IJSInProcessRuntime JsRuntimeSync => (IJSInProcessRuntime) JsRuntime;
+
+    [Inject]
+    protected NavigationManager Navigation { get; init; }
+    
+    public void Alert(string message) => JsRuntimeSync.InvokeVoid("alert", message);
+    
+    public bool Confirm(string message) => JsRuntimeSync.Invoke<bool>("confirm", message);
+    
+    public bool ConsoleLog(string message) => JsRuntimeSync.Invoke<bool>("console.log", message);
+    public bool ConsoleError(string message) => JsRuntimeSync.Invoke<bool>("console.error", message);
+}

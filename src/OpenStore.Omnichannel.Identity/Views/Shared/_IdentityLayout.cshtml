@@ -1,0 +1,23 @@
+@using System.Globalization
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName">
+<head>
+    <meta charset="utf-8"/>
+    <title>OpenStore | Identity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <link href="/identity/css/app.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="app" class="app app-full-height app-without-header">
+    @RenderBody()
+    <a href="#" data-click="scroll-top" class="btn-scroll-top fade">
+        <i class="fa fa-arrow-up"></i>
+    </a>
+</div>
+<script src="/identity/js/app.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -18,7 +18,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     {
         private readonly HashSet<Variant> _variants = new();
         private readonly HashSet<SpecificationAttributeValue> _specificationAttributeValues = new();
-
         private readonly HashSet<ProductMedia> _medias = new();
         private readonly HashSet<ProductTag> _tags = new();
 
@@ -32,7 +31,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public virtual Brand Brand { get; protected set; }
         public virtual IReadOnlyCollection<Variant> Variants => _variants;
         public virtual IReadOnlyCollection<SpecificationAttributeValue> SpecificationAttributeValues => _specificationAttributeValues;
-
         public virtual IReadOnlyCollection<ProductMedia> Medias => _medias;
         public virtual IReadOnlyCollection<ProductTag> Tags => _tags;
 
@@ -64,56 +62,56 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
         public void SetSpecificationAttribute(SetSpecificationAttributeToProductCommand command)
         {
-            var categoryAttribute = Category.FindAttribute(command.AttributeId);
-            var attribute = categoryAttribute.Attribute;
-
-            if (attribute.Type == AttributeType.Text)
-            {
-                if (command.CustomValue == null)
-                {
-                    Fail(Msg.Domain.RequiredSpecificationAttributeValueNotFound);
-                    return;
-                }
-
-                var productAttributeValue = SpecificationAttributeValues.SingleOrDefault(x => x.AttributeId == attribute.Id);
-
-                if (productAttributeValue != null)
-                {
-                    if (string.Equals(command.CustomValue, productAttributeValue.CustomValue, StringComparison.InvariantCultureIgnoreCase))
-                        return;
-
-                    productAttributeValue.ChangeValue(command.CustomValue);
-                }
-                else
-                {
-                    _specificationAttributeValues.Add(new SpecificationAttributeValue(this, attribute, command.CustomValue));
-                }
-            }
-            else
-            {
-                if (command.AttributeValueId == null)
-                {
-                    Fail(Msg.Domain.RequiredSpecificationAttributeValueNotFound);
-                    return;
-                }
-
-                var attributeValue = attribute.FindAttributeValue(command.AttributeValueId.Value);
-                var productAttributeValue = SpecificationAttributeValues.SingleOrDefault(x => x.AttributeId == attribute.Id);
-
-                if (productAttributeValue != null)
-                {
-                    if (productAttributeValue.AttributeValueId == attributeValue.Id)
-                        return;
-
-                    productAttributeValue.ChangeValue(attributeValue);
-                }
-                else
-                {
-                    _specificationAttributeValues.Add(new SpecificationAttributeValue(this, attribute, attributeValue));
-                }
-            }
-
-            ApplyChange(new ProductSpecificationAttributeSet(Id, command.AttributeId, command.AttributeValueId, command.CustomValue));
+            // var categoryAttribute = Category.FindAttribute(command.AttributeId);
+            // var attribute = categoryAttribute.Attribute;
+            //
+            // if (attribute.Type == AttributeType.Text)
+            // {
+            //     if (command.CustomValue == null)
+            //     {
+            //         Fail(Msg.Domain.RequiredSpecificationAttributeValueNotFound);
+            //         return;
+            //     }
+            //
+            //     var productAttributeValue = SpecificationAttributeValues.SingleOrDefault(x => x.AttributeId == attribute.Id);
+            //
+            //     if (productAttributeValue != null)
+            //     {
+            //         if (string.Equals(command.CustomValue, productAttributeValue.CustomValue, StringComparison.InvariantCultureIgnoreCase))
+            //             return;
+            //
+            //         productAttributeValue.ChangeValue(command.CustomValue);
+            //     }
+            //     else
+            //     {
+            //         _specificationAttributeValues.Add(new SpecificationAttributeValue(this, attribute, command.CustomValue));
+            //     }
+            // }
+            // else
+            // {
+            //     if (command.AttributeValueId == null)
+            //     {
+            //         Fail(Msg.Domain.RequiredSpecificationAttributeValueNotFound);
+            //         return;
+            //     }
+            //
+            //     var attributeValue = attribute.FindAttributeValue(command.AttributeValueId.Value);
+            //     var productAttributeValue = SpecificationAttributeValues.SingleOrDefault(x => x.AttributeId == attribute.Id);
+            //
+            //     if (productAttributeValue != null)
+            //     {
+            //         if (productAttributeValue.AttributeValueId == attributeValue.Id)
+            //             return;
+            //
+            //         productAttributeValue.ChangeValue(attributeValue);
+            //     }
+            //     else
+            //     {
+            //         _specificationAttributeValues.Add(new SpecificationAttributeValue(this, attribute, attributeValue));
+            //     }
+            // }
+            //
+            // ApplyChange(new ProductSpecificationAttributeSet(Id, command.AttributeId, command.AttributeValueId, command.CustomValue));
         }
 
         public void RemoveSpecificationAttribute(RemoveSpecificationAttributeCommand command)
@@ -155,7 +153,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
         public Guid CreateVariant(CreateVariantCommand command)
         {
-       
+            return Guid.Empty;
         }
     }
 }

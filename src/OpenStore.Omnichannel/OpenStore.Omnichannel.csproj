@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Api\Controllers" />
+        <Folder Include="Application" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(NetPackagesVersion)">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\OpenStore.Omnichannel.Infrastructure\OpenStore.Omnichannel.Infrastructure.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Identity\OpenStore.Omnichannel.Identity.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Update="appsettings.Development.json">
+            <DependentUpon>appsettings.json</DependentUpon>
+        </Content>
+    </ItemGroup>
+
+</Project>
