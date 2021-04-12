@@ -64,38 +64,43 @@ function privacyOnChange()
     </script>
 }
 
-<div class="page-section container page__container">
+<div class="container register">
     <div class="col-lg-10 p-0 mx-auto">
         <form id="register-form" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@ViewData["returnUrl"]" method="post" role="form" autocomplete="off">
+            <h1 class="text-center">@L["Account.Register"]</h1>
+            <p class="text-muted text-center"> @L["Account.Register.Description"]</p>
             <div class="row">
                 <div class="col-md-6 mb-24pt mb-md-0">
                     <partial name="AccountValidationSummary"/>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label class="form-label" asp-for="Name">@L["Account.Register.Firstname"]</label>
-                        <input asp-for="Name" class="form-control" placeholder="@L["Account.Register.Firstname"]">
+                        <input asp-for="Name" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Firstname"]">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label class="form-label" asp-for="Surname">@L["Account.Register.Surname"]</label>
-                        <input asp-for="Surname" class="form-control" placeholder="@L["Account.Register.Surname"]">
+                        <input asp-for="Surname" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Surname"]">
                         <span asp-validation-for="Surname" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label class="form-label" asp-for="Email">@L["Account.Register.Email"]</label>
-                        <input asp-for="Email" type="email" class="form-control" placeholder="@L["Account.Register.Email"]">
+                        <input asp-for="Email" type="email" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Email"]">
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-24pt">
+                    <div class="form-group mb-3">
                         <label class="form-label" asp-for="Password">@L["Account.Register.Password"]</label>
-                        <input asp-for="Password" class="form-control" placeholder="@L["Account.Register.Password"]">
+                        <input asp-for="Password" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Password"]">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-24pt">
+                    <div class="form-group mb-3">
                         <label class="form-label" asp-for="ConfirmPassword">@L["Account.Register.ConfirmPassword"]</label>
-                        <input asp-for="ConfirmPassword" class="form-control" placeholder="@L["Account.Register.ConfirmPassword"]">
+                        <input asp-for="ConfirmPassword" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.ConfirmPassword"]">
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">@L["Account.Register"]</button>
+                    <button type="submit" class="btn btn-primary btn-lg fs-15px fw-500 d-block w-100 mb-3">@L["Account.Register"]</button>
+                    <div class="text-muted text-center">
+                        @L["Account.DoHaveAccount"] <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">@L["Account.Login"]</a>
+                    </div>
 
                 </div>
                 <div class="col-md-6">
@@ -136,7 +141,3 @@ function privacyOnChange()
         </div>
     </div>
 }
-
-<p class="text-center mt-4">
-    @L["Account.DoHaveAccount"] <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">@L["Account.Login"]</a>
-</p>

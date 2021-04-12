@@ -6,13 +6,32 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Quartz.Extensions.Hosting" Version="3.2.4" />
+        <PackageReference Include="Quartz.Extensions.Hosting" Version="3.3.2" />
         <PackageReference Include="OpenIddict.Quartz" Version="$(OpenIddictVersion)" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\OpenStore.Omnichannel.Infrastructure\OpenStore.Omnichannel.Infrastructure.csproj" />
       <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="wwwroot" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\Account\Login.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Login.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Update="Resources\Views\Account\Login.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Login.tr-TR.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

@@ -93,6 +93,7 @@ namespace OpenStore.Omnichannel
             app.UseOpenStoreLocalization();
 
             app
+                .UseStaticFiles()
                 .UseResponseCompression()
                 .UseSubApplication<Identity.Startup>("/identity")
                 .UseRouting()

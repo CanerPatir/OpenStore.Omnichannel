@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenStore.Infrastructure;
 using OpenStore.Infrastructure.Email;
+using OpenStore.Infrastructure.Email.Smtp;
 using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Localization.Json;
 using OpenStore.Infrastructure.Tasks.InMemory;
@@ -34,12 +35,15 @@ namespace OpenStore.Omnichannel.Infrastructure
                 .AddAuthorizationInfrastructure(configuration)
                 .AddOpenStoreCore(callingAssembly, applicationAssembly, infrastructureAssembly)
                 .AddOpenStoreInMemoryBackgroundTasks()
+                .AddOpenStoreMailInfrastructure(mailConf =>
+                {
+                    mailConf.UseSmtp(configuration, "Mail:Smtp");
+                })
                 ;
-            
-            services.AddOpenStoreResxLocalization(mvcBuilder, options =>
-            {
-                options.SharedResourceAssemblyName = callingAssembly.FullName;
-            });
+
+            services.AddOpenStoreResxLocalization(mvcBuilder, options => { options.SharedResourceAssemblyName = callingAssembly.FullName; });
+
+            services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
 
             if (withScheduledJobs)
             {

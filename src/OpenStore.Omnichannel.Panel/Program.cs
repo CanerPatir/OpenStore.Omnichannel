@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OnlineCourse.Panel;
 using OpenStore.Omnichannel.Panel.Extensions;
 
 namespace OpenStore.Omnichannel.Panel
@@ -35,6 +36,11 @@ namespace OpenStore.Omnichannel.Panel
                 options.AuthenticationPaths.RemoteRegisterPath = authority + "account/register";
             });
 
+            builder.Services.AddAuthorizationCore(config =>
+            {
+                config.AddPolicy(ApplicationPolicies.AdministratorPolicy, policy => policy.MyRequireRole(ApplicationRoles.Administrator));
+                
+            });
             await builder.Build().RunAsync();
         }
     }

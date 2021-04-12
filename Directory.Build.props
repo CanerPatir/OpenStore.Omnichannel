@@ -13,8 +13,8 @@
         <PackageProjectUrl>https://github.com/canerpatir/OpenStore</PackageProjectUrl>
         <LangVersion>latest</LangVersion>
         <OpenStoreBuildingBlocksVersion>0.2.23</OpenStoreBuildingBlocksVersion>
-        <NetPackagesVersion>5.0.4</NetPackagesVersion>
-        <OpenIddictVersion>3.0.2</OpenIddictVersion>
+        <NetPackagesVersion>5.0.5</NetPackagesVersion>
+        <OpenIddictVersion>3.0.3</OpenIddictVersion>
 
         <!--     <Nullable>enable</Nullable>-->
     </PropertyGroup>

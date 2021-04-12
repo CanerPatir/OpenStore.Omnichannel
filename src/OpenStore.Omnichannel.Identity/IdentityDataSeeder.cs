@@ -53,7 +53,7 @@ namespace OpenStore.Omnichannel.Identity
                     OpenIddictConstants.Permissions.Scopes.Email,
                     OpenIddictConstants.Permissions.Scopes.Profile,
                     OpenIddictConstants.Permissions.Scopes.Roles,
-                    OpenIddictConstants.Permissions.Prefixes.Scope + "api"
+                    OpenIddictConstants.Permissions.Prefixes.Scope + "OSScp_API"
                 },
                 Requirements =
                 {
@@ -79,10 +79,10 @@ namespace OpenStore.Omnichannel.Identity
         {
             var openIddictApplicationDescriptor = new OpenIddictApplicationDescriptor
             {
-                ClientId = "OnlineCourse.Web",
+                ClientId = "OpenStore.Web",
                 ClientSecret = "secret",
                 ConsentType = OpenIddictConstants.ConsentTypes.Implicit,
-                DisplayName = "OnlineCourse.Web",
+                DisplayName = "OpenStore.Web",
                 Permissions =
                 {
                     OpenIddictConstants.Permissions.ResponseTypes.Code,
@@ -107,7 +107,7 @@ namespace OpenStore.Omnichannel.Identity
             openIddictApplicationDescriptor.PostLogoutRedirectUris.AddRange(_identityConfig.WebPostLogoutRedirectUris);
             openIddictApplicationDescriptor.RedirectUris.AddRange(_identityConfig.WebRedirectUris);
 
-            var foundClient = await _applicationManager.FindByClientIdAsync("OnlineCourse.Web");
+            var foundClient = await _applicationManager.FindByClientIdAsync("OpenStore.Web");
 
             if (foundClient == null)
                 await _applicationManager.CreateAsync(openIddictApplicationDescriptor);

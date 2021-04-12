@@ -18,9 +18,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
             IHostEnvironment environment,
             IConfiguration configuration)
         {
-            // workaround for multiple migration
-            // var migrationAssemblyName = "OpenStore.Omnichannel";
-            // var migrationAssemblyName = Assembly.GetEntryAssembly().FullName;
             var migrationAssemblyName = Assembly.GetExecutingAssembly().FullName;
             
             var dataSource = configuration.GetActiveDataSource();
