@@ -15,7 +15,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Authentication
         public override IdentityError PasswordRequiresNonAlphanumeric()
         {
             var error = base.PasswordRequiresNonAlphanumeric();
-            error.Description = _openStoreLocalizer["Identity.Validation.PasswordRequiresNonAlphanumeric"];
+            error.Description = _openStoreLocalizer[Msg.Validation.PasswordRequiresNonAlphanumeric];
             return error;
         }
 
@@ -32,7 +32,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Authentication
             error.Description = _openStoreLocalizer[Msg.Validation.PasswordTooShort, length];
             return error;
         }
-
+        
         public override IdentityError PasswordMismatch()
         {
             var error = base.PasswordMismatch();
@@ -64,7 +64,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Authentication
         public override IdentityError PasswordRequiresUniqueChars(int uniqueChars)
         {
             var error = base.PasswordRequiresUniqueChars(uniqueChars);
-            error.Description = _openStoreLocalizer["Identity.Validation.PasswordRequiresUniqueChars", uniqueChars];
+            error.Description = _openStoreLocalizer[Msg.Validation.PasswordRequiresUniqueChars, uniqueChars];
             return error;
         }
 

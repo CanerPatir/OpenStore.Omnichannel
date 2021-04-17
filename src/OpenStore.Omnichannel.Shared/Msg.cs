@@ -9,7 +9,6 @@ namespace OpenStore.Omnichannel
         public class Domain
         {
             public const string GivenAttrValueNotBelongAttr = nameof(Domain) + DiscriminatorChar + nameof(GivenAttrValueNotBelongAttr);
-            
         }
 
         public static class Application
@@ -34,6 +33,8 @@ namespace OpenStore.Omnichannel
             public const string InvalidCreditCard = nameof(Validation) + DiscriminatorChar + nameof(InvalidCreditCard);
             public const string PasswordRequiresLower = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresLower);
             public const string PasswordRequiresUpper = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresUpper);
+            public const string PasswordRequiresUniqueChars = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresUniqueChars);
+            public const string PasswordRequiresNonAlphanumeric = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresNonAlphanumeric);
         }
 
         public const string ResourceNotFound = nameof(ResourceNotFound);

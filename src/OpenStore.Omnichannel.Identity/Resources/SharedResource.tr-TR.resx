@@ -18,4 +18,34 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Validation.Required" xml:space="preserve">
+        <value>Zorunlu alan</value>
+    </data>
+    <data name="Validation.InvalidEmail" xml:space="preserve">
+        <value>Hatalı e-posta adresi</value>
+    </data>
+    <data name="Validation.PasswordMismatch" xml:space="preserve">
+        <value>Parola uyuşmuyor</value>
+    </data>
+    <data name="Validation.PasswordTooShort" xml:space="preserve">
+        <value>Parola en az {1} karakter uzunluğunda olmalıdır</value>
+    </data>
+    <data name="Validation.DuplicateEmail" xml:space="preserve">
+        <value>Kullanıcı adı sistemde mevcut</value>
+    </data>
+    <data name="Validation.PasswordRequiresDigit" xml:space="preserve">
+        <value>Parola rakam içermelidir</value>
+    </data>
+    <data name="Validation.PasswordRequiresLower" xml:space="preserve">
+        <value>Parola küçük harf içermelidir</value>
+    </data>
+    <data name="Validation.PasswordRequiresUpper" xml:space="preserve">
+        <value>Parola büyük harf içermelidir</value>
+    </data>
+    <data name="Validation.PasswordRequiresUniqueChars" xml:space="preserve">
+        <value>Parola tekil karakter içermelidir</value>
+    </data>
+    <data name="Validation.PasswordRequiresNonAlphanumeric" xml:space="preserve">
+        <value>Parola harf ve rakam dışında özel karakter içermelidir</value>
+    </data>
 </root>

@@ -2,7 +2,7 @@
 @model OpenStore.Omnichannel.Identity.ViewModels.Account.RegisterViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 @{
-    ViewData["Title"] = L["Account.Register"];
+    ViewData["Title"] = VL["Register.Title"];
     var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 }
 
@@ -67,39 +67,39 @@ function privacyOnChange()
 <div class="container register">
     <div class="col-lg-10 p-0 mx-auto">
         <form id="register-form" asp-controller="Account" asp-action="Register" asp-route-returnUrl="@ViewData["returnUrl"]" method="post" role="form" autocomplete="off">
-            <h1 class="text-center">@L["Account.Register"]</h1>
-            <p class="text-muted text-center"> @L["Account.Register.Description"]</p>
+            <h1 class="text-center">@VL["Register.Title"]</h1>
+            <p class="text-muted text-center"> @VL["Register.Description"]</p>
             <div class="row">
                 <div class="col-md-6 mb-24pt mb-md-0">
                     <partial name="AccountValidationSummary"/>
                     <div class="form-group mb-3">
-                        <label class="form-label" asp-for="Name">@L["Account.Register.Firstname"]</label>
-                        <input asp-for="Name" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Firstname"]">
+                        <label class="form-label" asp-for="Name">@VL["Register.Firstname"]</label>
+                        <input asp-for="Name" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.Firstname"]">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label" asp-for="Surname">@L["Account.Register.Surname"]</label>
-                        <input asp-for="Surname" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Surname"]">
+                        <label class="form-label" asp-for="Surname">@VL["Register.Surname"]</label>
+                        <input asp-for="Surname" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.Surname"]">
                         <span asp-validation-for="Surname" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label" asp-for="Email">@L["Account.Register.Email"]</label>
-                        <input asp-for="Email" type="email" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Email"]">
+                        <label class="form-label" asp-for="Email">@VL["Register.Email"]</label>
+                        <input asp-for="Email" type="email" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.Email"]">
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label" asp-for="Password">@L["Account.Register.Password"]</label>
-                        <input asp-for="Password" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.Password"]">
+                        <label class="form-label" asp-for="Password">@VL["Register.Password"]</label>
+                        <input asp-for="Password" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.Password"]">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
-                        <label class="form-label" asp-for="ConfirmPassword">@L["Account.Register.ConfirmPassword"]</label>
-                        <input asp-for="ConfirmPassword" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Register.ConfirmPassword"]">
+                        <label class="form-label" asp-for="ConfirmPassword">@VL["Register.ConfirmPassword"]</label>
+                        <input asp-for="ConfirmPassword" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.ConfirmPassword"]">
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg fs-15px fw-500 d-block w-100 mb-3">@L["Account.Register"]</button>
+                    <button type="submit" class="btn btn-primary btn-lg fs-15px fw-500 d-block w-100 mb-3">@VL["Register.Button"]</button>
                     <div class="text-muted text-center">
-                        @L["Account.DoHaveAccount"] <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">@L["Account.Login"]</a>
+                        @VL["Register.DoHaveAccount"] <a asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">@VL["Register.Login"]</a>
                     </div>
 
                 </div>
@@ -109,10 +109,10 @@ function privacyOnChange()
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" id="privacy-policy" on class="custom-control-input" onclick="privacyOnChange();">
                                 <label for="privacy-policy" class="custom-control-label">
-                                    <a href="/home/terms" onclick="popupCenter('/home/terms?noheaderfooter=true', '', 900, 500);return false;">Gizlilik politikası ve kullanım koşullarını </a> okudum onaylıyorum
+                                    <a href="/home/terms" onclick="popupCenter('/home/terms?noheaderfooter=true', '', 900, 500);return false;">@VL["Register.PrivacyPolicyLink"]</a> @VL["Register.PolicyReadAndApprove"]
                                 </label>
                                 <span id="privacy-policy-invalid" style="display: none" class="text-danger">
-                                    Gizlilik politikası ve kullanım koşullarını onaylamalısınız !
+                                    @VL["Register.PrivacyPolicyMustBeAgree"]
                                 </span>
                             </div>
                         </div>

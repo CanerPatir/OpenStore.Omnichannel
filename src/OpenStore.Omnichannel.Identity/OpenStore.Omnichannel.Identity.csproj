@@ -28,6 +28,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>SharedResource.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Account\ForgotPassword.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ForgotPassword.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Views\Account\Register.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Register.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
     
     <ItemGroup>
@@ -40,6 +48,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>SharedResource.tr-TR.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Account\ForgotPassword.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ForgotPassword.tr-TR.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Views\Account\Register.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Register.tr-TR.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -44,5 +44,65 @@ namespace OpenStore.Omnichannel.Identity.Resources {
                 resourceCulture = value;
             }
         }
+        
+        internal static string Validation_Required {
+            get {
+                return ResourceManager.GetString("Validation.Required", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_InvalidEmail {
+            get {
+                return ResourceManager.GetString("Validation.InvalidEmail", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordMismatch {
+            get {
+                return ResourceManager.GetString("Validation.PasswordMismatch", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordTooShort {
+            get {
+                return ResourceManager.GetString("Validation.PasswordTooShort", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_DuplicateEmail {
+            get {
+                return ResourceManager.GetString("Validation.DuplicateEmail", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordRequiresDigit {
+            get {
+                return ResourceManager.GetString("Validation.PasswordRequiresDigit", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordRequiresLower {
+            get {
+                return ResourceManager.GetString("Validation.PasswordRequiresLower", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordRequiresUpper {
+            get {
+                return ResourceManager.GetString("Validation.PasswordRequiresUpper", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordRequiresUniqueChars {
+            get {
+                return ResourceManager.GetString("Validation.PasswordRequiresUniqueChars", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_PasswordRequiresNonAlphanumeric {
+            get {
+                return ResourceManager.GetString("Validation.PasswordRequiresNonAlphanumeric", resourceCulture);
+            }
+        }
     }
 }
