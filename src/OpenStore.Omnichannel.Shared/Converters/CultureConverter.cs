@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace OnlineCourse
+namespace OpenStore.Omnichannel
 {
     public class CultureConverter : JsonConverter<CultureInfo>
     {

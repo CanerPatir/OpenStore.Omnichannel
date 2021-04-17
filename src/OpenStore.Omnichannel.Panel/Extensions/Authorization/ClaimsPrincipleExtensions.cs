@@ -6,7 +6,7 @@ using OpenStore.Omnichannel.Panel.Extensions.Authorization;
 
 // ReSharper disable CheckNamespace
 
-namespace OnlineCourse.Panel
+namespace OpenStore.Omnichannel.Panel
 {
     public static class ClaimsPrincipleExtensions
     {

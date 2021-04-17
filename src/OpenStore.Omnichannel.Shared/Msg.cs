@@ -5,6 +5,7 @@ namespace OpenStore.Omnichannel
     public static class Msg
     {
         private const string DiscriminatorChar = ".";
+        public const string OpenStoreGenericError = "OpenStore.GenericError";
 
         public class Domain
         {

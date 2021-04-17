@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 // ReSharper disable All
 
-namespace OnlineCourse
+namespace OpenStore.Omnichannel
 {
     public class TimeSpanConverter : JsonConverter<TimeSpan>
     {

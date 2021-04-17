@@ -1,8 +1,7 @@
 using System;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using OnlineCourse;
-
+ 
 namespace OpenStore.Omnichannel.Shared.Dto
 {
     public class NotificationDto : INotification

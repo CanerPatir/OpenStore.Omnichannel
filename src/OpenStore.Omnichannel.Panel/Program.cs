@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OnlineCourse.Panel;
+using Microsoft.JSInterop;
 using OpenStore.Omnichannel.Panel.Extensions;
 
 namespace OpenStore.Omnichannel.Panel
@@ -39,9 +39,12 @@ namespace OpenStore.Omnichannel.Panel
             builder.Services.AddAuthorizationCore(config =>
             {
                 config.AddPolicy(ApplicationPolicies.AdministratorPolicy, policy => policy.MyRequireRole(ApplicationRoles.Administrator));
-                
             });
-            await builder.Build().RunAsync();
+            
+            var host = builder.Build();
+            var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
+            (jsInterop as IJSInProcessRuntime).InitCulture();
+            await host.RunAsync();
         }
     }
 }

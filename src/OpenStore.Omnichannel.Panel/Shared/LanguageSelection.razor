@@ -1,0 +1,41 @@
+@using System.Globalization
+<h3>LanguageSelection</h3>
+  
+<div class="form-group">
+  <select class="form-control"  @onchange="ChangeLanguage">
+   @foreach (var langCode in _langCodes)
+   {
+       if (langCode.Name == _selectedLang)
+       {
+           <option value="@langCode.Name" selected>@langCode.DisplayName</option>
+       }
+       else
+       {
+           <option value="@langCode.Name">@langCode.DisplayName</option>
+       }
+   }
+  </select>
+</div>
+@* <button class="btn btn-primary" @onclick="ChangeLanguage">Change Language</button> *@
+
+@code {
+    private readonly List<CultureInfo> _langCodes = new()
+    {
+        new CultureInfo("tr-TR"),
+        new CultureInfo("en-US")
+    };
+ 
+    private string _selectedLang = "";
+
+    protected override void OnInitialized()
+    {
+        _selectedLang = JsRuntimeSync.GetCulture().Name;
+        base.OnInitialized();
+    }
+
+    private void ChangeLanguage(ChangeEventArgs args)
+    {
+        JsRuntimeSync.SetCulture(new CultureInfo((string)args.Value ?? string.Empty));
+        Navigation.Reload();
+    }
+}

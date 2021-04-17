@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 // ReSharper disable All
 
-namespace OnlineCourse.Panel
+namespace OpenStore.Omnichannel.Panel
 {
     public class MyRolesAuthorizationRequirement : AuthorizationHandler<MyRolesAuthorizationRequirement>, IAuthorizationRequirement
     {

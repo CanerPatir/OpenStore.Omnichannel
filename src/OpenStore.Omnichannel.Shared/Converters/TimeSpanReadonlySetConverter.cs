@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 // ReSharper disable CheckNamespace
 
-namespace OnlineCourse
+namespace OpenStore.Omnichannel
 {
     public class TimeSpanReadonlySetConverter : JsonConverter<ISet<TimeSpan>>
     {
