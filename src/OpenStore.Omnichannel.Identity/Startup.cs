@@ -53,7 +53,7 @@ namespace OpenStore.Omnichannel.Identity
                 })
                 // .AddOpenStoreRecurringJob<IdentityBackgroundService>(IdentityBackgroundService.EveryHour)
                 .AddCommonInfrastructure(mvcBuilder, Environment, Configuration);
-
+            
             // services.AddDbContext<ApplicationDbContext>(options =>
             // {
             //     // Configure the context to use Microsoft SQL Server.

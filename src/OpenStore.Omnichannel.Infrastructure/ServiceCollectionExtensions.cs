@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +6,6 @@ using OpenStore.Infrastructure;
 using OpenStore.Infrastructure.Email;
 using OpenStore.Infrastructure.Email.Smtp;
 using OpenStore.Infrastructure.Localization;
-using OpenStore.Infrastructure.Localization.Json;
 using OpenStore.Infrastructure.Tasks.InMemory;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
@@ -41,7 +39,10 @@ namespace OpenStore.Omnichannel.Infrastructure
                 })
                 ;
 
-            services.AddOpenStoreResxLocalization(mvcBuilder, options => { options.SharedResourceAssemblyName = callingAssembly.FullName; });
+            services.AddOpenStoreResxLocalization(mvcBuilder, options =>
+            {
+                options.Assembly = callingAssembly;
+            });
 
             services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
 

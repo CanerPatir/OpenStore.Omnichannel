@@ -44,5 +44,53 @@ namespace OpenStore.Omnichannel.Identity.Resources.Views.Account {
                 resourceCulture = value;
             }
         }
+        
+        internal static string Login_Title {
+            get {
+                return ResourceManager.GetString("Login.Title", resourceCulture);
+            }
+        }
+        
+        internal static string Login_SubTitle {
+            get {
+                return ResourceManager.GetString("Login.SubTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Login_UserName {
+            get {
+                return ResourceManager.GetString("Login.UserName", resourceCulture);
+            }
+        }
+        
+        internal static string Login_Password {
+            get {
+                return ResourceManager.GetString("Login.Password", resourceCulture);
+            }
+        }
+        
+        internal static string Login_ForgetPassword {
+            get {
+                return ResourceManager.GetString("Login.ForgetPassword", resourceCulture);
+            }
+        }
+        
+        internal static string Login_Button {
+            get {
+                return ResourceManager.GetString("Login.Button", resourceCulture);
+            }
+        }
+        
+        internal static string Login_SignUp {
+            get {
+                return ResourceManager.GetString("Login.SignUp", resourceCulture);
+            }
+        }
+        
+        internal static string Login_DontHaveAccount {
+            get {
+                return ResourceManager.GetString("Login.DontHaveAccount", resourceCulture);
+            }
+        }
     }
 }

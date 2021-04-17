@@ -24,6 +24,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Login.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\SharedResource.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>SharedResource.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
     
     <ItemGroup>
@@ -31,6 +35,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Login.tr-TR.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\SharedResource.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>SharedResource.tr-TR.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -18,4 +18,33 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    <data name="Login.Title" xml:space="preserve">
+        <value>Giriş</value>
+    </data>
+    <data name="Login.SubTitle" xml:space="preserve">
+        <value>Giriş</value>
+    </data>
+    <data name="Login.UserName" xml:space="preserve">
+        <value>Kullanıcı Adı</value>
+    </data>
+    <data name="Login.Password" xml:space="preserve">
+        <value>Parola</value>
+        <comment>Login.Password</comment>
+    </data>
+    <data name="Login.ForgetPassword" xml:space="preserve">
+        <value>Parolamı unuttum</value>
+        <comment>Login.ForgetPassword</comment>
+    </data>
+    <data name="Login.Button" xml:space="preserve">
+        <value>Giriş</value>
+        <comment>Login.Button</comment>
+    </data>
+    <data name="Login.SignUp" xml:space="preserve">
+        <value>Hesap Oluştur</value>
+        <comment>Login.SignUp</comment>
+    </data>
+    <data name="Login.DontHaveAccount" xml:space="preserve">
+        <value>Bir hesabınız yok mu?</value>
+        <comment>Login.DontHaveAccount</comment>
+    </data>
 </root>

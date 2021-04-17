@@ -3,35 +3,35 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = L["Account.Login"];
+    ViewData["Title"] = L["Login.Title"];
     var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 }
 
 <div class="login">
     <div class="login-content">
         <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form" class="form-horizontal">
-            <h1 class="text-center">@L["Account.Login"]</h1>
+            <h1 class="text-center">@VL["Login.Title"]</h1>
             <div class="text-muted text-center mb-4">
-                @L["Account.Login.Description"]
+                @VL["Login.SubTitle"]
             </div>
             <partial name="AccountValidationSummary"/>
             <div class="form-group mb-3">
-                <label class="form-label" asp-for="Email">@L["Account.Login.UserName"]</label>
-                <input asp-for="Email" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Login.UserName"]">
+                <label class="form-label" asp-for="Email">@VL["Login.UserName"]</label>
+                <input asp-for="Email" class="form-control form-control-lg fs-15px" placeholder="@VL["Login.UserName"]">
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label class="form-label" asp-for="Password">@L["Account.Login.Password"]</label>
-                <input asp-for="Password" type="password" class="form-control form-control-lg fs-15px" placeholder="@L["Account.Login.Password"]">
+                <label class="form-label" asp-for="Password">@VL["Login.Password"]</label>
+                <input asp-for="Password" type="password" class="form-control form-control-lg fs-15px" placeholder="@VL["Login.Password"]">
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <p class="text-right">
-                    <a asp-action="ForgotPassword" class="small">@L["Account.Login.ForgetPassword"]</a>
+                    <a asp-action="ForgotPassword" class="small">@VL["Login.ForgetPassword"]</a>
                 </p>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3"> @L["Account.Login"]</button>
+                <button type="submit" class="btn btn-primary btn-lg d-block w-100 fw-500 mb-3"> @VL["Login.Button"]</button>
                 <div class="text-center text-muted">
-                    @L["Account.DontHaveAccount"] <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" style="color: rgb(85 103 255);">@L["Account.SignUp"]</a>.
+                    @VL["Login.DontHaveAccount"] <a asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]" style="color: rgb(85 103 255);">@VL["Login.SignUp"]</a>.
                 </div>
             </div>
         </form>
