@@ -89,12 +89,12 @@ function privacyOnChange()
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" asp-for="Password">@VL["Register.Password"]</label>
-                        <input asp-for="Password" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.Password"]">
+                        <input asp-for="Password" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.Password"]" autocomplete="new-password">
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-3">
                         <label class="form-label" asp-for="ConfirmPassword">@VL["Register.ConfirmPassword"]</label>
-                        <input asp-for="ConfirmPassword" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.ConfirmPassword"]">
+                        <input asp-for="ConfirmPassword" class="form-control form-control-lg fs-15px" placeholder="@VL["Register.ConfirmPassword"]" autocomplete="new-password">
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg fs-15px fw-500 d-block w-100 mb-3">@VL["Register.Button"]</button>
