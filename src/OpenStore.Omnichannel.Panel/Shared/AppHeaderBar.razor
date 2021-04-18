@@ -1,3 +1,5 @@
+@inject IStringLocalizer<AppHeaderBar> L
+
 <div id="header" class="app-header">
     <div class="mobile-toggler">
         <button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
@@ -15,7 +17,8 @@
         </div>
 
         <a href="#" class="brand-logo">
-            <img src="~/img/logo.png" alt="" height="20"/>
+            OpenStore
+            @* <img src="/assets/img/logo.png" alt="" height="20"/> *@
         </a>
     </div>
 
@@ -67,7 +70,29 @@
                 </div>
             </div>
         </div>
-        <OsLoginInfo/>
+        <div class="menu-item dropdown">
+            <div class="menu-item dropdown">
+                <a href="#" data-bs-toggle="dropdown" data-display="static" class="menu-link">
 
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="menu-img online">
+                                <img src="assets/img/user/user.jpg" alt="" class="ms-100 mh-100 rounded-circle"/>
+                            </div>
+                            <div class="menu-text">@context.User.Identity.Name</div>
+                        </Authorized>
+                    </AuthorizeView>
+
+                </a>
+                <div class="dropdown-menu dropdown-menu-right me-lg-3">
+                    <NavLink class="dropdown-item d-flex align-items-center" href="settings">
+                        @L["NavBar.Settings"]
+                        <i class="fa fa-wrench fa-fw ms-auto text-gray-400 f-s-16"></i>
+                    </NavLink>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item d-flex align-items-center" @onclick="BeginSignOut">Çıkış <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400 f-s-16"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

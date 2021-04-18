@@ -14,6 +14,7 @@ namespace OpenStore.Omnichannel.Panel.Services
         }
 
         protected HttpClient HttpClient { get; }
+        
         protected AuthenticationStateProvider AuthenticationStateProvider { get; }
 
         protected abstract string Path { get; }

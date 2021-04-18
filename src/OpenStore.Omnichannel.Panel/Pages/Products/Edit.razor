@@ -1,0 +1,140 @@
+@page "/products/add"
+@inject IStringLocalizer<Edit> L
+
+<Container>
+    <Row class="justify-content-center">
+        <Column ColumnSize="ColumnSize.Is10.OnDesktop">
+            <div class="d-flex align-items-center mb-4">
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <NavLink href="products">Products</NavLink>
+                        </li>
+                        <li class="breadcrumb-item active">Add New</li>
+                    </ul>
+                    <h1 class="page-header mb-0">
+                        Product Name
+
+                        <Badge Color="Color.Warning">
+                            Draft
+                        </Badge>
+                    </h1>
+                </div>
+
+                <div class="ms-auto">
+                    <NavLink href="products/add" class="btn btn-success">
+                        <i class="fa fa-save fa-fw me-1"></i> Save
+                    </NavLink>
+                </div>
+            </div>
+
+            <Row>
+                <Column ColumnSize="ColumnSize.Is9.OnDesktop">
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            Content
+                        </CardBody>
+                    </Card>
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Media
+                            </h5>
+                            Media
+                        </CardBody>
+                    </Card>
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Pricing
+                            </h5>
+                            Pricing
+                        </CardBody>
+                    </Card>
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Inventory
+                            </h5>
+                            Inventory
+                        </CardBody>
+                    </Card>
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Shipping
+                            </h5>
+                            Shipping
+                        </CardBody>
+                    </Card>
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Variants
+                            </h5>
+                            Variants
+                        </CardBody>
+                    </Card>
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Seo
+                            </h5>
+                            Seo
+                        </CardBody>
+                    </Card>
+                </Column>
+
+                <Column ColumnSize="ColumnSize.Is3.OnDesktop">
+
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardBody>
+                            <h5>
+                                Status
+                            </h5>
+
+                        </CardBody>
+                        <hr>
+                        <CardBody>
+                            <h5>
+                                Channels
+                            </h5>
+                            Channels
+                        </CardBody>
+                    </Card>
+
+                    <ListGroup Margin="Margin.Is3.FromBottom">
+                        <ListGroupItem>
+                            <h5>
+                                collections
+                            </h5>
+                            collections
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            <h5>
+                                tags
+                            </h5>
+                            tags
+                        </ListGroupItem>
+                    </ListGroup>
+
+
+                </Column>
+            </Row>
+            <hr class="mb-4">
+            <Row>
+
+            </Row>
+        </Column>
+    </Row>
+</Container>
+
+@code {
+
+}

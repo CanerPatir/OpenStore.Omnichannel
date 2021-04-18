@@ -15,7 +15,7 @@ namespace OpenStore.Omnichannel.Panel
             => jsRuntime.InvokeVoid("__showToast", "success", message, header);
 
         public static void ShowError(this IJSInProcessRuntime jsRuntime, string message, string header = null)
-            => jsRuntime.InvokeVoid("__showToast", "warning", message, header);
+            => jsRuntime.InvokeVoid("__showToast", "error", message, header);
 
         public static void ShowWarning(this IJSInProcessRuntime jsRuntime, string message, string header = null)
             => jsRuntime.InvokeVoid("__showToast", "warning", message, header);

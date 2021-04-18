@@ -21,4 +21,40 @@
     <data name="MenuHeader.Channels" xml:space="preserve">
         <value>Satış Kanalları</value>
     </data>
+    <data name="Menu.Home" xml:space="preserve">
+        <value>Ana Sayfa</value>
+    </data>
+    <data name="Menu.Orders" xml:space="preserve">
+        <value>Siparişler</value>
+    </data>
+    <data name="Menu.Products" xml:space="preserve">
+        <value>Ürünler</value>
+    </data>
+    <data name="Menu.AllProducts" xml:space="preserve">
+        <value>Ürün Listesi</value>
+    </data>
+    <data name="Menu.Inventory" xml:space="preserve">
+        <value>Envanter Yönetimi</value>
+    </data>
+    <data name="Menu.Collections" xml:space="preserve">
+        <value>Koleksiyonlar</value>
+    </data>
+    <data name="Menu.Customers" xml:space="preserve">
+        <value>Müşteriler</value>
+    </data>
+    <data name="Menu.Analytics" xml:space="preserve">
+        <value>Raporlar</value>
+    </data>
+    <data name="Menu.Documentation" xml:space="preserve">
+        <value>Yardım Dökümanları</value>
+    </data>
+    <data name="Menu.Channels" xml:space="preserve">
+        <value>Satış Kanalları</value>
+    </data>
+    <data name="Menu.OnlineStore" xml:space="preserve">
+        <value>Online Mağaza</value>
+    </data>
+    <data name="Menu.Discounts" xml:space="preserve">
+        <value>İndirimler</value>
+    </data>
 </root>

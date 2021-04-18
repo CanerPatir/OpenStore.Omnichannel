@@ -1,23 +1,8 @@
 ﻿@page "/"
-@inject IStringLocalizer<Index> L
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?"/>
-
-@L["TestKey"]
-
+ 
+<RedirectToHome/>
 <LanguageSelection/>
 
-<button type="button" class="btn btn-primary" @onclick="ShowToast">Toast</button>
-
 @code {
-
-    private void ShowToast()
-    {
-        ShowSuccess("asdfasdq");
-    }
 
 }

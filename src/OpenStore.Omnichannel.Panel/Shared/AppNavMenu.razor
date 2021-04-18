@@ -1,135 +1,146 @@
 ﻿@inject IStringLocalizer<AppNavMenu> L
-
+@implements IDisposable
 
 <div id="sidebar" class="app-sidebar">
     <!-- BEGIN scrollbar -->
     <div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
-        <!-- BEGIN menu -->
         <div class="menu">
-            <div class="menu-header">Navigation</div>
-            <div class="menu-item active">
-                <a href="index.html" class="menu-link">
+            <div class="menu-item @GetLiClassContains("home")">
+                <NavLink href="home" class="menu-link">
                     <span class="menu-icon">
-                        <i class="fa fa-laptop"></i>
+                        <i class="fas fa-home"></i>
                     </span>
-                    <span class="menu-text">Dashboard</span>
+                    <span class="menu-text">@L["Menu.Home"]</span>
+                </NavLink>
+            </div>
+            <div class="menu-item @GetLiClassContains("orders")">
+                <NavLink href="orders" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fas fa-download"></i>
+                        <span class="menu-icon-label">6</span>
+                    </span>
+                    <span class="menu-text">@L["Menu.Orders"]</span>
+                </NavLink>
+            </div>
+            <div class="menu-item has-sub">
+                <a href="#" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fas fa-tags"></i>
+                    </span>
+                    <span class="menu-text">@L["Menu.Products"]</span>
+                    <span class="menu-caret">
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item @GetLiClassContains("products")">
+                        <NavLink href="products" class="menu-link">
+                            <span class="menu-text">@L["Menu.AllProducts"]</span>
+                        </NavLink>
+                    </div>
+                    <div class="menu-item @GetLiClassContains("products/inventory")">
+                        <NavLink href="products/inventory" class="menu-link">
+                            <span class="menu-text">@L["Menu.Inventory"]</span>
+                        </NavLink>
+                    </div>
+                    <div class="menu-item @GetLiClassContains("products/collections")">
+                        <NavLink href="products/collections" class="menu-link">
+                            <span class="menu-text">@L["Menu.Collections"]</span>
+                        </NavLink>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item @GetLiClassContains("customers")">
+                <NavLink href="customers" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span class="menu-text">@L["Menu.Customers"]</span>
+                </NavLink>
+            </div>
+            <div class="menu-item @GetLiClassContains("dashboards")">
+                <NavLink href="dashboards" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </span>
+                    <span class="menu-text">@L["Menu.Analytics"]</span>
+                </NavLink>
+            </div>
+            <div class="menu-item @GetLiClassContains("discounts")">
+                <NavLink href="discounts" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fas fa-percentage"></i>
+                    </span>
+                    <span class="menu-text">@L["Menu.Discounts"]</span>
+                </NavLink>
+            </div>
+            <div class="menu-divider"></div>
+            <div class="menu-header">@L["Menu.Channels"]</div>
+            <div class="menu-item @GetLiClassContains("store-management")">
+                <NavLink href="store-management" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fas fa-store"></i>
+                    </span>
+                    <span class="menu-text">@L["Menu.OnlineStore"]</span>
+                </NavLink>
+            </div>
+            <div class="menu-item">
+                <a href="analytics.html" class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fab fa-facebook-square"></i>
+                    </span>
+                    <span class="menu-text">@L["Facebook"]</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link">
+                    <span class="menu-icon">
+                        <i class="fab fa-instagram-square"></i>
+                    </span>
+                    <span class="menu-text">@L["Instagram"]</span>
                 </a>
             </div>
             <div class="menu-item">
                 <a href="analytics.html" class="menu-link">
                     <span class="menu-icon">
-                        <i class="fa fa-chart-pie"></i>
+                        <i class="fab fa-amazon"></i>
                     </span>
-                    <span class="menu-text">Analytics</span>
+                    <span class="menu-text">@L["Amazon"]</span>
                 </a>
             </div>
-            <div class="menu-item has-sub">
-                <a href="#" class="menu-link">
-                    <span class="menu-icon">
-                        <i class="fa fa-envelope"></i>
-                        <span class="menu-icon-label">6</span>
-                    </span>
-                    <span class="menu-text">Email</span>
-                    <span class="menu-caret">
-                        <b class="caret"></b>
-                    </span>
-                </a>
-                <div class="menu-submenu">
-                    <div class="menu-item">
-                        <a href="email_inbox.html" class="menu-link">
-                            <span class="menu-text">Inbox</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="email_compose.html" class="menu-link">
-                            <span class="menu-text">Compose</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="email_detail.html" class="menu-link">
-                            <span class="menu-text">Detail</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-divider"></div>
-            <div class="menu-header">Components</div>
-            <div class="menu-item">
-                <a href="widgets.html" class="menu-link">
-                    <span class="menu-icon">
-                        <i class="fa fa-qrcode"></i>
-                    </span>
-                    <span class="menu-text">Widgets</span>
-                </a>
-            </div>
-            <div class="menu-item has-sub">
-                <a href="#" class="menu-link">
-                    <span class="menu-icon">
-                        <i class="fa fa-heart"></i>
-                    </span>
-                    <span class="menu-text">UI Kits</span>
-                    <span class="menu-caret">
-                        <b class="caret"></b>
-                    </span>
-                </a>
-                <div class="menu-submenu">
-                    <div class="menu-item">
-                        <a href="ui_bootstrap.html" class="menu-link">
-                            <span class="menu-text">Bootstrap</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="ui_buttons.html" class="menu-link">
-                            <span class="menu-text">Buttons</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="ui_card.html" class="menu-link">
-                            <span class="menu-text">Card</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="ui_icons.html" class="menu-link">
-                            <span class="menu-text">Icons</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="ui_modal_notification.html" class="menu-link">
-                            <span class="menu-text">Modal & Notification</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="ui_typography.html" class="menu-link">
-                            <span class="menu-text">Typography</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a href="ui_tabs_accordions.html" class="menu-link">
-                            <span class="menu-text">Tabs & Accordions</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="menu-divider"></div>
-            <div class="menu-header">@L["MenuHeader.Channels"]</div>
-           
+
             <div class="p-3 px-4 mt-auto hide-on-minified">
-                <a href="../../documentation/index.html" class="btn btn-secondary d-block w-100 font-weight-600 rounded-pill">
-                    <i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> Documentation
+                <a  class="btn btn-secondary d-block w-100 font-weight-600 rounded-pill">
+                    <i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> @L["Menu.Documentation"]
                 </a>
             </div>
         </div>
-        <!-- END menu -->
     </div>
     <!-- END scrollbar -->
 
-    <!-- BEGIN mobile-sidebar-backdrop -->
     <button class="app-sidebar-mobile-backdrop" data-dismiss="sidebar-mobile"></button>
-    <!-- END mobile-sidebar-backdrop -->
 </div>
 
 
-@code
-{
+@code {
 
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += OnNavigationOnLocationChanged;
+    }
+
+    private void OnNavigationOnLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        StateHasChanged();
+    }
+    
+    private string GetLiClassContains(string path)
+    {
+        return Navigation.Uri.Trim('/').EndsWith(path.Trim('/')) ? "active" : string.Empty;
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnNavigationOnLocationChanged;
+    }
 }

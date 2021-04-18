@@ -50,5 +50,77 @@ namespace OpenStore.Omnichannel.Panel.Resources.Shared {
                 return ResourceManager.GetString("MenuHeader.Channels", resourceCulture);
             }
         }
+        
+        internal static string Menu_Home {
+            get {
+                return ResourceManager.GetString("Menu.Home", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Orders {
+            get {
+                return ResourceManager.GetString("Menu.Orders", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Products {
+            get {
+                return ResourceManager.GetString("Menu.Products", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_AllProducts {
+            get {
+                return ResourceManager.GetString("Menu.AllProducts", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Inventory {
+            get {
+                return ResourceManager.GetString("Menu.Inventory", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Collections {
+            get {
+                return ResourceManager.GetString("Menu.Collections", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Customers {
+            get {
+                return ResourceManager.GetString("Menu.Customers", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Analytics {
+            get {
+                return ResourceManager.GetString("Menu.Analytics", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Documentation {
+            get {
+                return ResourceManager.GetString("Menu.Documentation", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Channels {
+            get {
+                return ResourceManager.GetString("Menu.Channels", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_OnlineStore {
+            get {
+                return ResourceManager.GetString("Menu.OnlineStore", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_Discounts {
+            get {
+                return ResourceManager.GetString("Menu.Discounts", resourceCulture);
+            }
+        }
     }
 }

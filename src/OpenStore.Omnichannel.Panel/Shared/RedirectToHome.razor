@@ -1,9 +1,8 @@
 ﻿@code {
     protected override bool ShouldRender() => false;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        Navigation.NavigateTo("");
+        Navigation.NavigateTo("home");
     }
-
 }
