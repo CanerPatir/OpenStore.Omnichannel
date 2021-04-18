@@ -13,5 +13,10 @@
     <ItemGroup>
         <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="InventoryContext" />
+      <Folder Include="OrderContext" />
+    </ItemGroup>
 
 </Project>

@@ -2,6 +2,8 @@ using System;
 using System.Net.Http;
 using Blazorise;
 using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
+using Blazorise.RichTextEdit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -22,7 +24,8 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             builder.Services
                 .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
                 .AddBootstrapProviders()
-                
+                .AddFontAwesomeIcons()
+                .AddBlazoriseRichTextEdit(options => { options.DynamicLoadReferences = true; })
                 ;
             
             var environment = builder.HostEnvironment;
