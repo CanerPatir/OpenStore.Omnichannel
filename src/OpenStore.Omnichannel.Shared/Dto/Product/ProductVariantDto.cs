@@ -5,6 +5,8 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
     public class ProductVariantDto 
     {
+        public string Barcode { get; set; }
+        public string Sku { get; set; }
         public ProductPricingDto Pricing { get; set; }
         public ProductInventoryDto Inventory { get; set; }
         public ProductShippingInfoDto ProductShippingInfoDto { get; set; }

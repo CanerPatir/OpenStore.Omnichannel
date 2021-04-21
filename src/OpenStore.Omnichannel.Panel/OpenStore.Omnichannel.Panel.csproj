@@ -108,9 +108,9 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>AppNavMenu.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\SharedResource.tr-TR.resx">
+      <EmbeddedResource Update="Resources\App.tr-TR.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>SharedResource.tr-TR.Designer.cs</LastGenOutput>
+        <LastGenOutput>App.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
       <EmbeddedResource Update="Resources\Shared\AppHeaderBar.tr-TR.resx">
         <Generator>ResXFileCodeGenerator</Generator>
@@ -120,9 +120,9 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\Detail.tr-TR.resx">
+      <EmbeddedResource Update="Resources\Pages\Products\Create.tr-TR.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Detail.tr-TR.Designer.cs</LastGenOutput>
+        <LastGenOutput>Create.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
@@ -137,7 +137,7 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>AppNavMenu.tr-TR.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\SharedResource.tr-TR.Designer.cs">
+      <Compile Update="Resources\App.tr-TR.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>SharedResource.tr-TR.resx</DependentUpon>
@@ -152,7 +152,7 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Index.tr-TR.resx</DependentUpon>
       </Compile>
-      <Compile Update="Resources\Pages\Products\Detail.tr-TR.Designer.cs">
+      <Compile Update="Resources\Pages\Products\Create.tr-TR.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>Edit.tr-TR.resx</DependentUpon>
@@ -160,7 +160,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Components" />
       <Folder Include="wwwroot\assets" />
     </ItemGroup>
 

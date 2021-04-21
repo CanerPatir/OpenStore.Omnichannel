@@ -14,7 +14,7 @@
     protected IJSInProcessRuntime JsRuntimeSync => (IJSInProcessRuntime) JsRuntime;
     
     [Inject]
-    private IStringLocalizer<SharedResource> SharedLocalizer { get; init; }
+    protected IStringLocalizer<App> SharedLocalizer { get; init; }
     
     [Inject]
     protected NavigationManager Navigation { get; init; }
@@ -42,6 +42,8 @@
 
     protected void ShowWarning(string message, string title = null) => JsRuntimeSync.ShowWarning(message, title);
     
+    protected string Localize(string message, IEnumerable<string> arguments) => string.Format(SharedLocalizer[message], arguments?.ToArray() ?? new object[0]);
+
     protected bool Loading { get; private set; }
     protected bool LoadedAny { get; private set; }
     
