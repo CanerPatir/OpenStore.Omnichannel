@@ -1,0 +1,36 @@
+<div class="d-flex align-items-center mb-4">
+    <div>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                <NavLink href="@RootHref">@RootTitle</NavLink>
+            </li>
+            <li class="breadcrumb-item active">@CurrentTitle</li>
+        </ul>
+        <h1 class="page-header mb-0">
+            @TitleSection
+        </h1>
+    </div>
+
+    <div class="ms-auto">
+        @ButtonsSection
+    </div>
+</div>
+
+@code {
+ 
+    [Parameter]
+    public string CurrentTitle { get; set; }   
+    
+    [Parameter]
+    public string RootTitle { get; set; }
+    
+    [Parameter]
+    public string RootHref { get; set; }
+    
+    [Parameter]
+    public RenderFragment TitleSection { get; set; }
+
+    [Parameter]
+    public RenderFragment ButtonsSection { get; set; }
+
+}

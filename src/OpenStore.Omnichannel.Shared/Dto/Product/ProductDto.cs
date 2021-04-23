@@ -9,25 +9,27 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public Guid? Id { get; set; }
 
         [Required(ErrorMessage = Msg.Validation.Required)]
+        [MaxLength(70, ErrorMessage = Msg.Validation.MaxLength)]
+        public string Handle { get; set; } // unique  
+
+        [Required(ErrorMessage = Msg.Validation.Required)]
+        // [Range(20, 80, ErrorMessage = Msg.Validation.Range)]
         public string Title { get; set; }
 
         [Required(ErrorMessage = Msg.Validation.Required)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = Msg.Validation.Required)]
-        public string Handle { get; set; } // unique  
+        public ProductMetaDto Meta { get; set; } = new();
 
         public string Tags { get; set; }
-        public string MetaTitle { get; set; }
-        public string MetaDescription { get; set; }
         public ProductStatus Status { get; set; } = ProductStatus.Draft;
 
         public IEnumerable<ProductVariantDto> Variants { get; set; }
         public IEnumerable<ProductSaleChannelDto> Channels { get; set; }
 
-        public ProductPricingDto Pricing { get; set; }
-        public ProductInventoryDto Inventory { get; set; }
-        public ProductShippingInfoDto ProductShippingInfoDto { get; set; }
+        public ProductPricingDto Pricing { get; set; } = new();
+        public ProductInventoryDto Inventory { get; set; } = new();
+        public ProductShippingInfoDto Shipping { get; set; } = new();
         public IEnumerable<ProductMediaDto> Medias { get; set; }
 
         public IEnumerable<ProductVarianterAttributeDto> VarianterAttributes { get; set; }

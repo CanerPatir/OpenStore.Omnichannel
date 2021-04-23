@@ -36,6 +36,7 @@ namespace OpenStore.Omnichannel
             public const string PasswordRequiresUpper = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresUpper);
             public const string PasswordRequiresUniqueChars = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresUniqueChars);
             public const string PasswordRequiresNonAlphanumeric = nameof(Validation) + DiscriminatorChar + nameof(PasswordRequiresNonAlphanumeric);
+            public const string MaxLength = nameof(Validation) + DiscriminatorChar + nameof(MaxLength);
         }
 
         public const string ResourceNotFound = nameof(ResourceNotFound);

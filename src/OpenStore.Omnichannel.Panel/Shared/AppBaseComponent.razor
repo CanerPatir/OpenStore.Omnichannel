@@ -42,7 +42,12 @@
 
     protected void ShowWarning(string message, string title = null) => JsRuntimeSync.ShowWarning(message, title);
     
-    protected string Localize(string message, IEnumerable<string> arguments) => string.Format(SharedLocalizer[message], arguments?.ToArray() ?? new object[0]);
+    protected string Localize(string message, IEnumerable<string> arguments)
+    {
+        Alert(message);
+        Alert(arguments.Count().ToString());
+        return SharedLocalizer[message, arguments];
+    }
 
     protected bool Loading { get; private set; }
     protected bool LoadedAny { get; private set; }

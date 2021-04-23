@@ -50,5 +50,11 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Validation.Required", resourceCulture);
             }
         }
+        
+        internal static string Validation_Range {
+            get {
+                return ResourceManager.GetString("Validation.Range", resourceCulture);
+            }
+        }
     }
 }

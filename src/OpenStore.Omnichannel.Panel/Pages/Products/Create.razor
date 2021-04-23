@@ -5,148 +5,38 @@
 <Container>
     <Row class="justify-content-center">
         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-            <div class="d-flex align-items-center mb-4">
-                <div>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <NavLink href="products">@L["Breadcrumb.Products"]</NavLink>
-                        </li>
-                        <li class="breadcrumb-item active">@L["Breadcrumb.AddProduct"]</li>
-                    </ul>
-                    <h1 class="page-header mb-0">
-                        @if (string.IsNullOrWhiteSpace(_product.Title))
-                        {
-                            <span>@L["NewProduct"]</span>
-                        }
-                        else
-                        {
-                            <span>@_product.Title</span>
-                        }
+            <OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Products"]" CurrentTitle="@L["Breadcrumb.AddProduct"]">
+                <TitleSection>
+                    @if (string.IsNullOrWhiteSpace(_product.Title))
+                    {
+                        <span>@L["NewProduct"]</span>
+                    }
+                    else
+                    {
+                        <span>@_product.Title</span>
+                    }
 
-                        <Badge Color="Color.Warning">
-                            Draft
-                        </Badge>
-                    </h1>
-                </div>
-
-                <div class="ms-auto">
+                    <Badge Color="Color.Warning">
+                        Draft
+                    </Badge>
+                </TitleSection>
+                <ButtonsSection>
                     <Button Clicked="Save" Color="Color.Success">
                         <i class="fa fa-save fa-fw me-1"></i> @L["Button.Save"]
                     </Button>
-                </div>
-            </div>
-
+                </ButtonsSection>
+            </OsBreadcrumb>
+ 
             <Row>
-                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
+                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product" >
                     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <Validation MessageLocalizer="Localize">
-                                    <Field Margin="Margin.Is3.FromBottom">
-                                        <FieldLabel>@L["Form.ProductTitle"]</FieldLabel>
-                                        <FieldBody>
-                                            <TextEdit @bind-Text="@_product.Title">
-                                                <Feedback>
-                                                    <ValidationError/>
-                                                </Feedback>
-                                            </TextEdit>
-                                        </FieldBody>
-                                    </Field>
-                                </Validation>
-
-                                <Field>
-                                    <FieldLabel>@L["Form.ProductDescription"]</FieldLabel>
-                                    <FieldBody>
-                                        <RichTextEdit
-                                            @ref="_richTextEditRef"
-                                            ContentChanged="@OnContentChanged"
-                                            Theme="RichTextEditTheme.Snow"
-                                            PlaceHolder="Type your post here..."
-                                            SubmitOnEnter="false"
-                                            ToolbarPosition="Placement.Top">
-                                            <Toolbar >
-                                                <RichTextEditToolbarGroup >
-                                                    <RichTextEditToolbarButton Action="RichTextEditAction.Bold"/>
-                                                    <RichTextEditToolbarButton Action="RichTextEditAction.Italic"/>
-                                                    <RichTextEditToolbarSelect Action="RichTextEditAction.Size">
-                                                        <RichTextEditToolbarSelectItem Value="small"/>
-                                                        <RichTextEditToolbarSelectItem Selected="true"/>
-                                                        <RichTextEditToolbarSelectItem Value="large"/>
-                                                        <RichTextEditToolbarSelectItem Value="huge">Very Big</RichTextEditToolbarSelectItem>
-                                                    </RichTextEditToolbarSelect>
-                                                    <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="ordered"/>
-                                                    <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="bullet"/>
-                                                </RichTextEditToolbarGroup>
-                                                <!-- Custom toolbar content -->
-                                                @* <RichTextEditToolbarGroup Float="Float.Right"> *@
-                                                @* *@
-                                                @*     <Button Clicked="@(o => { })"> *@
-                                                @*         <Icon Name="IconName.Save"/> *@
-                                                @*     </Button> *@
-                                                @* </RichTextEditToolbarGroup> *@
-                                            </Toolbar>
-                                            <Editor >@(_product.Description ?? " ")</Editor>
-                                        </RichTextEdit>
-                                    </FieldBody>
-                                </Field>
-
-                            </CardBody>
-                        </Card>
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    @L["CardTitle.Media"]
-                                </h5>
-                                <FileEdit Filter=".jpg, .png, .gif" Multiple="true"/>
-                            </CardBody>
-                        </Card>
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    @L["CardTitle.Pricing"]
-
-                                </h5>
-                                Pricing
-                            </CardBody>
-                        </Card>
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    @L["CardTitle.Inventory"]
-                                </h5>
-                                Inventory
-                            </CardBody>
-                        </Card>
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    @L["CardTitle.Shipping"]
-                                </h5>
-                                Shipping
-                            </CardBody>
-                        </Card>
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    @L["CardTitle.Variants"]
-                                </h5>
-                                Variants
-                            </CardBody>
-                        </Card>
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    @L["CardTitle.Seo"]
-                                </h5>
-                                Seo
-                            </CardBody>
-                        </Card>
+                        <ProductContentEditor HeaderTitle="" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
+                        <MediaEditor HeaderTitle="@L["CardTitle.Media"]" Model="@_product.Medias"/>
+                        <PricingEditor HeaderTitle="@L["CardTitle.Pricing"]" Model="@_product.Pricing"/>
+                        <InventoryEditor HeaderTitle="@L["CardTitle.Inventory"]" Model="@_product.Inventory"/>
+                        <ShippingEditor HeaderTitle="@L["CardTitle.Shipping"]" Model="@_product.Shipping"/>
+                        <VariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product.Variants"/>
+                        <MetaEditor HeaderTitle="@L["CardTitle.Seo"]" Model="@_product.Meta"/>
                     </Column>
 
                     <Column ColumnSize="ColumnSize.Is4.OnDesktop">
@@ -178,7 +68,7 @@
                                 <h5>
                                     @L["CardTitle.Tags"]
                                 </h5>
-                                <OsChipsInput Chips="@_tags" />
+                                <OsChipsInput Chips="@_tags"/>
 
                             </ListGroupItem>
                         </ListGroup>
@@ -190,7 +80,6 @@
             <hr class="mb-4">
             <Row>
                 <div class="d-flex align-items-center mb-4">
-
                     <div class="ms-auto">
                         <Button Clicked="Save" Color="Color.Success">
                             <i class="fa fa-save fa-fw me-1"></i> @L["Button.Save"]
@@ -204,16 +93,9 @@
 
 @code {
     private readonly ProductDto _product = new();
-    private RichTextEdit _richTextEditRef;
     private Validations _validations;
-    private string _contentAsHtml;
 
     private List<string> _tags = new List<string>();
-
-    private async Task OnContentChanged()
-    {
-        _contentAsHtml = await _richTextEditRef.GetHtmlAsync();
-    }
 
     private Task UploadImage()
     {
@@ -222,16 +104,13 @@
 
         return Task.CompletedTask;
     }
-    
+
     private async Task Save()
     {
         if (!_validations.ValidateAll())
         {
             return;
         }
-
-        Alert(_contentAsHtml);
-        await _richTextEditRef.ClearAsync();
     }
 
 }

@@ -1,0 +1,20 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        <h5>
+            @HeaderTitle
+        </h5>
+        Shipping
+    </CardBody>
+</Card>
+
+@code {
+
+    [Parameter]
+    public ProductShippingInfoDto Model { get; set; }
+
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+}

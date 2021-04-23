@@ -1,0 +1,21 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+
+
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        <h5>
+            @HeaderTitle
+        </h5>
+        Variants
+    </CardBody>
+</Card>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<ProductVariantDto> Model { get; set; }
+
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+}

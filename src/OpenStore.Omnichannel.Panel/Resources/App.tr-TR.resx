@@ -21,4 +21,7 @@
     <data name="Validation.Required" xml:space="preserve">
         <value>Zorunlu alan</value>
     </data>
+    <data name="Validation.Range" xml:space="preserve">
+        <value>Bu alanın uzunluğu en az {1}, en fazla {2} olablilir</value>
+    </data>
 </root>

@@ -1,0 +1,19 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        <h5>
+            @HeaderTitle
+        </h5>
+        seo
+    </CardBody>
+</Card>
+
+@code {
+
+    [Parameter]
+    public ProductMetaDto Model { get; set; }
+
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+}
