@@ -1,4 +1,5 @@
-<div class="@ChipsContainerClass" style="display: flex; flex-wrap: wrap; border: 1px solid #cccccc; border-radius: @(InputBorderRadius)rem;">
+@using System.Globalization
+<div class="@ChipsContainerClass" style="display: flex; flex-wrap: wrap; border: 1px solid #cccccc; border-radius: @(InputBorderRadius.ToString(CultureInfo.InvariantCulture))rem;">
     <ul class="@ChipsListClass" style="display: inline-flex; flex-wrap: wrap; width: 100%; margin: 0; padding: 5px; list-style: none;">
         @foreach (string chip in Chips)
         {
@@ -23,7 +24,7 @@
 
 @if (ShowValidationErrors)
 {
-    @foreach (string validationError in _validationErrors)
+    foreach (var validationError in _validationErrors)
     {
         @if (ValidationErrorTemplate != null)
         {

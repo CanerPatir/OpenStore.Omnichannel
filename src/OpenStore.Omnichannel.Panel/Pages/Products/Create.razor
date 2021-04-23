@@ -26,9 +26,9 @@
                     </Button>
                 </ButtonsSection>
             </OsBreadcrumb>
- 
+
             <Row>
-                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product" >
+                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
                     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                         <ProductContentEditor HeaderTitle="" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
                         <MediaEditor HeaderTitle="@L["CardTitle.Media"]" Model="@_product.Medias"/>
@@ -40,27 +40,26 @@
                     </Column>
 
                     <Column ColumnSize="ColumnSize.Is4.OnDesktop">
-
-                        <Card Margin="Margin.Is3.FromBottom">
-                            <CardBody>
-                                <h5>
-                                    Status
-                                </h5>
-
-                            </CardBody>
-                            <hr>
-                            <CardBody>
-                                <h5>
-                                    Channels
-                                </h5>
-                                Channels
-                            </CardBody>
-                        </Card>
-
+                        
                         <ListGroup Margin="Margin.Is3.FromBottom">
                             <ListGroupItem>
                                 <h5>
-                                    collections
+                                    @L["CardTitle.Status"]
+                                </h5>
+                                Status
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <h5>
+                                    @L["CardTitle.Channels"]
+                                </h5>
+                                Channels
+                            </ListGroupItem>
+                        </ListGroup>
+                        
+                        <ListGroup Margin="Margin.Is3.FromBottom">
+                            <ListGroupItem>
+                                <h5>
+                                    @L["CardTitle.Collections"]
                                 </h5>
                                 collections
                             </ListGroupItem>

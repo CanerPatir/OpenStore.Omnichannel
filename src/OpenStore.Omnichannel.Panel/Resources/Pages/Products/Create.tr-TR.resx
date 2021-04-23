@@ -57,4 +57,13 @@
     <data name="CardTitle.Tags" xml:space="preserve">
         <value>Etiketler</value>
     </data>
+    <data name="CardTitle.Collections" xml:space="preserve">
+        <value>Koleksiyonlar</value>
+    </data>
+    <data name="CardTitle.Status" xml:space="preserve">
+        <value>Statü</value>
+    </data>
+    <data name="CardTitle.Channels" xml:space="preserve">
+        <value>Satış Kanalları</value>
+    </data>
 </root>

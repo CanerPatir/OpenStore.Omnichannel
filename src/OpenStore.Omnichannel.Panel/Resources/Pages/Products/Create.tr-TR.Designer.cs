@@ -122,5 +122,23 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("CardTitle.Tags", resourceCulture);
             }
         }
+        
+        internal static string CardTitle_Collections {
+            get {
+                return ResourceManager.GetString("CardTitle.Collections", resourceCulture);
+            }
+        }
+        
+        internal static string CardTitle_Status {
+            get {
+                return ResourceManager.GetString("CardTitle.Status", resourceCulture);
+            }
+        }
+        
+        internal static string CardTitle_Channels {
+            get {
+                return ResourceManager.GetString("CardTitle.Channels", resourceCulture);
+            }
+        }
     }
 }

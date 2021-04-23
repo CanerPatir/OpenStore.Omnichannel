@@ -1,9 +1,142 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using System.IO
+
+
+@inject IStringLocalizer<MediaEditor> L
+
 <Card Margin="Margin.Is3.FromBottom">
     <CardBody>
         <h5>
             @HeaderTitle
         </h5>
+
+        <div>
+            @foreach (var url in _urls)
+            {
+                <img src="@url" style="max-height: 220px; max-width: 220px" alt="">
+            }
+
+            @if (_base64Images.Any())
+            {
+                foreach (var file in _base64Images)
+                {
+                    <img src="@file" style="max-height: 220px; max-width: 220px" alt="">
+                }
+            }
+            
+            <div class="_1u--M">
+                <div class="_2v-l- _16ROL">
+                    <div class="_1BWdo"></div>
+                    <div class="_1BWdo"></div>
+                    <div class="_1BWdo"></div>
+                </div>
+                <div class="_2v-l-">
+                    <div>
+                        <button class="_1A2zx" type="button">
+                            <div class="_39S4u">
+                                <span class="Polaris-Icon_yj27d">
+                                    <svg viewBox="0 0 20 20" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                        <path d="M3.181 9.271C2.505 9.271 2 8.799 2 8.131V3.783C2 2.651 2.66 2 3.783 2h4.511c.676 0 1.148.497 1.148 1.173 0 .667-.48 1.164-1.148 1.164h-.537l-1.803.002 1.298 1.227 2.036 2.028c.219.22.358.497.358.806 0 .717-.497 1.23-1.222 1.23-.309 0-.61-.114-.83-.342L5.575 7.252 4.347 5.953l-.002 1.771v.407c0 .668-.505 1.14-1.164 1.14zM11.698 18c-.668 0-1.14-.497-1.14-1.173 0-.667.472-1.164 1.14-1.164h.545l1.814-.002-1.309-1.219-2.036-2.036c-.219-.22-.358-.497-.358-.806 0-.717.497-1.23 1.213-1.23.318 0 .611.114.839.342l2.019 2.036 1.227 1.298.003-1.77v-.407c0-.668.505-1.14 1.164-1.14.676 0 1.181.48 1.181 1.14v4.348C18 17.349 17.34 18 16.217 18h-4.519z" fill-rule="nonzero">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <div class="_2XYX0">
+                                    <span class="Polaris-Icon_yj27d">
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                            <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="_3sowp">
+                                <img class="_33kBe" src="https://cdn.shopify.com/s/files/1/2850/4238/products/1_350x350.jpg?v=1619034792" alt="">
+                            </div>
+                            <div class="_2JrRS">
+                                <label class="Polaris-Choice_j5gzq Polaris-Choice--labelHidden_14tn9" for="PolarisCheckbox3">
+                                    <span class="Polaris-Choice__Control_1u8vs">
+                                        <span class="Polaris-Checkbox_1d6zr">
+                                            <input id="PolarisCheckbox3" type="checkbox" class="Polaris-Checkbox__Input_30ock" aria-invalid="false" role="checkbox" aria-checked="false" value="">
+                                            <span class="Polaris-Checkbox__Backdrop_1x2i2">
+                                            </span>
+                                            <span class="Polaris-Checkbox__Icon_yj27d">
+                                                <span class="Polaris-Icon_yj27d">
+                                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                        <path d="M8.315 13.859l-3.182-3.417a.506.506 0 0 1 0-.684l.643-.683a.437.437 0 0 1 .642 0l2.22 2.393 4.942-5.327a.436.436 0 0 1 .643 0l.643.684a.504.504 0 0 1 0 .683l-5.91 6.35a.437.437 0 0 1-.642 0">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span class="Polaris-Choice__Label_2vd36">
+                                        Select
+                                    </span>
+                                </label>
+                            </div>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="_1A2zx" type="button">
+                            <div class="_39S4u">
+                                <span class="Polaris-Icon_yj27d">
+                                    <svg viewBox="0 0 20 20" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                        <path d="M3.181 9.271C2.505 9.271 2 8.799 2 8.131V3.783C2 2.651 2.66 2 3.783 2h4.511c.676 0 1.148.497 1.148 1.173 0 .667-.48 1.164-1.148 1.164h-.537l-1.803.002 1.298 1.227 2.036 2.028c.219.22.358.497.358.806 0 .717-.497 1.23-1.222 1.23-.309 0-.61-.114-.83-.342L5.575 7.252 4.347 5.953l-.002 1.771v.407c0 .668-.505 1.14-1.164 1.14zM11.698 18c-.668 0-1.14-.497-1.14-1.173 0-.667.472-1.164 1.14-1.164h.545l1.814-.002-1.309-1.219-2.036-2.036c-.219-.22-.358-.497-.358-.806 0-.717.497-1.23 1.213-1.23.318 0 .611.114.839.342l2.019 2.036 1.227 1.298.003-1.77v-.407c0-.668.505-1.14 1.164-1.14.676 0 1.181.48 1.181 1.14v4.348C18 17.349 17.34 18 16.217 18h-4.519z" fill-rule="nonzero">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <div class="_2XYX0">
+                                    <span class="Polaris-Icon_yj27d">
+                                        <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                            <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z">
+                                            </path>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="_3sowp">
+                                <img class="_33kBe" src="https://cdn.shopify.com/s/files/1/2850/4238/products/6_252F7_252Fd_252F5_252F67d548660834bcb896d66d27063b98213219d4dc_bag_350x350.jpg?v=1619003572" alt="">
+                            </div>
+                            <div class="_2JrRS">
+                                <label class="Polaris-Choice_j5gzq Polaris-Choice--labelHidden_14tn9" for="PolarisCheckbox4">
+                                    <span class="Polaris-Choice__Control_1u8vs">
+                                        <span class="Polaris-Checkbox_1d6zr">
+                                            <input id="PolarisCheckbox4" type="checkbox" class="Polaris-Checkbox__Input_30ock" aria-invalid="false" role="checkbox" aria-checked="false" value="">
+                                            <span class="Polaris-Checkbox__Backdrop_1x2i2">
+                                            </span>
+                                            <span class="Polaris-Checkbox__Icon_yj27d">
+                                                <span class="Polaris-Icon_yj27d">
+                                                    <svg viewBox="0 0 20 20" class="Polaris-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                                        <path d="M8.315 13.859l-3.182-3.417a.506.506 0 0 1 0-.684l.643-.683a.437.437 0 0 1 .642 0l2.22 2.393 4.942-5.327a.436.436 0 0 1 .643 0l.643.684a.504.504 0 0 1 0 .683l-5.91 6.35a.437.437 0 0 1-.642 0">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span class="Polaris-Choice__Label_2vd36">
+                                        Select
+                                    </span>
+                                </label>
+                            </div>
+                        </button>
+                    </div>
+                    @* <div class="DmE8e"> *@
+                    <div>
+                        <div class="drop-area @_dropClass">
+                            <InputFile OnChange="OnInputFileChange"
+                                       @ondragenter="HandleDragEnter"
+                                       @ondragleave="HandleDragLeave"
+                                       accept="image/png,image/gif,image/jpeg,image/webp"
+                                       multiple/>
+                            <span>@L["DropArea.DropTitle"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </CardBody>
 </Card>
 
@@ -14,4 +147,47 @@
 
     [Parameter]
     public string HeaderTitle { get; set; }
+
+    private IReadOnlyList<IBrowserFile> _files;
+    private List<string> _urls = new();
+    private List<string> _base64Images = new();
+    
+    private string _dropClass = string.Empty;
+
+    private void HandleDragEnter() => _dropClass = "drop-area-drug";
+    private void HandleDragLeave() => _dropClass = string.Empty;
+
+    async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        _dropClass = string.Empty;
+        _files = e.FileCount > 1 ? e.GetMultipleFiles() : new[] {e.File};
+
+        _base64Images.Clear();
+        foreach (var browserFile in _files)
+        {
+            var buffers = new byte[browserFile.Size];
+            await browserFile.OpenReadStream().ReadAsync(buffers);
+            var imageType = browserFile.ContentType;
+            _base64Images.Add($"data:{imageType};base64,{Convert.ToBase64String(buffers)}");
+        }
+
+        _urls.Clear();
+        _urls.AddRange(await SaveFiles(_files));
+    }
+
+    private async Task<List<string>> SaveFiles(IReadOnlyList<IBrowserFile> files)
+    {
+        var list = new List<string>();
+        var guid = Guid.NewGuid().ToString();
+        foreach (var file in files)
+        {
+            await Task.Delay(1000);
+            var url = ""; // await SaveFile(file, guid);
+            list.Add(url);
+        }
+        return list;
+    }
+
+
+
 }

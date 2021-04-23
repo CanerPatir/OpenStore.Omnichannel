@@ -9,5 +9,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public string Title { get; set; }
         public string Extension { get; set; }
         public string Filename { get; set; }
+        public bool IsShowcase { get; set; }
+        public short Order { get; set; }
     }
 }

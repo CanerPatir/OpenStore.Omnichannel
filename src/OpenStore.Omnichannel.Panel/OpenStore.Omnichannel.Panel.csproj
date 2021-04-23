@@ -93,6 +93,28 @@
       <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\news-1.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\news-2.jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\widget-cover-1.jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload-noscript.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload-ui-noscript.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload-ui.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\vendor\carbon.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\vendor\doka.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\img\loading.gif" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\img\progressbar.gif" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\img\vendor\doka-logo.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\index.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\demo.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-audio.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-image.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-process.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-ui.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-validate.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-video.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.iframe-transport.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\vendor\doka.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\vendor\doka.polyfill.loader.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\vendor\jquery.ui.widget.js" />
     </ItemGroup>
 
     <ItemGroup>
