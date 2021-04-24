@@ -15,9 +15,9 @@ namespace OpenStore.Omnichannel.Domain.ChannelContext
         }
 
         public Guid ProductId { get; protected set; }
-        public Product Product { get; protected set; }
+        public virtual Product Product { get; protected set; }
 
         public Guid SaleChannelId { get; protected set; }
-        public SaleChannel SaleChannel { get; protected set; }
+        public virtual SaleChannel SaleChannel { get; protected set; }
     }
 }

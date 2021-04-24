@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Omnichannel.Domain.IdentityContext;
+using OpenStore.Omnichannel.Domain.MediaContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 {
@@ -15,6 +16,8 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 
         // Identity
         // public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+        
+        public DbSet<Media> Medias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

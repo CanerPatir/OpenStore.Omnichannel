@@ -18,105 +18,7 @@
         <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\.DS_Store" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-1.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-10.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-11.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-12.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-13.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-14.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-15.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-2.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-3.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-4.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-5.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-6.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-7.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-8.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product-9.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\product\product.png" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-1.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-10.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-11.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-12.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-13.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-14.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-15.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-16.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-17.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-18.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-19.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-2.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-20.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-21.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-22.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-23.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-24.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-25.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-26.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-27.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-28.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-29.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-3.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-30.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-31.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-32.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-33.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-34.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-35.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-36.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-37.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-38.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-39.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-4.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-40.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-41.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-42.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-43.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-44.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-45.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-46.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-47.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-48.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-49.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-5.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-50.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-51.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-52.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-53.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-6.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-7.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-8.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\gallery-9.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\news-1.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\news-2.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\img\gallery\widget-cover-1.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload-noscript.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload-ui-noscript.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload-ui.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\jquery.fileupload.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\vendor\carbon.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\css\vendor\doka.min.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\img\loading.gif" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\img\progressbar.gif" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\img\vendor\doka-logo.svg" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\index.html" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\demo.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-audio.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-image.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-process.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-ui.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-validate.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload-video.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.fileupload.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\jquery.iframe-transport.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\vendor\doka.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\vendor\doka.polyfill.loader.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\file-uploader\jQuery-File-Upload\js\vendor\jquery.ui.widget.js" />
-    </ItemGroup>
-
+ 
     <ItemGroup>
       <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
     </ItemGroup>
@@ -145,6 +47,10 @@
       <EmbeddedResource Update="Resources\Pages\Products\Create.tr-TR.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Create.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Products\MediaEditor.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>MediaEditor.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
@@ -179,10 +85,12 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Edit.tr-TR.resx</DependentUpon>
       </Compile>
+      <Compile Update="Resources\Pages\Products\MediaEditor.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>MediaEditor.tr-TR.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\assets" />
-    </ItemGroup>
 
 </Project>

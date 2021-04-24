@@ -8,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using OpenStore.Infrastructure.Data.EntityFramework;
 using OpenStore.Infrastructure.Mapping.AutoMapper;
 using OpenStore.Omnichannel.Domain.IdentityContext;
+using OpenStore.Omnichannel.Domain.MediaContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
+using OpenStore.Omnichannel.Shared.Dto.Media;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
 {
@@ -64,7 +66,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
 
                 // to avoid unexpected lazy loading dto should be located to left hand of mapping
                 // identity
-                // cfg.CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
+                cfg.CreateMap<MediaDto, Media>().ReverseMap();
                 
             });
             return services;

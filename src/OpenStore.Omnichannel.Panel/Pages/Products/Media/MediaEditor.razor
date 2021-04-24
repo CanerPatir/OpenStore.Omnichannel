@@ -1,0 +1,86 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@using System.IO
+@using OpenStore.Omnichannel.Shared.Dto
+@using OpenStore.Omnichannel.Shared.Dto.Media
+
+@inject IStringLocalizer<MediaEditor> L
+
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        <h5>
+            @HeaderTitle
+        </h5>
+
+        <div>
+            <div class="draggable-container">
+                <div class="draggable-image-grid _16ROL">
+                    @for (var i = 0; i <= Model.Count(); i++)
+                    {
+                        <div class="draggable-image-grid-item-placeholder"></div>
+                    }
+                </div>
+                <div class="draggable-image-grid" ondragover="event.preventDefault();">
+                    <MediaEditorItems Items="@Items"/>
+                    <div>
+                        <div class="drop-area @_dropClass">
+                            <InputFile OnChange="OnInputFileChange"
+                                       @ondragenter="HandleDragEnter"
+                                       @ondragleave="HandleDragLeave"
+                                       accept="image/png,image/gif,image/jpeg,image/webp"
+                                       multiple/>
+                            <span>@L["DropArea.DropTitle"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </CardBody>
+</Card>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<MediaDto> Model { get; set; }
+    
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+    private List<MediaEditorItemModel> Items => Model.Select(x => new MediaEditorItemModel
+    {
+        Dto = x
+    }).ToList();
+
+    private string _dropClass = string.Empty;
+
+    private void HandleDragEnter() => _dropClass = "drop-area-drug";
+    private void HandleDragLeave() => _dropClass = string.Empty;
+
+    async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        _dropClass = string.Empty;
+        var files = e.FileCount > 1 ? e.GetMultipleFiles() : new[] {e.File};
+
+        var dtoList = new List<FileUploadDto>();
+        var index = Model.Count();
+        foreach (var file in files)
+        {
+            var bytes = new byte[file.Size];
+            await using var openReadStream = file.OpenReadStream();
+            await openReadStream.ReadAsync(bytes);
+            dtoList.Add(new FileUploadDto(file.Name, file.ContentType, file.Size, index++, bytes));
+            // list.Add($"data:{imageType};base64,{Convert.ToBase64String(bytes)}");
+        }
+
+        var mediaDtoList = await ApiClient.Media.Upload(dtoList);
+
+        var model = new List<MediaDto>();
+        model.AddRange(Model);
+        model.AddRange(mediaDtoList);
+
+        Model = model;
+        StateHasChanged();
+        // await ModelChanged.InvokeAsync(model);
+    }
+
+
+}

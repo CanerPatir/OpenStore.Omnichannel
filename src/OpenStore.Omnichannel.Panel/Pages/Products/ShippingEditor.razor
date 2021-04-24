@@ -1,18 +1,25 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<ShippingEditor> L
 
 <Card Margin="Margin.Is3.FromBottom">
     <CardBody>
         <h5>
             @HeaderTitle
         </h5>
-        Shipping
+        
+        <Field>
+            <FieldBody>
+                <Check TValue="bool" Readonly="@Model.IsEdit" @bind-Checked="@Model.IsPhysicalProduct">@L["IsPhysicalProduct"]</Check>
+            </FieldBody>
+        </Field>
+        <Divider/>
     </CardBody>
 </Card>
 
 @code {
 
     [Parameter]
-    public ProductShippingInfoDto Model { get; set; }
+    public ProductDto Model { get; set; }
 
     [Parameter]
     public string HeaderTitle { get; set; }

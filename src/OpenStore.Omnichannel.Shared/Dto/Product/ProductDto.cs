@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
@@ -19,32 +20,26 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         [Required(ErrorMessage = Msg.Validation.Required)]
         public string Description { get; set; }
 
-        public ProductMetaDto Meta { get; set; } = new();
-
-        public string Tags { get; set; }
         public ProductStatus Status { get; set; } = ProductStatus.Draft;
+        public bool HasMultipleVariants { get; set; }
 
-        public IEnumerable<ProductVariantDto> Variants { get; set; }
-        public IEnumerable<ProductSaleChannelDto> Channels { get; set; }
+        // fulfillment
+        public decimal? Weight { get; set; }
+        public string HsCode { get; set; }
+        public bool IsPhysicalProduct { get; set; } = true;
 
-        public ProductPricingDto Pricing { get; set; } = new();
-        public ProductInventoryDto Inventory { get; set; } = new();
-        public ProductShippingInfoDto Shipping { get; set; } = new();
-        public IEnumerable<ProductMediaDto> Medias { get; set; }
+        // seo
+        public string MetaTitle { get; set; }
+        public string MetaDescription { get; set; }
+        public string Tags { get; set; }
 
-        public IEnumerable<ProductVarianterAttributeDto> VarianterAttributes { get; set; }
-    }
+        public IEnumerable<ProductVariantDto> Variants { get; set; } = new List<ProductVariantDto>()
+        {
+            new ProductVariantDto()
+        };
 
-    public class ProductVarianterAttributeDto
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public IEnumerable<ProductVarianterAttributeValueDto> Values { get; set; }
-    }
-
-    public class ProductVarianterAttributeValueDto
-    {
-        public Guid Id { get; set; }
-        public string Value { get; set; }
+        public IEnumerable<VariantAttributeDto> VariantAttributes { get; set; } = new List<VariantAttributeDto>();
+        
+        [NotMapped] public bool IsEdit => Id.HasValue && Id != default;
     }
 }

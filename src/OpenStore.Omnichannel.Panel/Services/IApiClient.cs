@@ -7,6 +7,7 @@ namespace OpenStore.Omnichannel.Panel.Services
     public interface IApiClient
     {
         ProductHttpStore Product { get; }
+        MediaHttpStore Media { get; }
         Task<bool> Ping();
     }
 
@@ -15,11 +16,13 @@ namespace OpenStore.Omnichannel.Panel.Services
         private readonly HttpClient _httpClient;
 
         public ProductHttpStore Product { get; }
+        public MediaHttpStore Media { get; }
 
         public ApiClient(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider)
         {
             _httpClient = httpClient;
             Product = new ProductHttpStore(httpClient, authenticationStateProvider);
+            Media = new MediaHttpStore(httpClient, authenticationStateProvider);
         }
 
         public async Task<bool> Ping()

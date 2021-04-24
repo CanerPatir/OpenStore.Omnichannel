@@ -1,0 +1,38 @@
+
+
+@foreach (var item in Items)
+{
+    <div draggable="true"
+         @ondragenter="@(() => HandleDragEnter(item))"
+         @ondragleave="@(() => HandleDragEnter(item))"
+         @ondrop="@(() => Drop(item))"
+         @ondrag="@(() => StartDrag(item))">
+
+        <MediaEditorItem Model="@item"/>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public List<MediaEditorItemModel> Items { get; set; } = new();
+
+    private int _currentIndex;
+
+    private void StartDrag(MediaEditorItemModel image) => _currentIndex = GetIndex(image);
+    private int GetIndex(MediaEditorItemModel image) => Items.FindIndex(a => a == image);
+
+    private void Drop(MediaEditorItemModel image)
+    {
+        var index = GetIndex(image);
+        var current = Items[_currentIndex];
+        Items.RemoveAt(_currentIndex);
+        Items.Insert(index, current);
+        _currentIndex = index;
+
+        // StateHasChanged();
+    }
+
+    private void HandleDragEnter(MediaEditorItemModel item) =>  item.Dropping = true;
+    private void HandleDragLeave(MediaEditorItemModel item) =>  item.Dropping = false ;
+}

@@ -13,25 +13,16 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 {
     public class Variant : Entity<Guid>
     {
+        private readonly HashSet<VariantAttributeValue> _variantAttributeValues = new();
+
         public Guid ProductId { get; protected set; }
+        
+        public virtual IReadOnlyCollection<VariantAttributeValue> VariantAttributeValues => _variantAttributeValues;
 
-        public string Sku { get; protected set; }
-
-        public int Order { get; protected set; }
-
-        private readonly HashSet<VariantAttributeValue> _attributeValues = new();
-        public virtual IReadOnlyCollection<VariantAttributeValue> AttributeValues => _attributeValues;
-
-        public Variant(Guid productId, HashSet<VariantAttributeValue> attributeValues)
+        public Variant(Guid productId)
         {
-            Id = Guid.NewGuid();
             ProductId = productId;
-            _attributeValues = attributeValues;
         }
 
-        public void SetSku(string sku)
-        {
-            Sku = sku;
-        }
     }
 }

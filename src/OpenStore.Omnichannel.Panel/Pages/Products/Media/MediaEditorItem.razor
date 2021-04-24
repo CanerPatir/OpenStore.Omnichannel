@@ -1,0 +1,57 @@
+
+
+<div class="draggable-image-grid-item">
+    <div class="_39S4u">
+        <span class="ImageEditor-Icon_yj27d" @onclick="@ExpandClick">
+            <svg viewBox="0 0 20 20" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" class="ImageEditor-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                <path d="M3.181 9.271C2.505 9.271 2 8.799 2 8.131V3.783C2 2.651 2.66 2 3.783 2h4.511c.676 0 1.148.497 1.148 1.173 0 .667-.48 1.164-1.148 1.164h-.537l-1.803.002 1.298 1.227 2.036 2.028c.219.22.358.497.358.806 0 .717-.497 1.23-1.222 1.23-.309 0-.61-.114-.83-.342L5.575 7.252 4.347 5.953l-.002 1.771v.407c0 .668-.505 1.14-1.164 1.14zM11.698 18c-.668 0-1.14-.497-1.14-1.173 0-.667.472-1.164 1.14-1.164h.545l1.814-.002-1.309-1.219-2.036-2.036c-.219-.22-.358-.497-.358-.806 0-.717.497-1.23 1.213-1.23.318 0 .611.114.839.342l2.019 2.036 1.227 1.298.003-1.77v-.407c0-.668.505-1.14 1.164-1.14.676 0 1.181.48 1.181 1.14v4.348C18 17.349 17.34 18 16.217 18h-4.519z" fill-rule="nonzero">
+                </path>
+            </svg>
+        </span>
+        <div class="_2XYX0">
+            <span class="ImageEditor-Icon_yj27d">
+                <svg viewBox="0 0 20 20" class="ImageEditor-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                    <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z">
+                    </path>
+                </svg>
+            </span>
+        </div>
+    </div>
+    <div class="draggable-image-grid-item-image-container">
+        <img class="draggable-image-grid-item-image" src="@($"{Model.Dto.Host.TrimEnd('/')}/{Model.Dto.Path}")" alt="@Model.Dto.Filename">
+    </div>
+    <div class="_2JrRS">
+        <label class="ImageEditor-Choice_j5gzq ImageEditor-Choice--labelHidden_14tn9" for="PolarisCheckbox4">
+            <span class="ImageEditor-Choice__Control_1u8vs">
+                <span class="ImageEditor-Checkbox_1d6zr">
+                    <input id="PolarisCheckbox4" type="checkbox" class="ImageEditor-Checkbox__Input_30ock" aria-invalid="false" role="checkbox" aria-checked="false" value="">
+                    <span class="ImageEditor-Checkbox__Backdrop_1x2i2">
+                    </span>
+                    <span class="ImageEditor-Checkbox__Icon_yj27d">
+                        <span class="ImageEditor-Icon_yj27d">
+                            <svg viewBox="0 0 20 20" class="ImageEditor-Icon__Svg_375hu" focusable="false" aria-hidden="true">
+                                <path d="M8.315 13.859l-3.182-3.417a.506.506 0 0 1 0-.684l.643-.683a.437.437 0 0 1 .642 0l2.22 2.393 4.942-5.327a.436.436 0 0 1 .643 0l.643.684a.504.504 0 0 1 0 .683l-5.91 6.35a.437.437 0 0 1-.642 0">
+                                </path>
+                            </svg>
+                        </span>
+                    </span>
+                </span>
+            </span>
+            <span class="ImageEditor-Choice__Label_2vd36">
+                Select
+            </span>
+        </label>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public MediaEditorItemModel Model { get; set; }
+
+    private void ExpandClick()
+    {
+        
+    }
+
+}

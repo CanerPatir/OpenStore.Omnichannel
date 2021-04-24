@@ -14,6 +14,8 @@ namespace OpenStore.Omnichannel
 {
     public class Startup
     {
+        private const string AllowAllCorsPolicy = nameof(AllowAllCorsPolicy);
+
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
@@ -29,7 +31,14 @@ namespace OpenStore.Omnichannel
             var mvcBuilder = services.AddControllersForAssemblies();
             services.AddResponseCompression();
             services.AddCommonInfrastructure(mvcBuilder, Environment, Configuration, withScheduledJobs: true);
-
+          
+            services.AddCors(o => o.AddPolicy(AllowAllCorsPolicy, builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+            
             if (Environment.IsDevelopment())
             {
                 services.AddOpenStoreSwaggerForModule<Startup>(Environment, "OpenStore.Omnichannel");
@@ -93,6 +102,7 @@ namespace OpenStore.Omnichannel
             app.UseOpenStoreLocalization();
 
             app
+                .UseCors(AllowAllCorsPolicy)
                 .UseStaticFiles()
                 .UseResponseCompression()
                 .UseSubApplication<Identity.Startup>("/identity")
