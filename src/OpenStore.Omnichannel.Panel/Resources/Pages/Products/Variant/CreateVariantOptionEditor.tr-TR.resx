@@ -30,4 +30,19 @@
     <data name="Button.AddOption" xml:space="preserve">
         <value>Ekle</value>
     </data>
+    <data name="Validation.OptionName" xml:space="preserve">
+        <value>Opsiyon ismi belirtilmedi</value>
+    </data>
+    <data name="Validation.ValuesEmpty" xml:space="preserve">
+        <value>Oprsiyon değerleri belirtilmedi</value>
+    </data>
+    <data name="OptionName.Size" xml:space="preserve">
+        <value>Beden</value>
+    </data>
+    <data name="OptionName.Color" xml:space="preserve">
+        <value>Renk</value>
+    </data>
+    <data name="OptionName.Material" xml:space="preserve">
+        <value>Materyal</value>
+    </data>
 </root>

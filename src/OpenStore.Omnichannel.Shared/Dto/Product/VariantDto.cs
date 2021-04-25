@@ -10,8 +10,8 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public decimal? Cost { get; set; }
 
         // Inventory
-        public string Sku { get; protected set; }
-        public string Barcode { get; protected set; }
+        public string Sku { get;  set; }
+        public string Barcode { get;  set; }
         public bool TrackQuantity { get; set; }
         public bool ContinueSellingWhenOutOfStock { get; set; }
         public uint Quantity { get; set; }

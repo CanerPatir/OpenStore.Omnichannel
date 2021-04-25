@@ -1,0 +1,20 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+<Card Margin="Margin.Is3.FromBottom">
+    <ListGroup>
+        <ListGroupItem>
+            <h5 class="mt-2 mb-2">
+                @HeaderTitle
+            </h5>
+        </ListGroupItem>
+    </ListGroup>
+</Card>
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+}

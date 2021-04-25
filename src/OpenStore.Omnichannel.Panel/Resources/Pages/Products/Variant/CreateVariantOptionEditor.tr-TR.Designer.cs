@@ -14,22 +14,22 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class VariantOptionEditor_tr_TR {
+    internal class CreateVariantOptionEditor_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal VariantOptionEditor_tr_TR() {
+        internal CreateVariantOptionEditor_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.VariantOptionEditor_" +
-                            "tr_TR", typeof(VariantOptionEditor_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.CreateVariantOptionE" +
+                            "ditor_tr_TR", typeof(CreateVariantOptionEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -67,6 +67,36 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
         internal static string Button_AddOption {
             get {
                 return ResourceManager.GetString("Button.AddOption", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_OptionName {
+            get {
+                return ResourceManager.GetString("Validation.OptionName", resourceCulture);
+            }
+        }
+        
+        internal static string Validation_ValuesEmpty {
+            get {
+                return ResourceManager.GetString("Validation.ValuesEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string OptionName_Size {
+            get {
+                return ResourceManager.GetString("OptionName.Size", resourceCulture);
+            }
+        }
+        
+        internal static string OptionName_Color {
+            get {
+                return ResourceManager.GetString("OptionName.Color", resourceCulture);
+            }
+        }
+        
+        internal static string OptionName_Material {
+            get {
+                return ResourceManager.GetString("OptionName.Material", resourceCulture);
             }
         }
     }

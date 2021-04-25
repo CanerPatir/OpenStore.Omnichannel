@@ -35,8 +35,17 @@
                     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                         <ProductContentEditor HeaderTitle="" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
                         <MediaEditor HeaderTitle="@L["CardTitle.Media"]" Model="@_product"/>
-                        <VariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product"/>
-                        @if (_product.IsCreate || !_product.HasMultipleVariants)
+
+                        @if (_product.IsCreate)
+                        {
+                            <CreateVariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
+                        }
+                        else if (_product.HasMultipleVariants)
+                        {
+                            <EditVariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product"/>
+                        }
+
+                        @if (!_product.HasMultipleVariants)
                         {
                             <PricingEditor HeaderTitle="@L["CardTitle.Pricing"]" Model="@_product.Variants.First()"/>
                             <InventoryEditor HeaderTitle="@L["CardTitle.Inventory"]" Model="@_product.Variants.First()"/>
@@ -95,9 +104,6 @@
         </Column>
     </Row>
 </Container>
-
-
-
 
 
 @code {

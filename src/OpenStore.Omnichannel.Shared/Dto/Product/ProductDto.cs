@@ -33,7 +33,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public string MetaDescription { get; set; }
         public string Tags { get; set; }
 
-        public IEnumerable<VariantDto> Variants { get; set; } = new List<VariantDto>()
+        public List<VariantDto> Variants { get; set; } = new()
         {
             new VariantDto()
         };

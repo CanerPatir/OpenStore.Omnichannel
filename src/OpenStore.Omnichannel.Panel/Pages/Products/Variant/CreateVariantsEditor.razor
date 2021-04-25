@@ -1,0 +1,138 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<CreateVariantsEditor> L
+
+
+<Card Margin="Margin.Is3.FromBottom">
+    <ListGroup>
+        <ListGroupItem>
+            <h5 class="mt-2 mb-2">
+                @HeaderTitle
+            </h5>
+            <Field>
+                <FieldBody>
+                    <Check TValue="bool" Checked="@Model.HasMultipleVariants" CheckedChanged="HasMultipleVariantsChanged">@L["HasMultipleVariants"]</Check>
+                </FieldBody>
+            </Field>
+        </ListGroupItem>
+        @if (Model.HasMultipleVariants)
+        {
+            <ListGroupItem>
+                <CreateVariantOptionEditor Model="@Model" OptionsChanged="OptionsChanged"/>
+            </ListGroupItem>
+            if (Model.Variants.Any())
+            {
+                <ListGroupItem>
+                    <h6 class="mt-2 mb-2">@L["Header.VariantsPreview"]</h6>
+
+                    @foreach (var variant in Model.Variants)
+                    {
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is4">
+                                @variant.Option1
+                                @if (!string.IsNullOrWhiteSpace(variant.Option2))
+                                {
+                                    <span>&nbsp;/ @variant.Option2</span>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(variant.Option3))
+                                {
+                                    <span>&nbsp;/ @variant.Option3</span>
+                                }
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is4">
+                                <TextEdit @bind-Text="@variant.Barcode" Size="Size.Small" Placeholder="@(L["Input.VariantBarcode"])"/>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is4">
+                                @variant.Price.ToCurrencyString()
+                            </Column>
+                        </Row>
+                        
+                        if (Model.Variants.Last() != variant)
+                        {
+                            <hr class="mb-2 mt-2">
+                        }
+                    }
+                </ListGroupItem>
+            }
+        }
+    </ListGroup>
+</Card>
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+
+    [Parameter]
+    public EventCallback<ProductDto> ModelChanged { get; set; }
+
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+    private async Task OptionsChanged()
+    {
+        Model.Variants.Clear();
+
+        if (Model.Options.Count == 1)
+        {
+            foreach (var optionValue in Model.Options[0].Values)
+            {
+                Model.Variants.Add(new VariantDto
+                {
+                    Option1 = optionValue
+                });
+            }
+        }
+
+        if (Model.Options.Count == 2)
+        {
+            foreach (var optionValue in Model.Options[0].Values)
+                foreach (var optionValue2 in Model.Options[1].Values)
+                {
+                    Model.Variants.Add(new VariantDto
+                    {
+                        Option1 = optionValue,
+                        Option2 = optionValue2
+                    });
+                }
+        }
+
+        if (Model.Options.Count == 3)
+        {
+            foreach (var optionValue in Model.Options[0].Values)
+                foreach (var optionValue2 in Model.Options[1].Values)
+                    foreach (var optionValue3 in Model.Options[2].Values)
+                    {
+                        Model.Variants.Add(new VariantDto
+                        {
+                            Option1 = optionValue,
+                            Option2 = optionValue2,
+                            Option3 = optionValue3,
+                        });
+                    }
+        }
+
+        await ModelChanged.InvokeAsync();
+    }
+
+    private async Task HasMultipleVariantsChanged(bool val)
+    {
+        Model.HasMultipleVariants = val;
+
+        if (!Model.HasMultipleVariants)
+        {
+            Model.Variants.Clear();
+            Model.Options.Clear();
+
+            Model.Variants.Add(new VariantDto()); // add default variant
+        }
+        else
+        {
+            if (!Model.Options.Any())
+            {
+                Model.Variants.Clear();
+            }
+        }
+        await ModelChanged.InvokeAsync();
+    }
+
+}

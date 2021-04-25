@@ -1,10 +1,8 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 
-@inject IStringLocalizer<VariantOptionEditor> L
-
+@inject IStringLocalizer<CreateVariantOptionEditor> L
 
 <h6>@L["Header.Options"]</h6>
-
 @foreach (var option in Model.Options)
 {
     <Row >
@@ -39,36 +37,61 @@
     [Parameter]
     public ProductDto Model { get; set; }
 
-    public EventCallback OnOptionsChanged { get; set; }
+    [Parameter]
+    public EventCallback OptionsChanged { get; set; }
 
     protected override void OnInitialized()
     {
         if (!Model.Options.Any())
         {
-            Model.Options.Add(new ProductOptionDto());
+            Model.Options.Add(new ProductOptionDto
+            {
+                Name = L["OptionName.Size"]
+            });
         }
     }
 
-    private async Task AddOption()
+    private void AddOption()
     {
-        if (Model.Options.Count < 3)
+        if (Model.Options.Count >= 3) return;
+        
+        var last = Model.Options.LastOrDefault();
+        if (last is not null)
         {
-            Model.Options.Add(new ProductOptionDto());
+            if (string.IsNullOrWhiteSpace(last.Name))
+            {
+                ShowWarning(L["Validation.OptionName"]);
+                return;
+            }
 
-            await OnOptionsChanged.InvokeAsync();
+            if (!last.Values.Any())
+            {
+                ShowWarning(L["Validation.ValuesEmpty"]);
+                return;
+            }
         }
+
+        Model.Options.Add(new ProductOptionDto
+        {
+            Name = Model.Options.Count switch {
+                0 => L["OptionName.Size"],
+                1 => L["OptionName.Color"],
+                2 => L["OptionName.Material"],    
+                _ => string.Empty
+                }
+        });
     }
 
     private async Task RemoveOption(ProductOptionDto option)
     {
         Model.Options.Remove(option);
 
-        await OnOptionsChanged.InvokeAsync();
+        await OptionsChanged.InvokeAsync();
     }
 
     private async Task ValuesChanged(ProductOptionDto option)
     {
-        await OnOptionsChanged.InvokeAsync();
+        await OptionsChanged.InvokeAsync();
     }
 
 }

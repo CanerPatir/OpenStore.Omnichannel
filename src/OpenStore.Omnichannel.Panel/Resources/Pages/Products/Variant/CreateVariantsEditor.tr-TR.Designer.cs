@@ -14,22 +14,22 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class VariantsEditor_tr_TR {
+    internal class CreateVariantsEditor_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal VariantsEditor_tr_TR() {
+        internal CreateVariantsEditor_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.VariantsEditor_tr_TR" +
-                            "", typeof(VariantsEditor_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.CreateVariantsEditor" +
+                            "_tr_TR", typeof(CreateVariantsEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -49,6 +49,18 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
         internal static string HasMultipleVariants {
             get {
                 return ResourceManager.GetString("HasMultipleVariants", resourceCulture);
+            }
+        }
+        
+        internal static string Header_VariantsPreview {
+            get {
+                return ResourceManager.GetString("Header.VariantsPreview", resourceCulture);
+            }
+        }
+        
+        internal static string Input_VariantBarcode {
+            get {
+                return ResourceManager.GetString("Input.VariantBarcode", resourceCulture);
             }
         }
     }

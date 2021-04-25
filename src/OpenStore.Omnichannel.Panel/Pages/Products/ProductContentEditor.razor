@@ -81,6 +81,7 @@
     private async Task OnContentChanged()
     {
         Model.Description = await _richTextEditRef.GetHtmlAsync();
+        
         await ModelChanged.InvokeAsync();
     }
 
@@ -89,6 +90,8 @@
         if (Model.IsCreate)
         {
             Model.Handle = new SlugHelper().GenerateSlug(Model.Title);
+            Model.MetaTitle = Model.Title;
+            Model.MetaDescription = await _richTextEditRef.GetTextAsync();
         }
 
         await ModelChanged.InvokeAsync();
