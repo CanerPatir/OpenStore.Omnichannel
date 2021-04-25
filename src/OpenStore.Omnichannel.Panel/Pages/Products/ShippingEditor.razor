@@ -2,18 +2,24 @@
 @inject IStringLocalizer<ShippingEditor> L
 
 <Card Margin="Margin.Is3.FromBottom">
-    <CardBody>
-        <h5>
-            @HeaderTitle
-        </h5>
-        
-        <Field>
-            <FieldBody>
-                <Check TValue="bool" Readonly="@Model.IsEdit" @bind-Checked="@Model.IsPhysicalProduct">@L["IsPhysicalProduct"]</Check>
-            </FieldBody>
-        </Field>
-        <Divider/>
-    </CardBody>
+    <ListGroup>
+        <ListGroupItem>
+            <h5 class="mt-2 mb-2">
+                @HeaderTitle
+            </h5>
+            <Field>
+                <FieldBody>
+                    <Check TValue="bool" Readonly="@Model.IsEdit" @bind-Checked="@Model.IsPhysicalProduct">@L["IsPhysicalProduct"]</Check>
+                </FieldBody>
+            </Field>
+        </ListGroupItem>
+        @if (Model.IsPhysicalProduct)
+        {
+            <ListGroupItem>
+
+            </ListGroupItem>
+        }
+    </ListGroup>
 </Card>
 
 @code {

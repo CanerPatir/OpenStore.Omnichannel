@@ -11,6 +11,6 @@ namespace OpenStore.Omnichannel.Domain.LookupContext
         public virtual Category Parent { get; set; }
         public virtual ICollection<Category> Children { get; set; } = new List<Category>();
 
-        public string ImagePath { get; set; }
+        public virtual List<CategoryMedia> Medias { get; set; } = new();
     }
 }

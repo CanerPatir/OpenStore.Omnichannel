@@ -33,13 +33,15 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public string MetaDescription { get; set; }
         public string Tags { get; set; }
 
-        public IEnumerable<ProductVariantDto> Variants { get; set; } = new List<ProductVariantDto>()
+        public IEnumerable<VariantDto> Variants { get; set; } = new List<VariantDto>()
         {
-            new ProductVariantDto()
+            new VariantDto()
         };
 
-        public IEnumerable<VariantAttributeDto> VariantAttributes { get; set; } = new List<VariantAttributeDto>();
-        
+        public IEnumerable<ProductMediaDto> Medias { get; set; } = new List<ProductMediaDto>();
+        public List<ProductOptionDto> Options { get; set; } = new List<ProductOptionDto>();
+
         [NotMapped] public bool IsEdit => Id.HasValue && Id != default;
+        [NotMapped] public bool IsCreate => !IsEdit;
     }
 }

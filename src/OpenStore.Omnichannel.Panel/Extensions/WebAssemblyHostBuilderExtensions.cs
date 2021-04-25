@@ -27,7 +27,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 .AddFontAwesomeIcons()
                 .AddBlazoriseRichTextEdit(options => { options.DynamicLoadReferences = true; })
                 ;
-            
+
             var environment = builder.HostEnvironment;
 
             var clientBaseAddress = new Uri(new Uri(builder.Configuration.GetValue<string>("ApiGateway")).GetLeftPart(UriPartial.Authority));
@@ -42,6 +42,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 //         TimeSpan.FromSeconds(4)
                 //     });
                 // })
+                .AddHttpMessageHandler(_ => new TokenErrorMessageHandler())
                 .AddHttpMessageHandler(sp =>
                 {
                     var navigationManager = sp.GetRequiredService<NavigationManager>();
@@ -60,7 +61,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 );
             });
 
-            
+
             return builder;
         }
     }

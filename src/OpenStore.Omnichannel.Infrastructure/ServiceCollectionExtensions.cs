@@ -7,8 +7,11 @@ using OpenStore.Infrastructure.Email;
 using OpenStore.Infrastructure.Email.Smtp;
 using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Tasks.InMemory;
+using OpenStore.Omnichannel.Application;
+using OpenStore.Omnichannel.Application.Command;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
+using OpenStore.Omnichannel.Infrastructure.ObjectStorage;
 
 namespace OpenStore.Omnichannel.Infrastructure
 {
@@ -23,15 +26,15 @@ namespace OpenStore.Omnichannel.Infrastructure
             bool withScheduledJobs = false)
         {
             var callingAssembly = Assembly.GetCallingAssembly();
-            var applicationAssembly = callingAssembly;
             var infrastructureAssembly = Assembly.GetExecutingAssembly();
+            var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
 
             services
                 .AddHttpContextAccessor()
                 .AddMemoryCache()
                 .AddEntityFrameworkInfrastructure(environment, configuration)
                 .AddAuthorizationInfrastructure(configuration)
-                .AddOpenStoreCore(callingAssembly, applicationAssembly, infrastructureAssembly)
+                .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly)
                 .AddOpenStoreInMemoryBackgroundTasks()
                 .AddOpenStoreMailInfrastructure(mailConf =>
                 {
@@ -45,6 +48,7 @@ namespace OpenStore.Omnichannel.Infrastructure
             });
 
             services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
+            services.AddTransient<IObjectStorageService, FileSystemObjectStorageService>();
 
             if (withScheduledJobs)
             {

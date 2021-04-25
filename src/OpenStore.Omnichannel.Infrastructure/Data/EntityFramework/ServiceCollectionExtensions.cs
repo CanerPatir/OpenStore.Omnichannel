@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using EFCoreSecondLevelCacheInterceptor;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,9 +9,9 @@ using Microsoft.Extensions.Hosting;
 using OpenStore.Infrastructure.Data.EntityFramework;
 using OpenStore.Infrastructure.Mapping.AutoMapper;
 using OpenStore.Omnichannel.Domain.IdentityContext;
-using OpenStore.Omnichannel.Domain.MediaContext;
+using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
-using OpenStore.Omnichannel.Shared.Dto.Media;
+using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
 {
@@ -55,6 +56,10 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            services
+                .AddDataProtection()
+                .PersistKeysToDbContext<ApplicationDbContext>();
 
             AddInMemoryCacheServiceProvider(services);
 
@@ -65,8 +70,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
                 // cfg.UseEntityFrameworkCoreModel<ApplicationDbContext>(services.BuildServiceProvider().CreateScope().ServiceProvider);
 
                 // to avoid unexpected lazy loading dto should be located to left hand of mapping
-                // identity
-                cfg.CreateMap<MediaDto, Media>().ReverseMap();
+                cfg.CreateMap<ProductMediaDto, ProductMedia>().ReverseMap();
                 
             });
             return services;

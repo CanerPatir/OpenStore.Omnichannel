@@ -1,9 +1,6 @@
-using System;
-using OpenStore.Domain;
-
 namespace OpenStore.Omnichannel.Domain.LookupContext
 {
-    public abstract class LookupEntity : Entity<Guid>
+    public abstract class LookupEntity : AuditableEntity
     {
         public string Title { get; set; }
         public string DisplayTitle { get; set; }

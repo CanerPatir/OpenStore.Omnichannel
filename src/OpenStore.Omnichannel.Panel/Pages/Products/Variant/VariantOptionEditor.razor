@@ -1,0 +1,74 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+
+@inject IStringLocalizer<VariantOptionEditor> L
+
+
+<h6>@L["Header.Options"]</h6>
+
+@foreach (var option in Model.Options)
+{
+    <Row >
+        <Row>
+            <div class="d-flex align-items-center mb-2">
+                <div>
+                    @L["Header.Option"] @(Model.Options.IndexOf(option) + 1)
+                </div>
+                <div class="ms-auto">
+                    <a @onclick="@(() => RemoveOption(option))" style="cursor: pointer;color: #dc3545; text-decoration: underline">@L["Button.RemoveOption"] </a>
+                </div>
+            </div>
+        </Row>
+        <Column ColumnSize="ColumnSize.Is4">
+            <TextEdit @bind-Text="@option.Name"/>
+        </Column>
+        <Column ColumnSize="ColumnSize.Is8">
+            <OsChipsInput Chips="@option.Values" OnChipsChanged="@(e => ValuesChanged(option))"/>
+        </Column>
+    </Row>
+    <hr class="mb-2">
+}
+
+@if (Model.Options.Count < 3)
+{
+    <Button Color="Color.Light" Size="Size.Small" Clicked="AddOption">@L["Button.AddOption"]</Button>
+}
+
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+
+    public EventCallback OnOptionsChanged { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (!Model.Options.Any())
+        {
+            Model.Options.Add(new ProductOptionDto());
+        }
+    }
+
+    private async Task AddOption()
+    {
+        if (Model.Options.Count < 3)
+        {
+            Model.Options.Add(new ProductOptionDto());
+
+            await OnOptionsChanged.InvokeAsync();
+        }
+    }
+
+    private async Task RemoveOption(ProductOptionDto option)
+    {
+        Model.Options.Remove(option);
+
+        await OnOptionsChanged.InvokeAsync();
+    }
+
+    private async Task ValuesChanged(ProductOptionDto option)
+    {
+        await OnOptionsChanged.InvokeAsync();
+    }
+
+}

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using static OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.StringLengthConstants;
 
-namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations
+namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.IdentityContext
 {
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
@@ -18,7 +18,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
             builder.Property(x => x.NormalizedUserName).HasMaxLength(_191_);
             builder.Property(x => x.CreatedBy).HasMaxLength(EmailLength);
             builder.Property(x => x.UpdatedBy).HasMaxLength(EmailLength);
-
         }
     }
 }

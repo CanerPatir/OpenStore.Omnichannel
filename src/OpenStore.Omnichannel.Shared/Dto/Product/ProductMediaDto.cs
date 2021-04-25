@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 
-namespace OpenStore.Omnichannel.Shared.Dto.Media
+namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
-    public class MediaDto
+    public class ProductMediaDto
     {
         public Guid Id { get; set; }
         public string Host { get; set; }
@@ -13,5 +14,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Media
         public string Filename { get; set; }
         public int Position { get; set; }
         public long? Size { get; set; }
+
+        public IEnumerable<Guid> VariantIds { get; set; } = new List<Guid>();
     }
 }

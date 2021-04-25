@@ -1,7 +1,6 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @using System.IO
 @using OpenStore.Omnichannel.Shared.Dto
-@using OpenStore.Omnichannel.Shared.Dto.Media
 
 @inject IStringLocalizer<MediaEditor> L
 
@@ -14,7 +13,7 @@
         <div>
             <div class="draggable-container">
                 <div class="draggable-image-grid _16ROL">
-                    @for (var i = 0; i <= Model.Count(); i++)
+                    @for (var i = 0; i <= Model.Medias.Count(); i++)
                     {
                         <div class="draggable-image-grid-item-placeholder"></div>
                     }
@@ -40,12 +39,12 @@
 @code {
 
     [Parameter]
-    public IEnumerable<MediaDto> Model { get; set; }
+    public ProductDto Model { get; set; }
     
     [Parameter]
     public string HeaderTitle { get; set; }
 
-    private List<MediaEditorItemModel> Items => Model.Select(x => new MediaEditorItemModel
+    private List<MediaEditorItemModel> Items => Model.Medias.Select(x => new MediaEditorItemModel
     {
         Dto = x
     }).ToList();
@@ -61,7 +60,7 @@
         var files = e.FileCount > 1 ? e.GetMultipleFiles() : new[] {e.File};
 
         var dtoList = new List<FileUploadDto>();
-        var index = Model.Count();
+        var index = Model.Medias.Count();
         foreach (var file in files)
         {
             var bytes = new byte[file.Size];
@@ -71,13 +70,13 @@
             // list.Add($"data:{imageType};base64,{Convert.ToBase64String(bytes)}");
         }
 
-        var mediaDtoList = await ApiClient.Media.Upload(dtoList);
+        var mediaDtoList = await ApiClient.Media.UploadProductMedia(dtoList);
 
-        var model = new List<MediaDto>();
-        model.AddRange(Model);
+        var model = new List<ProductMediaDto>();
+        model.AddRange(Model.Medias);
         model.AddRange(mediaDtoList);
 
-        Model = model;
+        Model.Medias = model;
         StateHasChanged();
         // await ModelChanged.InvokeAsync(model);
     }

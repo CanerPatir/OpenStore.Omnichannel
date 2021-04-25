@@ -6,12 +6,14 @@
     <ItemGroup>
         <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="7.0.1" />
         <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="2.5.0" />
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="$(NetPackagesVersion)" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="$(OpenIddictVersion)" />
         <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
         <PackageReference Include="OpenStore.Infrastructure.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
       <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
     </ItemGroup>
     <ItemGroup>

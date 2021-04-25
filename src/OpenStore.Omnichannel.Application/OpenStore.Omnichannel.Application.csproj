@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="OpenStore.Application" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(NetPackagesVersion)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

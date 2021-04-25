@@ -1,4 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a1da8e1c_002Dca78_002D4eb0_002Db31b_002Dceb8670a3bf8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SlugHelperTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::DFE913DE-D625-4F15-833A-50D15C52487D::net5.0::OpenSore.Omnichannel.Shared.Tests.SlugHelperTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FIdentity_002FOpenStore_002EOmnichannel_002EIdentity_002FResources_002FSharedResource/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FIdentity_002FOpenStore_002EOmnichannel_002EIdentity_002FResources_002FViews_002FAccount_002FForgotPassword/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FIdentity_002FOpenStore_002EOmnichannel_002EIdentity_002FResources_002FViews_002FAccount_002FLogin/@EntryIndexedValue">False</s:Boolean>
@@ -8,7 +13,10 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FCreate/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FDetail/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FIndex/@EntryIndexedValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FMediaEditor/@EntryIndexedValue">True</s:Boolean>
+	
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FMedia_002FMediaEditor/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FMetaEditor/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FVariant_002FVariantOptionEditor/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FShared_002FAppHeaderBar/@EntryIndexedValue">False</s:Boolean>

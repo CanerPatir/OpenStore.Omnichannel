@@ -8,6 +8,6 @@ namespace OpenStore.Omnichannel.Domain.IdentityContext
     public class ApplicationRole : IdentityRole<Guid>, IEntity
     {
         [NotMapped] object IEntity.Id => Id;
-        [NotMapped] ulong IEntity.Version { get; set; }
+        public long Version { get; set; }
     }
 }

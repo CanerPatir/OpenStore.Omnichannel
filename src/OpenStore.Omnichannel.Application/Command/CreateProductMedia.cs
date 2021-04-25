@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,31 +6,35 @@ using System.Threading.Tasks;
 using MediatR;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
-using OpenStore.Omnichannel.Domain.MediaContext;
+using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto;
-using OpenStore.Omnichannel.Shared.Dto.Media;
+using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Application.Command
 {
-    public record CreateMedia(IEnumerable<FileUploadDto> Uploads, Func<string, byte[], Task<(string host, string path)>> FileDelegate) : IRequest<IEnumerable<MediaDto>>;
+    public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<ProductMediaDto>>;
 
-    public class CreateMediaHandler : IRequestHandler<CreateMedia, IEnumerable<MediaDto>>
+    public class CreateProductMediaHandler : IRequestHandler<CreateProductMedia, IEnumerable<ProductMediaDto>>
     {
-        private readonly ICrudRepository<Media> _repository;
+        private readonly ICrudRepository<ProductMedia> _repository;
         private readonly IOpenStoreObjectMapper _mapper;
+        private readonly IObjectStorageService _objectStorageService;
 
-        public CreateMediaHandler(ICrudRepository<Media> repository, IOpenStoreObjectMapper mapper)
+        public CreateProductMediaHandler(ICrudRepository<ProductMedia> repository,
+            IOpenStoreObjectMapper mapper,
+            IObjectStorageService objectStorageService)
         {
             _repository = repository;
             _mapper = mapper;
+            _objectStorageService = objectStorageService;
         }
 
-        public async Task<IEnumerable<MediaDto>> Handle(CreateMedia request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductMediaDto>> Handle(CreateProductMedia request, CancellationToken cancellationToken)
         {
             var mediasTasks = request.Uploads.Select(async x =>
             {
-                var (host, path) = await request.FileDelegate(FileNameStrategy(x.FileName), x.FileContent);
-                return new Media(host, path, x.Type, Path.GetExtension(x.FileName), x.FileName)
+                var (host, path) = await _objectStorageService.Write(FileNameStrategy(x.FileName), x.FileContent);
+                return new ProductMedia(host, path, x.Type, Path.GetExtension(x.FileName), x.FileName)
                 {
                     Position = x.Position,
                     Size = x.Size,
@@ -40,7 +43,7 @@ namespace OpenStore.Omnichannel.Application.Command
             });
 
             var medias = await Task.WhenAll(mediasTasks);
-            
+
             foreach (var media in medias)
             {
                 await _repository.InsertAsync(media, cancellationToken);
@@ -48,7 +51,7 @@ namespace OpenStore.Omnichannel.Application.Command
 
             await _repository.SaveChangesAsync(cancellationToken);
 
-            return _mapper.MapAll<MediaDto>(medias);
+            return _mapper.MapAll<ProductMediaDto>(medias);
         }
 
         private static string FileNameStrategy(string fileName) =>

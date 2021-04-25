@@ -9,7 +9,7 @@ namespace OpenStore.Omnichannel
 
         public class Domain
         {
-            public const string GivenAttrValueNotBelongAttr = nameof(Domain) + DiscriminatorChar + nameof(GivenAttrValueNotBelongAttr);
+            public const string MultipleVariantProductMustHasOptions = nameof(Domain) + DiscriminatorChar + nameof(MultipleVariantProductMustHasOptions);
         }
 
         public static class Application

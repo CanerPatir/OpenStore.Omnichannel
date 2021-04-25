@@ -11,7 +11,7 @@
                     @HeaderTitle
                 </h5>
             }
-           
+
             <Validation MessageLocalizer="Localize">
                 <Field Margin="Margin.Is3.FromBottom">
                     <FieldLabel>@L["Form.ProductTitle"]</FieldLabel>
@@ -86,6 +86,11 @@
 
     private async Task KeyUp()
     {
+        if (Model.IsCreate)
+        {
+            Model.Handle = new SlugHelper().GenerateSlug(Model.Title);
+        }
+
         await ModelChanged.InvokeAsync();
     }
 

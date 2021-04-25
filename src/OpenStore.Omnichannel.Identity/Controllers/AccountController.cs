@@ -15,7 +15,6 @@ namespace OpenStore.Omnichannel.Identity.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private static bool _databaseChecked;
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;

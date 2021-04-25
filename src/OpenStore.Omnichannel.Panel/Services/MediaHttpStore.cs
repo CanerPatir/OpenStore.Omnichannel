@@ -4,7 +4,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Authorization;
 using OpenStore.Omnichannel.Shared.Dto;
-using OpenStore.Omnichannel.Shared.Dto.Media;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Panel.Services
@@ -17,11 +16,11 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         protected override string Path => "api/media";
 
-        public async Task<IEnumerable<MediaDto>> Upload(IEnumerable<FileUploadDto> fileUploadDtoList)
+        public async Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> fileUploadDtoList)
         {
-            var response = await HttpClient.PostAsJsonAsync($"{Path}", fileUploadDtoList);
+            var response = await HttpClient.PostAsJsonAsync($"{Path}/product", fileUploadDtoList);
             await response.HandleError();
-            return await response.Content.ReadFromJsonAsync<List<MediaDto>>();
+            return await response.Content.ReadFromJsonAsync<List<ProductMediaDto>>();
         }
     }
 }

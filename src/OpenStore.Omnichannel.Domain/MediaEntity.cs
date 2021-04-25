@@ -1,11 +1,10 @@
-using System;
-using OpenStore.Domain;
-
-namespace OpenStore.Omnichannel.Domain.MediaContext
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+namespace OpenStore.Omnichannel.Domain
 {
-    public class Media : Entity<Guid>
+    public abstract class MediaEntity : AuditableEntity
     {
-        public Guid? ProductId { get; set; }
         public string Host { get; protected set; }
         public string Path { get; protected set; }
         public string Type { get; protected set; }
@@ -15,7 +14,7 @@ namespace OpenStore.Omnichannel.Domain.MediaContext
         public int Position { get; set; }
         public long? Size { get; set; }
 
-        public Media(string host, string path, string type, string extension, string filename)
+        protected MediaEntity(string host, string path, string type, string extension, string filename)
         {
             Host = host;
             Path = path;

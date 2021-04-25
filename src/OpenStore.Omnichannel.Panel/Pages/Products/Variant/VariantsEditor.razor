@@ -1,0 +1,50 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<VariantsEditor> L
+
+
+<Card Margin="Margin.Is3.FromBottom">
+    <ListGroup>
+        @if (Model.IsCreate)
+        {
+            <ListGroupItem>
+                <h5 class="mt-2 mb-2">
+                    @HeaderTitle
+                </h5>
+                <Field>
+                    <FieldBody>
+                        <Check TValue="bool" @bind-Checked="@Model.HasMultipleVariants">@L["HasMultipleVariants"]</Check>
+                    </FieldBody>
+                </Field>
+            </ListGroupItem>
+        }
+
+        @if (Model.HasMultipleVariants)
+        {
+            if (Model.IsCreate)
+            {
+                <ListGroupItem>
+                    <VariantOptionEditor Model="@Model" />
+                </ListGroupItem>
+            }
+            
+            <ListGroupItem>
+                @if (Model.IsEdit)
+                {
+                    <h5 class="mt-2 mb-2">
+                        @HeaderTitle
+                    </h5>
+                }
+            </ListGroupItem>
+        }
+    </ListGroup>
+</Card>
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+
+    [Parameter]
+    public string HeaderTitle { get; set; }
+
+}

@@ -1,6 +1,8 @@
 @page "/products/add"
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @using OpenStore.Omnichannel.Panel.Pages.Products.Media
+@using OpenStore.Omnichannel.Panel.Pages.Products.Variant
+
 @inject IStringLocalizer<Create> L
 
 <Container>
@@ -32,11 +34,10 @@
                 <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
                     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                         <ProductContentEditor HeaderTitle="" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
+                        <MediaEditor HeaderTitle="@L["CardTitle.Media"]" Model="@_product"/>
                         <VariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product"/>
-                        
-                        @if (!_product.HasMultipleVariants)
+                        @if (_product.IsCreate || !_product.HasMultipleVariants)
                         {
-                            <MediaEditor HeaderTitle="@L["CardTitle.Media"]" Model="@_product.Variants.First().Medias"/>
                             <PricingEditor HeaderTitle="@L["CardTitle.Pricing"]" Model="@_product.Variants.First()"/>
                             <InventoryEditor HeaderTitle="@L["CardTitle.Inventory"]" Model="@_product.Variants.First()"/>
                             <ShippingEditor HeaderTitle="@L["CardTitle.Shipping"]" Model="@_product"/>
@@ -94,6 +95,10 @@
         </Column>
     </Row>
 </Container>
+
+
+
+
 
 @code {
     private readonly ProductDto _product = new();

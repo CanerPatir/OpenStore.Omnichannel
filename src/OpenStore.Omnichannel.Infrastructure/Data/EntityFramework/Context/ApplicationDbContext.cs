@@ -1,23 +1,40 @@
 ﻿using System;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OpenStore.Omnichannel.Domain.ChannelContext;
 using OpenStore.Omnichannel.Domain.IdentityContext;
-using OpenStore.Omnichannel.Domain.MediaContext;
+using OpenStore.Omnichannel.Domain.LookupContext;
+using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 {
-    public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid> //, IDataProtectionKeyContext
+    public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>, IDataProtectionKeyContext
     {
         protected ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
         }
 
-        // Identity
-        // public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
-        
-        public DbSet<Media> Medias { get; set; }
+        // DataProtection
+        public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+
+        // Product context
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductMedia> ProductMedias { get; set; }
+
+        // Channel context
+        public DbSet<SaleChannel> SaleChannel { get; set; }
+        public DbSet<SaleChannelProduct> SaleChannelProducts { get; set; }
+
+        // Lookup Context
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<BrandMedia> BrandMedias { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryMedia> CategoryMedias { get; set; }
+        public DbSet<CategoryProduct> CategoryProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
