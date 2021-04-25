@@ -14,22 +14,22 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class VariantOptionEditor_tr_TR {
+    internal class VariantsEditor_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal VariantOptionEditor_tr_TR() {
+        internal VariantsEditor_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.VariantOptionEditor_" +
-                            "tr_TR", typeof(VariantOptionEditor_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.VariantsEditor_tr_TR" +
+                            "", typeof(VariantsEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -46,27 +46,9 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
             }
         }
         
-        internal static string Header_Options {
+        internal static string HasMultipleVariants {
             get {
-                return ResourceManager.GetString("Header.Options", resourceCulture);
-            }
-        }
-        
-        internal static string Header_Option {
-            get {
-                return ResourceManager.GetString("Header.Option", resourceCulture);
-            }
-        }
-        
-        internal static string Button_RemoveOption {
-            get {
-                return ResourceManager.GetString("Button.RemoveOption", resourceCulture);
-            }
-        }
-        
-        internal static string Button_AddOption {
-            get {
-                return ResourceManager.GetString("Button.AddOption", resourceCulture);
+                return ResourceManager.GetString("HasMultipleVariants", resourceCulture);
             }
         }
     }

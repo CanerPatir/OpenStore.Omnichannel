@@ -18,16 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Header.Options" xml:space="preserve">
-        <value>Opsiyonlar</value>
-    </data>
-    <data name="Header.Option" xml:space="preserve">
-        <value>Opsiyon</value>
-    </data>
-    <data name="Button.RemoveOption" xml:space="preserve">
-        <value>Sil</value>
-    </data>
-    <data name="Button.AddOption" xml:space="preserve">
-        <value>Ekle</value>
+    <data name="HasMultipleVariants" xml:space="preserve">
+        <value>Bu ürün birden fazla opsiyon barındırır (Örn: Renk , Beden)</value>
     </data>
 </root>
