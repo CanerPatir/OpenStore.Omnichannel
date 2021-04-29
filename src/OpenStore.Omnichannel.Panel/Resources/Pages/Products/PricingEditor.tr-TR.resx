@@ -18,22 +18,25 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="HasMultipleVariants" xml:space="preserve">
-        <value>Bu ürün birden fazla opsiyon barındırır (Örn: Renk , Beden)</value>
-    </data>
-    <data name="Header.VariantsPreview" xml:space="preserve">
-        <value>Varyant ön izleme</value>
-    </data>
-    <data name="Input.VariantBarcode" xml:space="preserve">
-        <value>Barkod</value>
-    </data>
     <data name="Input.Price" xml:space="preserve">
         <value>Fiyat</value>
     </data>
-    <data name="Input.Stock" xml:space="preserve">
-        <value>Stok</value>
-    </data>
     <data name="Input.ComparePrice" xml:space="preserve">
         <value>Karşılaştırma Fiyatı</value>
+    </data>
+    <data name="Input.Cost" xml:space="preserve">
+        <value>Maliyet</value>
+    </data>
+    <data name="Input.Margin" xml:space="preserve">
+        <value>Kar Yüzdesi</value>
+    </data>
+    <data name="Input.Profit" xml:space="preserve">
+        <value>Kar</value>
+    </data>
+    <data name="InputHelp.CustomerDontSeeThisInfo" xml:space="preserve">
+        <value>Müşteriler bu bilgiyi göremez</value>
+    </data>
+    <data name="Input.ChargeTaxOnTheVariant" xml:space="preserve">
+        <value>Bu fiyat üzerinden vergiyi haricen hesaplayın</value>
     </data>
 </root>

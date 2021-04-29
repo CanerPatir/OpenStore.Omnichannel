@@ -39,7 +39,7 @@
                 <FieldBody>
                     <Addons>
                         <Addon AddonType="AddonType.Start">
-                            <AddonLabel>https://your-site.open-store.com/products/</AddonLabel>
+                            <AddonLabel Style="border-bottom-right-radius: 0; border-top-right-radius: 0">https://your-site.open-store.com/products/</AddonLabel>
                         </Addon>
                         <Addon AddonType="AddonType.Body">
                             <TextEdit Readonly="@Model.IsEdit" @bind-Text="@Model.Handle"/>
@@ -49,7 +49,6 @@
             </Field>
         </ListGroupItem>
     </ListGroup>
-
 </Card>
 
 @code {

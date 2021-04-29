@@ -18,11 +18,11 @@ namespace OpenStore.Omnichannel.Panel.Services
         public ProductHttpStore Product { get; }
         public MediaHttpStore Media { get; }
 
-        public ApiClient(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider)
+        public ApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            Product = new ProductHttpStore(httpClient, authenticationStateProvider);
-            Media = new MediaHttpStore(httpClient, authenticationStateProvider);
+            Product = new ProductHttpStore(httpClient);
+            Media = new MediaHttpStore(httpClient);
         }
 
         public async Task<bool> Ping()

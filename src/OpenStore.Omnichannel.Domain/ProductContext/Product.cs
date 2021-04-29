@@ -14,7 +14,7 @@ using OpenStore.Omnichannel.Domain.LookupContext;
 
 namespace OpenStore.Omnichannel.Domain.ProductContext
 {
-    public class Product : AggregateRoot<Guid>, IAuditableEntity
+    public class Product : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     {
         private readonly HashSet<Variant> _variants = new();
         private readonly HashSet<ProductOption> _options = new();
@@ -50,6 +50,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
         #endregion
 
+        #region soft delete members
+
+        public bool SoftDeleted { get; set; }
+
+        #endregion
+
         protected Product()
         {
         }
@@ -74,5 +80,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                 _options = new HashSet<ProductOption>();
             }
         }
+
     }
 }

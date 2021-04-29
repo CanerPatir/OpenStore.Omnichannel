@@ -9,8 +9,8 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20210425140918_Migration-2021-04-25-17-09")]
-    partial class Migration202104251709
+    [Migration("20210429194753_Migration-2021-04-29-22-47")]
+    partial class Migration202104292247
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -768,6 +768,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<string>("Options")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
@@ -871,6 +874,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("CalculateTaxAdditionally")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal?>("CompareAtPrice")
                         .HasColumnType("TEXT");
 
@@ -901,7 +907,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");
 
-                    b.Property<uint>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Sku")

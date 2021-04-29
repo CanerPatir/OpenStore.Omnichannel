@@ -766,6 +766,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<string>("Options")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
@@ -869,6 +872,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("CalculateTaxAdditionally")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal?>("CompareAtPrice")
                         .HasColumnType("TEXT");
 
@@ -899,7 +905,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");
 
-                    b.Property<uint>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Sku")

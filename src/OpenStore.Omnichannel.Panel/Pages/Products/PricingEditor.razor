@@ -1,11 +1,56 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using System.Globalization
+@inject IStringLocalizer<PricingEditor> L
+
+
 <Card Margin="Margin.Is3.FromBottom">
-    <CardBody>
-        <h5>
-            @HeaderTitle
-        </h5>
-        Pricing
-    </CardBody>
+    <ListGroup>
+        <ListGroupItem>
+            <h5 class="mt-2 mb-2">
+                @HeaderTitle
+            </h5>
+            <Row Margin="Margin.Is2.FromBottom">
+                <Field ColumnSize="ColumnSize.Is6">
+                    <FieldLabel>@L["Input.Price"]</FieldLabel>
+                    <NumericEdit TValue="decimal" @bind-Value="@Model.Price" Decimals="2"/>
+                </Field>
+                <Field ColumnSize="ColumnSize.Is6">
+                    <FieldLabel>@L["Input.ComparePrice"]</FieldLabel>
+                    <NumericEdit TValue="decimal?" @bind-Value="@Model.CompareAtPrice" Decimals="2"/>
+                </Field>
+            </Row>
+        </ListGroupItem>
+        <ListGroupItem>
+            <Row Margin="Margin.Is2.FromTop">
+                <Field ColumnSize="ColumnSize.Is6">
+                    <FieldLabel>@L["Input.Cost"]</FieldLabel>
+                    <NumericEdit TValue="decimal?" @bind-Value="@Model.Cost" Decimals="2">
+                        <FieldHelp>@L["InputHelp.CustomerDontSeeThisInfo"]</FieldHelp>
+                    </NumericEdit>
+                </Field>
+                <Field ColumnSize="ColumnSize.Is3">
+                    <FieldLabel>@L["Input.Margin"]</FieldLabel>
+                    <br/>
+                    <FieldBody>
+                        @(CalculateMargin() ?? "-")
+                    </FieldBody>
+                </Field>
+
+                <Field ColumnSize="ColumnSize.Is3">
+                    <FieldLabel>@L["Input.Profit"]</FieldLabel>
+                    <br/>
+                    <FieldBody>
+                        @(CalculateProfit() ?? "-")
+                    </FieldBody>
+                </Field>
+            </Row>
+            <Field Margin="Margin.Is3.FromTop">
+                <FieldBody>
+                    <Check TValue="bool" @bind-Checked="@Model.CalculateTaxAdditionally" >@L["Input.ChargeTaxOnTheVariant"]</Check>
+                </FieldBody>
+            </Field>
+        </ListGroupItem>
+    </ListGroup>
 </Card>
 
 @code {
@@ -15,4 +60,26 @@
 
     [Parameter]
     public string HeaderTitle { get; set; }
+
+    private string CalculateProfit()
+    {
+        if (Model.Cost == null)
+        {
+            return null;
+        }
+
+        return (Model.Price - Model.Cost.Value).ToCurrencyString();
+    }
+
+    private string CalculateMargin()
+    {
+        if (Model.Cost == null)
+        {
+            return null;
+        }
+
+        var margin = (Model.Price - Model.Cost.Value);
+        return $"% {margin * 100 / Model.Cost.Value:F1}";
+    }
+
 }

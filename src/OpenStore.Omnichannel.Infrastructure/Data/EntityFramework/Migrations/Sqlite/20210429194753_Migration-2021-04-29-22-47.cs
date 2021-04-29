@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
-    public partial class Migration202104251709 : Migration
+    public partial class Migration202104292247 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -231,6 +231,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
                     UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    SoftDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     Version = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -495,11 +496,12 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     Price = table.Column<decimal>(type: "TEXT", nullable: false),
                     CompareAtPrice = table.Column<decimal>(type: "TEXT", nullable: true),
                     Cost = table.Column<decimal>(type: "TEXT", nullable: true),
+                    CalculateTaxAdditionally = table.Column<bool>(type: "INTEGER", nullable: false),
                     Sku = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     Barcode = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     TrackQuantity = table.Column<bool>(type: "INTEGER", nullable: false),
                     ContinueSellingWhenOutOfStock = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Quantity = table.Column<uint>(type: "INTEGER", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     Option1 = table.Column<string>(type: "TEXT", nullable: true),
                     Option2 = table.Column<string>(type: "TEXT", nullable: true),
                     Option3 = table.Column<string>(type: "TEXT", nullable: true),

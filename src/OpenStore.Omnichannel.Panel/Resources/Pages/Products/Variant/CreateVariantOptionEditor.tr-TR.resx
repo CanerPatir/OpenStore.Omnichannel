@@ -28,7 +28,7 @@
         <value>Sil</value>
     </data>
     <data name="Button.AddOption" xml:space="preserve">
-        <value>Ekle</value>
+        <value>Opsiyon Ekle</value>
     </data>
     <data name="Validation.OptionName" xml:space="preserve">
         <value>Opsiyon ismi belirtilmedi</value>

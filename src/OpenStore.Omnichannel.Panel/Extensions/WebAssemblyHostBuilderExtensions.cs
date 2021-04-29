@@ -5,11 +5,11 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Blazorise.RichTextEdit;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using OpenStore.Omnichannel.Panel.Services;
 
 namespace OpenStore.Omnichannel.Panel.Extensions
@@ -42,7 +42,14 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 //         TimeSpan.FromSeconds(4)
                 //     });
                 // })
-                .AddHttpMessageHandler(_ => new TokenErrorMessageHandler())
+                .AddHttpMessageHandler(sp =>
+                {
+                    var navigationManager = sp.GetRequiredService<NavigationManager>();
+                    var signOutSessionStateManager = sp.GetRequiredService<SignOutSessionStateManager>();
+                    var alertService = sp.GetRequiredService<AlertService>();
+                    var sharedLocalizer = sp.GetRequiredService<IStringLocalizer<App>>();
+                    return new HttpErrorMessageHandler(navigationManager, signOutSessionStateManager, alertService, sharedLocalizer);
+                })
                 .AddHttpMessageHandler(sp =>
                 {
                     var navigationManager = sp.GetRequiredService<NavigationManager>();
@@ -51,16 +58,14 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 })
                 ;
 
-            builder.Services.AddTransient<IApiClient, ApiClient>(sp =>
+            builder.Services.AddSingleton<IApiClient, ApiClient>(sp =>
             {
                 var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
                 var httpClient = httpClientFactory.CreateClient(ClientName);
-                return new ApiClient(
-                    httpClient,
-                    sp.GetRequiredService<AuthenticationStateProvider>()
-                );
+                return new ApiClient(httpClient);
             });
 
+            builder.Services.AddSingleton<AlertService>();
 
             return builder;
         }

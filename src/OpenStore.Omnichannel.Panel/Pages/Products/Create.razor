@@ -2,6 +2,7 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @using OpenStore.Omnichannel.Panel.Pages.Products.Media
 @using OpenStore.Omnichannel.Panel.Pages.Products.Variant
+@using System.Text.Json
 
 @inject IStringLocalizer<Create> L
 
@@ -125,6 +126,7 @@
         {
             return;
         }
+        ConsoleLog(JsonSerializer.Serialize(_product));
     }
 
 }

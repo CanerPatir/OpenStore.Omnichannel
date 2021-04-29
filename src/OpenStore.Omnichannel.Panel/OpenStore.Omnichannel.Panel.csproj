@@ -64,6 +64,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>CreateVariantsEditor.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Products\PricingEditor.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>PricingEditor.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -116,6 +120,11 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>VariantsEditor.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Products\PricingEditor.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PricingEditor.tr-TR.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

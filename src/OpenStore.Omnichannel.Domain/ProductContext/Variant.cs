@@ -18,13 +18,14 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public decimal Price { get; protected set; } = 0;
         public decimal? CompareAtPrice { get; protected set; }
         public decimal? Cost { get; protected set; }
+        public bool CalculateTaxAdditionally { get; set; }
 
         // Inventory
         public string Sku { get; protected set; }
         public string Barcode { get; protected set; }
         public bool TrackQuantity { get; protected set; }
         public bool ContinueSellingWhenOutOfStock { get; protected set; }
-        public uint Quantity { get; protected set; }
+        public int Quantity { get; protected set; }
         
         // option
         public string Option1 { get; protected set; }

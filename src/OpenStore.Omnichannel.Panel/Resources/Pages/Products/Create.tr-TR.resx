@@ -40,7 +40,7 @@
         <value>Görsel</value>
     </data>
     <data name="CardTitle.Pricing" xml:space="preserve">
-        <value>Fiyat</value>
+        <value>Fiyatlandırma</value>
     </data>
     <data name="CardTitle.Inventory" xml:space="preserve">
         <value>Stok / Envanter</value>

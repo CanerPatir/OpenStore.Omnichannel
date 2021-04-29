@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Microsoft.AspNetCore.Components;
 
 namespace OpenStore.Omnichannel.Panel.Services
 {
@@ -13,7 +14,7 @@ namespace OpenStore.Omnichannel.Panel.Services
             Error = error;
             RawErrorContent = rawErrorContent;
             IsInvalidToken = isInvalidToken;
-         }
+        }
 
         public HttpStatusCode StatusCode { get; }
         public ErrorReadModel Error { get; }
@@ -30,7 +31,7 @@ namespace OpenStore.Omnichannel.Panel.Services
                 // return RawErrorContent;
                 return string.Empty;
             }
-            
+
             var sb = new StringBuilder();
 
             if (!Error.Errors.Any()) sb.Append(Error.Message.Trim());

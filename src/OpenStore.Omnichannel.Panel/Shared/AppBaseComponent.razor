@@ -1,6 +1,4 @@
 @using System.Security.Claims
-@using System.Net
-@using OpenStore.Omnichannel.Panel.Resources
 
 @inherits ComponentBase
 
@@ -12,20 +10,31 @@
     protected IJSRuntime JsRuntime { get; init; }
 
     protected IJSInProcessRuntime JsRuntimeSync => (IJSInProcessRuntime) JsRuntime;
-    
+
     [Inject]
     protected IStringLocalizer<App> SharedLocalizer { get; init; }
-    
+
     [Inject]
     protected NavigationManager Navigation { get; init; }
 
-    public void Alert(string message) => JsRuntimeSync.InvokeVoid("alert", message);
+    [Inject]
+    protected AlertService AlertService { get; init; }
 
-    public bool Confirm(string message) => JsRuntimeSync.Invoke<bool>("confirm", message);
+    public void Alert(string message) => AlertService.Alert(message);
 
-    public bool ConsoleLog(string message) => JsRuntimeSync.Invoke<bool>("console.log", message);
+    public bool Confirm(string message) => AlertService.Confirm(message);
 
-    public bool ConsoleError(string message) => JsRuntimeSync.Invoke<bool>("console.error", message);
+    public bool ConsoleLog(string message) => AlertService.ConsoleLog(message);
+
+    public bool ConsoleError(string message) => AlertService.ConsoleError(message);
+
+    protected void ShowSuccess(string message, string title = null) => AlertService.ShowSuccess(message, title);
+
+    protected void ShowError(string message, string title = null) => AlertService.ShowError(message, title);
+
+    protected void ShowWarning(string message, string title = null) => AlertService.ShowWarning(message, title);
+    
+    protected string Localize(string message, IEnumerable<string> arguments) => SharedLocalizer[message, arguments];
 
     [CascadingParameter]
     private Task<AuthenticationState> AuthenticationStateTask { get; set; }
@@ -35,88 +44,36 @@
 
     [Inject]
     private SignOutSessionStateManager SignOutManager { get; init; }
-
-    protected void ShowSuccess(string message, string title = null) => JsRuntimeSync.ShowSuccess(message, title);
-
-    protected void ShowError(string message, string title = null) => JsRuntimeSync.ShowError(message, title);
-
-    protected void ShowWarning(string message, string title = null) => JsRuntimeSync.ShowWarning(message, title);
     
-    protected string Localize(string message, IEnumerable<string> arguments)
-    {
-        Alert(message);
-        Alert(arguments.Count().ToString());
-        return SharedLocalizer[message, arguments];
-    }
-
     protected bool Loading { get; private set; }
     protected bool LoadedAny { get; private set; }
-    
-    protected async Task Run(Func<Task> operation, bool noAlert = false)
+
+    protected async Task Run(Func<Task> operation)
     {
         try
         {
             await operation();
         }
-        catch (ApiException ex)
-        {
-            if (ex.IsUnauthorized && ex.IsInvalidToken)
-            {
-    // ReloadPage();
-                BeginSignOut();
-            }
 
-            if (!noAlert)
-            {
-                HandleApiException(ex);
-            }
-        }
         catch (Exception ex)
         {
-            if (!noAlert)
+            if (ex.Message.Contains("Failed to fetch"))
             {
-                if (ex.Message.Contains("Failed to fetch"))
-                {
-                    ShowError("Sunucu ile iletişime geçilemiyor. Lütfen internet bağlantınızı kontrol edin.", "Bağlantı Hatası");
-                }
-                else
-                {
-                    ShowError(SharedLocalizer[ex.Message], "Hata");
-                }
+                ShowError("Sunucu ile iletişime geçilemiyor. Lütfen internet bağlantınızı kontrol edin.", "Bağlantı Hatası");
+            }
+            else
+            {
+                ShowError(SharedLocalizer[ex.Message], "Hata");
             }
         }
     }
 
-    protected virtual void HandleApiException(ApiException ex)
-    {
-        if (ex.StatusCode == HttpStatusCode.NotFound)
-        {
-            ShowError("Kayıt bulunamadı", "Hata");
-        }
-        else if (ex.StatusCode == HttpStatusCode.BadRequest)
-        {
-            ShowError(SharedLocalizer[ex.GetMessageKey()], "Hata");
-        }
-        else if (ex.StatusCode == HttpStatusCode.Forbidden)
-        {
-            ShowError("Yetkisiz erişim", "Hata");
-        }
-        else
-        {
-            ConsoleError(ex.ToString());
-
-            var message = ex.GetAggregatedErrorMessage();
-
-            ShowError(SharedLocalizer[message], "Hata");
-        }
-    }
-
-    protected async Task RunInLoading(Func<Task> operation, bool noAlert = false)
+    protected async Task RunInLoading(Func<Task> operation)
     {
         Loading = true;
         try
         {
-            await Run(operation, noAlert);
+            await Run(operation);
         }
         finally
         {
@@ -125,10 +82,10 @@
         }
     }
 
-    protected async Task<T> GetWithLoading<T>(Func<Task<T>> operation, bool noAlert = false)
+    protected async Task<T> GetWithLoading<T>(Func<Task<T>> operation)
     {
         T result = default;
-        await RunInLoading(async () => { result = await operation(); }, noAlert);
+        await RunInLoading(async () => { result = await operation(); });
         return result;
     }
 
