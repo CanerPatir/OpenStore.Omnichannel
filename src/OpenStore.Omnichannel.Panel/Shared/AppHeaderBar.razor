@@ -96,3 +96,15 @@
         </div>
     </div>
 </div>
+
+@code {
+    
+    [Inject]
+    private SignOutSessionStateManager SignOutManager { get; init; }
+
+    private async void BeginSignOut()
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
     public class VariantDto
@@ -13,7 +11,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         // Inventory
         public string Sku { get;  set; }
         public string Barcode { get;  set; }
-        public bool TrackQuantity { get; set; }
+        public bool TrackQuantity { get; set; } = true;
         public bool ContinueSellingWhenOutOfStock { get; set; }
         public int Quantity { get; set; }
 

@@ -69,18 +69,6 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
             }
         }
         
-        internal static string Form_ProductTitle {
-            get {
-                return ResourceManager.GetString("Form.ProductTitle", resourceCulture);
-            }
-        }
-        
-        internal static string Form_ProductDescription {
-            get {
-                return ResourceManager.GetString("Form.ProductDescription", resourceCulture);
-            }
-        }
-        
         internal static string CardTitle_Media {
             get {
                 return ResourceManager.GetString("CardTitle.Media", resourceCulture);

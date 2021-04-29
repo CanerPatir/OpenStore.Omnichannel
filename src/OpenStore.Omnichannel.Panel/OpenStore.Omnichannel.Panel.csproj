@@ -68,6 +68,14 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>PricingEditor.tr-TR.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Products\InventoryEditor.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>InventoryEditor.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Pages\Products\ProductContentEditor.tr-TR.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ProductContentEditor.tr-TR.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -125,6 +133,16 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>PricingEditor.tr-TR.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Products\InventoryEditor.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>InventoryEditor.tr-TR.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Pages\Products\ProductContentEditor.tr-TR.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ProductContentEditor.tr-TR.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 

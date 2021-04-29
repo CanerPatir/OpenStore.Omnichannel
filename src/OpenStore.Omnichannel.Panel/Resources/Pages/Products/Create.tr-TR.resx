@@ -30,12 +30,6 @@
     <data name="Breadcrumb.AddProduct" xml:space="preserve">
         <value>Ürün Ekle</value>
     </data>
-    <data name="Form.ProductTitle" xml:space="preserve">
-        <value>Ürün Başlığı</value>
-    </data>
-    <data name="Form.ProductDescription" xml:space="preserve">
-        <value>Ürün Açıklaması</value>
-    </data>
     <data name="CardTitle.Media" xml:space="preserve">
         <value>Görsel</value>
     </data>

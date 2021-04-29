@@ -2,11 +2,10 @@
 @using System.Globalization
 @inject IStringLocalizer<PricingEditor> L
 
-
 <Card Margin="Margin.Is3.FromBottom">
     <ListGroup>
         <ListGroupItem>
-            <h5 class="mt-2 mb-2">
+            <h5 class="mt-2 mb-3">
                 @HeaderTitle
             </h5>
             <Row Margin="Margin.Is2.FromBottom">
@@ -44,7 +43,7 @@
                     </FieldBody>
                 </Field>
             </Row>
-            <Field Margin="Margin.Is3.FromTop">
+            <Field Margin="Margin.Is3.FromTop.Is1.FromBottom">
                 <FieldBody>
                     <Check TValue="bool" @bind-Checked="@Model.CalculateTaxAdditionally" >@L["Input.ChargeTaxOnTheVariant"]</Check>
                 </FieldBody>

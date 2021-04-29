@@ -32,12 +32,14 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public string Option2 { get; protected set; }
         public string Option3 { get; protected set; }
         
-        public Variant(Guid productId, string option1, string option2, string option3)
+        public Variant(Guid productId, string option1, string option2, string option3, bool trackQuantity, bool continueSellingWhenOutOfStock)
         {
             ProductId = productId;
             Option1 = option1;
             Option2 = option2;
             Option3 = option3;
+            TrackQuantity = trackQuantity;
+            ContinueSellingWhenOutOfStock = continueSellingWhenOutOfStock;
         }
     }
 }

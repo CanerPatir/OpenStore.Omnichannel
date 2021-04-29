@@ -1,5 +1,5 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
-@inject IStringLocalizer<Create> L
+@inject IStringLocalizer<ProductContentEditor> L
 
 <Card Margin="Margin.Is3.FromBottom">
     @if (Model != null)
@@ -32,7 +32,7 @@
                         @ref="_richTextEditRef"
                         ContentChanged="@OnContentChanged"
                         Theme="RichTextEditTheme.Snow"
-                        PlaceHolder="Type your post here..."
+                        PlaceHolder="@L["Form.DescriptionPlaceholder"]"
                         SubmitOnEnter="false"
                         ToolbarPosition="Placement.Top">
                         <Toolbar >

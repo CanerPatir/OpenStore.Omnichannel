@@ -1,17 +1,45 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<InventoryEditor> L
+
 <Card Margin="Margin.Is3.FromBottom">
-    <CardBody>
-        <h5>
-            @HeaderTitle
-        </h5>
-        Inventory
-    </CardBody>
+    <ListGroup>
+        <ListGroupItem>
+            <h5 class="mt-2 mb-3">
+                @HeaderTitle
+            </h5>
+            <Field Margin="Margin.Is1.FromBottom">
+                <FieldBody>
+                    <Check TValue="bool" @bind-Checked="@Model.TrackQuantity">@L["Input.TrackQuantity"]</Check>
+                </FieldBody>
+            </Field>
+        </ListGroupItem>
+        @if (Model.TrackQuantity)
+        {
+            <ListGroupItem>
+                <Field ColumnSize="ColumnSize.Is3" Margin="Margin.Is2.FromBottom">
+                    <FieldLabel>@L["Input.Quantity"]</FieldLabel>
+                    <FieldBody>
+                        <InputNumber @bind-Value="@Model.Quantity"
+                                     min="0"
+                                     class="form-control form-control-sm"
+                                     DisplayName="@L["Input.Stock"]"/>
+                    </FieldBody>
+                </Field>
+                <Field Margin="Margin.Is1.FromBottom">
+                    <FieldBody>
+                        <Check TValue="bool" @bind-Checked="@Model.ContinueSellingWhenOutOfStock">@L["Input.SellWhenOutOfStock"]</Check>
+                    </FieldBody>
+                </Field>
+            </ListGroupItem>
+        }
+    </ListGroup>
 </Card>
 
 @code {
+
     [Parameter]
     public VariantDto Model { get; set; }
-    
+
     [Parameter]
     public string HeaderTitle { get; set; }
 }
