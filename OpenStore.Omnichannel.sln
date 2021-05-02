@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSore.Omnichannel.Shared.Tests", "test\OpenSore.Omnichannel.Shared.Tests\OpenSore.Omnichannel.Shared.Tests.csproj", "{DFE913DE-D625-4F15-833A-50D15C52487D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Panel.UIAutomation", "test\OpenStore.Omnichannel.Panel.UIAutomation\OpenStore.Omnichannel.Panel.UIAutomation.csproj", "{44DE1DDB-D77A-4036-852A-7480E01C24A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,7 @@ Global
 		{4167F2F8-4FEC-4BBF-8890-25DEBF044792} = {3013B3D8-6676-47BC-8396-276111A475A6}
 		{3A08BCD2-5C8F-4971-A2B8-A772D8313B81} = {3013B3D8-6676-47BC-8396-276111A475A6}
 		{DFE913DE-D625-4F15-833A-50D15C52487D} = {584967D8-F0EF-47B0-B73C-021E594A95AF}
+		{44DE1DDB-D77A-4036-852A-7480E01C24A1} = {584967D8-F0EF-47B0-B73C-021E594A95AF}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{64D507E4-EEA0-4F01-A7C5-A100407868E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -85,5 +88,9 @@ Global
 		{DFE913DE-D625-4F15-833A-50D15C52487D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFE913DE-D625-4F15-833A-50D15C52487D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFE913DE-D625-4F15-833A-50D15C52487D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

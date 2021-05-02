@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+        <PackageReference Include="Selenium.Support" Version="3.141.0" />
+        <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="90.0.4430.2400" />
+        <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.7.38" />
+        <PackageReference Include="SpecFlow.xUnit" Version="3.7.38" />
+        <PackageReference Include="WebDriver.ChromeDriver" Version="26.14.313457.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="3.0.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Features\CreateProduct.feature.cs">
+        <DependentUpon>CreateProduct.feature</DependentUpon>
+      </Compile>
+      <Compile Update="Features\BookRoom.feature.cs">
+        <DependentUpon>BookRoom.feature</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+
+    <Target Name="WorkaroundForSpecFlowXUnitResharperError" AfterTargets="IncludeCodeBehindFilesInProject">
+        <ReplaceFileText
+                InputFilename="$(IntermediateOutputPath)xUnit.AssemblyHooks.cs"
+                OutputFilename="$(IntermediateOutputPath)xUnit.AssemblyHooks.cs"
+                MatchExpression="public\sclass"
+                ReplacementText="public partial class" />
+    </Target>
+
+    <UsingTask TaskName="ReplaceFileText" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+        <ParameterGroup>
+            <InputFilename ParameterType="System.String" Required="true" />
+            <OutputFilename ParameterType="System.String" Required="true" />
+            <MatchExpression ParameterType="System.String" Required="true" />
+            <ReplacementText ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Using Namespace="System" />
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Text.RegularExpressions" />
+            <Code Type="Fragment" Language="cs">
+                <![CDATA[
+            File.WriteAllText(
+                OutputFilename, 
+                Regex.Replace(File.ReadAllText(InputFilename), MatchExpression, ReplacementText));
+          ]]>
+            </Code>
+        </Task>
+    </UsingTask>
+</Project>
