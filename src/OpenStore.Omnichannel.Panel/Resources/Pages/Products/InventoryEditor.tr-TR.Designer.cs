@@ -62,5 +62,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("Input.Quantity", resourceCulture);
             }
         }
+        
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }

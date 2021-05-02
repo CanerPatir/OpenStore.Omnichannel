@@ -29,8 +29,9 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public string MetaTitle { get; protected set; }
         public string MetaDescription { get; protected set; }
         public string Tags { get; protected set; }
-
+        
         public decimal? Weight { get; protected set; }
+        public string WeightUnit { get; protected set; }
         public string HsCode { get; protected set; }
         public bool IsPhysicalProduct { get; protected set; }
 

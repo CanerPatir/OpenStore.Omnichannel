@@ -34,7 +34,7 @@
         <value>Opsiyon ismi belirtilmedi</value>
     </data>
     <data name="Validation.ValuesEmpty" xml:space="preserve">
-        <value>Oprsiyon değerleri belirtilmedi</value>
+        <value>Opsiyon değerleri belirtilmedi</value>
     </data>
     <data name="OptionName.Size" xml:space="preserve">
         <value>Beden</value>

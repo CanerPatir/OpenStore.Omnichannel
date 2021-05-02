@@ -8,7 +8,7 @@
         {
             <ListGroupItem>
                 <h5 class="mt-2 mb-2">
-                    @HeaderTitle
+                    @L["Title"]
                 </h5>
               
             </ListGroupItem>
@@ -17,7 +17,7 @@
         {
             <ListGroupItem>
                 <h5 class="mt-2 mb-2">
-                    @HeaderTitle
+                    @L["Title"]
                 </h5>
                 <Field>
                     <FieldBody>
@@ -35,7 +35,5 @@
     [Parameter]
     public ProductDto Model { get; set; }
 
-    [Parameter]
-    public string HeaderTitle { get; set; }
 
 }

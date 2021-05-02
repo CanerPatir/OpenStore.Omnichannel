@@ -6,7 +6,7 @@
     <ListGroup>
         <ListGroupItem>
             <h5 class="mt-2 mb-3">
-                @HeaderTitle
+                @L["Title"]
             </h5>
             <Row Margin="Margin.Is2.FromBottom">
                 <Field ColumnSize="ColumnSize.Is6">
@@ -56,9 +56,6 @@
 
     [Parameter]
     public VariantDto Model { get; set; }
-
-    [Parameter]
-    public string HeaderTitle { get; set; }
 
     private string CalculateProfit()
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
-    public partial class Migration202104292247 : Migration
+    public partial class Migration202105021456 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -223,6 +223,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     MetaDescription = table.Column<string>(type: "TEXT", nullable: true),
                     Tags = table.Column<string>(type: "TEXT", nullable: true),
                     Weight = table.Column<decimal>(type: "TEXT", nullable: true),
+                    WeightUnit = table.Column<string>(type: "TEXT", nullable: true),
                     HsCode = table.Column<string>(type: "TEXT", nullable: true),
                     IsPhysicalProduct = table.Column<bool>(type: "INTEGER", nullable: false),
                     BrandId = table.Column<Guid>(type: "TEXT", nullable: true),

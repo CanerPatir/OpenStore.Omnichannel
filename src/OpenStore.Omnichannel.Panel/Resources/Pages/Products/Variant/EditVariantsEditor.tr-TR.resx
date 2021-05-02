@@ -18,29 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Button.Save" xml:space="preserve">
-        <value>Kaydet</value>
+    <data name="Title" xml:space="preserve">
+        <value>Varyant</value>
     </data>
-    <data name="NewProduct" xml:space="preserve">
-        <value>&lt;Yeni Ürün&gt;</value>
-    </data>
-    <data name="Breadcrumb.Products" xml:space="preserve">
-        <value>Ürünler</value>
-    </data>
-    <data name="Breadcrumb.AddProduct" xml:space="preserve">
-        <value>Ürün Ekle</value>
-    </data>
-    <data name="CardTitle.Shipping" xml:space="preserve">
-        <value>Kargolama</value>
-    </data>
-    <data name="CardTitle.Collections" xml:space="preserve">
-        <value>Koleksiyonlar</value>
-    </data>
-    <data name="CardTitle.Channels" xml:space="preserve">
-        <value>Satış Kanalları</value>
-    </data>
-    <data name="Alert.ValidationErrors" xml:space="preserve">
-        <value>Ürünle ilgili bazı hatalar mevcut!</value>
-    </data>
-   
 </root>

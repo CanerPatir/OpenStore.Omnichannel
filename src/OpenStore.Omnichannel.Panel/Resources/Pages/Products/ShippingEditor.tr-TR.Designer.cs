@@ -14,21 +14,21 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Create_tr_TR {
+    internal class ShippingEditor_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Create_tr_TR() {
+        internal ShippingEditor_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Create_tr_TR", typeof(Create_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.ShippingEditor_tr_TR", typeof(ShippingEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,51 +45,45 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
             }
         }
         
-        internal static string Button_Save {
+        internal static string InputHelp_Weight {
             get {
-                return ResourceManager.GetString("Button.Save", resourceCulture);
+                return ResourceManager.GetString("InputHelp.Weight", resourceCulture);
             }
         }
         
-        internal static string NewProduct {
+        internal static string Input_Weight {
             get {
-                return ResourceManager.GetString("NewProduct", resourceCulture);
+                return ResourceManager.GetString("Input.Weight", resourceCulture);
             }
         }
         
-        internal static string Breadcrumb_Products {
+        internal static string Input_WeightUnit {
             get {
-                return ResourceManager.GetString("Breadcrumb.Products", resourceCulture);
+                return ResourceManager.GetString("Input.WeightUnit", resourceCulture);
             }
         }
         
-        internal static string Breadcrumb_AddProduct {
+        internal static string Input_IsPhysicalProduct {
             get {
-                return ResourceManager.GetString("Breadcrumb.AddProduct", resourceCulture);
+                return ResourceManager.GetString("Input.IsPhysicalProduct", resourceCulture);
             }
         }
         
-        internal static string CardTitle_Shipping {
+        internal static string Input_HsCode {
             get {
-                return ResourceManager.GetString("CardTitle.Shipping", resourceCulture);
+                return ResourceManager.GetString("Input.HsCode", resourceCulture);
             }
         }
         
-        internal static string CardTitle_Collections {
+        internal static string InputHelp_HsCode {
             get {
-                return ResourceManager.GetString("CardTitle.Collections", resourceCulture);
+                return ResourceManager.GetString("InputHelp.HsCode", resourceCulture);
             }
         }
         
-        internal static string CardTitle_Channels {
+        internal static string Title {
             get {
-                return ResourceManager.GetString("CardTitle.Channels", resourceCulture);
-            }
-        }
-        
-        internal static string Alert_ValidationErrors {
-            get {
-                return ResourceManager.GetString("Alert.ValidationErrors", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

@@ -8,7 +8,7 @@
             <div class="menu-item @GetLiClassContains("home")">
                 <NavLink href="home" class="menu-link">
                     <span class="menu-icon">
-                        <i class="fas fa-home"></i>
+                        <Icon Name="IconName.Home"></Icon>
                     </span>
                     <span class="menu-text">@L["Menu.Home"]</span>
                 </NavLink>
@@ -16,8 +16,7 @@
             <div class="menu-item @GetLiClassContains("orders")">
                 <NavLink href="orders" class="menu-link">
                     <span class="menu-icon">
-                        <i class="fas fa-download"></i>
-                        <span class="menu-icon-label">6</span>
+                        <Icon Name="IconName.Download"></Icon>
                     </span>
                     <span class="menu-text">@L["Menu.Orders"]</span>
                 </NavLink>
@@ -25,7 +24,7 @@
             <div class="menu-item has-sub">
                 <a href="#" class="menu-link">
                     <span class="menu-icon">
-                        <i class="fas fa-tags"></i>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Tags"></Icon>
                     </span>
                     <span class="menu-text">@L["Menu.Products"]</span>
                     <span class="menu-caret">
@@ -110,7 +109,7 @@
             </div>
 
             <div class="p-3 px-4 mt-auto hide-on-minified">
-                <a  class="btn btn-secondary d-block w-100 font-weight-600 rounded-pill">
+                <a class="btn btn-secondary d-block w-100 font-weight-600 rounded-pill">
                     <i class="fa fa-code-branch me-1 ms-n1 opacity-5"></i> @L["Menu.Documentation"]
                 </a>
             </div>
@@ -133,7 +132,7 @@
     {
         StateHasChanged();
     }
-    
+
     private string GetLiClassContains(string path)
     {
         return Navigation.Uri.Trim('/').EndsWith(path.Trim('/')) ? "active" : string.Empty;
@@ -143,4 +142,5 @@
     {
         Navigation.LocationChanged -= OnNavigationOnLocationChanged;
     }
+
 }

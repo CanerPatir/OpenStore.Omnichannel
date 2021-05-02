@@ -18,29 +18,26 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="Button.Save" xml:space="preserve">
-        <value>Kaydet</value>
+    <data name="InputHelp.Weight" xml:space="preserve">
+        <value>Ödeme sırasında nakliye ücretlerini hesaplamak için kullanılır</value>
     </data>
-    <data name="NewProduct" xml:space="preserve">
-        <value>&lt;Yeni Ürün&gt;</value>
+    <data name="Input.Weight" xml:space="preserve">
+        <value>Ağırlık</value>
     </data>
-    <data name="Breadcrumb.Products" xml:space="preserve">
-        <value>Ürünler</value>
+    <data name="Input.WeightUnit" xml:space="preserve">
+        <value>Birim</value>
     </data>
-    <data name="Breadcrumb.AddProduct" xml:space="preserve">
-        <value>Ürün Ekle</value>
+    <data name="Input.IsPhysicalProduct" xml:space="preserve">
+        <value>Bu ürün kargolanabilir fiziksel bir üründür</value>
     </data>
-    <data name="CardTitle.Shipping" xml:space="preserve">
+    <data name="Input.HsCode" xml:space="preserve">
+        <value>HS (Harmonized System) kod</value>
+    </data>
+    <data name="InputHelp.HsCode" xml:space="preserve">
+        <value>Uluslararası teslimatlarda gerekli olabilir
+</value>
+    </data>
+    <data name="Title" xml:space="preserve">
         <value>Kargolama</value>
     </data>
-    <data name="CardTitle.Collections" xml:space="preserve">
-        <value>Koleksiyonlar</value>
-    </data>
-    <data name="CardTitle.Channels" xml:space="preserve">
-        <value>Satış Kanalları</value>
-    </data>
-    <data name="Alert.ValidationErrors" xml:space="preserve">
-        <value>Ürünle ilgili bazı hatalar mevcut!</value>
-    </data>
-   
 </root>

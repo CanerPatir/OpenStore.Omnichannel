@@ -25,6 +25,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
 
         // fulfillment
         public decimal? Weight { get; set; }
+        public string WeightUnit { get; set; }
         public string HsCode { get; set; }
         public bool IsPhysicalProduct { get; set; } = true;
 

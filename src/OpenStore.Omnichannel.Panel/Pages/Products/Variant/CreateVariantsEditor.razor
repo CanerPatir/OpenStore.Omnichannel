@@ -8,7 +8,7 @@
     <ListGroup>
         <ListGroupItem>
             <h5 class="mt-2 mb-2">
-                @HeaderTitle
+                @L["Title"]
             </h5>
             <Field>
                 <FieldBody>
@@ -106,9 +106,6 @@
 
     [Parameter]
     public EventCallback<ProductDto> ModelChanged { get; set; }
-
-    [Parameter]
-    public string HeaderTitle { get; set; }
 
     private async Task OptionsChanged()
     {

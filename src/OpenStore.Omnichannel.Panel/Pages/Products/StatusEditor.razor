@@ -1,0 +1,36 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<StatusEditor> L
+
+<ListGroupItem>
+    <h5>
+        @L["Title"]
+    </h5>
+    <Field>
+        <FieldBody>
+            <Select TValue="ProductStatus" @bind-SelectedValue="@Model.Status" class="form-control">
+                <ChildContent>
+                    <SelectItem Value="ProductStatus.Draft">@L["Status.Draft"]</SelectItem>
+                    <SelectItem Value="ProductStatus.Active">@L["Status.Active"]</SelectItem>
+                </ChildContent>
+                <Feedback>
+
+                    @if (Model.Status == ProductStatus.Draft)
+                    {
+                        <FieldHelp>@L["InputHelp.Draft"]</FieldHelp>
+                    }
+                    else if (Model.Status == ProductStatus.Active)
+                    {
+                        <FieldHelp>@L["InputHelp.Active"]</FieldHelp>
+                    }
+                </Feedback>
+            </Select>
+        </FieldBody>
+    </Field>
+</ListGroupItem>
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+
+}

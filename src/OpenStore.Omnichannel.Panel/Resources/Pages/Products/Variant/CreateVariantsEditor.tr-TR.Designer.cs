@@ -81,5 +81,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
                 return ResourceManager.GetString("Input.ComparePrice", resourceCulture);
             }
         }
+        
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }

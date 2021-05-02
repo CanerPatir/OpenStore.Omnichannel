@@ -793,6 +793,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<decimal?>("Weight")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("WeightUnit")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");

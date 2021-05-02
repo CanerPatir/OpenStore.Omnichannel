@@ -2,14 +2,15 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-       <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> 
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazorise" Version="0.9.3.4" />
-        <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3.4" />
-        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.4" />
-        <PackageReference Include="Blazorise.RichTextEdit" Version="0.9.3.4" />
+        <PackageReference Include="Blazorise" Version="0.9.3.6" />
+        <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3.6" />
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.6" />
+        <PackageReference Include="Blazorise.RichTextEdit" Version="0.9.3.6" />
+        <PackageReference Include="Blazorise.Components" Version="0.9.3.6" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(NetPackagesVersion)" PrivateAssets="all" />
@@ -17,133 +18,168 @@
         <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     </ItemGroup>
-
  
     <ItemGroup>
-      <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Pages\Index.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Shared\AppNavMenu.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>AppNavMenu.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\App.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>App.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Shared\AppHeaderBar.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>AppHeaderBar.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\Index.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\Create.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Create.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\Media\MediaEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>MediaEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\MetaEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>MetaEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\Variant\CreateVariantOptionEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>CreateVariantOptionEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\Variant\CreateVariantsEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>CreateVariantsEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\PricingEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>PricingEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\InventoryEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>InventoryEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Pages\Products\ProductContentEditor.tr-TR.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>ProductContentEditor.tr-TR.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Index.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Shared\AppNavMenu.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>AppNavMenu.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\App.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>App.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Shared\AppHeaderBar.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>AppHeaderBar.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Index.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Create.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Create.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Media\MediaEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>MediaEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\MetaEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>MetaEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Variant\CreateVariantOptionEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>CreateVariantOptionEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Variant\CreateVariantsEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>CreateVariantsEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\PricingEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>PricingEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\InventoryEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>InventoryEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\ProductContentEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>ProductContentEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\ShippingEditor.tr-TR.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>ShippingEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\StatusEditor.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>StatusEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Variant\EditVariantsEditor.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>EditVariantsEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\TagsEditor.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>TagsEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\Pages\Index.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Index.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Shared\AppNavMenu.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>AppNavMenu.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\App.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>SharedResource.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Shared\AppHeaderBar.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>AppHeaderBar.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\Index.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Index.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\Create.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Edit.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\Media\MediaEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>MediaEditor.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\MetaEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>MetaEditor.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\Variant\CreateVariantOptionEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>VariantOptionEditor.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\Variant\CreateVariantsEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>VariantsEditor.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\PricingEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>PricingEditor.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\InventoryEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>InventoryEditor.tr-TR.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Pages\Products\ProductContentEditor.tr-TR.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>ProductContentEditor.tr-TR.resx</DependentUpon>
-      </Compile>
+        <Compile Update="Resources\Pages\Index.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Index.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Shared\AppNavMenu.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>AppNavMenu.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\App.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>SharedResource.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Shared\AppHeaderBar.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>AppHeaderBar.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Index.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Index.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Create.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Edit.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Media\MediaEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>MediaEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\MetaEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>MetaEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Variant\CreateVariantOptionEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>VariantOptionEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Variant\CreateVariantsEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>VariantsEditor.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\PricingEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>PricingEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\InventoryEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>InventoryEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\ProductContentEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ProductContentEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\ShippingEditor.tr-TR.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>ShippingEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\StatusEditor.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>StatusEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Variant\EditVariantsEditor.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>EditVariantsEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\TagsEditor.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>TagsEditor.tr-TR.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 

@@ -37,11 +37,7 @@
 
 
     <Target Name="WorkaroundForSpecFlowXUnitResharperError" AfterTargets="IncludeCodeBehindFilesInProject">
-        <ReplaceFileText
-                InputFilename="$(IntermediateOutputPath)xUnit.AssemblyHooks.cs"
-                OutputFilename="$(IntermediateOutputPath)xUnit.AssemblyHooks.cs"
-                MatchExpression="public\sclass"
-                ReplacementText="public partial class" />
+        <ReplaceFileText InputFilename="$(IntermediateOutputPath)xUnit.AssemblyHooks.cs" OutputFilename="$(IntermediateOutputPath)xUnit.AssemblyHooks.cs" MatchExpression="public\sclass" ReplacementText="public partial class" />
     </Target>
 
     <UsingTask TaskName="ReplaceFileText" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">

@@ -1,7 +1,128 @@
 @page "/products/{Id:guid}"
-<h3>Update</h3>
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@using OpenStore.Omnichannel.Panel.Pages.Products.Media
+@using OpenStore.Omnichannel.Panel.Pages.Products.Variant
+@inject IStringLocalizer<Update> L
+
+<Container>
+    <Row class="justify-content-center">
+        <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+            <OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Products"]" CurrentTitle="@L["Breadcrumb.AddProduct"]">
+                <TitleSection>
+                    <span>@_product.Title</span>
+                </TitleSection>
+                <ButtonsSection>
+                    <Button Loading="_saving" Clicked="Save" Color="Color.Success">
+                        @if (!_saving)
+                        {
+                            <Icon Name="IconName.Save" Class="me-1"></Icon>
+                        }
+                        @L["Button.Save"]
+                    </Button>
+                </ButtonsSection>
+            </OsBreadcrumb>
+
+            <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is12">
+                        <Alert Color="Color.Danger" Visible="@_formHasErrors">
+                            <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
+                                @L["Alert.ValidationErrors"]
+                            </Heading>
+                            <Blazorise.ValidationSummary Margin="Margin.Is0"/>
+                        </Alert>
+                    </Column>
+                </Row>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                        <ProductContentEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
+                        <MediaEditor Model="@_product"/>
+
+                        @if (_product.HasMultipleVariants)
+                        {
+                            <EditVariantsEditor Model="@_product"/>
+                        }
+
+                        @if (!_product.HasMultipleVariants)
+                        {
+                            <PricingEditor Model="@_product.Variants.First()"/>
+                            <InventoryEditor Model="@_product.Variants.First()"/>
+                            <ShippingEditor Model="@_product"/>
+                        }
+
+                        <MetaEditor Model="@_product"/>
+                    </Column>
+
+                    <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+                        <ListGroup Margin="Margin.Is3.FromBottom">
+                            <StatusEditor Model="@_product"/>
+                            <ListGroupItem>
+                                <h5>
+                                    @L["CardTitle.Channels"]
+                                </h5>
+                                Channels
+                            </ListGroupItem>
+                        </ListGroup>
+
+                        <ListGroup Margin="Margin.Is3.FromBottom">
+                            <ListGroupItem>
+                                <h5>
+                                    @L["CardTitle.Collections"]
+                                </h5>
+                                collections
+                            </ListGroupItem>
+                            <TagsEditor Model="@_product"/>
+                        </ListGroup>
+                    </Column>
+                </Row>
+            </Validations>
+            <hr class="mb-4">
+            <Row>
+                <div class="d-flex align-items-center mb-4">
+                    <div class="ms-auto">
+                        <Button Loading="_saving" Clicked="Save" Color="Color.Success">
+                            @if (!_saving)
+                            {
+                                <Icon Name="IconName.Save" Class="me-1"></Icon>
+                            }
+                            @L["Button.Save"]
+                        </Button>
+                    </div>
+                </div>
+            </Row>
+        </Column>
+    </Row>
+</Container>
+
 
 @code {
+
     [Parameter]
     public Guid Id { get; set; }
+
+    private bool _saving;
+    private bool _formHasErrors;
+
+    private readonly ProductDto _product = new();
+    private Validations _validations;
+
+    private async Task Save()
+    {
+        _formHasErrors = !_validations.ValidateAll();
+        if (_formHasErrors)
+        {
+            return;
+        }
+
+        try
+        {
+            _saving = true;
+        }
+        finally
+        {
+            _saving = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
 }

@@ -28,7 +28,7 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.MediaEditor_tr_TR", typeof(MediaEditor_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Media.MediaEditor_tr_TR", typeof(MediaEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -48,6 +48,12 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
         internal static string DropArea_DropTitle {
             get {
                 return ResourceManager.GetString("DropArea.DropTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

@@ -18,10 +18,6 @@
                     {
                         <span>@_product.Title</span>
                     }
-
-                    <Badge Color="Color.Warning">
-                        Draft
-                    </Badge>
                 </TitleSection>
                 <ButtonsSection>
                     <Button Loading="_saving" Clicked="Save" Color="Color.Success">
@@ -34,65 +30,41 @@
                 </ButtonsSection>
             </OsBreadcrumb>
 
-            <Row>
-                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
+            <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is12">
+                        <Alert Color="Color.Danger" Visible="@_formHasErrors">
+                            <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
+                                @L["Alert.ValidationErrors"]
+                            </Heading>
+                            <Blazorise.ValidationSummary Margin="Margin.Is0"/>
+                        </Alert>
+                    </Column>
+                </Row>
+                <Row>
                     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                        <ProductContentEditor HeaderTitle="" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
-                        <MediaEditor HeaderTitle="@L["CardTitle.Media"]" Model="@_product"/>
-
-                        @if (_product.IsCreate)
-                        {
-                            <CreateVariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
-                        }
-                        else if (_product.HasMultipleVariants)
-                        {
-                            <EditVariantsEditor HeaderTitle="@L["CardTitle.Variants"]" Model="@_product"/>
-                        }
-
+                        <ProductContentEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
+                        <MediaEditor Model="@_product"/>
+                        <CreateVariantsEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
                         @if (!_product.HasMultipleVariants)
                         {
-                            <PricingEditor HeaderTitle="@L["CardTitle.Pricing"]" Model="@_product.Variants.First()"/>
-                            <InventoryEditor HeaderTitle="@L["CardTitle.Inventory"]" Model="@_product.Variants.First()"/>
-                            <ShippingEditor HeaderTitle="@L["CardTitle.Shipping"]" Model="@_product"/>
+                            <PricingEditor Model="@_product.Variants.First()"/>
+                            <InventoryEditor Model="@_product.Variants.First()"/>
+                            <ShippingEditor Model="@_product"/>
                         }
-
-                        <MetaEditor HeaderTitle="@L["CardTitle.Seo"]" Model="@_product"/>
+                        <MetaEditor Model="@_product"/>
                     </Column>
 
                     <Column ColumnSize="ColumnSize.Is4.OnDesktop">
                         <ListGroup Margin="Margin.Is3.FromBottom">
-                            <ListGroupItem>
-                                <h5>
-                                    @L["CardTitle.Status"]
-                                </h5>
-                                Status
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <h5>
-                                    @L["CardTitle.Channels"]
-                                </h5>
-                                Channels
-                            </ListGroupItem>
+                            <StatusEditor Model="@_product"/>
                         </ListGroup>
-
                         <ListGroup Margin="Margin.Is3.FromBottom">
-                            <ListGroupItem>
-                                <h5>
-                                    @L["CardTitle.Collections"]
-                                </h5>
-                                collections
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <h5>
-                                    @L["CardTitle.Tags"]
-                                </h5>
-                                <OsChipsInput Chips="@_tags"/>
-
-                            </ListGroupItem>
+                            <TagsEditor Model="@_product"/>
                         </ListGroup>
                     </Column>
-                </Validations>
-            </Row>
+                </Row>
+            </Validations>
             <hr class="mb-4">
             <Row>
                 <div class="d-flex align-items-center mb-4">
@@ -115,13 +87,14 @@
 @code {
     private readonly ProductDto _product = new();
     private Validations _validations;
-    private List<string> _tags = new();
 
-    private bool _saving = false;
+    private bool _saving;
+    private bool _formHasErrors;
 
     private async Task Save()
     {
-        if (!_validations.ValidateAll())
+        _formHasErrors = !_validations.ValidateAll();
+        if (_formHasErrors)
         {
             return;
         }

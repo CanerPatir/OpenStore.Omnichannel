@@ -9,8 +9,8 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20210429194753_Migration-2021-04-29-22-47")]
-    partial class Migration202104292247
+    [Migration("20210502115631_Migration-2021-05-02-14-56")]
+    partial class Migration202105021456
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -793,6 +793,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal?>("Weight")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WeightUnit")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

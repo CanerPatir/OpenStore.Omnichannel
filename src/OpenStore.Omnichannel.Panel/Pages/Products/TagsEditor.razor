@@ -1,0 +1,29 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<TagsEditor> L
+
+
+<ListGroupItem>
+    <h5>
+        @L["Title"]
+    </h5>
+    <OsChipsInput Chips="@_tags" OnChipsChanged="ChipsChanged" />
+</ListGroupItem>
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+    
+    private List<string> _tags = new();
+
+    protected override void OnInitialized()
+    {
+        _tags = Model.Tags?.Split(',').ToList() ?? new List<string>();
+    }
+
+    private void ChipsChanged(List<string> chips)
+    {
+        Model.Tags = string.Join(',', chips);
+    }
+
+}

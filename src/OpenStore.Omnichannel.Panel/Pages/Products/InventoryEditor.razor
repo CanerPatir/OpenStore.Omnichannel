@@ -5,7 +5,7 @@
     <ListGroup>
         <ListGroupItem>
             <h5 class="mt-2 mb-3">
-                @HeaderTitle
+                @L["Title"]
             </h5>
             <Field Margin="Margin.Is1.FromBottom">
                 <FieldBody>
@@ -21,7 +21,7 @@
                     <FieldBody>
                         <InputNumber @bind-Value="@Model.Quantity"
                                      min="0"
-                                     class="form-control form-control-sm"
+                                     class="form-control"
                                      DisplayName="@L["Input.Stock"]"/>
                     </FieldBody>
                 </Field>
@@ -40,6 +40,4 @@
     [Parameter]
     public VariantDto Model { get; set; }
 
-    [Parameter]
-    public string HeaderTitle { get; set; }
 }

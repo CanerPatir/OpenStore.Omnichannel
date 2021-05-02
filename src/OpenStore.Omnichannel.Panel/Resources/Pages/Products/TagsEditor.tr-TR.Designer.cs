@@ -14,21 +14,21 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Create_tr_TR {
+    internal class TagsEditor_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Create_tr_TR() {
+        internal TagsEditor_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Create_tr_TR", typeof(Create_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.TagsEditor_tr_TR", typeof(TagsEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,51 +45,9 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
             }
         }
         
-        internal static string Button_Save {
+        internal static string Title {
             get {
-                return ResourceManager.GetString("Button.Save", resourceCulture);
-            }
-        }
-        
-        internal static string NewProduct {
-            get {
-                return ResourceManager.GetString("NewProduct", resourceCulture);
-            }
-        }
-        
-        internal static string Breadcrumb_Products {
-            get {
-                return ResourceManager.GetString("Breadcrumb.Products", resourceCulture);
-            }
-        }
-        
-        internal static string Breadcrumb_AddProduct {
-            get {
-                return ResourceManager.GetString("Breadcrumb.AddProduct", resourceCulture);
-            }
-        }
-        
-        internal static string CardTitle_Shipping {
-            get {
-                return ResourceManager.GetString("CardTitle.Shipping", resourceCulture);
-            }
-        }
-        
-        internal static string CardTitle_Collections {
-            get {
-                return ResourceManager.GetString("CardTitle.Collections", resourceCulture);
-            }
-        }
-        
-        internal static string CardTitle_Channels {
-            get {
-                return ResourceManager.GetString("CardTitle.Channels", resourceCulture);
-            }
-        }
-        
-        internal static string Alert_ValidationErrors {
-            get {
-                return ResourceManager.GetString("Alert.ValidationErrors", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }
