@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OpenStore.Infrastructure.Data;
+using OpenStore.Infrastructure.Data.EntityFramework;
 using OpenStore.Omnichannel.Domain.ChannelContext;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.LookupContext;
@@ -11,7 +13,7 @@ using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 {
-    public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>, IDataProtectionKeyContext
+    public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>, IOutBoxDbContext, IDataProtectionKeyContext
     {
         protected ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -35,7 +37,8 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<CategoryMedia> CategoryMedias { get; set; }
         public DbSet<CategoryProduct> CategoryProducts { get; set; }
-
+        public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -53,5 +56,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
+
     }
 }

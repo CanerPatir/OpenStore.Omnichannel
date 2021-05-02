@@ -82,5 +82,9 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             }
         }
 
+        public static Product Create(CreateProduct command)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

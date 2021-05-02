@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using MediatR;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
+using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Application.Command
 {
-    public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<ProductMediaDto>>;
-
     public class CreateProductMediaHandler : IRequestHandler<CreateProductMedia, IEnumerable<ProductMediaDto>>
     {
         private readonly ICrudRepository<ProductMedia> _repository;
@@ -34,12 +32,7 @@ namespace OpenStore.Omnichannel.Application.Command
             var mediasTasks = request.Uploads.Select(async x =>
             {
                 var (host, path) = await _objectStorageService.Write(FileNameStrategy(x.FileName), x.FileContent);
-                return new ProductMedia(host, path, x.Type, Path.GetExtension(x.FileName), x.FileName)
-                {
-                    Position = x.Position,
-                    Size = x.Size,
-                    Title = x.FileName
-                };
+                return ProductMedia.Create(host, path, x.Type, Path.GetExtension(x.FileName), x.FileName, x.Position, x.Size, x.FileName);
             });
 
             var medias = await Task.WhenAll(mediasTasks);

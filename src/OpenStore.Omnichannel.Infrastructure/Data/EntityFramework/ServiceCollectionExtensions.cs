@@ -22,7 +22,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
             IConfiguration configuration)
         {
             var migrationAssemblyName = Assembly.GetExecutingAssembly().FullName;
-            
+
             var dataSource = configuration.GetActiveDataSource();
 
             void Opts(DbContextOptionsBuilder opts)
@@ -56,7 +56,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             services
                 .AddDataProtection()
                 .PersistKeysToDbContext<ApplicationDbContext>();
@@ -71,7 +71,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
 
                 // to avoid unexpected lazy loading dto should be located to left hand of mapping
                 cfg.CreateMap<ProductMediaDto, ProductMedia>().ReverseMap();
-                
             });
             return services;
         }

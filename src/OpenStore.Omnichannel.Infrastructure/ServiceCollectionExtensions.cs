@@ -48,7 +48,7 @@ namespace OpenStore.Omnichannel.Infrastructure
             });
 
             services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
-            services.AddTransient<IObjectStorageService, FileSystemObjectStorageService>();
+            services.AddSingleton<IObjectStorageService, FileSystemObjectStorageService>();
 
             if (withScheduledJobs)
             {
