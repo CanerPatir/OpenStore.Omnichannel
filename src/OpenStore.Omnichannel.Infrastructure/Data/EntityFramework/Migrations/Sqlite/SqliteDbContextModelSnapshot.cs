@@ -145,6 +145,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<bool>("Committed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("CommittedBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CorrelationId")
                         .HasColumnType("TEXT");
 

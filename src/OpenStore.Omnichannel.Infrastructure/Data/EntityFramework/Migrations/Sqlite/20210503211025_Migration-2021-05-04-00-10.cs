@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
-    public partial class Migration202105032316 : Migration
+    public partial class Migration202105040010 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -119,7 +119,8 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     Payload = table.Column<string>(type: "TEXT", nullable: false),
                     Timestamp = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     Version = table.Column<long>(type: "INTEGER", nullable: false),
-                    CorrelationId = table.Column<string>(type: "TEXT", nullable: true)
+                    CorrelationId = table.Column<string>(type: "TEXT", nullable: true),
+                    CommittedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

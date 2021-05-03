@@ -9,8 +9,8 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20210503201634_Migration-2021-05-03-23-16")]
-    partial class Migration202105032316
+    [Migration("20210503211025_Migration-2021-05-04-00-10")]
+    partial class Migration202105040010
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -146,6 +146,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
 
                     b.Property<bool>("Committed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("CommittedBy")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CorrelationId")
                         .HasColumnType("TEXT");
