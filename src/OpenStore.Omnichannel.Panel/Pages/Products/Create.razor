@@ -103,6 +103,7 @@
         {
             _saving = true;
             var productId = await ApiClient.Product.CreateProduct(_product);
+            ShowSuccess(L["Success.ProductCreated"]);
             Navigation.NavigateTo($"products/{productId}");
         }
         finally

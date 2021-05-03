@@ -18,7 +18,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
             builder.Property(x => x.VariantIds)
                 .HasConversion(
                     x => JsonSerializer.Serialize(x, new JsonSerializerOptions()),
-                    x => JsonSerializer.Deserialize<List<Guid>>(x, new JsonSerializerOptions())
+                    x => JsonSerializer.Deserialize<HashSet<Guid>>(x, new JsonSerializerOptions())
                 );
         }
     }

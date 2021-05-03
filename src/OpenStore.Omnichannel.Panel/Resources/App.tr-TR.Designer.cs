@@ -56,5 +56,41 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Validation.Range", resourceCulture);
             }
         }
+        
+        internal static string Success_Title {
+            get {
+                return ResourceManager.GetString("Success.Title", resourceCulture);
+            }
+        }
+        
+        internal static string Success_GenericCreated {
+            get {
+                return ResourceManager.GetString("Success.GenericCreated", resourceCulture);
+            }
+        }
+        
+        internal static string Error_Title {
+            get {
+                return ResourceManager.GetString("Error.Title", resourceCulture);
+            }
+        }
+        
+        internal static string Warning_Title {
+            get {
+                return ResourceManager.GetString("Warning.Title", resourceCulture);
+            }
+        }
+        
+        internal static string Warning_NotFound {
+            get {
+                return ResourceManager.GetString("Warning.NotFound", resourceCulture);
+            }
+        }
+        
+        internal static string Warning_Forbidden {
+            get {
+                return ResourceManager.GetString("Warning.Forbidden", resourceCulture);
+            }
+        }
     }
 }

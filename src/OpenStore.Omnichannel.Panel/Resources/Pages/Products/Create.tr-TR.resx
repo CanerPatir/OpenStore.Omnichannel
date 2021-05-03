@@ -42,5 +42,7 @@
     <data name="Alert.ValidationErrors" xml:space="preserve">
         <value>Ürünle ilgili bazı hatalar mevcut!</value>
     </data>
-   
+    <data name="Success.ProductCreated" xml:space="preserve">
+        <value>Ürün başarıyla oluşturuldu</value>
+    </data>
 </root>

@@ -9,7 +9,6 @@ using OpenStore.Omnichannel.Domain.ChannelContext;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.LookupContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 {

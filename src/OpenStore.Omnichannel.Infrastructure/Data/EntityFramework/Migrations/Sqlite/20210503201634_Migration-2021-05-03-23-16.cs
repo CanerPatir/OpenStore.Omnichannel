@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
-    public partial class Migration202105030015 : Migration
+    public partial class Migration202105032316 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -240,10 +240,10 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     MetaTitle = table.Column<string>(type: "TEXT", nullable: true),
                     MetaDescription = table.Column<string>(type: "TEXT", nullable: true),
                     Tags = table.Column<string>(type: "TEXT", nullable: true),
-                    Weight = table.Column<decimal>(type: "TEXT", nullable: true),
+                    IsPhysicalProduct = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Weight = table.Column<decimal>(type: "TEXT", precision: 9, scale: 2, nullable: true),
                     WeightUnit = table.Column<string>(type: "TEXT", nullable: true),
                     HsCode = table.Column<string>(type: "TEXT", nullable: true),
-                    IsPhysicalProduct = table.Column<bool>(type: "INTEGER", nullable: false),
                     BrandId = table.Column<Guid>(type: "TEXT", nullable: true),
                     Options = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -512,18 +512,18 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Price = table.Column<decimal>(type: "TEXT", nullable: false),
-                    CompareAtPrice = table.Column<decimal>(type: "TEXT", nullable: true),
-                    Cost = table.Column<decimal>(type: "TEXT", nullable: true),
+                    Option1 = table.Column<string>(type: "TEXT", nullable: true),
+                    Option2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Option3 = table.Column<string>(type: "TEXT", nullable: true),
+                    Price = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
+                    CompareAtPrice = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: true),
+                    Cost = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: true),
                     CalculateTaxAdditionally = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     Sku = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     Barcode = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     TrackQuantity = table.Column<bool>(type: "INTEGER", nullable: false),
                     ContinueSellingWhenOutOfStock = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    Option1 = table.Column<string>(type: "TEXT", nullable: true),
-                    Option2 = table.Column<string>(type: "TEXT", nullable: true),
-                    Option3 = table.Column<string>(type: "TEXT", nullable: true),
                     Version = table.Column<long>(type: "INTEGER", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: true),

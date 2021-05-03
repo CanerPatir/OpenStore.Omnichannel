@@ -13,6 +13,10 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
 
             builder.HasIndex(x => x.Barcode);
             builder.HasIndex(x => x.Sku);
+
+            builder.Property(x => x.Price).HasPrecision(18, 2);
+            builder.Property(x => x.CompareAtPrice).HasPrecision(18, 2);
+            builder.Property(x => x.Cost).HasPrecision(18, 2);
             
             builder.Property(x => x.Barcode).HasMaxLength(StringLengthConstants.DefaultStringLength);
             builder.Property(x => x.Sku).HasMaxLength(StringLengthConstants.DefaultStringLength);

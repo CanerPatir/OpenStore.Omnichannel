@@ -30,10 +30,12 @@
 
     protected void ShowSuccess(string message, string title = null) => AlertService.ShowSuccess(message, title);
 
+    protected void ShowCreatedSuccess() => AlertService.ShowCreatedSuccess();
+
     protected void ShowError(string message, string title = null) => AlertService.ShowError(message, title);
 
     protected void ShowWarning(string message, string title = null) => AlertService.ShowWarning(message, title);
-    
+
     protected string Localize(string message, IEnumerable<string> arguments) => SharedLocalizer[message, arguments];
 
     [CascadingParameter]
@@ -41,7 +43,7 @@
 
     [Inject]
     protected IApiClient ApiClient { get; init; }
-    
+
     protected async Task<bool> IsInRole(string role)
     {
         var user = await GetUser();

@@ -98,28 +98,28 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 isInvalidToken
             );
 
-            if (ex.IsUnauthorized && ex.IsInvalidToken)
+            // if (ex.IsUnauthorized && ex.IsInvalidToken)
+            if (ex.IsUnauthorized)
             {
                 await SignOut();
             }
 
             if (ex.StatusCode == HttpStatusCode.NotFound)
             {
-                _alertService.ShowError("Kayıt bulunamadı", "Hata");
+                _alertService.ShowWarning(_sharedLocalizer["Warning.NotFound"]);
             }
             else if (ex.StatusCode == HttpStatusCode.BadRequest)
             {
-                _alertService.ShowError(_sharedLocalizer[ex.GetMessageKey()], "Hata");
+                _alertService.ShowWarning(_sharedLocalizer[ex.GetMessageKey()]);
             }
             else if (ex.StatusCode == HttpStatusCode.Forbidden)
             {
-                _alertService.ShowError("Yetkisiz erişim", "Hata");
+                _alertService.ShowWarning(_sharedLocalizer["Warning.Forbidden"]);
             }
             else
             {
                 var message = ex.GetAggregatedErrorMessage();
-
-                _alertService.ShowError(_sharedLocalizer[message], "Hata");
+                _alertService.ShowError(_sharedLocalizer[message]);
             }
 
             throw ex;

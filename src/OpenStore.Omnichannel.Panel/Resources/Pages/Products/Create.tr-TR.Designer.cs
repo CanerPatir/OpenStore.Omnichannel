@@ -92,5 +92,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("Alert.ValidationErrors", resourceCulture);
             }
         }
+        
+        internal static string Success_ProductCreated {
+            get {
+                return ResourceManager.GetString("Success.ProductCreated", resourceCulture);
+            }
+        }
     }
 }

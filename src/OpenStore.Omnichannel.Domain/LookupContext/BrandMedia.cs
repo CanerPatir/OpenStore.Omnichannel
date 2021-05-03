@@ -7,7 +7,7 @@ namespace OpenStore.Omnichannel.Domain.LookupContext
         public Guid? BrandId { get; set; }
         public virtual Brand Brand { get; protected set; }
         
-        public BrandMedia(string host, string path, string type, string extension, string filename) : base(host, path, type, extension, filename)
+        protected BrandMedia()
         {
         }
     }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using MediatR;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
-using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 

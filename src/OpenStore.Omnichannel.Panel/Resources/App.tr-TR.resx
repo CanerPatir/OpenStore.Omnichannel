@@ -24,4 +24,22 @@
     <data name="Validation.Range" xml:space="preserve">
         <value>Bu alanın uzunluğu en az {1}, en fazla {2} olablilir</value>
     </data>
+    <data name="Success.Title" xml:space="preserve">
+        <value>İşlem Başarılı</value>
+    </data>
+    <data name="Success.GenericCreated" xml:space="preserve">
+        <value>Kayıt başarıyla oluşturuldu</value>
+    </data>
+    <data name="Error.Title" xml:space="preserve">
+        <value>Hata!</value>
+    </data>
+    <data name="Warning.Title" xml:space="preserve">
+        <value>Uyarı!</value>
+    </data>
+    <data name="Warning.NotFound" xml:space="preserve">
+        <value>Kayıt bulunamadı</value>
+    </data>
+    <data name="Warning.Forbidden" xml:space="preserve">
+        <value>Yetkisiz erişim</value>
+    </data>
 </root>

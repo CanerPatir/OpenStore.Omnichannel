@@ -9,8 +9,8 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20210502211540_Migration-2021-05-03-00-15")]
-    partial class Migration202105030015
+    [Migration("20210503201634_Migration-2021-05-03-23-16")]
+    partial class Migration202105032316
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,6 +162,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasColumnType("TEXT");
 
                     b.Property<long>("Version")
+                        .IsConcurrencyToken()
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -828,6 +829,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal?>("Weight")
+                        .HasPrecision(9, 2)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("WeightUnit")
@@ -916,12 +918,14 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal?>("CompareAtPrice")
+                        .HasPrecision(18, 2)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("ContinueSellingWhenOutOfStock")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal?>("Cost")
+                        .HasPrecision(18, 2)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -940,6 +944,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ProductId")

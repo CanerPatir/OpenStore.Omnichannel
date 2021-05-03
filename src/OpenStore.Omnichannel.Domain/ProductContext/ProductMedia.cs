@@ -13,16 +13,25 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
         public IReadOnlyCollection<Guid> VariantIds => _variantIds;
 
-        protected ProductMedia(string host, string path, string type, string extension, string filename)
-            : base(host, path, type, extension, filename)
+        protected ProductMedia()
         {
-            Id = Guid.NewGuid();
+        }
+
+        internal ProductMedia(Guid id)
+        {
+            Id = id;
         }
 
         public static ProductMedia Create(string host, string path, string type, string extension, string filename, int position, long? size, string title)
         {
-            var productMedia = new ProductMedia(host, path, type, extension, filename)
+            var productMedia = new ProductMedia
             {
+                Id = Guid.NewGuid(),
+                Host =  host,
+                Path = path,
+                Type = type,
+                Extension = extension,
+                Filename = filename,
                 Position = position,
                 Size = size,
                 Title = title
