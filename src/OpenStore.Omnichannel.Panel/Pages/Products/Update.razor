@@ -7,79 +7,18 @@
 <Container>
     <Row class="justify-content-center">
         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-            <OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Products"]" CurrentTitle="@L["Breadcrumb.AddProduct"]">
-                <TitleSection>
-                    <span>@_product.Title</span>
-                </TitleSection>
-                <ButtonsSection>
-                    <Button Loading="_saving" Clicked="Save" Color="Color.Success">
-                        @if (!_saving)
-                        {
-                            <Icon Name="IconName.Save" Class="me-1"></Icon>
-                        }
-                        @L["Button.Save"]
-                    </Button>
-                </ButtonsSection>
-            </OsBreadcrumb>
 
-            <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
-                <Row>
-                    <Column ColumnSize="ColumnSize.Is12">
-                        <Alert Color="Color.Danger" Visible="@_formHasErrors">
-                            <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
-                                @L["Alert.ValidationErrors"]
-                            </Heading>
-                            <Blazorise.ValidationSummary Margin="Margin.Is0"/>
-                        </Alert>
-                    </Column>
-                </Row>
-                <Row>
-                    <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                        <ProductContentEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
-                        <MediaEditor Model="@_product"/>
-
-                        @if (_product.HasMultipleVariants)
-                        {
-                            <EditVariantsEditor Model="@_product"/>
-                        }
-
-                        @if (!_product.HasMultipleVariants)
-                        {
-                            <PricingEditor Model="@_product.Variants.First()"/>
-                            <InventoryEditor Model="@_product.Variants.First()"/>
-                            <ShippingEditor Model="@_product"/>
-                        }
-
-                        <MetaEditor Model="@_product"/>
-                    </Column>
-
-                    <Column ColumnSize="ColumnSize.Is4.OnDesktop">
-                        <ListGroup Margin="Margin.Is3.FromBottom">
-                            <StatusEditor Model="@_product"/>
-                            <ListGroupItem>
-                                <h5>
-                                    @L["CardTitle.Channels"]
-                                </h5>
-                                Channels
-                            </ListGroupItem>
-                        </ListGroup>
-
-                        <ListGroup Margin="Margin.Is3.FromBottom">
-                            <ListGroupItem>
-                                <h5>
-                                    @L["CardTitle.Collections"]
-                                </h5>
-                                collections
-                            </ListGroupItem>
-                            <TagsEditor Model="@_product"/>
-                        </ListGroup>
-                    </Column>
-                </Row>
-            </Validations>
-            <hr class="mb-4">
-            <Row>
-                <div class="d-flex align-items-center mb-4">
-                    <div class="ms-auto">
+            @if (_product is null)
+            {
+                <OsSpinner/>
+            }
+            else
+            {
+                <OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Products"]" CurrentTitle="@L["Breadcrumb.AddProduct"]">
+                    <TitleSection>
+                        <span>@_product.Title</span>
+                    </TitleSection>
+                    <ButtonsSection>
                         <Button Loading="_saving" Clicked="Save" Color="Color.Success">
                             @if (!_saving)
                             {
@@ -87,9 +26,77 @@
                             }
                             @L["Button.Save"]
                         </Button>
+                    </ButtonsSection>
+                </OsBreadcrumb>
+                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is12">
+                            <Alert Color="Color.Danger" Visible="@_formHasErrors">
+                                <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
+                                    @L["Alert.ValidationErrors"]
+                                </Heading>
+                                <Blazorise.ValidationSummary Margin="Margin.Is0"/>
+                            </Alert>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                            <ProductContentEditor Model="@_product" ModelChanged="@(_ => StateHasChanged())"/>
+                            <MediaEditor Model="@_product"/>
+
+                            @if (_product.HasMultipleVariants)
+                            {
+                                <EditVariantsEditor Model="@_product"/>
+                            }
+
+                            @if (!_product.HasMultipleVariants)
+                            {
+                                <PricingEditor Model="@_product.Variants.First()"/>
+                                <InventoryEditor Model="@_product.Variants.First()"/>
+                                <ShippingEditor Model="@_product"/>
+                            }
+
+                            <MetaEditor Model="@_product"/>
+                        </Column>
+
+                        <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <StatusEditor Model="@_product"/>
+                                <ListGroupItem>
+                                    <h5>
+                                        @L["CardTitle.Channels"]
+                                    </h5>
+                                    Channels
+                                </ListGroupItem>
+                            </ListGroup>
+
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <ListGroupItem>
+                                    <h5>
+                                        @L["CardTitle.Collections"]
+                                    </h5>
+                                    collections
+                                </ListGroupItem>
+                                <TagsEditor Model="@_product"/>
+                            </ListGroup>
+                        </Column>
+                    </Row>
+                </Validations>
+                <hr class="mb-4">
+                <Row>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="ms-auto">
+                            <Button Loading="_saving" Clicked="Save" Color="Color.Success">
+                                @if (!_saving)
+                                {
+                                    <Icon Name="IconName.Save" Class="me-1"></Icon>
+                                }
+                                @L["Button.Save"]
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            </Row>
+                </Row>
+            }
         </Column>
     </Row>
 </Container>
@@ -103,8 +110,13 @@
     private bool _saving;
     private bool _formHasErrors;
 
-    private readonly ProductDto _product = new();
+    private ProductDto _product;
     private Validations _validations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _product = await ApiClient.Product.Get(Id);
+    }
 
     private async Task Save()
     {

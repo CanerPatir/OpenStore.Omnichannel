@@ -1,7 +1,11 @@
+using System;
+
 namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
     public class VariantDto
     {
+        public Guid? Id { get; set; }
+
         // Pricing
         public decimal Price { get; set; } = 0;
         public decimal? CompareAtPrice { get; set; }

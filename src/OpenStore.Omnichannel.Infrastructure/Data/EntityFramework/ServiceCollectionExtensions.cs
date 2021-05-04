@@ -71,6 +71,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
 
                 // to avoid unexpected lazy loading dto should be located to left hand of mapping
                 cfg.CreateMap<ProductMediaDto, ProductMedia>().ReverseMap();
+                cfg.CreateMap<ProductDto, Product>().ReverseMap();
+                cfg.CreateMap<VariantDto, Variant>().ReverseMap();
+                cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
             });
             return services;
         }

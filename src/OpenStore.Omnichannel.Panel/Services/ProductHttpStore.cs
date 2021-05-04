@@ -19,5 +19,7 @@ namespace OpenStore.Omnichannel.Panel.Services
             var response = await HttpClient.PostAsJsonAsync($"{Path}", model);
             return await response.Content.ReadFromJsonAsync<Guid>();
         }
+
+        public async Task<ProductDto> Get(Guid id) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{id}");
     }
 }

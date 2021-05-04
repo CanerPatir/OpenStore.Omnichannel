@@ -2,60 +2,58 @@
 @inject IStringLocalizer<ProductContentEditor> L
 
 <Card Margin="Margin.Is3.FromBottom">
-    @if (Model != null)
-    {
-        <CardBody>
-            <Validation MessageLocalizer="Localize">
-                <Field Margin="Margin.Is3.FromBottom">
-                    <FieldLabel>@L["Form.ProductTitle"]</FieldLabel>
-                    <FieldBody>
-                        <TextEdit @bind-Text="@Model.Title" KeyUp="KeyUp" MaxLength="80">
-                            <Feedback>
-                                <ValidationError/>
-                            </Feedback>
-                        </TextEdit>
-                    </FieldBody>
-                </Field>
-            </Validation>
-
-            <Field>
-                <FieldLabel>@L["Form.ProductDescription"]</FieldLabel>
+    <CardBody>
+        <Validation MessageLocalizer="Localize">
+            <Field Margin="Margin.Is3.FromBottom">
+                <FieldLabel>@L["Form.ProductTitle"]</FieldLabel>
                 <FieldBody>
-                    <RichTextEdit
-                        @ref="_richTextEditRef"
-                        ContentChanged="@OnContentChanged"
-                        Theme="RichTextEditTheme.Snow"
-                        PlaceHolder="@L["Form.DescriptionPlaceholder"]"
-                        SubmitOnEnter="false"
-                        ToolbarPosition="Placement.Top"
-                        >
-                        <Toolbar>
-                            <RichTextEditToolbarGroup >
-                                <RichTextEditToolbarButton Action="RichTextEditAction.Bold"/>
-                                <RichTextEditToolbarButton Action="RichTextEditAction.Italic"/>
-                                <RichTextEditToolbarSelect Action="RichTextEditAction.Size">
-                                    <RichTextEditToolbarSelectItem Value="small"/>
-                                    <RichTextEditToolbarSelectItem Selected="true"/>
-                                    <RichTextEditToolbarSelectItem Value="large"/>
-                                    <RichTextEditToolbarSelectItem Value="huge">Very Big</RichTextEditToolbarSelectItem>
-                                </RichTextEditToolbarSelect>
-                                <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="ordered"/>
-                                <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="bullet"/>
-                            </RichTextEditToolbarGroup>
-                            <!-- Custom toolbar content -->
-                            @* <RichTextEditToolbarGroup Float="Float.Right"> *@
-                            @* *@
-                            @*     <Button Clicked="@(o => { })"> *@
-                            @*         <Icon Name="IconName.Save"/> *@
-                            @*     </Button> *@
-                            @* </RichTextEditToolbarGroup> *@
-                        </Toolbar>
-                        <Editor>@(Model.Description ?? " ")</Editor>
-                    </RichTextEdit>
+                    <TextEdit @bind-Text="@Model.Title" KeyUp="KeyUp" MaxLength="80">
+                        <Feedback>
+                            <ValidationError/>
+                        </Feedback>
+                    </TextEdit>
                 </FieldBody>
             </Field>
-        </CardBody>
-    }
+        </Validation>
+
+        <Field>
+            <FieldLabel>@L["Form.ProductDescription"]</FieldLabel>
+            <FieldBody>
+                <RichTextEdit
+                    @ref="_richTextEditRef"
+                    ContentChanged="@OnContentChanged"
+                    Theme="RichTextEditTheme.Snow"
+                    PlaceHolder="@L["Form.DescriptionPlaceholder"]"
+                    SubmitOnEnter="false"
+                    ToolbarPosition="Placement.Top">
+                    <Toolbar>
+                        <RichTextEditToolbarGroup >
+                            <RichTextEditToolbarButton Action="RichTextEditAction.Bold"/>
+                            <RichTextEditToolbarButton Action="RichTextEditAction.Italic"/>
+                            <RichTextEditToolbarSelect Action="RichTextEditAction.Size">
+                                <RichTextEditToolbarSelectItem Value="small"/>
+                                <RichTextEditToolbarSelectItem Selected="true"/>
+                                <RichTextEditToolbarSelectItem Value="large"/>
+                                <RichTextEditToolbarSelectItem Value="huge">Very Big</RichTextEditToolbarSelectItem>
+                            </RichTextEditToolbarSelect>
+                            <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="ordered"/>
+                            <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="bullet"/>
+                        </RichTextEditToolbarGroup>
+                        <!-- Custom toolbar content -->
+                        @* <RichTextEditToolbarGroup Float="Float.Right"> *@
+                        @* *@
+                        @*     <Button Clicked="@(o => { })"> *@
+                        @*         <Icon Name="IconName.Save"/> *@
+                        @*     </Button> *@
+                        @* </RichTextEditToolbarGroup> *@
+                    </Toolbar>
+                    <Editor>
+
+                    </Editor>
+                </RichTextEdit>
+            </FieldBody>
+        </Field>
+    </CardBody>
 </Card>
 
 
