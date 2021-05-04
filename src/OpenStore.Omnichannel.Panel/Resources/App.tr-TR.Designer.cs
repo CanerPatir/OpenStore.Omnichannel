@@ -92,5 +92,11 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Warning.Forbidden", resourceCulture);
             }
         }
+        
+        internal static string Domain_ProductHandleAlreadyExists {
+            get {
+                return ResourceManager.GetString("Domain.ProductHandleAlreadyExists", resourceCulture);
+            }
+        }
     }
 }

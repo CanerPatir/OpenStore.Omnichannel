@@ -42,4 +42,7 @@
     <data name="Warning.Forbidden" xml:space="preserve">
         <value>Yetkisiz erişim</value>
     </data>
+    <data name="Domain.ProductHandleAlreadyExists" xml:space="preserve">
+        <value>Aynı 'Arama motoru URL'  başka bir ürün için mevcut. Bu değer bütün ürünler için benzersiz olmalıdır.</value>
+    </data>
 </root>

@@ -10,6 +10,7 @@ namespace OpenStore.Omnichannel
         public class Domain
         {
             public const string MultipleVariantProductMustHasOptions = nameof(Domain) + DiscriminatorChar + nameof(MultipleVariantProductMustHasOptions);
+            public const string ProductHandleAlreadyExists = nameof(Domain) + DiscriminatorChar + nameof(ProductHandleAlreadyExists);
         }
 
         public static class Application
