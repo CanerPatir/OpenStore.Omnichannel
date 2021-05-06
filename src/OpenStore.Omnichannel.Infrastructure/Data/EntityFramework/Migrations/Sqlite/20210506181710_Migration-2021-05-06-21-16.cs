@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
-    public partial class Migration202105040010 : Migration
+    public partial class Migration202105062116 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -520,7 +520,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     CompareAtPrice = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: true),
                     Cost = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: true),
                     CalculateTaxAdditionally = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     Sku = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     Barcode = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
                     TrackQuantity = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -577,6 +576,28 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Inventories",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    VariantId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    AvailableQuantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    ContinueSellingWhenOutOfStock = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Version = table.Column<long>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Inventories_Variant_VariantId",
+                        column: x => x.VariantId,
+                        principalTable: "Variant",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_BrandMedias_BrandId",
                 table: "BrandMedias",
@@ -596,6 +617,12 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                 name: "IX_CategoryProducts_ProductId",
                 table: "CategoryProducts",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventories_VariantId",
+                table: "Inventories",
+                column: "VariantId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
@@ -719,6 +746,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                 name: "DataProtectionKeys");
 
             migrationBuilder.DropTable(
+                name: "Inventories");
+
+            migrationBuilder.DropTable(
                 name: "OpenIddictScopes");
 
             migrationBuilder.DropTable(
@@ -749,10 +779,10 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                 name: "UserTokens");
 
             migrationBuilder.DropTable(
-                name: "Variant");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Variant");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");

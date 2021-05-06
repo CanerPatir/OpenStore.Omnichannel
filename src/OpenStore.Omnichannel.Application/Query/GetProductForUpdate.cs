@@ -29,6 +29,7 @@ namespace OpenStore.Omnichannel.Application.Query
             var product = await _repository.Query
                 .Include(x => x.Medias)
                 .Include(x => x.Variants)
+                .ThenInclude(v => v.Inventory)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 

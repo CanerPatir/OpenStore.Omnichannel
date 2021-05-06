@@ -28,7 +28,7 @@ namespace OpenStore.Omnichannel.Application.Command
         {
             if (await _repository.Query.AnyAsync(x => x.Handle == command.Model.Handle, cancellationToken))
             {
-                throw new DomainException(Msg.Domain.ProductHandleAlreadyExists);
+                throw new DomainException(Msg.Domain.Product.ProductHandleAlreadyExists);
             }
             
             var product = Product.Create(command, id => _productMediaRepository.Query.Single(x => x.Id == id));

@@ -1,5 +1,6 @@
 using System;
-using System.Collections.Generic;
+using OpenStore.Domain;
+using OpenStore.Omnichannel.Domain.InventoryContext;
 
 // ReSharper disable ReturnTypeCanBeEnumerable.Global
 // ReSharper disable MemberCanBeProtected.Global
@@ -13,12 +14,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public class Variant : AuditableEntity
     {
         public Guid ProductId { get; protected set; }
-        
+
         // option
         public string Option1 { get; protected set; }
         public string Option2 { get; protected set; }
         public string Option3 { get; protected set; }
-        
+
         // Pricing
         public decimal Price { get; protected set; } = 0;
         public decimal? CompareAtPrice { get; protected set; }
@@ -26,18 +27,20 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public bool CalculateTaxAdditionally { get; set; }
 
         // Inventory
-        public int Quantity { get; protected set; }
+
         public string Sku { get; protected set; }
         public string Barcode { get; protected set; }
         public bool TrackQuantity { get; protected set; }
         public bool ContinueSellingWhenOutOfStock { get; protected set; }
 
+        public virtual Inventory Inventory { get; protected set; }
+
         protected Variant()
         {
-            
         }
-        public Variant(Guid productId, 
-            string option1, string option2, string option3, 
+
+        internal Variant(Guid productId,
+            string option1, string option2, string option3,
             decimal price, decimal? compareAtPrice, decimal? cost, bool calculateTaxAdditionally,
             int quantity, string sku, string barcode, bool trackQuantity, bool continueSellingWhenOutOfStock)
         {
@@ -46,18 +49,29 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             Option1 = option1;
             Option2 = option2;
             Option3 = option3;
-            
+
             Price = price;
             CompareAtPrice = compareAtPrice;
             Cost = cost;
             CalculateTaxAdditionally = calculateTaxAdditionally;
-            
-            Quantity = quantity;
+
             Sku = sku;
             Barcode = barcode;
             TrackQuantity = trackQuantity;
-            ContinueSellingWhenOutOfStock = continueSellingWhenOutOfStock;
+            if (TrackQuantity)
+            {
+                Inventory = Inventory.Create(Id, quantity, continueSellingWhenOutOfStock);
+            }
         }
-        
+
+        public void UpdateQuantity(int quantity)
+        {
+            if (!TrackQuantity)
+            {
+                throw new DomainException(Msg.Domain.Product.VariantStockIsNotTracking);
+            }
+
+            Inventory.Change(quantity);
+        }
     }
 }

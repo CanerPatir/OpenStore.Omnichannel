@@ -16,7 +16,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             {
                 if (model.Options is null || !model.Options.Any())
                 {
-                    throw new DomainException(Msg.Domain.MultipleVariantProductMustHasOptions);
+                    throw new DomainException(Msg.Domain.Product.MultipleVariantProductMustHasOptions);
                 }
 
                 productOptions = model.Options.Select(x => new ProductOption(x.Name, x.Values)).ToHashSet();
@@ -86,6 +86,25 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             _medias.Add(productMedia);
 
             ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));
+            ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));
+        }
+
+        public void UpdateQuantity(UpdateProductVariantQuantity command)
+        {
+            var (variantId, quantity) = command;
+            if (quantity < 0)
+            {
+                throw new DomainException(Msg.Domain.Product.QuantityShouldBeGreaterOrEqualThenZero);
+            }
+            var variant = _variants.SingleOrDefault(x => x.Id == variantId);
+            if (variant is null)
+            {
+                throw new DomainException(Msg.Domain.Product.VariantNotFound);
+            }
+
+            variant.UpdateQuantity(quantity);
+            
+            ApplyChange(new ProductVariantQuantityUpdated(Id, variantId, quantity));
         }
     }
 }

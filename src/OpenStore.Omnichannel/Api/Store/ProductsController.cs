@@ -2,11 +2,13 @@ using System;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OpenStore.Application;
 using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Application.Query;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.ReadModel;
 
 namespace OpenStore.Omnichannel.Api.Store
 {
@@ -26,5 +28,9 @@ namespace OpenStore.Omnichannel.Api.Store
         
         [HttpGet("{id:guid}")]
         public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdate(id), CancellationToken);
+        
+        [HttpGet("all")]
+        public Task<PagedList<ProductListItemReadModel>> AllProducts([FromQuery] int? pageNumber, [FromQuery] int? pageSize) 
+            => _mediator.Send(new GetAllProducts(pageNumber, pageSize), CancellationToken);
     }
 }

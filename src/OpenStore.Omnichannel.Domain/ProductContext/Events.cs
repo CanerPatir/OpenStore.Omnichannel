@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using OpenStore.Domain;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Domain.ProductContext
 {
-    public abstract record DomainEventBase(Guid EntityId) : DomainEvent(EntityId.ToString());
-
     public record ProductMediaCreated(
         Guid ProductMediaId,
         string Host,
@@ -47,4 +44,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record VariantAddedToProduct(Guid ProductId, VariantDto Variant) : DomainEventBase(ProductId);
     
     public record MediaAssignedToProduct(Guid ProductId, ProductMediaDto ProductMedia) : DomainEventBase(ProductId);
+    
+    public record ProductVariantQuantityUpdated(Guid ProductId, Guid VariantId, int Quantity) : DomainEventBase(ProductId);
 }

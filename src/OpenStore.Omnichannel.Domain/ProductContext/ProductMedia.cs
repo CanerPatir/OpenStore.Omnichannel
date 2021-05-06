@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 // ReSharper disable CollectionNeverUpdated.Local
 
@@ -12,6 +13,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public Guid? ProductId { get; set; }
 
         public IReadOnlyCollection<Guid> VariantIds => _variantIds;
+
+        [NotMapped] public string Url => $"{Host?.TrimEnd('/')}/{Path}";
 
         protected ProductMedia()
         {

@@ -10,4 +10,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record CreateProduct(ProductDto Model) : IRequest<Guid>;
 
+    public record UpdateProductVariantQuantity(Guid VariantId, int Quantity);
+
 }

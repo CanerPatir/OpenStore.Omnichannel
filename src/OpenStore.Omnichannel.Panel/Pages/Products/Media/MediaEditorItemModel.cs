@@ -1,6 +1,6 @@
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
-namespace OpenStore.Omnichannel.Panel.Pages.Products
+namespace OpenStore.Omnichannel.Panel.Pages.Products.Media
 {
     public class MediaEditorItemModel
     {

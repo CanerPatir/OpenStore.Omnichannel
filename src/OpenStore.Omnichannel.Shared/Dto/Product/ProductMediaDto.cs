@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
@@ -16,5 +17,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public long? Size { get; set; }
 
         public IEnumerable<Guid> VariantIds { get; set; } = new List<Guid>();
+        
+        [NotMapped] public string Url => $"{Host?.TrimEnd('/')}/{Path}";
     }
 }

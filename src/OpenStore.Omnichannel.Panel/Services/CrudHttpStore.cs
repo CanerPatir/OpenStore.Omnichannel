@@ -22,7 +22,7 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public virtual async Task<IEnumerable<TDto>> GetAll(CancellationToken cancellationToken = default)
         {
-            var pagedList = await HttpClient.GetPage<TDto>(GetPath(string.Empty), 1, 1_000_000, cancellationToken);
+            var pagedList = await HttpClient.GetPage<TDto>(GetPath(string.Empty), 1, 1_000_000);
             return pagedList.Items;
         }
 

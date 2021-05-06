@@ -41,8 +41,8 @@
                     </Row>
                     <Row>
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                            <ProductContentEditor Model="@_product" ModelChanged="@(_ => StateHasChanged())"/>
-                            <MediaEditor Model="@_product"/>
+                            <ProductContentEditor @ref="_contentEditor" Model="@_product" ModelChanged="@(_ => StateHasChanged())"/>
+                            <MediaEditor Model="@_product" />
 
                             @if (_product.HasMultipleVariants)
                             {
@@ -112,6 +112,7 @@
 
     private ProductDto _product;
     private Validations _validations;
+    private ProductContentEditor _contentEditor;
 
     protected override async Task OnInitializedAsync()
     {
@@ -129,6 +130,8 @@
         try
         {
             _saving = true;
+            _product.Description = await _contentEditor.GetDescriptionHtml();
+
         }
         finally
         {

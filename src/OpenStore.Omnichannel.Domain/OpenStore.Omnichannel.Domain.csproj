@@ -15,7 +15,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="InventoryContext" />
       <Folder Include="OrderContext" />
     </ItemGroup>
 

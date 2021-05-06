@@ -9,8 +9,8 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20210503211025_Migration-2021-05-04-00-10")]
-    partial class Migration202105040010
+    [Migration("20210506181710_Migration-2021-05-06-21-16")]
+    partial class Migration202105062116
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -562,6 +562,36 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.InventoryContext.Inventory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AvailableQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("ContinueSellingWhenOutOfStock")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("VariantId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VariantId")
+                        .IsUnique();
+
+                    b.ToTable("Inventories");
+                });
+
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.LookupContext.Brand", b =>
                 {
                     b.Property<Guid>("Id")
@@ -953,9 +983,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Sku")
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
@@ -1078,6 +1105,15 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Navigation("Authorization");
                 });
 
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.InventoryContext.Inventory", b =>
+                {
+                    b.HasOne("OpenStore.Omnichannel.Domain.ProductContext.Variant", "Variant")
+                        .WithOne("Inventory")
+                        .HasForeignKey("OpenStore.Omnichannel.Domain.InventoryContext.Inventory", "VariantId");
+
+                    b.Navigation("Variant");
+                });
+
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.LookupContext.BrandMedia", b =>
                 {
                     b.HasOne("OpenStore.Omnichannel.Domain.LookupContext.Brand", "Brand")
@@ -1182,6 +1218,11 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Navigation("Medias");
 
                     b.Navigation("Variants");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.ProductContext.Variant", b =>
+                {
+                    b.Navigation("Inventory");
                 });
 #pragma warning restore 612, 618
         }

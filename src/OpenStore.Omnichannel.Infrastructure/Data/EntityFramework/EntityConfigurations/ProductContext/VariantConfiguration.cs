@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Infrastructure.Data.EntityFramework.EntityConfiguration;
+using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ProductContext
@@ -20,6 +21,10 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
             
             builder.Property(x => x.Barcode).HasMaxLength(StringLengthConstants.DefaultStringLength);
             builder.Property(x => x.Sku).HasMaxLength(StringLengthConstants.DefaultStringLength);
+
+            builder.HasOne<Inventory>(x => x.Inventory)
+                .WithOne(x => x.Variant)
+                .IsRequired(false);
         }
     }
 }

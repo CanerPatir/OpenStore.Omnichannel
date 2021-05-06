@@ -7,6 +7,7 @@ using OpenStore.Infrastructure.Data;
 using OpenStore.Infrastructure.Data.EntityFramework;
 using OpenStore.Omnichannel.Domain.ChannelContext;
 using OpenStore.Omnichannel.Domain.IdentityContext;
+using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Domain.LookupContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
@@ -25,6 +26,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
         // Product context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductMedia> ProductMedias { get; set; }
+        
+        // Inventory context
+        public DbSet<Inventory> Inventories { get; set; }
 
         // Channel context
         public DbSet<SaleChannel> SaleChannel { get; set; }

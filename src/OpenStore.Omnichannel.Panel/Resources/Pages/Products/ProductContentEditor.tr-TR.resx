@@ -22,7 +22,7 @@
         <value>Ürün açıklamasını buraya giriniz...</value>
     </data>
     <data name="Form.ProductTitle" xml:space="preserve">
-        <value>Ürün Başlığı</value>
+        <value>Ürün Başlığı*</value>
     </data>
     <data name="Form.ProductDescription" xml:space="preserve">
         <value>Ürün Açıklaması</value>

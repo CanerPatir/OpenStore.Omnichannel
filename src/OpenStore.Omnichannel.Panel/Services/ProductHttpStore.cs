@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.ReadModel;
 
 namespace OpenStore.Omnichannel.Panel.Services
 {
@@ -21,5 +22,7 @@ namespace OpenStore.Omnichannel.Panel.Services
         }
 
         public async Task<ProductDto> Get(Guid id) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{id}");
+
+        public Task<PagedListDto<ProductListItemReadModel>> GetAll(int pageNumber, int pageSize) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/all", pageNumber, pageSize);
     }
 }

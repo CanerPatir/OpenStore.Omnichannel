@@ -7,10 +7,22 @@ namespace OpenStore.Omnichannel
         private const string DiscriminatorChar = ".";
         public const string OpenStoreGenericError = "OpenStore.GenericError";
 
-        public class Domain
+        public static class Domain
         {
-            public const string MultipleVariantProductMustHasOptions = nameof(Domain) + DiscriminatorChar + nameof(MultipleVariantProductMustHasOptions);
-            public const string ProductHandleAlreadyExists = nameof(Domain) + DiscriminatorChar + nameof(ProductHandleAlreadyExists);
+            public static class Product
+            {
+                public const string MultipleVariantProductMustHasOptions = nameof(Domain) + DiscriminatorChar + nameof(MultipleVariantProductMustHasOptions);
+                public const string ProductHandleAlreadyExists = nameof(Domain) + DiscriminatorChar + nameof(ProductHandleAlreadyExists);
+                public const string VariantNotFound = nameof(Domain) + DiscriminatorChar + nameof(VariantNotFound);
+                public const string VariantStockIsNotTracking = nameof(Domain) + DiscriminatorChar + nameof(VariantStockIsNotTracking);
+                public const string QuantityShouldBeGreaterOrEqualThenZero = nameof(Domain) + DiscriminatorChar + nameof(QuantityShouldBeGreaterOrEqualThenZero);
+            }
+
+            public static class Inventory
+            {
+                public const string QuantityShouldBeGreaterOrEqualThenZero = nameof(Domain) + DiscriminatorChar + nameof(QuantityShouldBeGreaterOrEqualThenZero);
+                public const string OutOfStock = nameof(Domain) + DiscriminatorChar + nameof(OutOfStock);
+            }
         }
 
         public static class Application

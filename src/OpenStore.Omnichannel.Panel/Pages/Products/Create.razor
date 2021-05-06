@@ -43,7 +43,7 @@
                 </Row>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                        <ProductContentEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
+                        <ProductContentEditor @ref="_contentEditor" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
                         <MediaEditor Model="@_product"/>
                         <CreateVariantsEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
                         @if (!_product.HasMultipleVariants)
@@ -87,6 +87,7 @@
 @code {
     private readonly ProductDto _product = new();
     private Validations _validations;
+    private ProductContentEditor _contentEditor;
 
     private bool _saving;
     private bool _formHasErrors;
@@ -102,6 +103,7 @@
         try
         {
             _saving = true;
+            _product.Description = await _contentEditor.GetDescriptionHtml();
             var productId = await ApiClient.Product.CreateProduct(_product);
             ShowSuccess(L["Success.ProductCreated"]);
             Navigation.NavigateTo($"products/{productId}");
