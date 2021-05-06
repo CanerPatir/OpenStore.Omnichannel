@@ -27,4 +27,49 @@
     <data name="AddProduct" xml:space="preserve">
         <value>Ürün Ekle</value>
     </data>
+    <data name="ProductList.InventoryColumn" xml:space="preserve">
+        <value>{1} varyantta {0} adet </value>
+    </data>
+    <data name="ProductList.InventoryNotTracking" xml:space="preserve">
+        <value>Stok yönetimi yapılmıyor</value>
+    </data>
+    <data name="ProductList.PhysicalProduct" xml:space="preserve">
+        <value>Fiziksel Ürün</value>
+    </data>
+    <data name="ProductList.NonPhysicalProduct" xml:space="preserve">
+        <value>Dijital Ürün</value>
+    </data>
+    <data name="ColumnHeader.Title" xml:space="preserve">
+        <value>Ürün</value>
+    </data>
+    <data name="ColumnHeader.Inventory" xml:space="preserve">
+        <value>Stok</value>
+    </data>
+    <data name="ColumnHeader.Category" xml:space="preserve">
+        <value>Kategori</value>
+    </data>
+    <data name="ColumnHeader.Type" xml:space="preserve">
+        <value>Ürün Tipi</value>
+    </data>
+    <data name="ColumnHeader.Status" xml:space="preserve">
+        <value>Durum</value>
+    </data>
+    <data name="ProductListItem.Active" xml:space="preserve">
+        <value>Aktif</value>
+    </data>
+    <data name="ProductListItem.Draft" xml:space="preserve">
+        <value>Taslak</value>
+    </data>
+    <data name="ProductListTab.All" xml:space="preserve">
+        <value>Hepsi</value>
+    </data> 
+    <data name="ProductListTab.Active" xml:space="preserve">
+        <value>Aktif</value>
+    </data>  
+    <data name="ProductListTab.Draft" xml:space="preserve">
+        <value>Taslak</value>
+    </data>
+    <data name="ProductListTab.Deleted" xml:space="preserve">
+        <value>Arşivlenmiş</value>
+    </data>
 </root>

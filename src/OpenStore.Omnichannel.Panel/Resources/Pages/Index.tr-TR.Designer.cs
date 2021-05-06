@@ -44,11 +44,5 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages {
                 resourceCulture = value;
             }
         }
-        
-        internal static string TestKey {
-            get {
-                return ResourceManager.GetString("TestKey", resourceCulture);
-            }
-        }
     }
 }

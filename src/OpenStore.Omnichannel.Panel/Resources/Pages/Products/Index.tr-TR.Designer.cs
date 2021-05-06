@@ -62,5 +62,95 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("AddProduct", resourceCulture);
             }
         }
+        
+        internal static string ProductList_InventoryColumn {
+            get {
+                return ResourceManager.GetString("ProductList.InventoryColumn", resourceCulture);
+            }
+        }
+        
+        internal static string ProductList_InventoryNotTracking {
+            get {
+                return ResourceManager.GetString("ProductList.InventoryNotTracking", resourceCulture);
+            }
+        }
+        
+        internal static string ProductList_PhysicalProduct {
+            get {
+                return ResourceManager.GetString("ProductList.PhysicalProduct", resourceCulture);
+            }
+        }
+        
+        internal static string ProductList_NonPhysicalProduct {
+            get {
+                return ResourceManager.GetString("ProductList.NonPhysicalProduct", resourceCulture);
+            }
+        }
+        
+        internal static string ColumnHeader_Title {
+            get {
+                return ResourceManager.GetString("ColumnHeader.Title", resourceCulture);
+            }
+        }
+        
+        internal static string ColumnHeader_Inventory {
+            get {
+                return ResourceManager.GetString("ColumnHeader.Inventory", resourceCulture);
+            }
+        }
+        
+        internal static string ColumnHeader_Category {
+            get {
+                return ResourceManager.GetString("ColumnHeader.Category", resourceCulture);
+            }
+        }
+        
+        internal static string ColumnHeader_Type {
+            get {
+                return ResourceManager.GetString("ColumnHeader.Type", resourceCulture);
+            }
+        }
+        
+        internal static string ColumnHeader_Status {
+            get {
+                return ResourceManager.GetString("ColumnHeader.Status", resourceCulture);
+            }
+        }
+        
+        internal static string ProductListItem_Active {
+            get {
+                return ResourceManager.GetString("ProductListItem.Active", resourceCulture);
+            }
+        }
+        
+        internal static string ProductListItem_Draft {
+            get {
+                return ResourceManager.GetString("ProductListItem.Draft", resourceCulture);
+            }
+        }
+        
+        internal static string ProductListTab_All {
+            get {
+                return ResourceManager.GetString("ProductListTab.All", resourceCulture);
+            }
+        }
+        
+        internal static string ProductListTab_Active {
+            get {
+                return ResourceManager.GetString("ProductListTab.Active", resourceCulture);
+            }
+        }
+        
+        internal static string ProductListTab_Draft {
+            get {
+                return ResourceManager.GetString("ProductListTab.Draft", resourceCulture);
+            }
+        }
+        
+        internal static string ProductListTab_Deleted {
+            get {
+                return ResourceManager.GetString("ProductListTab.Deleted", resourceCulture);
+            }
+        }
     }
 }

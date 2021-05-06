@@ -34,16 +34,16 @@
 <div class="card">
     <ul class="nav nav-tabs nav-tabs-v2 px-4">
         <li class="nav-item me-3">
-            <a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">All</a>
+            <a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">@L["ProductListTab.All"]</a>
         </li>
         <li class="nav-item me-3">
-            <a href="#publishedTab" class="nav-link px-2" data-bs-toggle="tab">Published</a>
+            <a href="#activeTab" class="nav-link px-2" data-bs-toggle="tab">@L["ProductListTab.Active"]</a>
         </li>
         <li class="nav-item me-3">
-            <a href="#expiredTab" class="nav-link px-2" data-bs-toggle="tab">Expired</a>
+            <a href="#draftTab" class="nav-link px-2" data-bs-toggle="tab">@L["ProductListTab.Draft"]</a>
         </li>
         <li class="nav-item me-3">
-            <a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Deleted</a>
+            <a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">@L["ProductListTab.Deleted"]</a>
         </li>
     </ul>
     <div class="tab-content p-4">
@@ -79,10 +79,11 @@
                         <thead>
                         <tr>
                             <th class="pt-0 pb-2"></th>
-                            <th class="pt-0 pb-2">Product</th>
-                            <th class="pt-0 pb-2">Inventory</th>
-                            <th class="pt-0 pb-2">Type</th>
-                            <th class="pt-0 pb-2">Vendor</th>
+                            <th class="pt-0 pb-2">@L["ColumnHeader.Title"]</th>
+                            <th class="pt-0 pb-2">@L["ColumnHeader.Status"]</th>
+                            <th class="pt-0 pb-2">@L["ColumnHeader.Inventory"]</th>
+                            <th class="pt-0 pb-2">@L["ColumnHeader.Category"]</th>
+                            <th class="pt-0 pb-2">@L["ColumnHeader.Type"]</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -112,13 +113,28 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">83 in stock for 3 variants</td>
-                                <td class="align-middle">Cotton</td>
-                                <td class="align-middle">Force Majeure</td>
+                                <td class="align-middle">@(item.Status == ProductStatus.Active ? L["ProductListItem.Active"]: L["ProductListItem.Draft"])</td>
+                                <td class="align-middle">
+                                    @if (item.AvailableQuantity == null)
+                                    {
+                                        @L["ProductList.InventoryNotTracking"]
+                                    }
+                                    else
+                                    {
+                                        if (item.HasMultipleVariants)
+                                        {
+                                            @L["ProductList.InventoryColumn", item.AvailableQuantity.Value, item.VariantCount]
+                                        }
+                                        else
+                                        {
+                                            @item.AvailableQuantity
+                                        }
+                                    }
+                                </td>
+                                <td class="align-middle">@*todo: category*@</td>
+                                <td class="align-middle">@(item.IsPhysicalProduct ? L["ProductList.PhysicalProduct"] : L["ProductList.NonPhysicalProduct"])</td>
                             </tr>
                         }
-
-
                         </tbody>
                     </table>
                 </div>
@@ -162,11 +178,12 @@
 
 
 @code {
+        private const int PageSiz = 50;
     private PagedListDto<ProductListItemReadModel> _products;
 
     protected override async Task OnInitializedAsync()
     {
-        _products = await ApiClient.Product.GetAll(1, 10);
+        _products = await ApiClient.Product.GetAll(1, PageSiz);
     }
 
 }
