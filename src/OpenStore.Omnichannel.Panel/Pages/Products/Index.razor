@@ -74,6 +74,30 @@
             }
             else
             {
+                <OsDataGrid TItem="ProductListItemReadModel" FetchData="FetchData">
+                    <OsDataGridColumn CustomTitle="" TItem="ProductListItemReadModel" IsSortable="true" IsFilterable="true">
+                        <RowTemplate Context="item">
+                            <div class="d-flex align-items-center">
+                                <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                    @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
+                                    {
+                                        <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
+                                    }
+                                    else
+                                    {
+                                        <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
+                                    }
+                                </div>
+                                <div class="ms-3">
+                                    <a href="@($"products/{item.Id}")">@item.Title</a>
+                                </div>
+                            </div>
+
+                        </RowTemplate>
+                    </OsDataGridColumn>
+                </OsDataGrid>
+
+
                 <div class="table-responsive">
                     <table class="table table-hover text-nowrap">
                         <thead>
@@ -113,7 +137,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle">@(item.Status == ProductStatus.Active ? L["ProductListItem.Active"]: L["ProductListItem.Draft"])</td>
+                                <td class="align-middle">@(item.Status == ProductStatus.Active ? L["ProductListItem.Active"] : L["ProductListItem.Draft"])</td>
                                 <td class="align-middle">
                                     @if (item.AvailableQuantity == null)
                                     {
@@ -154,6 +178,12 @@
     protected override async Task OnInitializedAsync()
     {
         _products = await ApiClient.Product.GetAll(1, PageSiz);
+    }
+
+    private async Task<PagedListDto<ProductListItemReadModel>> FetchData(GridRequestArgs arg)
+    {
+        var a = await ApiClient.Product.GetAll(1, PageSiz);
+        return a;
     }
 
 }

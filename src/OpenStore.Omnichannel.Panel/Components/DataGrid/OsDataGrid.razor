@@ -1,0 +1,279 @@
+@using System.Linq;
+
+@typeparam TItem
+
+<CascadingValue Value="this" IsFixed="true">
+    @if (Columns.Any(x => x.IsFilterable) && IsClientSide)
+    {
+        <div class="card-header">
+            <div class="search-form">
+                <input type="text"
+                       class="form-control search"
+                       placeholder="Ara ..." @onchange="@(OnFilterChanged)">
+                <button class="btn"
+                        type="button">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
+        </div>
+    }
+    <div class="@ContainerCssClass">
+        <table id="@Id" class="@CssClass" @attributes="TableAttributes">
+            <thead>
+            <tr>
+                @foreach (var column in Columns)
+                {
+                    <th class="@column.HeaderCssClass" id="@column.Guid.ToString();">
+
+                        @if (column.HeaderTemplate != null)
+                        {
+                            <span style="cursor: pointer" @onclick="(args) => OnColumnHeaderClickedEvent(args, column)">@column.HeaderTemplate(column.CustomTitle ?? column.GetColumnVisualPropertyName())</span>
+                        }
+                        else if (column.CustomTitle != null)
+                        {
+                            <span style="cursor: pointer" @onclick="(args) => OnColumnHeaderClickedEvent(args, column)">@column.CustomTitle</span>
+                        }
+                        else
+                        {
+                            <span style="cursor: pointer" @onclick="(args) => OnColumnHeaderClickedEvent(args, column)">@column.GetColumnVisualPropertyName()</span>
+                        }
+
+                        <i class="@GetColumnAscDesc(column)"></i>
+                    </th>
+                }
+            </tr>
+            </thead>
+            <tbody class="list">
+
+            @foreach (var item in PagedItems)
+            {
+                <tr id="@item.GetHashCode()" @onclick="(args) => OnRowClickedEvent(args, item)" @attributes="RowAttributes">
+                    @foreach (var column in Columns)
+                    {
+                        if (column.RowTemplate != null)
+                        {
+                            <td class="@column.RowCssClass">@column.RowTemplate(item)</td>
+                        }
+                        else if (column.ChildContent != null)
+                        {
+                            <td class="@column.RowCssClass">@column.ChildContent</td>
+                        }
+                        else if (column.Property != null)
+                        {
+                            var expression = column.Property.Compile();
+                            var result = expression.DynamicInvoke(item);
+                            <td class="@column.RowCssClass">@result</td>
+                        }
+                        else
+                        {
+                            <td class="@column.RowCssClass"></td>
+                        }
+                    }
+                </tr>
+            }
+
+            </tbody>
+        </table>
+
+        @if (IsLoading)
+        {
+            <OsSpinner/>
+        }
+        else if (!PagedItems.Any())
+        {
+            if (IfEmpty == null)
+            {
+                <div class="text-center text-muted p-3">@EmptyGridText</div>
+            }
+            else
+            {
+                @IfEmpty
+            }
+        }
+
+    </div>
+
+    @if (PageCount > 1)
+    {
+        <OsPager CurrentPage="PageNr" CurrentPageChanged="OnPageChanged" PageCount="PageCount"/>
+    }
+
+    @ChildContent
+
+</CascadingValue>
+
+@code{
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Id { get; set; } = "";
+
+    [Parameter]
+    public Dictionary<string, object> TableAttributes { get; set; }
+
+    [Parameter]
+    public Dictionary<string, object> RowAttributes { get; set; }
+
+    [Parameter]
+    public bool IsLoading { get; set; }
+
+    [Parameter]
+    public string ContainerCssClass { get; set; } = "table-responsive";
+
+    [Parameter]
+    public string CssClass { get; set; } = "table table-hover text-nowrap";
+
+    [Parameter]
+    public string EmptyGridText { get; set; } = "Listelenecek kayıt bulunamadı";
+
+    [Parameter]
+    public EventCallback<TItem> RowClickedEvent { get; set; }
+
+    [Parameter]
+    public RenderFragment IfEmpty { get; set; }
+
+    [Parameter]
+    public TItem SelectedItem { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem> SelectedItemChanged { get; set; }
+
+    [Parameter]
+    public Func<GridRequestArgs, Task<PagedListDto<TItem>>> FetchData { get; set; }
+
+    [Parameter]
+    public int PageNr { get; set; } = 1;
+
+    [Parameter]
+    public int PageSize { get; set; } = 20;
+
+    [Parameter]
+    public IEnumerable<TItem> Items { get; set; }
+
+    private bool IsServerSide => FetchData != null;
+    private bool IsClientSide => !IsServerSide;
+
+    private string FilterTerm { get; set; }
+    private OsDataGridColumn<TItem> SortColumn { get; set; }
+    private GridSortDirection SortDirection { get; set; } = GridSortDirection.Ascending;
+    private IList<OsDataGridColumn<TItem>> Columns { get; set; } = new List<OsDataGridColumn<TItem>>();
+    private IEnumerable<TItem> PagedItems { get; set; } = new List<TItem>();
+    private int PageCount { get; set; }
+
+    public void AddColumn(OsDataGridColumn<TItem> column)
+    {
+        Columns.Add(column);
+        StateHasChanged();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await Reload();
+    }
+
+    private async Task OnRowClickedEvent(MouseEventArgs args, TItem item)
+    {
+        SelectedItem = item;
+        await RowClickedEvent.InvokeAsync(item);
+        await SelectedItemChanged.InvokeAsync(item);
+    }
+
+    private async Task OnColumnHeaderClickedEvent(MouseEventArgs clickEvent, OsDataGridColumn<TItem> column)
+    {
+        if (!column.IsSortable)
+            return;
+
+        if (column.Guid == SortColumn?.Guid)
+        {
+            SortDirection = SortDirection == GridSortDirection.Ascending ? GridSortDirection.Descending : GridSortDirection.Ascending;
+        }
+        else
+        {
+            SortColumn = column;
+        }
+
+        await Reload();
+    }
+
+    private async Task OnFilterChanged(ChangeEventArgs args)
+    {
+        FilterTerm = args.Value.ToString();
+        PageNr = 1;
+        await Reload();
+    }
+
+    private async Task OnPageChanged(int pageNr)
+    {
+        PageNr = pageNr;
+        await Reload();
+    }
+
+    private bool fetchedBefore = false;
+
+    public async Task Reload()
+    {
+        if (IsServerSide)
+        {
+            IsLoading = !fetchedBefore;
+            try
+            {
+                var pageMetadata = new GridRequestArgs(PageNr, PageSize, SortColumn?.GetColumnPropertyName(), null, FilterTerm, SortDirection);
+                var pagedResult = await FetchData(pageMetadata);
+
+                PageCount = pagedResult.PageMeta.TotalPages;
+                PageNr = pagedResult.PageMeta.CurrentPage;
+                PagedItems = Items = pagedResult.Items;
+
+                fetchedBefore = true;
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+        else
+        {
+            if (Items != null)
+            {
+                var query = Items.AsQueryable();
+
+                if (SortColumn != null)
+                {
+                    query = SortDirection == GridSortDirection.Ascending ?
+                        query.OrderBy(SortColumn.Property) :
+                        query.OrderByDescending(SortColumn.Property);
+                }
+
+                if (!string.IsNullOrWhiteSpace(FilterTerm))
+                {
+                    query = query.Search(
+                        Columns
+                            .Where(c => c.IsFilterable)
+                            .Select(x => x.Property),
+                        FilterTerm);
+                }
+
+                PageCount = (int) Math.Ceiling(query.ToList().Count / (double) PageSize);
+
+                PagedItems = query
+                    .Skip((PageNr - 1) * PageSize)
+                    .Take(PageSize)
+                    .ToList();
+            }
+        }
+    }
+
+    private object GetColumnAscDesc(OsDataGridColumn<TItem> column)
+    {
+        if (!column.IsSortable) return "";
+
+        if (SortColumn != null && column.Guid == SortColumn?.Guid)
+        {
+            return SortDirection == GridSortDirection.Descending ? "fas fa-sort-down" : "fas fa-sort-up";
+        }
+        return "fas fa-sort";
+    }
+
+}

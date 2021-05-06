@@ -1,0 +1,65 @@
+@using System.Linq.Expressions
+
+@typeparam TItem
+
+@code {
+
+    [CascadingParameter]
+    private OsDataGrid<TItem> DataTable { get; set; }
+
+    [Parameter]
+    public string HeaderCssClass { get; set; } = "pt-0 pb-2";
+    
+    [Parameter]
+    public string RowCssClass { get; set; } = "align-middle";
+
+    [Parameter]
+    public bool IsSortable { get; set; } = false;
+
+    [Parameter]
+    public bool IsFilterable { get; set; } = false;
+
+    [Parameter]
+    public string CustomTitle { get; set; }
+
+    [Parameter]
+    public Expression<Func<TItem, object>> Property { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment<string> HeaderTemplate { get; set; }
+
+    [Parameter]
+    public RenderFragment<TItem> RowTemplate { get; set; }
+  
+
+    public Guid Guid { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (DataTable == null) throw new ArgumentNullException($"A 'DataGridColumn' must be a child of a 'DataGrid' component");
+
+        Guid = Guid.NewGuid();
+        DataTable.AddColumn(this);
+    }
+
+    public string GetColumnPropertyName() => Property != null ? GridUtils.GetPropertyName(Property) : "";
+
+    public string GetColumnVisualPropertyName()
+    {
+    //Don't return custom title anymore, since it causes issues with trying to sort or filter
+        if (Property != null)
+        {
+            var propertyName = GridUtils.GetPropertyName(Property);
+
+            var parts = propertyName.Split('.');
+            if (parts.Length > 0)
+                return parts.Last();
+        }
+
+        return "";
+    }
+
+}
