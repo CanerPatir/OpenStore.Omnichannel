@@ -1,0 +1,109 @@
+<div class="d-md-flex align-items-center">
+    <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
+        Showing 1 to 10 of 57 entries
+    </div>
+    @if (PageCount > 0)
+    {
+        <ul class="pagination mb-0 justify-content-center">
+            <li class="page-item @GetPrevClass()">
+                <button id="pagerLinkPrev" class="page-link" @onclick="@Prev">
+                    <Icon Name="IconName.ChevronLeft"></Icon>
+                </button>
+            </li>
+            @if (PageCount < 11)
+            {
+                for (var i = 0; i < PageCount; i++)
+                {
+                    var pageNr = i + 1;
+                    <li class="page-item @(pageNr == CurrentPage ? "active" : "")">
+                        <button id="pagerLink_@(i)" class="page-link" @onclick="@(args => OnCurrentPageChanged(pageNr))">
+                            @pageNr
+                        </button>
+                    </li>
+                }
+            }
+            else
+            {
+                var firstSeqFirstIndex = Math.Max(CurrentPage - 4, 0);
+                var firstSeqLastIndex = Math.Min(firstSeqFirstIndex + 4, PageCount - 1);
+
+                var secondSeqFirstIndex = PageCount - 2;
+                var secondSeqSecondIndex = PageCount - 1;
+
+                for (var i = firstSeqFirstIndex; i < firstSeqLastIndex; i++)
+                {
+                    var pageNr = i + 1;
+                    if (i != secondSeqFirstIndex && i != secondSeqSecondIndex)
+                    {
+                        <li class="page-item @(pageNr == CurrentPage ? "active" : "")">
+                            <button id="pagerLink_@(i)" class="page-link" @onclick="@(args => OnCurrentPageChanged(pageNr))">@pageNr</button>
+                        </li>
+                    }
+                }
+
+                <li class="page-item">
+                    <button id="pagerLink_middle" class="page-link" @onclick="@(args => OnCurrentPageChanged(firstSeqLastIndex + 4))">...</button>
+                </li>
+
+
+                <li class="page-item @(secondSeqFirstIndex + 1 == CurrentPage ? "active" : "")">
+                    <button id="pagerLink_@(secondSeqFirstIndex)" class="page-link" @onclick="@(args => OnCurrentPageChanged(secondSeqFirstIndex + 1))">@(secondSeqFirstIndex + 1)</button>
+                </li>
+
+                <li class="page-item @(secondSeqSecondIndex + 1 == CurrentPage ? "active" : "")">
+                    <button id="pagerLink_@(secondSeqSecondIndex)" class="page-link" @onclick="@(args => OnCurrentPageChanged(secondSeqSecondIndex + 1))">@(secondSeqSecondIndex + 1)</button>
+                </li>
+            }
+
+            <li class="page-item @GetNextClass()">
+                <button id="pagerLinkNext" class="page-link" @onclick="@Next">
+                    <Icon Name="IconName.ChevronRight"></Icon>
+                </button>
+            </li>
+        </ul>
+    }
+</div>
+
+
+@code{
+
+    [Parameter]
+    public int CurrentPage { get; set; } = 1;
+
+    [Parameter]
+    public EventCallback<int> CurrentPageChanged { get; set; }
+
+    [Parameter]
+    public int PageCount { get; set; }
+
+
+    private async Task OnCurrentPageChanged(int currentPage)
+    {
+        if (currentPage < PageCount + 1)
+        {
+            CurrentPage = currentPage;
+            await CurrentPageChanged.InvokeAsync(CurrentPage);
+        }
+    }
+
+    private async Task Prev(MouseEventArgs args)
+    {
+        if (CurrentPage > 1)
+        {
+            await OnCurrentPageChanged(CurrentPage - 1);
+        }
+    }
+
+    private async Task Next(MouseEventArgs args)
+    {
+        if (CurrentPage < PageCount + 1)
+        {
+            await OnCurrentPageChanged(CurrentPage + 1);
+        }
+    }
+
+    private string GetNextClass() => CurrentPage >= PageCount ? "disabled" : "";
+
+    private object GetPrevClass() => (CurrentPage <= 1) ? "disabled" : "";
+
+}
