@@ -1,0 +1,69 @@
+@inject IStringLocalizer<Index> L
+
+<OsDataGrid TItem="ProductListItemReadModel" FetchData="FetchData" PageSize="PageSize">
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Title"]" TItem="ProductListItemReadModel">
+        <RowTemplate Context="item">
+            <div class="d-flex align-items-center">
+                <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                    @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
+                    {
+                        <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
+                    }
+                    else
+                    {
+                        <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
+                    }
+                </div>
+                <div class="ms-3">
+                    <a href="@($"products/{item.Id}")">@item.Title</a>
+                </div>
+            </div>
+        </RowTemplate>
+    </OsDataGridColumn>
+
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Status"]" TItem="ProductListItemReadModel">
+        <RowTemplate Context="item">
+            @(item.Status == ProductStatus.Active ? L["ProductListItem.Active"] : L["ProductListItem.Draft"])
+        </RowTemplate>
+    </OsDataGridColumn>
+
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Inventory"]" TItem="ProductListItemReadModel">
+        <RowTemplate Context="item">
+            @if (item.AvailableQuantity == null)
+            {
+                @L["ProductList.InventoryNotTracking"]
+            }
+            else
+            {
+                if (item.HasMultipleVariants)
+                {
+                    @L["ProductList.InventoryColumn", item.AvailableQuantity.Value, item.VariantCount]
+                }
+                else
+                {
+                    @item.AvailableQuantity
+                }
+            }
+        </RowTemplate>
+    </OsDataGridColumn>
+
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Category"]" TItem="ProductListItemReadModel">
+        <RowTemplate Context="item">
+            @*todo: category*@
+        </RowTemplate>
+    </OsDataGridColumn>
+
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Type"]" TItem="ProductListItemReadModel">
+        <RowTemplate Context="item">
+            @(item.IsPhysicalProduct ? L["ProductList.PhysicalProduct"] : L["ProductList.NonPhysicalProduct"])
+        </RowTemplate>
+    </OsDataGridColumn>
+</OsDataGrid>
+
+@code {
+        private const int PageSize = 50;
+
+    [Parameter]
+    public Func<PageRequest, Task<PagedListDto<ProductListItemReadModel>>> FetchData { get; set; }
+
+}

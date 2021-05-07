@@ -20,13 +20,13 @@
     [Inject]
     protected AlertService AlertService { get; init; }
 
-    public void Alert(string message) => AlertService.Alert(message);
+    protected void Alert(object message) => AlertService.Alert(message);
 
-    public bool Confirm(string message) => AlertService.Confirm(message);
+    protected bool Confirm(string message) => AlertService.Confirm(message);
 
-    public bool ConsoleLog(string message) => AlertService.ConsoleLog(message);
+    protected bool ConsoleLog(object message) => AlertService.ConsoleLog(message);
 
-    public bool ConsoleError(string message) => AlertService.ConsoleError(message);
+    protected bool ConsoleError(object message) => AlertService.ConsoleError(message);
 
     protected void ShowSuccess(string message, string title = null) => AlertService.ShowSuccess(message, title);
 

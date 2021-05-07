@@ -24,5 +24,11 @@ namespace OpenStore.Omnichannel.Panel.Services
         public async Task<ProductDto> Get(Guid id) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{id}");
 
         public Task<PagedListDto<ProductListItemReadModel>> GetAll(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/all", request);
+        
+        public Task<PagedListDto<ProductListItemReadModel>> GetActive(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/active", request);
+        
+        public Task<PagedListDto<ProductListItemReadModel>> GetDraft(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/draft", request);
+        
+        public Task<PagedListDto<ProductListItemReadModel>> GetDeleted(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/deleted", request);
     }
 }

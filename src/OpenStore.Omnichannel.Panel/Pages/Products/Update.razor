@@ -42,7 +42,7 @@
                     <Row>
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                             <ProductContentEditor @ref="_contentEditor" Model="@_product" ModelChanged="@(_ => StateHasChanged())"/>
-                            <MediaEditor Model="@_product" />
+                            <MediaEditor Model="@_product"/>
 
                             @if (_product.HasMultipleVariants)
                             {
@@ -93,7 +93,16 @@
                                 }
                                 @L["Button.Save"]
                             </Button>
+
+                            <Button Loading="_deleting" Clicked="Delete" Color="Color.Danger">
+                                @if (!_saving)
+                                {
+                                    <Icon Name="IconName.Delete" Class="me-1"></Icon>
+                                }
+                                @L["Button.Archive"]
+                            </Button>
                         </div>
+
                     </div>
                 </Row>
             }
@@ -108,6 +117,7 @@
     public Guid Id { get; set; }
 
     private bool _saving;
+    private bool _deleting;
     private bool _formHasErrors;
 
     private ProductDto _product;
@@ -131,11 +141,29 @@
         {
             _saving = true;
             _product.Description = await _contentEditor.GetDescriptionHtml();
-
         }
         finally
         {
             _saving = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task Delete()
+    {
+        if (!Confirm(""))
+        {
+            return;
+        }
+        
+        try
+        {
+            _deleting = true;
+            _product.Description = await _contentEditor.GetDescriptionHtml();
+        }
+        finally
+        {
+            _deleting = false;
             await InvokeAsync(StateHasChanged);
         }
     }

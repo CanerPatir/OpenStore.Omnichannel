@@ -98,5 +98,11 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Domain.ProductHandleAlreadyExists", resourceCulture);
             }
         }
+        
+        internal static string Info_NoRecord {
+            get {
+                return ResourceManager.GetString("Info.NoRecord", resourceCulture);
+            }
+        }
     }
 }

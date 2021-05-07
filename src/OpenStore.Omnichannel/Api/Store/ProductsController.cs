@@ -30,7 +30,19 @@ namespace OpenStore.Omnichannel.Api.Store
         public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdate(id), CancellationToken);
         
         [HttpPost("all")]
-        public Task<PagedList<ProductListItemReadModel>> AllProducts(PageRequest pageRequest) 
-            => _mediator.Send(new GetAllProducts(pageRequest), CancellationToken);
+        public Task<PagedList<ProductListItemReadModel>> GetAllProducts(PageRequest pageRequest) 
+            => _mediator.Send(new GetAllProducts(pageRequest, null, false), CancellationToken);
+        
+        [HttpPost("active")]
+        public Task<PagedList<ProductListItemReadModel>> GetActiveProducts(PageRequest pageRequest) 
+            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Active, false), CancellationToken);
+        
+        [HttpPost("draft")]
+        public Task<PagedList<ProductListItemReadModel>> GetDraftProducts(PageRequest pageRequest) 
+            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Draft, false), CancellationToken);
+        
+        [HttpPost("deleted")]
+        public Task<PagedList<ProductListItemReadModel>> GetDeletedProducts(PageRequest pageRequest) 
+            => _mediator.Send(new GetAllProducts(pageRequest, null, true), CancellationToken);
     }
 }

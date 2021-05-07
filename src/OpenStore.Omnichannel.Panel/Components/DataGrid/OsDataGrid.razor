@@ -3,17 +3,19 @@
 
 @typeparam TItem
 
+@inject IStringLocalizer<ComponentLocalization> L
+
 <CascadingValue Value="this" IsFixed="true">
     @if (IsSearchable)
     {
         <div class="input-group mb-4">
-            <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter products &nbsp;</button>
+            <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@L["DataGrid.FilterItems"]</button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+                @* <a class="dropdown-item" href="#">Action</a> *@
+                @* <a class="dropdown-item" href="#">Another action</a> *@
+                @* <a class="dropdown-item" href="#">Something else here</a> *@
+                @* <div role="separator" class="dropdown-divider"></div> *@
+                @* <a class="dropdown-item" href="#">Separated link</a> *@
             </div>
             <div class="flex-fill position-relative">
                 <div class="input-group">
@@ -30,11 +32,8 @@
                         }
                     </div>
 
-                    <DebounceInput
-                        class="form-control ps-35px"
-                        DebounceTime="500"
-                        OnValueChanged="@OnFilterChanged"
-                        placeholder="Ara..."/>
+                    <DebounceInput class="form-control ps-35px" placeholder="@L["DataGrid.SearchPlaceholder"]"
+                                   DebounceTime="500" OnValueChanged="@OnFilterChanged"/>
                 </div>
             </div>
         </div>
@@ -48,7 +47,7 @@
                     var selectColumnId = Guid.NewGuid();
                     <th class="pt-0 pb-2">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="@selectColumnId">
+                            <input type="checkbox" class="form-check-input" id="@selectColumnId" @onchange="SelectAllChanged">
                             <label class="form-check-label" for="@selectColumnId"></label>
                         </div>
                     </th>
@@ -78,15 +77,15 @@
             </thead>
             <tbody class="list">
 
-            @foreach (var item in PagedItems)
+            @foreach (var item in _pagedItems)
             {
-                <tr id="@item.GetHashCode()" @onclick="(args) => OnRowClickedEvent(args, item)" @attributes="RowAttributes">
+                <tr id="@item.GetHashCode()" @onclick="(args) => OnRowClickedEvent(args, item.Item)" @attributes="RowAttributes">
                     @if (IsSelectable)
                     {
                         var selectColumnId = Guid.NewGuid();
                         <td class="width-10 align-middle">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="@selectColumnId">
+                                <input type="checkbox" class="form-check-input" id="@selectColumnId" value="@item.Selected" @onchange="@(e => SelectItemChanged(e, item))">
                                 <label class="form-check-label" for="@selectColumnId"></label>
                             </div>
                         </td>
@@ -95,7 +94,7 @@
                     {
                         if (column.RowTemplate != null)
                         {
-                            <td class="@column.RowCssClass">@column.RowTemplate(item)</td>
+                            <td class="@column.RowCssClass">@column.RowTemplate(item.Item)</td>
                         }
                         else if (column.ChildContent != null)
                         {
@@ -122,23 +121,18 @@
         {
             <OsSpinner/>
         }
-        else if (!PagedItems.Any())
+        else if (!_pagedItems.Any())
         {
-            if (IfEmpty == null)
-            {
-                <div class="text-center text-muted p-3">@EmptyGridText</div>
-            }
-            else
-            {
-                @IfEmpty
-            }
+            <div class="text-center text-muted p-3">
+                @SharedLocalizer["Info.NoRecord"]
+            </div>
         }
 
     </div>
 
     @if (PageCount > 1)
     {
-        <OsPager CurrentPage="PageNr" CurrentPageChanged="OnPageChanged" PageCount="PageCount"/>
+        <OsPager CurrentPage="PageNumber" CurrentPageChanged="OnPageChanged" PageCount="PageCount"/>
     }
 
     @ChildContent
@@ -170,31 +164,22 @@
     public string CssClass { get; set; } = "table table-hover text-nowrap";
 
     [Parameter]
-    public string EmptyGridText { get; set; } = "Listelenecek kayıt bulunamadı";
-
-    [Parameter]
-    public EventCallback<TItem> RowClickedEvent { get; set; }
-
-    [Parameter]
-    public RenderFragment IfEmpty { get; set; }
-
-    [Parameter]
     public bool IsSearchable { get; set; } = true;
 
     [Parameter]
     public bool IsSelectable { get; set; } = true;
 
     [Parameter]
-    public TItem SelectedItem { get; set; }
+    public EventCallback<TItem> RowClickedEvent { get; set; }
 
     [Parameter]
-    public EventCallback<TItem> SelectedItemChanged { get; set; }
+    public EventCallback<IEnumerable<TItem>> SelectedItemsChanged { get; set; }
 
     [Parameter]
     public Func<PageRequest, Task<PagedListDto<TItem>>> FetchData { get; set; }
 
     [Parameter]
-    public int PageNr { get; set; } = 1;
+    public int PageNumber { get; set; } = 1;
 
     [Parameter]
     public int PageSize { get; set; } = 20;
@@ -203,15 +188,14 @@
     public IEnumerable<TItem> Items { get; set; }
 
     private bool IsServerSide => FetchData != null;
-    private bool IsClientSide => !IsServerSide;
-
-    private string FilterTerm { get; set; }
+    private string _filterTerm;
     private OsDataGridColumn<TItem> SortColumn { get; set; }
     private OpenStore.Omnichannel.SortDirection SortDirection { get; set; } = OpenStore.Omnichannel.SortDirection.Ascending;
     private IList<OsDataGridColumn<TItem>> Columns { get; set; } = new List<OsDataGridColumn<TItem>>();
-    private IEnumerable<TItem> PagedItems { get; set; } = new List<TItem>();
+    private IEnumerable<DataGridEnvelope<TItem>> _pagedItems = new List<DataGridEnvelope<TItem>>();
     private int PageCount { get; set; }
     private bool _isReloading;
+    private bool _fetchedBefore = false;
 
     public void AddColumn(OsDataGridColumn<TItem> column)
     {
@@ -226,9 +210,7 @@
 
     private async Task OnRowClickedEvent(MouseEventArgs args, TItem item)
     {
-        SelectedItem = item;
         await RowClickedEvent.InvokeAsync(item);
-        await SelectedItemChanged.InvokeAsync(item);
     }
 
     private async Task OnColumnHeaderClickedEvent(MouseEventArgs clickEvent, OsDataGridColumn<TItem> column)
@@ -250,20 +232,18 @@
 
     private async Task OnFilterChanged(string term)
     {
-        FilterTerm = string.IsNullOrEmpty(term) ? null : term;
-        PageNr = 1;
+        _filterTerm = string.IsNullOrEmpty(term) ? null : term;
+        PageNumber = 1;
         await Reload();
     }
 
-    private async Task OnPageChanged(int pageNr)
+    private async Task OnPageChanged(int pageNumber)
     {
-        PageNr = pageNr;
+        PageNumber = pageNumber;
         await Reload();
     }
 
-    private bool _fetchedBefore = false;
-
-    public async Task Reload()
+    private async Task Reload()
     {
         if (IsServerSide)
         {
@@ -271,13 +251,13 @@
             _isReloading = _fetchedBefore;
             try
             {
-                var pageMetadata = new PageRequest(PageNr, PageSize, SortColumn?.GetColumnPropertyName(), FilterTerm, SortDirection);
+                var pageMetadata = new PageRequest(PageNumber, PageSize, SortColumn?.GetColumnPropertyName(), _filterTerm, SortDirection);
                 var pagedResult = await FetchData(pageMetadata);
                 await Task.Delay(1000);
                 PageCount = pagedResult.PageMeta.TotalPages;
-                PageNr = pagedResult.PageMeta.CurrentPage;
-                PagedItems = Items = pagedResult.Items;
-
+                PageNumber = pagedResult.PageMeta.CurrentPage;
+                Items = pagedResult.Items;
+                _pagedItems = pagedResult.Items.Select(x => new DataGridEnvelope<TItem>(x));
                 _fetchedBefore = true;
             }
             finally
@@ -298,20 +278,21 @@
                         query.OrderByDescending(SortColumn.Property);
                 }
 
-                if (!string.IsNullOrWhiteSpace(FilterTerm))
+                if (!string.IsNullOrWhiteSpace(_filterTerm))
                 {
                     query = query.Search(
                         Columns
                             .Where(c => c.IsFilterable)
                             .Select(x => x.Property),
-                        FilterTerm);
+                        _filterTerm);
                 }
 
                 PageCount = (int) Math.Ceiling(query.ToList().Count / (double) PageSize);
 
-                PagedItems = query
-                    .Skip((PageNr - 1) * PageSize)
+                _pagedItems = query
+                    .Skip((PageNumber - 1) * PageSize)
                     .Take(PageSize)
+                    .Select(x => new DataGridEnvelope<TItem>(x))
                     .ToList();
             }
         }
@@ -326,6 +307,32 @@
             return SortDirection == OpenStore.Omnichannel.SortDirection.Descending ? "fas fa-sort-down" : "fas fa-sort-up";
         }
         return "fas fa-sort";
+    }
+
+    private Task SelectAllChanged(ChangeEventArgs arg)
+    {
+        foreach (var pagedItem in _pagedItems)
+        {
+            pagedItem.Selected = (bool) arg.Value;
+        }
+        StateHasChanged();
+
+        return OnSelectedItemsChanged();
+    }
+
+    private Task SelectItemChanged(ChangeEventArgs arg, DataGridEnvelope<TItem> item)
+    {
+        item.Selected = (bool) arg.Value;
+        StateHasChanged();
+
+        return OnSelectedItemsChanged();
+    }
+
+    private async Task OnSelectedItemsChanged()
+    {
+        var selectedItems = _pagedItems.Where(x => x.Selected).Select(x => x.Item);
+
+        await SelectedItemsChanged.InvokeAsync(selectedItems);
     }
 
 }

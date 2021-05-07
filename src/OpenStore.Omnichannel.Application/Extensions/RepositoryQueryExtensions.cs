@@ -26,23 +26,23 @@ namespace OpenStore.Omnichannel.Application.Extensions
         }
 
         public static async Task<PagedList<TDto>> GetPaged<T, TDto>(this IQueryable<T> query,
-            PageRequest pageRequest,
+            int pageNumber,
+            int pageSize,
             Func<T, TDto> mapper,
             CancellationToken cancellationToken = default)
             where T : class, IEntity
         {
             var count = await query.CountAsync(cancellationToken);
 
-
-            query = query.Skip((pageRequest.PageNumber - 1) * pageRequest.PageSize)
-                .Take(pageRequest.PageSize)
+            query = query.Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .OrderBy(x => x.Id);
 
             var items = await query
                 // .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
-            return new PagedList<TDto>(items.Select(mapper), count, pageRequest.PageNumber, pageRequest.PageSize);
+            return new PagedList<TDto>(items.Select(mapper), count, pageNumber, pageSize);
         }
     }
 }

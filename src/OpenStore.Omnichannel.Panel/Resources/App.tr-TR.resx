@@ -45,4 +45,7 @@
     <data name="Domain.ProductHandleAlreadyExists" xml:space="preserve">
         <value>Aynı 'Arama motoru URL'  başka bir ürün için mevcut. Bu değer bütün ürünler için benzersiz olmalıdır.</value>
     </data>
+    <data name="Info.NoRecord" xml:space="preserve">
+        <value>Kayıt bulunamadı</value>
+    </data>
 </root>
