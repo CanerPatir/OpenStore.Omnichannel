@@ -49,141 +49,78 @@
     <div class="tab-content p-4">
         <div class="tab-pane fade show active" id="allTab">
 
-            <div class="input-group mb-4">
-                <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter products &nbsp;</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-                <div class="flex-fill position-relative">
-                    <div class="input-group">
-                        <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 pe-0" style="z-index: 1020;">
-                            <i class="fa fa-search opacity-5"></i>
-                        </div>
-                        <input type="text" class="form-control ps-35px" placeholder="Search products"/>
-                    </div>
-                </div>
-            </div>
 
-            @if (_products == null)
-            {
-                <OsSpinner/>
-            }
-            else
-            {
-                <OsDataGrid TItem="ProductListItemReadModel" FetchData="FetchData">
-                    <OsDataGridColumn CustomTitle="" TItem="ProductListItemReadModel" IsSortable="true" IsFilterable="true">
-                        <RowTemplate Context="item">
-                            <div class="d-flex align-items-center">
-                                <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
-                                    @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
-                                    {
-                                        <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
-                                    }
-                                    else
-                                    {
-                                        <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
-                                    }
-                                </div>
-                                <div class="ms-3">
-                                    <a href="@($"products/{item.Id}")">@item.Title</a>
-                                </div>
+            <OsDataGrid TItem="ProductListItemReadModel" FetchData="FetchData" PageSize="PageSize">
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Title"]" TItem="ProductListItemReadModel">
+                    <RowTemplate Context="item">
+                        <div class="d-flex align-items-center">
+                            <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
+                                {
+                                    <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
+                                }
+                                else
+                                {
+                                    <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
+                                }
                             </div>
+                            <div class="ms-3">
+                                <a href="@($"products/{item.Id}")">@item.Title</a>
+                            </div>
+                        </div>
+                    </RowTemplate>
+                </OsDataGridColumn>
 
-                        </RowTemplate>
-                    </OsDataGridColumn>
-                </OsDataGrid>
-
-
-                <div class="table-responsive">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                        <tr>
-                            <th class="pt-0 pb-2"></th>
-                            <th class="pt-0 pb-2">@L["ColumnHeader.Title"]</th>
-                            <th class="pt-0 pb-2">@L["ColumnHeader.Status"]</th>
-                            <th class="pt-0 pb-2">@L["ColumnHeader.Inventory"]</th>
-                            <th class="pt-0 pb-2">@L["ColumnHeader.Category"]</th>
-                            <th class="pt-0 pb-2">@L["ColumnHeader.Type"]</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach (var item in _products.Items)
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Status"]" TItem="ProductListItemReadModel">
+                    <RowTemplate Context="item">
+                        @(item.Status == ProductStatus.Active ? L["ProductListItem.Active"] : L["ProductListItem.Draft"])
+                    </RowTemplate>
+                </OsDataGridColumn>
+                
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Inventory"]" TItem="ProductListItemReadModel">
+                    <RowTemplate Context="item">
+                        @if (item.AvailableQuantity == null)
                         {
-                            <tr>
-                                <td class="width-10 align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="product1">
-                                        <label class="form-check-label" for="product1"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
-                                            @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
-                                            {
-                                                <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
-                                            }
-                                            else
-                                            {
-                                                <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
-                                            }
-                                        </div>
-                                        <div class="ms-3">
-                                            <a href="@($"products/{item.Id}")">@item.Title</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">@(item.Status == ProductStatus.Active ? L["ProductListItem.Active"] : L["ProductListItem.Draft"])</td>
-                                <td class="align-middle">
-                                    @if (item.AvailableQuantity == null)
-                                    {
-                                        @L["ProductList.InventoryNotTracking"]
-                                    }
-                                    else
-                                    {
-                                        if (item.HasMultipleVariants)
-                                        {
-                                            @L["ProductList.InventoryColumn", item.AvailableQuantity.Value, item.VariantCount]
-                                        }
-                                        else
-                                        {
-                                            @item.AvailableQuantity
-                                        }
-                                    }
-                                </td>
-                                <td class="align-middle">@*todo: category*@</td>
-                                <td class="align-middle">@(item.IsPhysicalProduct ? L["ProductList.PhysicalProduct"] : L["ProductList.NonPhysicalProduct"])</td>
-                            </tr>
+                            @L["ProductList.InventoryNotTracking"]
                         }
-                        </tbody>
-                    </table>
-                </div>
+                        else
+                        {
+                            if (item.HasMultipleVariants)
+                            {
+                                @L["ProductList.InventoryColumn", item.AvailableQuantity.Value, item.VariantCount]
+                            }
+                            else
+                            {
+                                @item.AvailableQuantity
+                            }
+                        }
+                    </RowTemplate>
+                </OsDataGridColumn>
 
-                <OsPager CurrentPage="1" PageCount="10"/>
-            }
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Category"]" TItem="ProductListItemReadModel">
+                    <RowTemplate Context="item">
+                        @*todo: category*@
+                    </RowTemplate>
+                </OsDataGridColumn>
 
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Type"]" TItem="ProductListItemReadModel">
+                    <RowTemplate Context="item">
+                        @(item.IsPhysicalProduct ? L["ProductList.PhysicalProduct"] : L["ProductList.NonPhysicalProduct"])
+                    </RowTemplate>
+                </OsDataGridColumn>
+            </OsDataGrid>
         </div>
     </div>
 </div>
 
 
 @code {
-        private const int PageSiz = 50;
-    private PagedListDto<ProductListItemReadModel> _products;
+        private const int PageSize = 50;
 
-    protected override async Task OnInitializedAsync()
+    private async Task<PagedListDto<ProductListItemReadModel>> FetchData(PageRequest pageRequest)
     {
-        _products = await ApiClient.Product.GetAll(1, PageSiz);
+        return await ApiClient.Product.GetAll(pageRequest);
     }
-
-    private async Task<PagedListDto<ProductListItemReadModel>> FetchData(GridRequestArgs arg)
-    {
-        var a = await ApiClient.Product.GetAll(1, PageSiz);
-        return a;
-    }
+ 
 
 }

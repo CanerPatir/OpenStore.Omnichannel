@@ -1,22 +1,17 @@
-using System;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Threading;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using OpenStore.Omnichannel.Panel.Services;
+using OpenStore.Omnichannel;
 
 // ReSharper disable CheckNamespace
 
-namespace OpenStore.Omnichannel.Panel
+namespace System.Net.Http
 {
     public static class HttpClientExtensions
     {
-        public static async Task<PagedListDto<T>> GetPage<T>(this HttpClient httpClient, string path, int pageNumber, int pageSize)
+        public static async Task<PagedListDto<T>> GetPage<T>(this HttpClient httpClient, string path, PageRequest request)
         {
-            var qs = $"?pageNumber={pageNumber}&pageSize={pageSize}";
-            var response = await httpClient.GetAsync(path + qs);
+            var response = await httpClient.PostAsJsonAsync(path, request);
             return await response.Content.ReadFromJsonAsync<PagedListDto<T>>();
         }
     }

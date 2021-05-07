@@ -11,7 +11,7 @@ using OpenStore.Omnichannel.Shared.ReadModel;
 
 namespace OpenStore.Omnichannel.Application.Query
 {
-    public record GetAllProducts(int? PageNumber, int? PageSize) : IRequest<PagedList<ProductListItemReadModel>>;
+    public record GetAllProducts(PageRequest PageRequest) : IRequest<PagedList<ProductListItemReadModel>>;
 
     public class GetAllProductsHandler : IRequestHandler<GetAllProducts, PagedList<ProductListItemReadModel>>
     {
@@ -24,14 +24,14 @@ namespace OpenStore.Omnichannel.Application.Query
 
         public Task<PagedList<ProductListItemReadModel>> Handle(GetAllProducts request, CancellationToken cancellationToken)
         {
-            var (pageNumber, pageSize) = request;
-            return _repository.Query
+            var pageRequest = request.PageRequest;
+            
+             return _repository.Query
                 .Include(x => x.Medias)
                 .Include(x => x.Variants)
                 .ThenInclude(x => x.Inventory)
                 .GetPaged(
-                    pageNumber,
-                    pageSize,
+                    pageRequest,
                     p => new ProductListItemReadModel(
                         p.Id,
                         p.Medias.FirstOrDefault()?.Url,

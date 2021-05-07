@@ -15,5 +15,9 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         protected virtual string GetPath(object route) => $"{Path}/{route}";
 
+        // protected readonly JsonSerializerOptions DefaultSerializerOptions = new(JsonSerializerDefaults.Web)
+        // {
+        //     IgnoreNullValues = true
+        // };
     }
 }

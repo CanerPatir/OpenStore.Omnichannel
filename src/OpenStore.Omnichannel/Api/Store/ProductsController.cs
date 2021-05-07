@@ -29,8 +29,8 @@ namespace OpenStore.Omnichannel.Api.Store
         [HttpGet("{id:guid}")]
         public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdate(id), CancellationToken);
         
-        [HttpGet("all")]
-        public Task<PagedList<ProductListItemReadModel>> AllProducts([FromQuery] int? pageNumber, [FromQuery] int? pageSize) 
-            => _mediator.Send(new GetAllProducts(pageNumber, pageSize), CancellationToken);
+        [HttpPost("all")]
+        public Task<PagedList<ProductListItemReadModel>> AllProducts(PageRequest pageRequest) 
+            => _mediator.Send(new GetAllProducts(pageRequest), CancellationToken);
     }
 }

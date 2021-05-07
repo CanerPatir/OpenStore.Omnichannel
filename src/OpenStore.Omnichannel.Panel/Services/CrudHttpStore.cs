@@ -22,7 +22,7 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public virtual async Task<IEnumerable<TDto>> GetAll(CancellationToken cancellationToken = default)
         {
-            var pagedList = await HttpClient.GetPage<TDto>(GetPath(string.Empty), 1, 1_000_000);
+            var pagedList = await HttpClient.GetPage<TDto>(GetPath(string.Empty), new PageRequest(1, 1_000_000));
             return pagedList.Items;
         }
 
@@ -32,7 +32,7 @@ namespace OpenStore.Omnichannel.Panel.Services
             return await response.Content.ReadFromJsonAsync<TDto>(cancellationToken: cancellationToken);
         }
 
-        public virtual  Task Update(TKey id, TDto dto, CancellationToken cancellationToken = default) 
+        public virtual Task Update(TKey id, TDto dto, CancellationToken cancellationToken = default)
             => HttpClient.PutAsJsonAsync(GetPath(id), dto, cancellationToken);
 
         public virtual async Task<Guid> Create(TDto dto, CancellationToken cancellationToken = default)
