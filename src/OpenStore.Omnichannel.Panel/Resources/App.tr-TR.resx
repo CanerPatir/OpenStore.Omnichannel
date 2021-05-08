@@ -48,4 +48,7 @@
     <data name="Info.NoRecord" xml:space="preserve">
         <value>Kayıt bulunamadı</value>
     </data>
+    <data name="GenericSuccessMessage" xml:space="preserve">
+        <value>İşleminiz başarıyla gerçekleştirildi</value>
+    </data>
 </root>

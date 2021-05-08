@@ -15,6 +15,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(NetPackagesVersion)" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
         <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.5" />
         <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
@@ -96,6 +97,10 @@
         <EmbeddedResource Update="Resources\Components\ComponentLocalization.tr-TR.resx">
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>ComponentLocalization.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Products\Update.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Update.tr-TR.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
 
@@ -189,6 +194,11 @@
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>ComponentLocalization.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Products\Update.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Update.tr-TR.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 

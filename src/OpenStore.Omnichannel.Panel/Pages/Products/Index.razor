@@ -47,7 +47,7 @@
             <a href="#draftTab" class="nav-link px-2" data-bs-toggle="tab" @onclick="@(_ => ChangeCurrentTab("draftTab"))">@L["ProductListTab.Draft"]</a>
         </li>
         <li class="nav-item me-3">
-            <a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab" @onclick="@(_ => ChangeCurrentTab("deletedTab"))">@L["ProductListTab.Deleted"]</a>
+            <a href="#archivedTab" class="nav-link px-2" data-bs-toggle="tab" @onclick="@(_ => ChangeCurrentTab("archivedTab"))">@L["ProductListTab.Archived"]</a>
         </li>
     </ul>
     <div class="tab-content p-4">
@@ -69,16 +69,14 @@
                 <IndexProductList FetchData="GetDraft"/>
             }
         </div>
-
-        <div class="tab-pane fade" id="deletedTab">
-            @if (_currentTab == "deletedTab")
+        <div class="tab-pane fade" id="archivedTab">
+            @if (_currentTab == "archivedTab")
             {
-                <IndexProductList FetchData="GetDeleted"/>
+                <IndexProductList FetchData="GetArchived"/>
             }
         </div>
     </div>
 </Card>
-
 
 @code {
     private string _currentTab = "allTab";
@@ -86,7 +84,7 @@
     private async Task<PagedListDto<ProductListItemReadModel>> GetAll(PageRequest pageRequest) => await ApiClient.Product.GetAll(pageRequest);
     private async Task<PagedListDto<ProductListItemReadModel>> GetActive(PageRequest pageRequest) => await ApiClient.Product.GetActive(pageRequest);
     private async Task<PagedListDto<ProductListItemReadModel>> GetDraft(PageRequest pageRequest) => await ApiClient.Product.GetDraft(pageRequest);
-    private async Task<PagedListDto<ProductListItemReadModel>> GetDeleted(PageRequest pageRequest) => await ApiClient.Product.GetDeleted(pageRequest);
+    private async Task<PagedListDto<ProductListItemReadModel>> GetArchived(PageRequest pageRequest) => await ApiClient.Product.GetArchived(pageRequest);
 
     private void ChangeCurrentTab(string currentTab) => _currentTab = currentTab;
 

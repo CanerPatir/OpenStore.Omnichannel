@@ -10,6 +10,9 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record CreateProduct(ProductDto Model) : IRequest<Guid>;
 
-    public record UpdateProductVariantQuantity(Guid VariantId, int Quantity);
+    public record UpdateProductVariantQuantity(Guid VariantId, int Quantity) : IRequest;
 
+    public record ArchiveProduct(Guid Id) : IRequest;
+    
+    public record DeleteProduct(Guid Id) : IRequest;
 }

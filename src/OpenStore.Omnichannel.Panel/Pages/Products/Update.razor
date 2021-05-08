@@ -94,10 +94,10 @@
                                 @L["Button.Save"]
                             </Button>
 
-                            <Button Loading="_deleting" Clicked="Delete" Color="Color.Danger">
-                                @if (!_saving)
+                            <Button Loading="_archiving" Clicked="Archive" Color="Color.Secondary">
+                                @if (!_archiving)
                                 {
-                                    <Icon Name="IconName.Delete" Class="me-1"></Icon>
+                                    <Icon Name="IconName.Archive" Class="me-1"></Icon>
                                 }
                                 @L["Button.Archive"]
                             </Button>
@@ -117,7 +117,7 @@
     public Guid Id { get; set; }
 
     private bool _saving;
-    private bool _deleting;
+    private bool _archiving;
     private bool _formHasErrors;
 
     private ProductDto _product;
@@ -149,21 +149,21 @@
         }
     }
 
-    private async Task Delete()
+    private async Task Archive()
     {
-        if (!Confirm(""))
+        if (!Confirm(L["Alert.ArchiveConfirmation"]))
         {
             return;
         }
         
         try
         {
-            _deleting = true;
-            _product.Description = await _contentEditor.GetDescriptionHtml();
+            _archiving = true;
+            await ApiClient.Product.Archive(Id);
         }
         finally
         {
-            _deleting = false;
+            _archiving = false;
             await InvokeAsync(StateHasChanged);
         }
     }

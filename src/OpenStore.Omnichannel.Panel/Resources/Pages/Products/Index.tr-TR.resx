@@ -69,7 +69,7 @@
     <data name="ProductListTab.Draft" xml:space="preserve">
         <value>Taslak</value>
     </data>
-    <data name="ProductListTab.Deleted" xml:space="preserve">
+    <data name="ProductListTab.Archived" xml:space="preserve">
         <value>Arşivlenmiş</value>
     </data>
 </root>

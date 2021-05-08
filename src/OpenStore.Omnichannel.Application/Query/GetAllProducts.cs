@@ -11,7 +11,7 @@ using OpenStore.Omnichannel.Shared.ReadModel;
 
 namespace OpenStore.Omnichannel.Application.Query
 {
-    public record GetAllProducts(PageRequest PageRequest, ProductStatus? Status, bool GetDeleted) : IRequest<PagedList<ProductListItemReadModel>>;
+    public record GetAllProducts(PageRequest PageRequest, ProductStatus? Status) : IRequest<PagedList<ProductListItemReadModel>>;
 
     public class GetAllProductsHandler : IRequestHandler<GetAllProducts, PagedList<ProductListItemReadModel>>
     {
@@ -24,7 +24,7 @@ namespace OpenStore.Omnichannel.Application.Query
 
         public Task<PagedList<ProductListItemReadModel>> Handle(GetAllProducts request, CancellationToken cancellationToken)
         {
-            var (pageRequest, productStatus, getDeleted) = request;
+            var (pageRequest, productStatus) = request;
 
             IQueryable<Product> q = _repository.Query
                 .Include(x => x.Medias)
@@ -39,11 +39,12 @@ namespace OpenStore.Omnichannel.Application.Query
                 case ProductStatus.Draft:
                     q = q.Where(x => x.Status == ProductStatus.Draft);
                     break;
-            }
-
-            if (getDeleted)
-            {
-                q = q.IgnoreQueryFilters().Where(x => x.SoftDeleted);
+                case ProductStatus.Archived:
+                    q = q.Where(x => x.Status == ProductStatus.Archived);
+                    break;
+                case null:
+                    q = q.Where(x => x.Status != ProductStatus.Archived);
+                    break;
             }
 
             return q

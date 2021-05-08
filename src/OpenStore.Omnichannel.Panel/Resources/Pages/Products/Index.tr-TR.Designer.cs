@@ -147,9 +147,9 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
             }
         }
         
-        internal static string ProductListTab_Deleted {
+        internal static string ProductListTab_Archived {
             get {
-                return ResourceManager.GetString("ProductListTab.Deleted", resourceCulture);
+                return ResourceManager.GetString("ProductListTab.Archived", resourceCulture);
             }
         }
     }

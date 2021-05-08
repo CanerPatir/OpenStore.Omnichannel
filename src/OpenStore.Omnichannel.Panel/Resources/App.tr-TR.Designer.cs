@@ -104,5 +104,11 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Info.NoRecord", resourceCulture);
             }
         }
+        
+        internal static string GenericSuccessMessage {
+            get {
+                return ResourceManager.GetString("GenericSuccessMessage", resourceCulture);
+            }
+        }
     }
 }

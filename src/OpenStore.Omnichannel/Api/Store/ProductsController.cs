@@ -25,24 +25,30 @@ namespace OpenStore.Omnichannel.Api.Store
 
         [HttpPost]
         public Task<Guid> CreateProduct(ProductDto model) => _mediator.Send(new CreateProduct(model), CancellationToken);
-        
+
+        [HttpPost("{id:guid}/archive")]
+        public Task ArchiveProduct(Guid id) => _mediator.Send(new ArchiveProduct(id), CancellationToken);
+
+        [HttpDelete("{id:guid}")]
+        public Task DeleteProduct(Guid id) => _mediator.Send(new DeleteProduct(id), CancellationToken);
+
         [HttpGet("{id:guid}")]
         public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdate(id), CancellationToken);
-        
-        [HttpPost("all")]
-        public Task<PagedList<ProductListItemReadModel>> GetAllProducts(PageRequest pageRequest) 
-            => _mediator.Send(new GetAllProducts(pageRequest, null, false), CancellationToken);
-        
-        [HttpPost("active")]
-        public Task<PagedList<ProductListItemReadModel>> GetActiveProducts(PageRequest pageRequest) 
-            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Active, false), CancellationToken);
-        
-        [HttpPost("draft")]
-        public Task<PagedList<ProductListItemReadModel>> GetDraftProducts(PageRequest pageRequest) 
-            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Draft, false), CancellationToken);
-        
-        [HttpPost("deleted")]
-        public Task<PagedList<ProductListItemReadModel>> GetDeletedProducts(PageRequest pageRequest) 
-            => _mediator.Send(new GetAllProducts(pageRequest, null, true), CancellationToken);
+
+        [HttpGet("all")]
+        public Task<PagedList<ProductListItemReadModel>> GetAllProducts([FromQuery] PageRequestQueryModel pageRequest)
+            => _mediator.Send(new GetAllProducts(pageRequest, null), CancellationToken);
+
+        [HttpGet("active")]
+        public Task<PagedList<ProductListItemReadModel>> GetActiveProducts([FromQuery] PageRequestQueryModel pageRequest)
+            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Active), CancellationToken);
+
+        [HttpGet("draft")]
+        public Task<PagedList<ProductListItemReadModel>> GetDraftProducts([FromQuery] PageRequestQueryModel pageRequest)
+            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Draft), CancellationToken);
+
+        [HttpGet("archived")]
+        public Task<PagedList<ProductListItemReadModel>> GetArchivedProducts([FromQuery] PageRequestQueryModel pageRequest)
+            => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Archived), CancellationToken);
     }
 }

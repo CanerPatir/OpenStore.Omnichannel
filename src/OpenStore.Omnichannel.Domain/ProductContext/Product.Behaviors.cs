@@ -106,5 +106,27 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             
             ApplyChange(new ProductVariantQuantityUpdated(Id, variantId, quantity));
         }
+
+        public void Archive()
+        {
+            if (Status == ProductStatus.Archived)
+            {
+                return;
+            }
+
+            Status = ProductStatus.Archived;
+            ApplyChange(new ProductArchived(Id));
+        }
+        
+        public void Delete()
+        {
+            if (SoftDeleted)
+            {
+                return;
+            }
+
+            SoftDeleted = true;
+            ApplyChange(new ProductDeleted(Id));
+        }
     }
 }

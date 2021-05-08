@@ -42,8 +42,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     }
 
     public record VariantAddedToProduct(Guid ProductId, VariantDto Variant) : DomainEventBase(ProductId);
-    
+
     public record MediaAssignedToProduct(Guid ProductId, ProductMediaDto ProductMedia) : DomainEventBase(ProductId);
-    
+
     public record ProductVariantQuantityUpdated(Guid ProductId, Guid VariantId, int Quantity) : DomainEventBase(ProductId);
+
+    public record ProductArchived(Guid ProductId) : DomainEventBase(ProductId);
+
+    public record ProductDeleted(Guid ProductId) : DomainEventBase(ProductId);
 }

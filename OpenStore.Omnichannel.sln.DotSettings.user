@@ -26,7 +26,7 @@
 	
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FDetail/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FIndex/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FIndex/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FInventoryEditor/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FMedia_002FMediaEditor/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FMetaEditor/@EntryIndexedValue">False</s:Boolean>
@@ -34,7 +34,8 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FProductContentEditor/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FShippingEditor/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FStatusEditor/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FTagsEditor/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FTagsEditor/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FUpdate/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FVariant_002FCreateVariantOptionEditor/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FVariant_002FCreateVariantsEditor/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FProducts_002FVariant_002FEditVariantsEditor/@EntryIndexedValue">False</s:Boolean>

@@ -5,6 +5,7 @@ namespace OpenStore.Omnichannel
     public enum ProductStatus
     {
         Draft,
-        Active
+        Active,
+        Archived
     }
 }

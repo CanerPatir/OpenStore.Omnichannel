@@ -41,6 +41,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             try
             {
                 var response = await base.SendAsync(request, cancellationToken);
+                HandleSuccess(request, response);
                 await HandleError(response, cancellationToken);
                 return response;
             }
@@ -48,6 +49,23 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             {
                 e.Redirect();
                 throw;
+            }
+        }
+
+        private void HandleSuccess(HttpRequestMessage request, HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            
+            var method = request.Method;
+            if (method == HttpMethod.Post
+                || method == HttpMethod.Put
+                || method == HttpMethod.Patch
+                || method == HttpMethod.Delete)
+            {
+                _alertService.ShowSuccess(_sharedLocalizer["GenericSuccessMessage"]);
             }
         }
 
