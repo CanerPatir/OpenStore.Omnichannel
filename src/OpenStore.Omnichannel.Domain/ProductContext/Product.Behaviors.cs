@@ -118,6 +118,17 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             ApplyChange(new ProductArchived(Id));
         }
         
+        public void UnArchive()
+        {
+            if (Status != ProductStatus.Archived)
+            {
+                return;
+            }
+
+            Status = ProductStatus.Active;
+            ApplyChange(new ProductUnArchived(Id, Status));
+        }
+        
         public void Delete()
         {
             if (SoftDeleted)
@@ -128,5 +139,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             SoftDeleted = true;
             ApplyChange(new ProductDeleted(Id));
         }
+
+        
     }
 }

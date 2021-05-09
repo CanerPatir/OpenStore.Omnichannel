@@ -31,6 +31,16 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public Task<PagedListDto<ProductListItemReadModel>> GetArchived(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/archived", request);
 
-        public Task Archive(Guid id) => HttpClient.PostAsync($"{Path}/{id}/archive", null!);
+        public async Task Archive(ProductDto productDto)
+        {
+            await HttpClient.PostAsync($"{Path}/{productDto.Id.Value}/archive", null!);
+            productDto.Status = ProductStatus.Archived;
+        }
+
+        public async Task UnArchive(ProductDto productDto)
+        {
+            await HttpClient.PostAsync($"{Path}/{productDto.Id.Value}/un-archive", null!);
+            productDto.Status = ProductStatus.Active;
+        }
     }
 }

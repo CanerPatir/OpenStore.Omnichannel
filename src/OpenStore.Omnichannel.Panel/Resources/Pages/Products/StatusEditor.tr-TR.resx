@@ -33,4 +33,13 @@
     <data name="InputHelp.Active" xml:space="preserve">
         <value>Ürün seçilen kanallar için satışa açık durumdadır</value>
     </data>
+    <data name="CardHeader.Archived" xml:space="preserve">
+        <value>Arşivlendi</value>
+    </data>
+    <data name="CardHeader.ArchivedDescription" xml:space="preserve">
+        <value>Bu ürün kataloğunuzda yer almaz ve satış görmez.</value>
+    </data>
+    <data name="ButtonTitle.UnArchive" xml:space="preserve">
+        <value>Arşivden Çıkar</value>
+    </data>
 </root>

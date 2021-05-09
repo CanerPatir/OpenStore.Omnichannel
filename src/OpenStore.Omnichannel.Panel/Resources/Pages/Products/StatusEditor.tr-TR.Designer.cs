@@ -74,5 +74,23 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("InputHelp.Active", resourceCulture);
             }
         }
+        
+        internal static string CardHeader_Archived {
+            get {
+                return ResourceManager.GetString("CardHeader.Archived", resourceCulture);
+            }
+        }
+        
+        internal static string CardHeader_ArchivedDescription {
+            get {
+                return ResourceManager.GetString("CardHeader.ArchivedDescription", resourceCulture);
+            }
+        }
+        
+        internal static string ButtonTitle_UnArchive {
+            get {
+                return ResourceManager.GetString("ButtonTitle.UnArchive", resourceCulture);
+            }
+        }
     }
 }

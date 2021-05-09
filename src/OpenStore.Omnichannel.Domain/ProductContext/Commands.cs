@@ -14,5 +14,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record ArchiveProduct(Guid Id) : IRequest;
     
+    public record UnArchiveProduct(Guid Id) : IRequest;
+    
     public record DeleteProduct(Guid Id) : IRequest;
 }

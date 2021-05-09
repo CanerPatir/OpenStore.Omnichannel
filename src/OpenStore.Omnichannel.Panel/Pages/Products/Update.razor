@@ -61,7 +61,7 @@
 
                         <Column ColumnSize="ColumnSize.Is4.OnDesktop">
                             <ListGroup Margin="Margin.Is3.FromBottom">
-                                <StatusEditor Model="@_product"/>
+                                <StatusEditor Model="@_product" ModelChanged="@(_ => StateHasChanged())"/>
                                 <ListGroupItem>
                                     <h5>
                                         @L["CardTitle.Channels"]
@@ -94,13 +94,17 @@
                                 @L["Button.Save"]
                             </Button>
 
-                            <Button Loading="_archiving" Clicked="Archive" Color="Color.Secondary">
-                                @if (!_archiving)
-                                {
-                                    <Icon Name="IconName.Archive" Class="me-1"></Icon>
-                                }
-                                @L["Button.Archive"]
-                            </Button>
+                            @if (_product.Status != ProductStatus.Archived)
+                            {
+                                <Button Loading="_archiving" Style="margin-left: 12px" Clicked="Archive" Color="Color.Secondary">
+                                    @if (!_archiving)
+                                    {
+                                        <Icon Name="IconName.Archive" Class="me-1"></Icon>
+                                    }
+                                    @L["Button.Archive"]
+                                </Button>
+                            }
+                            
                         </div>
 
                     </div>
@@ -159,7 +163,8 @@
         try
         {
             _archiving = true;
-            await ApiClient.Product.Archive(Id);
+            await ApiClient.Product.Archive(_product);
+            _product.Status = ProductStatus.Archived;
         }
         finally
         {

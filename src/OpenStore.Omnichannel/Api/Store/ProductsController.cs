@@ -28,6 +28,9 @@ namespace OpenStore.Omnichannel.Api.Store
 
         [HttpPost("{id:guid}/archive")]
         public Task ArchiveProduct(Guid id) => _mediator.Send(new ArchiveProduct(id), CancellationToken);
+        
+        [HttpPost("{id:guid}/un-archive")]
+        public Task UnArchiveProduct(Guid id) => _mediator.Send(new UnArchiveProduct(id), CancellationToken);
 
         [HttpDelete("{id:guid}")]
         public Task DeleteProduct(Guid id) => _mediator.Send(new DeleteProduct(id), CancellationToken);

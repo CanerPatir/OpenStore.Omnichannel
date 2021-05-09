@@ -49,5 +49,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record ProductArchived(Guid ProductId) : DomainEventBase(ProductId);
 
+    public record ProductUnArchived(Guid ProductId, ProductStatus Status) : DomainEventBase(ProductId);
+
     public record ProductDeleted(Guid ProductId) : DomainEventBase(ProductId);
 }
