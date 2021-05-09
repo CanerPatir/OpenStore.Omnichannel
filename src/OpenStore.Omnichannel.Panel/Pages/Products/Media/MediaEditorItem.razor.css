@@ -15,7 +15,7 @@
     border-color: #c4cdd5;
 }
 
-._2JrRS, 
+._2JrRS,
 .draggable-image-grid-item:focus ._2JrRS,
 .draggable-image-grid-item:hover ._2JrRS {
     opacity: 1;
@@ -36,7 +36,7 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    cursor: pointer;
+    cursor: move;
     flex-direction: column;
     background-position-x: initial;
     background-position-y: initial;
@@ -45,11 +45,11 @@
     background-repeat-y: initial;
     background-origin: initial;
     background-clip: initial;
-    background: linear-gradient(180deg,rgba(33,43,54,.55),hsla(0,0%,100%,0));
+    background: linear-gradient(180deg, rgba(33, 43, 54, .55), hsla(0, 0%, 100%, 0));
     border-radius: 5px;
 }
 
-._39S4u:focus, 
+._39S4u:focus,
 ._39S4u:hover {
     opacity: 1;
 }
@@ -70,14 +70,15 @@
     max-height: 100%;
     max-width: 100%;
     margin: auto;
+    cursor: pointer;
 }
 
 ._2XYX0 {
     position: absolute;
     top: .8rem;
     right: calc(.8rem - 3px);
-    cursor: move;
-    pointer-events: none;
+    cursor: pointer;
+    /*pointer-events: none;*/
 }
 
 ._39S4u:not(._2SJEb) svg {

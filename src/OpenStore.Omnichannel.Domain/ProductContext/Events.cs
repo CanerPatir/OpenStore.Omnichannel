@@ -14,7 +14,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         string Title,
         int Position,
         long? Size) : DomainEventBase(ProductMediaId);
-
+    
     public record ProductCreated(
         Guid ProductId, string Handle, string Title,
         string Description, bool HasMultipleVariants, ProductStatus Status,
@@ -44,6 +44,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record VariantAddedToProduct(Guid ProductId, VariantDto Variant) : DomainEventBase(ProductId);
 
     public record MediaAssignedToProduct(Guid ProductId, ProductMediaDto ProductMedia) : DomainEventBase(ProductId);
+
+    public record ProductMediaUpdated(Guid ProductId, ProductMediaDto ProductMedia): DomainEventBase(ProductId);
+    
+    public record ProductMediaUpdate(Guid ProductId, ProductMediaDto ProductMedia): DomainEventBase(ProductId);
+    
+    public record ProductMediaDeleted(Guid ProductId, Guid ProductMediaId) : DomainEventBase(ProductId);
 
     public record ProductVariantQuantityUpdated(Guid ProductId, Guid VariantId, int Quantity) : DomainEventBase(ProductId);
 

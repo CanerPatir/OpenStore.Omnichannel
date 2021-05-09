@@ -13,7 +13,6 @@ namespace OpenStore.Omnichannel
             {
                 public const string MultipleVariantProductMustHasOptions = nameof(Domain) + DiscriminatorChar + nameof(MultipleVariantProductMustHasOptions);
                 public const string ProductHandleAlreadyExists = nameof(Domain) + DiscriminatorChar + nameof(ProductHandleAlreadyExists);
-                public const string VariantNotFound = nameof(Domain) + DiscriminatorChar + nameof(VariantNotFound);
                 public const string VariantStockIsNotTracking = nameof(Domain) + DiscriminatorChar + nameof(VariantStockIsNotTracking);
                 public const string QuantityShouldBeGreaterOrEqualThenZero = nameof(Domain) + DiscriminatorChar + nameof(QuantityShouldBeGreaterOrEqualThenZero);
             }

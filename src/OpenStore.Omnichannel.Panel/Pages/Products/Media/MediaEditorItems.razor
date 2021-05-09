@@ -1,5 +1,3 @@
-
-
 @foreach (var item in Items)
 {
     <div draggable="true"
@@ -7,8 +5,7 @@
          @ondragleave="@(() => HandleDragEnter(item))"
          @ondrop="@(() => Drop(item))"
          @ondrag="@(() => StartDrag(item))">
-
-        <MediaEditorItem Model="@item"/>
+        <MediaEditorItem Model="@item" RemoveClicked="@RemoveClicked"/>
     </div>
 }
 
@@ -17,12 +14,21 @@
     [Parameter]
     public List<MediaEditorItemModel> Items { get; set; } = new();
 
+    [Parameter]
+    public EventCallback<List<MediaEditorItemModel>> ItemsChanged { get; set; }
+
+    [Parameter]
+    public bool IsEdit { get; set; }
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
     private int _currentIndex;
 
     private void StartDrag(MediaEditorItemModel image) => _currentIndex = GetIndex(image);
     private int GetIndex(MediaEditorItemModel image) => Items.FindIndex(a => a == image);
 
-    private void Drop(MediaEditorItemModel image)
+    private async Task Drop(MediaEditorItemModel image)
     {
         var index = GetIndex(image);
         var current = Items[_currentIndex];
@@ -30,9 +36,34 @@
         Items.Insert(index, current);
         _currentIndex = index;
 
-        // StateHasChanged();
+        var reorderIndex = 0;
+        foreach (var mediaEditorItemModel in Items)
+        {
+            mediaEditorItemModel.Dto.Position = reorderIndex++;
+        }
+    // StateHasChanged();
+
+        if (IsEdit)
+        {
+            await ApiClient.Product.UpdateProductMedias(Id.Value, Items.Select(x => x.Dto));
+            await ItemsChanged.InvokeAsync(Items);
+        }
     }
 
-    private void HandleDragEnter(MediaEditorItemModel item) =>  item.Dropping = true;
-    private void HandleDragLeave(MediaEditorItemModel item) =>  item.Dropping = false ;
+    private void HandleDragEnter(MediaEditorItemModel item) => item.Dropping = true;
+    private void HandleDragLeave(MediaEditorItemModel item) => item.Dropping = false;
+
+    private async Task RemoveClicked(MediaEditorItemModel item)
+    {
+        if (IsEdit)
+        {
+            if (DeleteConfirm())
+            {
+                await ApiClient.Product.DeleteProductMedia(Id.Value, item.Dto.Id);
+                Items.Remove(item);
+                await ItemsChanged.InvokeAsync(Items);
+            }
+        }
+    }
+
 }

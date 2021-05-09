@@ -58,7 +58,7 @@ namespace OpenStore.Omnichannel.Application.Query
                     pageRequest.PageSize,
                     p => new ProductListItemReadModel(
                         p.Id,
-                        p.Medias.FirstOrDefault()?.Url,
+                        p.Medias.OrderBy(x => x.Position).FirstOrDefault()?.Url,
                         p.Status,
                         p.Title,
                         p.Variants.Select(x => x.Inventory).Where(x => x is not null).Sum(x => x.AvailableQuantity),

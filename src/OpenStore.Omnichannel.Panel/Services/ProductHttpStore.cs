@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 using OpenStore.Omnichannel.Shared.ReadModel;
 
@@ -42,5 +44,15 @@ namespace OpenStore.Omnichannel.Panel.Services
             await HttpClient.PostAsync($"{Path}/{productDto.Id.Value}/un-archive", null!);
             productDto.Status = ProductStatus.Active;
         }
+
+        public async Task<IEnumerable<ProductMediaDto>> AssignProductMedia(Guid id, List<FileUploadDto> fileUploadDtoList)
+        {
+            var response = await HttpClient.PostAsJsonAsync($"{Path}/{id}/assign-media", fileUploadDtoList);
+            return await response.Content.ReadFromJsonAsync<List<ProductMediaDto>>();
+        }
+
+        public Task UpdateProductMedias(Guid id, IEnumerable<ProductMediaDto> medias) => HttpClient.PostAsJsonAsync($"{Path}/{id}/update-medias", medias);
+        
+        public Task DeleteProductMedia(Guid id, Guid productMediaId) => HttpClient.DeleteAsync($"{Path}/{id}/medias/{productMediaId}");
     }
 }

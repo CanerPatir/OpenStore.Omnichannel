@@ -23,6 +23,8 @@
     protected void Alert(object message) => AlertService.Alert(message);
 
     protected bool Confirm(string message) => AlertService.Confirm(message);
+    
+    protected bool DeleteConfirm() => AlertService.DeleteConfirm();
 
     protected bool ConsoleLog(object message) => AlertService.ConsoleLog(message);
 

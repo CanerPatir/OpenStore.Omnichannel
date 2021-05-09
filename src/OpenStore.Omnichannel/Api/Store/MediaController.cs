@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,10 @@ namespace OpenStore.Omnichannel.Api.Store
         }
 
         [HttpPost("product")]
-        public Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> model) =>
-            _mediator.Send(new CreateProductMedia(model), CancellationToken);
+        public async Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> model)
+        {
+            var result = await _mediator.Send(new CreateProductMedia(model), CancellationToken);
+            return result.Select(x => x.dto);
+        }
     }
 }

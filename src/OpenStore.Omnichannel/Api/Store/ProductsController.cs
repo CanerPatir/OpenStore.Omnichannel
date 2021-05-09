@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Application;
 using OpenStore.Infrastructure.Web;
+using OpenStore.Omnichannel.Application.Command;
 using OpenStore.Omnichannel.Application.Query;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
+using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 using OpenStore.Omnichannel.Shared.ReadModel;
 
@@ -53,5 +56,15 @@ namespace OpenStore.Omnichannel.Api.Store
         [HttpGet("archived")]
         public Task<PagedList<ProductListItemReadModel>> GetArchivedProducts([FromQuery] PageRequestQueryModel pageRequest)
             => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Archived), CancellationToken);
+        
+        [HttpPost("{id:guid}/assign-media")]
+        public Task<IEnumerable<ProductMediaDto>> AssignProductMedia(Guid id, IEnumerable<FileUploadDto> model) =>
+            _mediator.Send(new AssignProductMedia(id, model), CancellationToken);
+        
+        [HttpPost("{id:guid}/update-medias")]
+        public Task UpdateProductMedias(Guid id, IEnumerable<ProductMediaDto> medias) => _mediator.Send(new UpdateProductMedias(id, medias), CancellationToken);
+        
+        [HttpDelete("{id:guid}/medias/{productMediaId:guid}")]
+        public Task DeleteProductMedia(Guid id, Guid productMediaId) => _mediator.Send(new DeleteProductMedia(id, productMediaId), CancellationToken);
     }
 }

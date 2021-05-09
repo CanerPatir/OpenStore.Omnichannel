@@ -51,4 +51,13 @@
     <data name="GenericSuccessMessage" xml:space="preserve">
         <value>İşleminiz başarıyla gerçekleştirildi</value>
     </data>
+    <data name="GenericDeleteConfirm" xml:space="preserve">
+        <value>Silmek istediğinizden emin misiniz?</value>
+    </data>
+    <data name="OpenStore.GenericError" xml:space="preserve">
+        <value>Bilinmeyen bir hata oluştu</value>
+    </data>
+    <data name="ResourceNotFound" xml:space="preserve">
+        <value>Kayıt bulunamadı</value>
+    </data>
 </root>

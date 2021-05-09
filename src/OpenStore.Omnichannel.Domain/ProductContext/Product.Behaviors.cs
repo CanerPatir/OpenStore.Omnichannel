@@ -81,11 +81,17 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public void AssignMedia(ProductMediaDto productMediaDto, Func<Guid, ProductMedia> attacher)
         {
             if (attacher == null) throw new ArgumentNullException(nameof(attacher));
-            
+
             var productMedia = attacher.Invoke(productMediaDto.Id);
             _medias.Add(productMedia);
 
             ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));
+        }
+
+        public void AssignAttachedMedia(ProductMedia productMedia, ProductMediaDto productMediaDto)
+        {
+            _medias.Add(productMedia);
+
             ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));
         }
 
@@ -96,14 +102,15 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             {
                 throw new DomainException(Msg.Domain.Product.QuantityShouldBeGreaterOrEqualThenZero);
             }
+
             var variant = _variants.SingleOrDefault(x => x.Id == variantId);
             if (variant is null)
             {
-                throw new DomainException(Msg.Domain.Product.VariantNotFound);
+                throw new DomainException(Msg.ResourceNotFound);
             }
 
             variant.UpdateQuantity(quantity);
-            
+
             ApplyChange(new ProductVariantQuantityUpdated(Id, variantId, quantity));
         }
 
@@ -117,7 +124,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             Status = ProductStatus.Archived;
             ApplyChange(new ProductArchived(Id));
         }
-        
+
         public void UnArchive()
         {
             if (Status != ProductStatus.Archived)
@@ -128,7 +135,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             Status = ProductStatus.Active;
             ApplyChange(new ProductUnArchived(Id, Status));
         }
-        
+
         public void Delete()
         {
             if (SoftDeleted)
@@ -140,6 +147,29 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             ApplyChange(new ProductDeleted(Id));
         }
 
-        
+        public void UpdateProductMedias(UpdateProductMedias command)
+        {
+            foreach (var productMediaDto in command.Medias)
+            {
+                var productMedia = Medias.SingleOrDefault(x => x.Id == productMediaDto.Id);
+
+                if (productMedia == null) continue;
+                
+                productMedia.Update(productMediaDto);
+                ApplyChange(new ProductMediaUpdated(Id, productMediaDto));
+            }
+        }
+
+        public void DeleteMedia(DeleteProductMedia command)
+        {
+            var productMedia = Medias.SingleOrDefault(x => x.Id == command.ProductMediaId);
+            if (productMedia == null)
+            {
+                throw new DomainException(Msg.ResourceNotFound);
+            }
+
+            _medias.Remove(productMedia);
+            ApplyChange(new ProductMediaDeleted(Id, command.ProductMediaId));
+        }
     }
 }

@@ -110,5 +110,23 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("GenericSuccessMessage", resourceCulture);
             }
         }
+        
+        internal static string GenericDeleteConfirm {
+            get {
+                return ResourceManager.GetString("GenericDeleteConfirm", resourceCulture);
+            }
+        }
+        
+        internal static string OpenStore_GenericError {
+            get {
+                return ResourceManager.GetString("OpenStore.GenericError", resourceCulture);
+            }
+        }
+        
+        internal static string ResourceNotFound {
+            get {
+                return ResourceManager.GetString("ResourceNotFound", resourceCulture);
+            }
+        }
     }
 }

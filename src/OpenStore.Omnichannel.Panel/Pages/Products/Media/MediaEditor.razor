@@ -19,7 +19,7 @@
                     }
                 </div>
                 <div class="draggable-image-grid" ondragover="event.preventDefault();">
-                    <MediaEditorItems Items="@Items"/>
+                    <MediaEditorItems Items="@Items" ItemsChanged="@OnItemsChanged" Id="@Model.Id" IsEdit="@Model.IsEdit"/>
                     <div>
                         <div class="drop-area @_dropClass">
                             <InputFile OnChange="OnInputFileChange"
@@ -37,7 +37,7 @@
 </Card>
 
 @code {
-    const long MaxAllowed = 2048000L;
+        const long MaxAllowed = 2048000L;
 
     [Parameter]
     public ProductDto Model { get; set; }
@@ -45,7 +45,7 @@
     private List<MediaEditorItemModel> Items => Model.Medias.Select(x => new MediaEditorItemModel
     {
         Dto = x
-    }).ToList();
+    }).OrderBy(x => x.Dto.Position).ToList();
 
     private string _dropClass = string.Empty;
 
@@ -65,19 +65,24 @@
             await using var openReadStream = file.OpenReadStream(MaxAllowed);
             await openReadStream.ReadAsync(bytes);
             dtoList.Add(new FileUploadDto(file.Name, file.ContentType, file.Size, index++, bytes));
-            // list.Add($"data:{imageType};base64,{Convert.ToBase64String(bytes)}");
+    // list.Add($"data:{imageType};base64,{Convert.ToBase64String(bytes)}");
         }
 
-        var mediaDtoList = await ApiClient.Media.UploadProductMedia(dtoList);
+        var mediaDtoList = Model.IsCreate ? await ApiClient.Media.UploadProductMedia(dtoList) : await ApiClient.Product.AssignProductMedia(Model.Id.Value, dtoList);
 
+        // todo: move to store
         var model = new List<ProductMediaDto>();
         model.AddRange(Model.Medias);
         model.AddRange(mediaDtoList);
 
         Model.Medias = model;
         StateHasChanged();
-        // await ModelChanged.InvokeAsync(model);
+    // await ModelChanged.InvokeAsync(model);
     }
 
+    private void OnItemsChanged(List<MediaEditorItemModel> items)
+    {
+        Model.Medias = items.Select(x => x.Dto);
+    }
 
 }

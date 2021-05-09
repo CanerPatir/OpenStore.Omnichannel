@@ -20,17 +20,19 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public bool Confirm(string message) => JsRuntimeSync.Invoke<bool>("confirm", message);
 
+        public bool DeleteConfirm() => JsRuntimeSync.Invoke<bool>("confirm", _sharedLocalizer["GenericDeleteConfirm"].ToString());
+
         public bool ConsoleLog(object message) => JsRuntimeSync.Invoke<bool>("console.log", message);
 
         public bool ConsoleError(object message) => JsRuntimeSync.Invoke<bool>("console.error", message);
 
         // toast
-        public void ShowSuccess(string message, string title = null) => JsRuntimeSync.ShowSuccess(message, title ?? _sharedLocalizer["Success.Title"]);
-     
-        public void ShowCreatedSuccess() => ShowSuccess(_sharedLocalizer["Success.GenericCreated"]);
+        public void ShowSuccess(string message, string title = null) => JsRuntimeSync.ShowSuccess(message, title ?? _sharedLocalizer["Success.Title"].ToString());
 
-        public void ShowError(string message, string title = null) => JsRuntimeSync.ShowError(message, title ?? _sharedLocalizer["Error.Title"]);
+        public void ShowCreatedSuccess() => ShowSuccess(_sharedLocalizer["Success.GenericCreated"].ToString());
 
-        public void ShowWarning(string message, string title = null) => JsRuntimeSync.ShowWarning(message, title ?? _sharedLocalizer["Warning.Title"]);
+        public void ShowError(string message, string title = null) => JsRuntimeSync.ShowError(message, title ?? _sharedLocalizer["Error.Title"].ToString());
+
+        public void ShowWarning(string message, string title = null) => JsRuntimeSync.ShowWarning(message, title ?? _sharedLocalizer["Warning.Title"].ToString());
     }
 }

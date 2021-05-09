@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using OpenStore.Omnichannel.Shared.Dto.Product;
 
 // ReSharper disable CollectionNeverUpdated.Local
 
@@ -30,7 +31,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             var productMedia = new ProductMedia
             {
                 Id = Guid.NewGuid(),
-                Host =  host,
+                Host = host,
                 Path = path,
                 Type = type,
                 Extension = extension,
@@ -52,6 +53,18 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                 productMedia.Size
             ));
             return productMedia;
+        }
+
+        public void Update(ProductMediaDto productMediaDto)
+        {
+            Host = productMediaDto.Host;
+            Path = productMediaDto.Path;
+            Type = productMediaDto.Type;
+            Extension = productMediaDto.Extension;
+            Filename = productMediaDto.Filename;
+            Title = productMediaDto.Title;
+            Position = productMediaDto.Position;
+            Size = productMediaDto.Size;
         }
     }
 }
