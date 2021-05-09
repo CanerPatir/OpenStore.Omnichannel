@@ -47,6 +47,11 @@ namespace OpenStore.Omnichannel.Application.Query
                     break;
             }
 
+            if (!string.IsNullOrWhiteSpace(pageRequest.FilterTerm))
+            {
+                q = q.Where(x => x.Title.Contains(pageRequest.FilterTerm));
+            }
+
             return q
                 .GetPaged(
                     pageRequest.PageNumber,
