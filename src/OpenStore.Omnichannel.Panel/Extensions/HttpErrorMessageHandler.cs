@@ -97,13 +97,13 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             {
                 errorReadModel = await response.Content.ReadFromJsonAsync<ErrorReadModel>(cancellationToken: cancellationToken);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 try
                 {
                     rawErrorMessage = await response.Content.ReadAsStringAsync(cancellationToken);
                 }
-                catch (Exception e2)
+                catch (Exception)
                 {
                     // ignored
                 }

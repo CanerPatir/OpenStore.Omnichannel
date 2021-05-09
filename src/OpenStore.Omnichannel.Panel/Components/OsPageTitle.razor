@@ -1,0 +1,36 @@
+<div class="d-flex align-items-center mb-4">
+    @if (!string.IsNullOrWhiteSpace(RootHref))
+    {
+        <Button Color="Color.Light" Clicked="GoBack" Style="border: 1px solid #babfc3; color: #5c5f62">
+            <Icon Name="IconName.ArrowLeft"/>
+        </Button>
+        <h1 class="page-header mb-0 ms-3">
+            @TitleSection
+        </h1>
+    }
+    else
+    {
+        <h1 class="page-header mb-0">
+            @TitleSection
+        </h1>
+    }
+    
+    <div class="ms-auto">
+        @ButtonsSection
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string RootHref { get; set; }
+
+    [Parameter]
+    public RenderFragment ButtonsSection { get; set; }
+
+    [Parameter]
+    public RenderFragment TitleSection { get; set; }
+
+    private void GoBack() => Navigation.NavigateTo(RootHref);
+
+}

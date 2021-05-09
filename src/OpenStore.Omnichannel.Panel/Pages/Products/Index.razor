@@ -1,16 +1,16 @@
 @page "/products"
 @inject IStringLocalizer<Index> L
 
-<OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Home"]" CurrentTitle="@L["Breadcrumb.ProductList"]">
+<OsPageTitle>
     <TitleSection>
-        @L["Breadcrumb.ProductList"]
+        <span>@L["Breadcrumb.ProductList"]</span>
     </TitleSection>
     <ButtonsSection>
         <NavLink href="products/add" class="btn btn-primary">
             <Icon Name="IconName.PlusCircle" Class="fa-fw me-1"/>@L["AddProduct"]
         </NavLink>
     </ButtonsSection>
-</OsBreadcrumb>
+</OsPageTitle>
 
 <div class="mb-sm-4 mb-3 d-sm-flex">
     <div class="mt-sm-0 mt-2">

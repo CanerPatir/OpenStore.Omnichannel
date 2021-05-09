@@ -1,0 +1,117 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<UpdateVariantsEditor> L
+
+<style>
+    .custom-control-label{
+        display: none;
+    }
+</style>
+<Card Margin="Margin.Is3.FromBottom">
+
+    <ListGroup>
+        <ListGroupItem>
+            <h5 class="mt-2 mb-2">
+                @L["Title"]
+            </h5>
+        </ListGroupItem>
+
+        @if (Model.Variants.Any())
+        {
+            <ListGroupItem Padding="Padding.Is3">
+                <div class="d-flex align-items-center">
+                    <div class="width-10 align-middle">
+                        <Check TValue="bool" Class="form-check-input" CheckedChanged="SelectedAll"/>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="m-0">
+                            @L["ListGroupItem.ShowingXVariants", Model.Variants.Count]
+                        </h6>
+                    </div>
+                    <div class="ms-auto">
+                        <Dropdown>
+                            <DropdownToggle Color="Color.Light">
+                                Dropdown
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>Action</DropdownItem>
+                                <DropdownDivider />
+                                <DropdownItem>Another Action</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </div>
+                </div>
+            </ListGroupItem>
+        }
+
+        @foreach (var variant in Model.Variants)
+        {
+            <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset" Clicked="@(_ => GoVariantDetail(variant))">
+                <div class="d-flex align-items-center">
+                    <div class="width-10 align-middle">
+                        <Check TValue="bool" Class="form-check-input" @bind-Checked="@variant.Selected"/>
+                    </div>
+                    <div class="ms-3 width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                        <img class="mw-100 mh-100" src="@GetVariantImage(variant)" alt=""/>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="m-0">
+                            @variant.Option1
+                            @if (!string.IsNullOrWhiteSpace(variant.Option2))
+                            {
+                                <span>&nbsp;/ @variant.Option2</span>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(variant.Option3))
+                            {
+                                <span>&nbsp;/ @variant.Option3</span>
+                            }
+                        </h6>
+                        <small>@variant.Barcode</small>
+                    </div>
+                    <div class="ms-auto">
+                        <h6 class="m-0 d-flex justify-content-end">@variant.Price.ToCurrencyString()</h6>
+                        @if (variant.TrackQuantity)
+                        {
+                            <small>@variant.Quantity @L["ListGroupItem.VariantQuantity"]</small>
+                        }
+                    </div>
+                </div>
+            </ListGroupItem>
+        }
+
+        @if (Model.Variants.Any())
+        {
+            <ListGroupItem Padding="Padding.Is4">
+                <div class="d-flex align-items-center">
+                    <div >
+                        @L["ListGroupItem.TotalQuantity"]
+                    </div>
+                    <div class="ms-auto">
+                        @(Model.Variants.Sum(x => x.Quantity))
+                    </div>
+                </div>
+            </ListGroupItem>
+        }
+    </ListGroup>
+</Card>
+
+
+@code {
+
+    [Parameter]
+    public ProductDto Model { get; set; }
+
+    // ReSharper disable PossibleInvalidOperationException
+    private string GetVariantImage(VariantDto variant) => Model.Medias.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value))?.Url;
+
+    // ReSharper disable PossibleInvalidOperationException
+    private void GoVariantDetail(VariantDto variant) => Navigation.NavigateTo($"products/{Model.Id.Value}/variants/{variant.Id.Value}");
+
+    private void SelectedAll(bool isChecked)
+    {
+        foreach (var modelVariant in Model.Variants)
+        {
+            modelVariant.Selected = isChecked;
+        }
+    }
+
+}

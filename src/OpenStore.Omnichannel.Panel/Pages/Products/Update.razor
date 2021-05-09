@@ -14,7 +14,7 @@
             }
             else
             {
-                <OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Products"]" CurrentTitle="@L["Breadcrumb.AddProduct"]">
+                <OsPageTitle RootHref="products">
                     <TitleSection>
                         <span>@_product.Title</span>
                     </TitleSection>
@@ -27,7 +27,8 @@
                             @L["Button.Save"]
                         </Button>
                     </ButtonsSection>
-                </OsBreadcrumb>
+                </OsPageTitle>
+
                 <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
                     <Row>
                         <Column ColumnSize="ColumnSize.Is12">
@@ -46,10 +47,9 @@
 
                             @if (_product.HasMultipleVariants)
                             {
-                                <EditVariantsEditor Model="@_product"/>
+                                <UpdateVariantsEditor Model="@_product"/>
                             }
-
-                            @if (!_product.HasMultipleVariants)
+                            else
                             {
                                 <PricingEditor Model="@_product.Variants.First()"/>
                                 <InventoryEditor Model="@_product.Variants.First()"/>
@@ -104,7 +104,7 @@
                                     @L["Button.Archive"]
                                 </Button>
                             }
-                            
+
                         </div>
 
                     </div>
@@ -159,7 +159,7 @@
         {
             return;
         }
-        
+
         try
         {
             _archiving = true;

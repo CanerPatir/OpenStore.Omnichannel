@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenStore.Omnichannel.Shared.Dto.Product
 {
@@ -23,5 +24,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public string Option1 { get; set; }
         public string Option2 { get; set; }
         public string Option3 { get; set; }
+        
+        [NotMapped] public bool Selected { get; set; }
     }
 }

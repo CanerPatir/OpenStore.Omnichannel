@@ -8,7 +8,7 @@
 <Container>
     <Row class="justify-content-center">
         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-            <OsBreadcrumb RootHref="products" RootTitle="@L["Breadcrumb.Products"]" CurrentTitle="@L["Breadcrumb.AddProduct"]">
+            <OsPageTitle RootHref="products">
                 <TitleSection>
                     @if (string.IsNullOrWhiteSpace(_product.Title))
                     {
@@ -28,7 +28,7 @@
                         @L["Button.Save"]
                     </Button>
                 </ButtonsSection>
-            </OsBreadcrumb>
+            </OsPageTitle>
 
             <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
                 <Row>
@@ -105,7 +105,7 @@
             _saving = true;
             _product.Description = await _contentEditor.GetDescriptionHtml();
             var productId = await ApiClient.Product.CreateProduct(_product);
-            ShowSuccess(L["Success.ProductCreated"]);
+    // ShowSuccess(L["Success.ProductCreated"]);
             Navigation.NavigateTo($"products/{productId}");
         }
         finally

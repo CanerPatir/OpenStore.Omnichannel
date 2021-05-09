@@ -14,22 +14,22 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class EditVariantsEditor_tr_TR {
+    internal class UpdateVariantsEditor_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EditVariantsEditor_tr_TR() {
+        internal UpdateVariantsEditor_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.EditVariantsEditor_t" +
-                            "r_TR", typeof(EditVariantsEditor_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant.UpdateVariantsEditor" +
+                            "_tr_TR", typeof(UpdateVariantsEditor_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -49,6 +49,24 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        internal static string ListGroupItem_VariantQuantity {
+            get {
+                return ResourceManager.GetString("ListGroupItem.VariantQuantity", resourceCulture);
+            }
+        }
+        
+        internal static string ListGroupItem_TotalQuantity {
+            get {
+                return ResourceManager.GetString("ListGroupItem.TotalQuantity", resourceCulture);
+            }
+        }
+        
+        internal static string ListGroupItem_ShowingXVariants {
+            get {
+                return ResourceManager.GetString("ListGroupItem.ShowingXVariants", resourceCulture);
             }
         }
     }

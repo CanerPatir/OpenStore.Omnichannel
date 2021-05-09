@@ -1,7 +1,7 @@
 @using System.Globalization
 <div class="@ChipsContainerClass" style="display: flex; flex-wrap: wrap; border: 1px solid #c9d2e3; border-radius: @(InputBorderRadius.ToString(CultureInfo.InvariantCulture))rem;">
     <ul class="@ChipsListClass" style="display: inline-flex; flex-wrap: wrap; width: 100%; margin: 0; padding: 5px; list-style: none;">
-        @foreach (string chip in Chips)
+        @foreach (var chip in Chips)
         {
             <li class="@ChipClass" id="@chip" style="display: flex; justify-content: center; align-items: center; padding: 0 25px; height: 30px; border-radius: @(ChipBorderRadius)rem; background-color: #f1f1f1; line-height: 1.6; margin: 5px 5px 5px 0px; padding: 0 10px; ">
                 @if (PrependIconTemplate != null)
@@ -63,7 +63,7 @@
     /// A list of allowed chip/tag values
     /// </summary>
     [Parameter]
-    public List<string>? AllowedValues { get; set; } = null;
+    public List<string> AllowedValues { get; set; } = null;
 
     /// <summary>
     /// The validation message to use when the chip/tag value is not present in the AllowedValues list
@@ -171,13 +171,13 @@
     /// Custom template for prepending an icon to the chip
     /// </summary>
     [Parameter]
-    public RenderFragment? PrependIconTemplate { get; set; }
+    public RenderFragment PrependIconTemplate { get; set; }
 
     /// <summary>
     /// Custom template for showing validation errors, make sure to set 'ShowValidationErrors' to true in order for validation errors to render
     /// </summary>
     [Parameter]
-    public RenderFragment<string>? ValidationErrorTemplate { get; set; }
+    public RenderFragment<string> ValidationErrorTemplate { get; set; }
 
     /// <summary>
     /// The border radius of the chip input container in rem

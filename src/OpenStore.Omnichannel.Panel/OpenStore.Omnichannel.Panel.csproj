@@ -86,9 +86,9 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>StatusEditor.tr-TR.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <EmbeddedResource Update="Resources\Pages\Products\Variant\EditVariantsEditor.tr-TR.resx">
+        <EmbeddedResource Update="Resources\Pages\Products\Variant\UpdateVariantsEditor.tr-TR.resx">
           <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>EditVariantsEditor.tr-TR.Designer.cs</LastGenOutput>
+          <LastGenOutput>UpdateVariantsEditor.tr-TR.Designer.cs</LastGenOutput>
         </EmbeddedResource>
         <EmbeddedResource Update="Resources\Pages\Products\TagsEditor.tr-TR.resx">
           <Generator>ResXFileCodeGenerator</Generator>
@@ -180,7 +180,7 @@
           <AutoGen>True</AutoGen>
           <DependentUpon>StatusEditor.tr-TR.resx</DependentUpon>
         </Compile>
-        <Compile Update="Resources\Pages\Products\Variant\EditVariantsEditor.tr-TR.Designer.cs">
+        <Compile Update="Resources\Pages\Products\Variant\UpdateVariantsEditor.tr-TR.Designer.cs">
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>EditVariantsEditor.tr-TR.resx</DependentUpon>

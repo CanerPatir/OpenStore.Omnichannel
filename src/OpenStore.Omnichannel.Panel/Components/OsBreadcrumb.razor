@@ -1,12 +1,30 @@
 <div class="d-flex align-items-center mb-4">
     <div>
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-                <NavLink href="@RootHref">@RootTitle</NavLink>
-            </li>
-            <li class="breadcrumb-item active">@CurrentTitle</li>
-        </ul>
-        <h1 class="page-header mb-0">
+        <div class="d-flex align-items-lg-center mb-2">
+            @if (!string.IsNullOrWhiteSpace(RootHref))
+            {
+                <Button Color="Color.Light" Clicked="GoBack" Style="border: 1px solid #babfc3; color: #5c5f62">
+                    <Icon Name="IconName.ArrowLeft"/>
+                </Button>
+                <ul class="breadcrumb m-0 ms-3">
+                    <li class="breadcrumb-item">
+                        @RootTitle
+                    </li>
+                    <li class="breadcrumb-item active">@CurrentTitle</li>
+                </ul>
+            }
+            else
+            {
+                <ul class="breadcrumb m-0 ms-1">
+                    <li class="breadcrumb-item">
+                        @RootTitle
+                    </li>
+                    <li class="breadcrumb-item active">@CurrentTitle</li>
+                </ul>
+            }
+
+        </div>
+        <h1 class="page-header mb-0 ms-1">
             @TitleSection
         </h1>
     </div>
@@ -17,20 +35,22 @@
 </div>
 
 @code {
- 
+
     [Parameter]
-    public string CurrentTitle { get; set; }   
-    
+    public string CurrentTitle { get; set; }
+
     [Parameter]
     public string RootTitle { get; set; }
-    
+
     [Parameter]
     public string RootHref { get; set; }
-    
+
     [Parameter]
     public RenderFragment TitleSection { get; set; }
 
     [Parameter]
     public RenderFragment ButtonsSection { get; set; }
+
+    private void GoBack() => Navigation.NavigateTo(RootHref);
 
 }
