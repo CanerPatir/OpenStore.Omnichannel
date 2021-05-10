@@ -26,5 +26,30 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public string Option3 { get; set; }
         
         [NotMapped] public bool Selected { get; set; }
+        [NotMapped] public string Title
+        {
+            get
+            {
+                var title = Option1;
+                if (!string.IsNullOrWhiteSpace(Option2))
+                {
+                    title += $" / {Option2}";
+                }
+                
+                if (!string.IsNullOrWhiteSpace(Option3))
+                {
+                    title += $" / {Option3}";
+                }
+
+                return title; 
+            }
+        }
+
+
+        
+        
+        
+        
+        
     }
 }

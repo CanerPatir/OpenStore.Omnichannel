@@ -10,15 +10,35 @@
 
     <ListGroup>
         <ListGroupItem>
-            <h5 class="mt-2 mb-2">
-                @L["Title"]
-            </h5>
+            <div class="d-flex">
+                <h5 class="mt-2 mb-2">
+                    @L["Title"]
+                </h5>
+                <div class="ms-auto">
+                    <Button Color="Color.Link" Clicked="ShowAddVariantModal">@L["Button.AddVariant"]</Button>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center p-2">
+                <div>
+                    @L["Label.BulkSelect"]
+                </div>
+                @foreach (var option in Model.Options)
+                {
+                    foreach (var optionValue in option.Values)
+                    {
+                        <div class="ms-0">
+                            <Button Color="Color.Link" Clicked="() => SelectOptionValue(optionValue)">@optionValue</Button>
+                        </div>
+                    }
+                }
+            </div>
         </ListGroupItem>
 
         @if (Model.Variants.Any())
         {
             <ListGroupItem Padding="Padding.Is3">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center" style="min-height: 36px">
                     <div class="width-10 align-middle">
                         <Check TValue="bool" Class="form-check-input" CheckedChanged="SelectedAll"/>
                     </div>
@@ -28,16 +48,20 @@
                         </h6>
                     </div>
                     <div class="ms-auto">
-                        <Dropdown>
-                            <DropdownToggle Color="Color.Light">
-                                Dropdown
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem>Action</DropdownItem>
-                                <DropdownDivider />
-                                <DropdownItem>Another Action</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
+                        @if (Model.Variants.Any(x => x.Selected))
+                        {
+                            <Dropdown>
+                                <DropdownToggle Color="Color.Light">
+                                    @L["Dropdown.BulkOperation"]
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem Clicked="BulkUpdatePrice">@L["DropdownItem.BulkUpdatePrice"]</DropdownItem>
+                                    <DropdownItem Clicked="BulkUpdateStock">@L["DropdownItem.BulkUpdateStock"]</DropdownItem>
+                                    <DropdownItem Clicked="BulkUpdateBarcodeSku">@L["DropdownItem.BulkUpdateBarcodeSku"]</DropdownItem>
+                                    <DropdownItem Clicked="BulkUpdateHsCode">@L["DropdownItem.BulkUpdateHsCode"]</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        }
                     </div>
                 </div>
             </ListGroupItem>
@@ -55,15 +79,7 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="m-0">
-                            @variant.Option1
-                            @if (!string.IsNullOrWhiteSpace(variant.Option2))
-                            {
-                                <span>&nbsp;/ @variant.Option2</span>
-                            }
-                            @if (!string.IsNullOrWhiteSpace(variant.Option3))
-                            {
-                                <span>&nbsp;/ @variant.Option3</span>
-                            }
+                            @variant.Title
                         </h6>
                         <small>@variant.Barcode</small>
                     </div>
@@ -82,7 +98,7 @@
         {
             <ListGroupItem Padding="Padding.Is4">
                 <div class="d-flex align-items-center">
-                    <div >
+                    <div>
                         @L["ListGroupItem.TotalQuantity"]
                     </div>
                     <div class="ms-auto">
@@ -94,8 +110,22 @@
     </ListGroup>
 </Card>
 
+@if (Model.Id.HasValue)
+{
+    <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
+    <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
+    <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
+    <UpdateVariantHsCodesModal @ref="_updateVariantHsCodesModal" ProductId="@Model.Id.Value"/>
+}
+
 
 @code {
+
+    private UpdateVariantPricesModal _updateVariantPricesModal;
+    private UpdateVariantStocksModal _updateVariantStocksModal;
+    private UpdateVariantBarcodesModal _updateVariantBarcodesModal;
+    private UpdateVariantHsCodesModal _updateVariantHsCodesModal;
+    private IEnumerable<VariantDto> SelectedVariants => Model.Variants.Where(x => x.Selected);
 
     [Parameter]
     public ProductDto Model { get; set; }
@@ -113,5 +143,26 @@
             modelVariant.Selected = isChecked;
         }
     }
+
+    private void SelectOptionValue(string optionValue)
+    {
+        foreach (var modelVariant in Model.Variants)
+        {
+            modelVariant.Selected = (modelVariant.Option1 == optionValue || modelVariant.Option2 == optionValue || modelVariant.Option3 == optionValue);
+        }
+    }
+
+    private void ShowAddVariantModal()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void BulkUpdatePrice() => _updateVariantPricesModal.Show(SelectedVariants);
+
+    private void BulkUpdateStock() => _updateVariantStocksModal.Show(SelectedVariants);
+
+    private void BulkUpdateBarcodeSku() => _updateVariantBarcodesModal.Show(SelectedVariants);
+
+    private void BulkUpdateHsCode() => _updateVariantHsCodesModal.Show(SelectedVariants);
 
 }

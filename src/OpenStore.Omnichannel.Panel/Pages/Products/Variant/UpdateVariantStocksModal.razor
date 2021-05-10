@@ -1,0 +1,57 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<UpdateVariantsEditor> L
+
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true">
+        <ModalHeader>
+            <ModalTitle>@L["UpdateVariantPricesModal.Title"]</ModalTitle>
+        </ModalHeader>
+        <ModalBody Class="overflow-auto" Style="max-height: 500px">
+            @_variants?.Count()
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Light" Clicked="@Cancel">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Loading="_saving" Color="Color.Success" Clicked="@Save">@SharedLocalizer["Generic.Save"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal _modalRef;
+    private IEnumerable<VariantDto> _variants;
+    private bool _saving;
+
+    [Parameter]
+    public EventCallback ModelChanged { get; set; }
+
+    [Parameter]
+    public Guid ProductId { get; set; }
+    
+    public void Show(IEnumerable<VariantDto> variants)
+    {
+        _variants = variants;
+        _modalRef.Show();
+    }
+
+    private void Cancel()
+    {
+        _modalRef.Hide();
+    }
+
+    private async Task Save()
+    {
+        _saving = true;
+        try
+        {
+            _variants = null;
+            _modalRef.Hide();
+            await ModelChanged.InvokeAsync();
+        }
+        finally
+        {
+            await InvokeAsync(StateHasChanged);
+            _saving = false;
+        }
+    }
+
+}

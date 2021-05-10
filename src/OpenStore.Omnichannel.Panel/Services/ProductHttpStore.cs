@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 using OpenStore.Omnichannel.Shared.ReadModel;
+using OpenStore.Omnichannel.Shared.Request;
 
 namespace OpenStore.Omnichannel.Panel.Services
 {
@@ -54,5 +55,7 @@ namespace OpenStore.Omnichannel.Panel.Services
         public Task UpdateProductMedias(Guid id, IEnumerable<ProductMediaDto> medias) => HttpClient.PostAsJsonAsync($"{Path}/{id}/update-medias", medias);
         
         public Task DeleteProductMedia(Guid id, Guid productMediaId) => HttpClient.DeleteAsync($"{Path}/{id}/medias/{productMediaId}");
+       
+        public Task UpdateVariantPrices(Guid id, UpdateVariantPricesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-prices", request);
     }
 }

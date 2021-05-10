@@ -69,5 +69,71 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
                 return ResourceManager.GetString("ListGroupItem.ShowingXVariants", resourceCulture);
             }
         }
+        
+        internal static string Label_BulkSelect {
+            get {
+                return ResourceManager.GetString("Label.BulkSelect", resourceCulture);
+            }
+        }
+        
+        internal static string Button_AddVariant {
+            get {
+                return ResourceManager.GetString("Button.AddVariant", resourceCulture);
+            }
+        }
+        
+        internal static string Dropdown_BulkOperation {
+            get {
+                return ResourceManager.GetString("Dropdown.BulkOperation", resourceCulture);
+            }
+        }
+        
+        internal static string DropdownItem_BulkUpdatePrice {
+            get {
+                return ResourceManager.GetString("DropdownItem.BulkUpdatePrice", resourceCulture);
+            }
+        }
+        
+        internal static string DropdownItem_BulkUpdateStock {
+            get {
+                return ResourceManager.GetString("DropdownItem.BulkUpdateStock", resourceCulture);
+            }
+        }
+        
+        internal static string DropdownItem_BulkUpdateBarcodeSku {
+            get {
+                return ResourceManager.GetString("DropdownItem.BulkUpdateBarcodeSku", resourceCulture);
+            }
+        }
+        
+        internal static string DropdownItem_BulkUpdateHsCode {
+            get {
+                return ResourceManager.GetString("DropdownItem.BulkUpdateHsCode", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantPricesModal_Title {
+            get {
+                return ResourceManager.GetString("UpdateVariantPricesModal.Title", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantPricesModal_Input_Price {
+            get {
+                return ResourceManager.GetString("UpdateVariantPricesModal.Input.Price", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantPricesModal_Input_CompareAtPrice {
+            get {
+                return ResourceManager.GetString("UpdateVariantPricesModal.Input.CompareAtPrice", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantPricesModal_Input_Cost {
+            get {
+                return ResourceManager.GetString("UpdateVariantPricesModal.Input.Cost", resourceCulture);
+            }
+        }
     }
 }

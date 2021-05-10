@@ -30,4 +30,37 @@
     <data name="ListGroupItem.ShowingXVariants" xml:space="preserve">
         <value>{0} adet varyant gösteriliyor</value>
     </data>
+    <data name="Label.BulkSelect" xml:space="preserve">
+        <value>Seçim:</value>
+    </data>
+    <data name="Button.AddVariant" xml:space="preserve">
+        <value>Yeni Varyant</value>
+    </data>
+    <data name="Dropdown.BulkOperation" xml:space="preserve">
+        <value>İşlemler</value>
+    </data>
+    <data name="DropdownItem.BulkUpdatePrice" xml:space="preserve">
+        <value>Toplu fiyat güncelle</value>
+    </data>
+    <data name="DropdownItem.BulkUpdateStock" xml:space="preserve">
+        <value>Toplu stok güncelle</value>
+    </data>
+    <data name="DropdownItem.BulkUpdateBarcodeSku" xml:space="preserve">
+        <value>Toplu barkod / SKU güncelle</value>
+    </data>
+    <data name="DropdownItem.BulkUpdateHsCode" xml:space="preserve">
+        <value>Toplu HS kod güncelle</value>
+    </data>
+    <data name="UpdateVariantPricesModal.Title" xml:space="preserve">
+        <value>Toplu Varyant Fiyat Güncelleme</value>
+    </data>
+    <data name="UpdateVariantPricesModal.Input.Price" xml:space="preserve">
+        <value>Fiyat*</value>
+    </data>
+    <data name="UpdateVariantPricesModal.Input.CompareAtPrice" xml:space="preserve">
+        <value>Karşılaştırma Fiyatı</value>
+    </data>
+    <data name="UpdateVariantPricesModal.Input.Cost" xml:space="preserve">
+        <value>Maliyet</value>
+    </data>
 </root>

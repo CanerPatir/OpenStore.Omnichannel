@@ -51,15 +51,7 @@
                     {
                         <Row>
                             <Column ColumnSize="ColumnSize.Is4">
-                                @variant.Option1
-                                @if (!string.IsNullOrWhiteSpace(variant.Option2))
-                                {
-                                    <span>&nbsp;/ @variant.Option2</span>
-                                }
-                                @if (!string.IsNullOrWhiteSpace(variant.Option3))
-                                {
-                                    <span>&nbsp;/ @variant.Option3</span>
-                                }
+                                @variant.Title
                             </Column>
                             <Column ColumnSize="ColumnSize.Is2">
                                 <TextEdit @bind-Text="@variant.Barcode" Size="Size.Small" Placeholder="@(L["Input.VariantBarcode"])"/>

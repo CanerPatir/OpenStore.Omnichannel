@@ -73,5 +73,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             Inventory.Change(quantity);
         }
+
+        public void UpdatePrice(decimal price, decimal? compareAtPrice, decimal? cost)
+        {
+            Price = price;
+            CompareAtPrice = compareAtPrice;
+            Cost = cost;
+        }
     }
 }

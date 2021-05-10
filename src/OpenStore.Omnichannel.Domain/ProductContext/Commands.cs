@@ -21,4 +21,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record UpdateProductMedias(Guid Id, IEnumerable<ProductMediaDto> Medias) : IRequest;
 
     public record DeleteProductMedia(Guid Id, Guid ProductMediaId) : IRequest;
+    
+    public record UpdateVariantPrices(Guid ProductId, IEnumerable<UpdateVariantPrice> Variants) : IRequest;
+
+    public record UpdateVariantPrice(Guid VariantId, decimal Price, decimal? CompareAtPrice, decimal? Cost) : IRequest;
 }

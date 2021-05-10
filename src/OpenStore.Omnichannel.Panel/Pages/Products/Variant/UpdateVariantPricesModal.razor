@@ -1,0 +1,144 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@using OpenStore.Omnichannel.Shared.Request
+@inject IStringLocalizer<UpdateVariantsEditor> L
+
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true">
+        <ModalHeader>
+            <ModalTitle>@L["UpdateVariantPricesModal.Title"]</ModalTitle>
+        </ModalHeader>
+        <ModalBody Class="overflow-auto" Style="max-height: 500px">
+            <ListGroup>
+
+
+                @if (_updateVariantPriceModelList != null)
+                {
+                    <ListGroupItem>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is3">
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is3">
+                                @L["UpdateVariantPricesModal.Input.Price"]
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is3">
+                                @L["UpdateVariantPricesModal.Input.CompareAtPrice"]
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is3">
+                                @L["UpdateVariantPricesModal.Input.Cost"]
+                            </Column>
+                        </Row>
+                    </ListGroupItem>
+                    foreach (var updateVariantPriceModel in _updateVariantPriceModelList)
+                    {
+                        <ListGroupItem>
+                            <Row>
+                                <Column ColumnSize="ColumnSize.Is3">
+                                    @updateVariantPriceModel.Title
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is3">
+                                    <NumericEdit TValue="decimal"
+                                                 @bind-Value="@updateVariantPriceModel.Price"
+                                                 Decimals="2"
+                                                 Size="Size.Small"/>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is3">
+                                    <NumericEdit TValue="decimal?"
+                                                 @bind-Value="@updateVariantPriceModel.CompareAtPrice"
+                                                 Decimals="2"
+                                                 Size="Size.Small"/>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is3">
+                                    <NumericEdit TValue="decimal?"
+                                                 @bind-Value="@updateVariantPriceModel.Cost"
+                                                 Decimals="2"
+                                                 Size="Size.Small"/>
+                                </Column>
+                            </Row>
+                        </ListGroupItem>
+                    }
+                }
+            </ListGroup>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Light" Clicked="@Cancel">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Loading="_saving" Color="Color.Success" Clicked="@Save">@SharedLocalizer["Generic.Save"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+
+    class UpdateVariantPriceModel
+    {
+        public string Title { get; init; }
+        public Guid VariantId { get; init; }
+
+        public decimal Price { get; set; }
+        public decimal? CompareAtPrice { get; set; }
+        public decimal? Cost { get; set; }
+
+        public static implicit operator UpdateVariantPriceRequest(UpdateVariantPriceModel model)
+            => new(model.VariantId, model.Price, model.CompareAtPrice, model.Cost);
+    }
+
+    private Modal _modalRef;
+    private IEnumerable<VariantDto> _variants;
+    private List<UpdateVariantPriceModel> _updateVariantPriceModelList;
+    private bool _saving;
+
+    [Parameter]
+    public Guid ProductId { get; set; }
+
+    [Parameter]
+    public EventCallback ModelChanged { get; set; }
+
+    public void Show(IEnumerable<VariantDto> variants)
+    {
+        _variants = variants.ToList();
+        _updateVariantPriceModelList = _variants.Select(v => new UpdateVariantPriceModel
+        {
+            Price = v.Price,
+            CompareAtPrice = v.CompareAtPrice,
+            Cost = v.Cost,
+            VariantId = v.Id.Value,
+            Title = v.Title
+        }).ToList();
+        _modalRef.Show();
+    }
+
+    private void Cancel()
+    {
+        _modalRef.Hide();
+    }
+
+    private async Task Save()
+    {
+        _saving = true;
+        try
+        {
+            await ApiClient.Product.UpdateVariantPrices(ProductId, new UpdateVariantPricesRequest(_updateVariantPriceModelList.Select(x => (UpdateVariantPriceRequest) x)));
+            _modalRef.Hide();
+            await UpdateLocalState();
+            _variants = null;
+            _updateVariantPriceModelList = null;
+        }
+        finally
+        {
+            await InvokeAsync(StateHasChanged);
+            _saving = false;
+        }
+    }
+
+    private async Task UpdateLocalState()
+    {
+        foreach (var variantDto in _variants)
+        {
+            var updateVariantPriceRequest = _updateVariantPriceModelList.Single(x => x.VariantId == variantDto.Id);
+            variantDto.Price = updateVariantPriceRequest.Price;
+            variantDto.CompareAtPrice = updateVariantPriceRequest.CompareAtPrice;
+            variantDto.Cost = updateVariantPriceRequest.Cost;
+        }
+        await ModelChanged.InvokeAsync();
+    }
+
+}
