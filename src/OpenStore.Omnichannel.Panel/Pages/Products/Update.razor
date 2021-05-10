@@ -24,7 +24,7 @@
                             {
                                 <Icon Name="IconName.Save" Class="me-1"></Icon>
                             }
-                            @L["Button.Save"]
+                            @SharedLocalizer["Generic.Save"]
                         </Button>
                     </ButtonsSection>
                 </OsPageTitle>
@@ -85,26 +85,28 @@
                 <hr class="mb-4">
                 <Row>
                     <div class="d-flex align-items-center mb-4">
-                        <div class="ms-auto">
-                            <Button Loading="_saving" Clicked="Save" Color="Color.Success">
-                                @if (!_saving)
-                                {
-                                    <Icon Name="IconName.Save" Class="me-1"></Icon>
-                                }
-                                @L["Button.Save"]
-                            </Button>
 
-                            @if (_product.Status != ProductStatus.Archived)
-                            {
-                                <Button Loading="_archiving" Style="margin-left: 12px" Clicked="Archive" Color="Color.Secondary">
+                        @if (_product.Status != ProductStatus.Archived)
+                        {
+                            <div>
+                                <Button Loading="_archiving" Clicked="Archive" Color="Color.Secondary">
                                     @if (!_archiving)
                                     {
                                         <Icon Name="IconName.Archive" Class="me-1"></Icon>
                                     }
                                     @L["Button.Archive"]
                                 </Button>
-                            }
+                            </div>
+                        }
 
+                        <div class="ms-auto">
+                            <Button Loading="_saving" Clicked="Save" Color="Color.Success">
+                                @if (!_saving)
+                                {
+                                    <Icon Name="IconName.Save" Class="me-1"></Icon>
+                                }
+                                @SharedLocalizer["Generic.Save"]
+                            </Button>
                         </div>
 
                     </div>

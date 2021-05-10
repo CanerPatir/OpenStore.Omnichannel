@@ -140,5 +140,11 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Generic.Save", resourceCulture);
             }
         }
+        
+        internal static string Generic_Delete {
+            get {
+                return ResourceManager.GetString("Generic.Delete", resourceCulture);
+            }
+        }
     }
 }

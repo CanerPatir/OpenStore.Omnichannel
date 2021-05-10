@@ -1,10 +1,109 @@
 @page "/products/{ProductId:guid}/variants/{VariantId:guid}"
-<h3>UpdateVariant</h3>
+@using OpenStore.Omnichannel.Shared.Dto.Product
+
+
+@inject IStringLocalizer<UpdateVariant> L
+
+<Container>
+    <Row class="justify-content-center">
+        <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+
+            <OsPageTitle RootHref="@($"/products/{ProductId}")">
+                <TitleSection>
+                    <span>@_variant?.Title</span>
+                </TitleSection>
+                <ButtonsSection>
+                    <Button Loading="_saving" Clicked="Save" Color="Color.Success">
+                        @if (!_saving)
+                        {
+                            <Icon Name="IconName.Save" Class="me-1"></Icon>
+                        }
+                        @SharedLocalizer["Generic.Save"]
+                    </Button>
+                </ButtonsSection>
+            </OsPageTitle>
+
+            <Row>
+                <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+
+                </Column>
+                <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+
+                </Column>
+            </Row>
+
+            <hr class="mb-4">
+            <Row>
+                <div class="d-flex align-items-center mb-4">
+
+                    <div>
+                        <Button Loading="_deleting" Clicked="Delete" Color="Color.Danger">
+                            @if (!_deleting)
+                            {
+                                <Icon Name="IconName.Delete" Class="me-1"></Icon>
+                            }
+                            @SharedLocalizer["Generic.Delete"]
+                        </Button>
+                    </div>
+                    <div class="ms-auto">
+                        <Button Loading="_saving" Clicked="Save" Color="Color.Success">
+                            @if (!_saving)
+                            {
+                                <Icon Name="IconName.Save" Class="me-1"></Icon>
+                            }
+                            @SharedLocalizer["Generic.Save"]
+                        </Button>
+                    </div>
+                </div>
+            </Row>
+
+        </Column>
+    </Row>
+</Container>
 
 @code {
+    private bool _saving;
+    private bool _deleting;
+    private VariantDto _variant;
+
     [Parameter]
     public Guid ProductId { get; set; }
-    
+
     [Parameter]
     public Guid VariantId { get; set; }
+
+
+    private async Task Save()
+    {
+        try
+        {
+            _saving = true;
+        }
+        finally
+        {
+            _saving = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task Delete()
+    {
+        if (!DeleteConfirm())
+        {
+            return;
+        }
+
+        try
+        {
+            _deleting = true;
+
+            Navigation.NavigateTo($"/products/{ProductId}");
+        }
+        finally
+        {
+            _deleting = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
 }

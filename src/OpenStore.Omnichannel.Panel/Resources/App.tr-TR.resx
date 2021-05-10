@@ -66,4 +66,7 @@
     <data name="Generic.Save" xml:space="preserve">
         <value>Kaydet</value>
     </data>
+    <data name="Generic.Delete" xml:space="preserve">
+        <value>Sil</value>
+    </data>
 </root>
