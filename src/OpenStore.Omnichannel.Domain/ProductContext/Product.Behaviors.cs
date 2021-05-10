@@ -94,8 +94,16 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));
         }
+        
+        public void UpdateVariantQuantities(UpdateProductVariantQuantities command)
+        {
+            foreach (var updateProductVariantQuantity in command.Variants)
+            {
+                UpdateVariantQuantity(updateProductVariantQuantity);
+            }
+        }
 
-        public void UpdateQuantity(UpdateProductVariantQuantity command)
+        public void UpdateVariantQuantity(UpdateProductVariantQuantity command)
         {
             var (variantId, quantity) = command;
             if (quantity < 0)
@@ -172,19 +180,24 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             ApplyChange(new ProductMediaDeleted(Id, command.ProductMediaId));
         }
 
-        public void UpdateVariantPrices(UpdateVariantPrices command)
+        public void UpdateVariantPrices(UpdateProductVariantPrices command)
         {
             foreach (var updateVariantPriceCommand in command.Variants)
             {
-                var variant = Variants.SingleOrDefault(v => v.Id == updateVariantPriceCommand.VariantId);
-                if (variant is null)
-                {
-                    throw new DomainException(Msg.ResourceNotFound);
-                }
-
-                variant.UpdatePrice(updateVariantPriceCommand.Price, updateVariantPriceCommand.CompareAtPrice, updateVariantPriceCommand.Cost);
-                ApplyChange(new VariantPriceUpdated(Id, variant.Id, variant.Price, variant.CompareAtPrice, variant.Cost));
+                UpdateVariantPrice(updateVariantPriceCommand);
             }
+        }
+
+        public void UpdateVariantPrice(UpdateProductVariantPrice command)
+        {
+            var variant = Variants.SingleOrDefault(v => v.Id == command.VariantId);
+            if (variant is null)
+            {
+                throw new DomainException(Msg.ResourceNotFound);
+            }
+
+            variant.UpdatePrice(command.Price, command.CompareAtPrice, command.Cost);
+            ApplyChange(new ProductVariantPriceUpdated(Id, variant.Id, variant.Price, variant.CompareAtPrice, variant.Cost));
         }
     }
 }

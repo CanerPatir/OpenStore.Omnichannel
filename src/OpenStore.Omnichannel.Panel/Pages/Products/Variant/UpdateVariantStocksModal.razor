@@ -1,13 +1,42 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using OpenStore.Omnichannel.Shared.Request
 @inject IStringLocalizer<UpdateVariantsEditor> L
 
 <Modal @ref="_modalRef">
     <ModalContent Centered="true">
         <ModalHeader>
-            <ModalTitle>@L["UpdateVariantPricesModal.Title"]</ModalTitle>
+            <ModalTitle>@L["UpdateVariantStocksModal.Title"]</ModalTitle>
         </ModalHeader>
         <ModalBody Class="overflow-auto" Style="max-height: 500px">
-            @_variants?.Count()
+            <ListGroup>
+                @if (_updateVariantStockModelList != null)
+                {
+                    <ListGroupItem>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is6">
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is6">
+                                @L["UpdateVariantStocksModal.Input.Quantity"]
+                            </Column>
+                        </Row>
+                    </ListGroupItem>
+                    foreach (var updateVariantPriceModel in _updateVariantStockModelList)
+                    {
+                        <ListGroupItem>
+                            <Row>
+                                <Column ColumnSize="ColumnSize.Is6">
+                                    @updateVariantPriceModel.Title
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is6">
+                                    <InputNumber @bind-Value="@updateVariantPriceModel.Quantity"
+                                                 min="0"
+                                                 class="form-control form-control-sm"/>
+                                </Column>
+                            </Row>
+                        </ListGroupItem>
+                    }
+                }
+            </ListGroup>
         </ModalBody>
         <ModalFooter>
             <Button Color="Color.Light" Clicked="@Cancel">@SharedLocalizer["Generic.Cancel"]</Button>
@@ -17,8 +46,20 @@
 </Modal>
 
 @code {
+
+    class UpdateVariantStockModel
+    {
+        public string Title { get; init; }
+        public Guid VariantId { get; init; }
+        public int Quantity { get; set; }
+
+        public static implicit operator UpdateVariantStockRequest(UpdateVariantStockModel model)
+            => new(model.VariantId, model.Quantity);
+    }
+
     private Modal _modalRef;
     private IEnumerable<VariantDto> _variants;
+    private List<UpdateVariantStockModel> _updateVariantStockModelList;
     private bool _saving;
 
     [Parameter]
@@ -26,32 +67,47 @@
 
     [Parameter]
     public Guid ProductId { get; set; }
-    
+
     public void Show(IEnumerable<VariantDto> variants)
     {
-        _variants = variants;
+        _variants = variants.ToList();
+        _updateVariantStockModelList = _variants.Select(v => new UpdateVariantStockModel
+        {
+            VariantId = v.Id.Value,
+            Quantity = v.Quantity,
+            Title = v.Title
+        }).ToList();
         _modalRef.Show();
     }
 
-    private void Cancel()
-    {
-        _modalRef.Hide();
-    }
+    private void Cancel() => _modalRef.Hide();
 
     private async Task Save()
     {
         _saving = true;
         try
         {
-            _variants = null;
+            await ApiClient.Product.UpdateVariantStocks(ProductId, new UpdateVariantStocksRequest(_updateVariantStockModelList.Select(x => (UpdateVariantStockRequest) x)));
             _modalRef.Hide();
-            await ModelChanged.InvokeAsync();
+            await UpdateLocalState();
+            _variants = null;
+            _updateVariantStockModelList = null;
         }
         finally
         {
             await InvokeAsync(StateHasChanged);
             _saving = false;
         }
+    }
+
+    private async Task UpdateLocalState()
+    {
+        foreach (var variantDto in _variants)
+        {
+            var updateVariantPriceRequest = _updateVariantStockModelList.Single(x => x.VariantId == variantDto.Id);
+            variantDto.Quantity = updateVariantPriceRequest.Quantity;
+        }
+        await ModelChanged.InvokeAsync();
     }
 
 }

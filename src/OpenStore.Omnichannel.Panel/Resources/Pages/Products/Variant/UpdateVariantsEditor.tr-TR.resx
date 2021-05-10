@@ -63,4 +63,10 @@
     <data name="UpdateVariantPricesModal.Input.Cost" xml:space="preserve">
         <value>Maliyet</value>
     </data>
+    <data name="UpdateVariantStocksModal.Title" xml:space="preserve">
+        <value>Toplu Varyant Stok Güncelleme</value>
+    </data>
+    <data name="UpdateVariantStocksModal.Input.Quantity" xml:space="preserve">
+        <value>Adet</value>
+    </data>
 </root>

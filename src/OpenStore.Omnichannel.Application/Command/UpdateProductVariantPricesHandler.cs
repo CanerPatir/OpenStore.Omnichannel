@@ -7,16 +7,16 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command
 {
-    public class UpdateVariantPricesHandler : IRequestHandler<UpdateVariantPrices>
+    public class UpdateProductVariantPricesHandler : IRequestHandler<UpdateProductVariantPrices>
     {
         private readonly ICrudRepository<Product> _repository;
 
-        public UpdateVariantPricesHandler(ICrudRepository<Product> repository)
+        public UpdateProductVariantPricesHandler(ICrudRepository<Product> repository)
         {
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(UpdateVariantPrices command, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateProductVariantPrices command, CancellationToken cancellationToken)
         {
             var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == command.ProductId, cancellationToken);
             product.UpdateVariantPrices(command);

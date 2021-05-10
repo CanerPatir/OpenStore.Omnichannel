@@ -10,6 +10,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record CreateProduct(ProductDto Model) : IRequest<Guid>;
 
+    public record UpdateProductVariantQuantities(Guid ProductId, IEnumerable<UpdateProductVariantQuantity> Variants) : IRequest;
+
     public record UpdateProductVariantQuantity(Guid VariantId, int Quantity) : IRequest;
 
     public record ArchiveProduct(Guid Id) : IRequest;
@@ -22,7 +24,9 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record DeleteProductMedia(Guid Id, Guid ProductMediaId) : IRequest;
     
-    public record UpdateVariantPrices(Guid ProductId, IEnumerable<UpdateVariantPrice> Variants) : IRequest;
+    public record UpdateProductVariantPrices(Guid ProductId, IEnumerable<UpdateProductVariantPrice> Variants) : IRequest;
 
-    public record UpdateVariantPrice(Guid VariantId, decimal Price, decimal? CompareAtPrice, decimal? Cost) : IRequest;
+    public record UpdateProductVariantPrice(Guid VariantId, decimal Price, decimal? CompareAtPrice, decimal? Cost) : IRequest;   
+    
+ 
 }

@@ -57,5 +57,7 @@ namespace OpenStore.Omnichannel.Panel.Services
         public Task DeleteProductMedia(Guid id, Guid productMediaId) => HttpClient.DeleteAsync($"{Path}/{id}/medias/{productMediaId}");
        
         public Task UpdateVariantPrices(Guid id, UpdateVariantPricesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-prices", request);
+        
+        public Task UpdateVariantStocks(Guid id, UpdateVariantStocksRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-stocks", request);
     }
 }

@@ -9,8 +9,6 @@
         </ModalHeader>
         <ModalBody Class="overflow-auto" Style="max-height: 500px">
             <ListGroup>
-
-
                 @if (_updateVariantPriceModelList != null)
                 {
                     <ListGroupItem>
@@ -106,10 +104,7 @@
         _modalRef.Show();
     }
 
-    private void Cancel()
-    {
-        _modalRef.Hide();
-    }
+    private void Cancel() => _modalRef.Hide();
 
     private async Task Save()
     {
