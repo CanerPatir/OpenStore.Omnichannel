@@ -60,4 +60,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record ProductDeleted(Guid ProductId) : DomainEventBase(ProductId);
 
     public record ProductVariantPriceUpdated(Guid ProductId, Guid VariantId, decimal Price, decimal? CompareAtPrice, decimal? Cost) : DomainEventBase(ProductId);
+    
+    public record ProductVariantBarcodeUpdated(Guid ProductId, Guid VariantId, string Barcode) : DomainEventBase(ProductId);
+    
+    public record ProductVariantSkuUpdated(Guid ProductId, Guid VariantId, string Sku) : DomainEventBase(ProductId);
 }

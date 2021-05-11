@@ -100,9 +100,9 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
             }
         }
         
-        internal static string DropdownItem_BulkUpdateBarcodeSku {
+        internal static string DropdownItem_BulkUpdateBarcode {
             get {
-                return ResourceManager.GetString("DropdownItem.BulkUpdateBarcodeSku", resourceCulture);
+                return ResourceManager.GetString("DropdownItem.BulkUpdateBarcode", resourceCulture);
             }
         }
         
@@ -145,6 +145,36 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
         internal static string UpdateVariantStocksModal_Input_Quantity {
             get {
                 return ResourceManager.GetString("UpdateVariantStocksModal.Input.Quantity", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantStocksModal_Input_Barcode {
+            get {
+                return ResourceManager.GetString("UpdateVariantStocksModal.Input.Barcode", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantBarcodesModal_Title {
+            get {
+                return ResourceManager.GetString("UpdateVariantBarcodesModal.Title", resourceCulture);
+            }
+        }
+        
+        internal static string DropdownItem_BulkUpdateSku {
+            get {
+                return ResourceManager.GetString("DropdownItem.BulkUpdateSku", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantSkusModal_Input_Sku {
+            get {
+                return ResourceManager.GetString("UpdateVariantSkusModal.Input.Sku", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantSkusModal_Title {
+            get {
+                return ResourceManager.GetString("UpdateVariantSkusModal.Title", resourceCulture);
             }
         }
     }

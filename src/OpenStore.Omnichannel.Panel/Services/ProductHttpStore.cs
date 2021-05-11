@@ -59,5 +59,9 @@ namespace OpenStore.Omnichannel.Panel.Services
         public Task UpdateVariantPrices(Guid id, UpdateVariantPricesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-prices", request);
         
         public Task UpdateVariantStocks(Guid id, UpdateVariantStocksRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-stocks", request);
+        
+        public Task UpdateVariantBarcodes(Guid id, UpdateVariantBarcodesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-barcodes", request);
+        
+        public Task UpdateVariantSkus(Guid id, UpdateVariantSkusRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-skus", request);
     }
 }

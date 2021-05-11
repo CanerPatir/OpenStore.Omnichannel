@@ -6,13 +6,6 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
 {
     public abstract class BaseViewModel: INotifyPropertyChanged
     {
-        private bool _isBusy = false; 
-        public bool IsBusy
-        {
-            get => _isBusy;
-            set => SetValue(ref _isBusy, value);
-        }
- 
         public event PropertyChangedEventHandler PropertyChanged;
  
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) 

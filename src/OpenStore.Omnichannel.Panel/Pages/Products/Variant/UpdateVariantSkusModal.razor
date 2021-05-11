@@ -5,22 +5,22 @@
 <Modal @ref="_modalRef">
     <ModalContent Centered="true">
         <ModalHeader>
-            <ModalTitle>@L["UpdateVariantBarcodesModal.Title"]</ModalTitle>
+            <ModalTitle>@L["UpdateVariantSkusModal.Title"]</ModalTitle>
         </ModalHeader>
         <ModalBody Class="overflow-auto" Style="max-height: 500px">
             <ListGroup>
-                @if (_updateVariantBarcodeModelList != null)
+                @if (_updateVariantSkuModelList != null)
                 {
                     <ListGroupItem>
                         <Row>
                             <Column ColumnSize="ColumnSize.Is6">
                             </Column>
                             <Column ColumnSize="ColumnSize.Is6">
-                                @L["UpdateVariantStocksModal.Input.Barcode"]
+                                @L["UpdateVariantSkusModal.Input.Sku"]
                             </Column>
                         </Row>
                     </ListGroupItem>
-                    foreach (var updateVariantStockModel in _updateVariantBarcodeModelList)
+                    foreach (var updateVariantStockModel in _updateVariantSkuModelList)
                     {
                         <ListGroupItem>
                             <Row>
@@ -28,7 +28,7 @@
                                     @updateVariantStockModel.Title
                                 </Column>
                                 <Column ColumnSize="ColumnSize.Is6">
-                                    <TextEdit @bind-Text="@updateVariantStockModel.Barcode" Size="Size.Small" Placeholder="@L["UpdateVariantStocksModal.Input.Barcode"]"/>
+                                    <TextEdit @bind-Text="@updateVariantStockModel.Sku" Size="Size.Small" Placeholder="@L["UpdateVariantSkusModal.Input.Sku"]"/>
                                 </Column>
                             </Row>
                         </ListGroupItem>
@@ -45,19 +45,19 @@
 
 @code {
 
-    class UpdateVariantBarcodeModel
+    class UpdateVariantSkuModel
     {
         public string Title { get; init; }
         public Guid VariantId { get; init; }
-        public string Barcode { get; set; }
+        public string Sku { get; set; }
 
-        public static implicit operator UpdateVariantBarcodeRequest(UpdateVariantBarcodeModel model)
-            => new(model.VariantId, model.Barcode);
+        public static implicit operator UpdateVariantSkuRequest(UpdateVariantSkuModel model)
+            => new(model.VariantId, model.Sku);
     }
 
     private Modal _modalRef;
     private IEnumerable<VariantDto> _variants;
-    private List<UpdateVariantBarcodeModel> _updateVariantBarcodeModelList;
+    private List<UpdateVariantSkuModel> _updateVariantSkuModelList;
 
     private bool _saving;
 
@@ -70,10 +70,10 @@
     public void Show(IEnumerable<VariantDto> variants)
     {
         _variants = variants.ToList();
-        _updateVariantBarcodeModelList = _variants.Select(v => new UpdateVariantBarcodeModel
+        _updateVariantSkuModelList = _variants.Select(v => new UpdateVariantSkuModel
         {
             VariantId = v.Id.Value,
-            Barcode = v.Barcode,
+            Sku = v.Sku,
             Title = v.Title
         }).ToList();
         _modalRef.Show();
@@ -86,11 +86,11 @@
         _saving = true;
         try
         {
-            await ApiClient.Product.UpdateVariantBarcodes(ProductId, new UpdateVariantBarcodesRequest(_updateVariantBarcodeModelList.Select(x => (UpdateVariantBarcodeRequest) x)));
+            await ApiClient.Product.UpdateVariantSkus(ProductId, new UpdateVariantSkusRequest(_updateVariantSkuModelList.Select(x => (UpdateVariantSkuRequest) x)));
             _modalRef.Hide();
             await UpdateLocalState();
             _variants = null;
-            _updateVariantBarcodeModelList = null;
+            _updateVariantSkuModelList = null;
         }
         finally
         {
@@ -103,8 +103,8 @@
     {
         foreach (var variantDto in _variants)
         {
-            var updateVariantPriceRequest = _updateVariantBarcodeModelList.Single(x => x.VariantId == variantDto.Id);
-            variantDto.Barcode = updateVariantPriceRequest.Barcode;
+            var updateVariantPriceRequest = _updateVariantSkuModelList.Single(x => x.VariantId == variantDto.Id);
+            variantDto.Sku = updateVariantPriceRequest.Sku;
         }
         await ModelChanged.InvokeAsync();
     }

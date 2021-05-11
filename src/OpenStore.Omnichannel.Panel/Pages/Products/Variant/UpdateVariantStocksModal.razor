@@ -28,9 +28,19 @@
                                     @updateVariantPriceModel.Title
                                 </Column>
                                 <Column ColumnSize="ColumnSize.Is6">
-                                    <InputNumber @bind-Value="@updateVariantPriceModel.Quantity"
-                                                 min="0"
-                                                 class="form-control form-control-sm"/>
+                                    @if (updateVariantPriceModel.TrackQuantity)
+                                    {
+                                        <InputNumber @bind-Value="@updateVariantPriceModel.Quantity"
+                                                     min="0"
+                                                     class="form-control form-control-sm"/>
+                                    }
+                                    else
+                                    {
+                                        <InputNumber @bind-Value="@updateVariantPriceModel.Quantity"
+                                                     min="0" readonly
+                                                     class="form-control form-control-sm"/>
+                                    }
+
                                 </Column>
                             </Row>
                         </ListGroupItem>
@@ -51,6 +61,7 @@
     {
         public string Title { get; init; }
         public Guid VariantId { get; init; }
+        public bool TrackQuantity { get; init; }
         public int Quantity { get; set; }
 
         public static implicit operator UpdateVariantStockRequest(UpdateVariantStockModel model)
@@ -74,6 +85,7 @@
         _updateVariantStockModelList = _variants.Select(v => new UpdateVariantStockModel
         {
             VariantId = v.Id.Value,
+            TrackQuantity = v.TrackQuantity,
             Quantity = v.Quantity,
             Title = v.Title
         }).ToList();

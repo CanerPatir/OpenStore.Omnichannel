@@ -76,5 +76,13 @@ namespace OpenStore.Omnichannel.Api.Store
         [HttpPost("{id:guid}/variants/update-stocks")]
         public Task UpdateProductVariantQuantities(Guid id, UpdateVariantStocksRequest request)
             => _mediator.Send(new UpdateProductVariantQuantities(id, request.Variants.Select(x => new UpdateProductVariantQuantity(x.VariantId, x.Quantity))), CancellationToken);
+        
+        [HttpPost("{id:guid}/variants/update-barcodes")]
+        public Task UpdateProductVariantBarcodes(Guid id, UpdateVariantBarcodesRequest request)
+            => _mediator.Send(new UpdateProductVariantBarcodes(id, request.Variants.Select(x => new UpdateProductVariantBarcode(x.VariantId, x.Barcode))), CancellationToken);
+        
+        [HttpPost("{id:guid}/variants/update-skus")]
+        public Task UpdateProductVariantSkus(Guid id, UpdateVariantSkusRequest request)
+            => _mediator.Send(new UpdateProductVariantSkus(id, request.Variants.Select(x => new UpdateProductVariantSku(x.VariantId, x.Sku))), CancellationToken);
     }
 }

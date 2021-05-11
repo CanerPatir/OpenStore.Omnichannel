@@ -45,8 +45,8 @@
     <data name="DropdownItem.BulkUpdateStock" xml:space="preserve">
         <value>Toplu stok güncelle</value>
     </data>
-    <data name="DropdownItem.BulkUpdateBarcodeSku" xml:space="preserve">
-        <value>Toplu barkod / SKU güncelle</value>
+    <data name="DropdownItem.BulkUpdateBarcode" xml:space="preserve">
+        <value>Toplu barkod güncelle</value>
     </data>
     <data name="DropdownItem.BulkUpdateHsCode" xml:space="preserve">
         <value>Toplu HS kod güncelle</value>
@@ -68,5 +68,20 @@
     </data>
     <data name="UpdateVariantStocksModal.Input.Quantity" xml:space="preserve">
         <value>Adet</value>
+    </data>
+    <data name="UpdateVariantStocksModal.Input.Barcode" xml:space="preserve">
+        <value>Barkod</value>
+    </data>
+    <data name="UpdateVariantBarcodesModal.Title" xml:space="preserve">
+        <value>Toplu Varyant Barkod Güncelleme</value>
+    </data>
+    <data name="DropdownItem.BulkUpdateSku" xml:space="preserve">
+        <value>Toplu SKU güncelle</value>
+    </data>
+    <data name="UpdateVariantSkusModal.Input.Sku" xml:space="preserve">
+        <value>SKU</value>
+    </data>
+    <data name="UpdateVariantSkusModal.Title" xml:space="preserve">
+        <value>Toplu Varyant SKU Güncelleme</value>
     </data>
 </root>

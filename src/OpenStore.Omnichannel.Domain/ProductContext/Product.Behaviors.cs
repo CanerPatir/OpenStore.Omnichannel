@@ -199,5 +199,45 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             variant.UpdatePrice(command.Price, command.CompareAtPrice, command.Cost);
             ApplyChange(new ProductVariantPriceUpdated(Id, variant.Id, variant.Price, variant.CompareAtPrice, variant.Cost));
         }
+        
+        public void UpdateVariantBarcodes(UpdateProductVariantBarcodes command)
+        {
+            foreach (var updateVariantPriceCommand in command.Variants)
+            {
+                UpdateVariantBarcode(updateVariantPriceCommand);
+            }
+        }
+
+        public void UpdateVariantBarcode(UpdateProductVariantBarcode command)
+        {
+            var variant = Variants.SingleOrDefault(v => v.Id == command.VariantId);
+            if (variant is null)
+            {
+                throw new DomainException(Msg.ResourceNotFound);
+            }
+
+            variant.UpdateBarcode(command.Barcode);
+            ApplyChange(new ProductVariantBarcodeUpdated(Id, variant.Id, variant.Barcode));
+        }
+        
+        public void UpdateVariantSkus(UpdateProductVariantSkus command)
+        {
+            foreach (var updateVariantPriceCommand in command.Variants)
+            {
+                UpdateVariantSku(updateVariantPriceCommand);
+            }
+        }
+
+        public void UpdateVariantSku(UpdateProductVariantSku command)
+        {
+            var variant = Variants.SingleOrDefault(v => v.Id == command.VariantId);
+            if (variant is null)
+            {
+                throw new DomainException(Msg.ResourceNotFound);
+            }
+
+            variant.UpdateSku(command.Sku);
+            ApplyChange(new ProductVariantSkuUpdated(Id, variant.Id, variant.Sku));
+        }
     }
 }

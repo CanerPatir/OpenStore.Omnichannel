@@ -23,10 +23,16 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record UpdateProductMedias(Guid Id, IEnumerable<ProductMediaDto> Medias) : IRequest;
 
     public record DeleteProductMedia(Guid Id, Guid ProductMediaId) : IRequest;
-    
+
     public record UpdateProductVariantPrices(Guid ProductId, IEnumerable<UpdateProductVariantPrice> Variants) : IRequest;
 
-    public record UpdateProductVariantPrice(Guid VariantId, decimal Price, decimal? CompareAtPrice, decimal? Cost) : IRequest;   
+    public record UpdateProductVariantPrice(Guid VariantId, decimal Price, decimal? CompareAtPrice, decimal? Cost) : IRequest;
+
+    public record UpdateProductVariantBarcodes(Guid ProductId, IEnumerable<UpdateProductVariantBarcode> Variants) : IRequest;
+
+    public record UpdateProductVariantBarcode(Guid VariantId, string Barcode) : IRequest;
     
- 
+    public record UpdateProductVariantSkus(Guid ProductId, IEnumerable<UpdateProductVariantSku> Variants) : IRequest;
+
+    public record UpdateProductVariantSku(Guid VariantId, string Sku) : IRequest;
 }

@@ -56,8 +56,12 @@
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem Clicked="BulkUpdatePrice">@L["DropdownItem.BulkUpdatePrice"]</DropdownItem>
-                                    <DropdownItem Clicked="BulkUpdateStock">@L["DropdownItem.BulkUpdateStock"]</DropdownItem>
-                                    <DropdownItem Clicked="BulkUpdateBarcodeSku">@L["DropdownItem.BulkUpdateBarcodeSku"]</DropdownItem>
+                                    @if (Model.Variants.Any(x => x.TrackQuantity))
+                                    {
+                                        <DropdownItem Clicked="BulkUpdateStock">@L["DropdownItem.BulkUpdateStock"]</DropdownItem>
+                                    }
+                                    <DropdownItem Clicked="BulkUpdateBarcode">@L["DropdownItem.BulkUpdateBarcode"]</DropdownItem>
+                                    <DropdownItem Clicked="BulkUpdateSku">@L["DropdownItem.BulkUpdateSku"]</DropdownItem>
                                     <DropdownItem Clicked="BulkUpdateHsCode">@L["DropdownItem.BulkUpdateHsCode"]</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -69,27 +73,30 @@
 
         @foreach (var variant in Model.Variants)
         {
-            <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset" Clicked="@(_ => GoVariantDetail(variant))">
+            <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset">
                 <div class="d-flex align-items-center">
                     <div class="width-10 align-middle">
                         <Check TValue="bool" Class="form-check-input" @bind-Checked="@variant.Selected"/>
                     </div>
-                    <div class="ms-3 width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
-                        <img class="mw-100 mh-100" src="@GetVariantImage(variant)" alt=""/>
+                    <div class="ms-3 d-flex w-100 align-items-center" @onclick="@(_ => GoVariantDetail(variant))">
+                        <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                            <img class="mw-100 mh-100" src="@GetVariantImage(variant)" alt=""/>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="m-0">
+                                @variant.Title
+                            </h6>
+                            <small>@variant.Barcode</small>
+                        </div>
+                        <div class="ms-auto">
+                            <h6 class="m-0 d-flex justify-content-end">@variant.Price.ToCurrencyString()</h6>
+                            @if (variant.TrackQuantity)
+                            {
+                                <small>@variant.Quantity @L["ListGroupItem.VariantQuantity"]</small>
+                            }
+                        </div>
                     </div>
-                    <div class="ms-3">
-                        <h6 class="m-0">
-                            @variant.Title
-                        </h6>
-                        <small>@variant.Barcode</small>
-                    </div>
-                    <div class="ms-auto">
-                        <h6 class="m-0 d-flex justify-content-end">@variant.Price.ToCurrencyString()</h6>
-                        @if (variant.TrackQuantity)
-                        {
-                            <small>@variant.Quantity @L["ListGroupItem.VariantQuantity"]</small>
-                        }
-                    </div>
+
                 </div>
             </ListGroupItem>
         }
@@ -115,6 +122,7 @@
     <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
     <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
     <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
+    <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
     <UpdateVariantHsCodesModal @ref="_updateVariantHsCodesModal" ProductId="@Model.Id.Value"/>
 }
 
@@ -124,6 +132,7 @@
     private UpdateVariantPricesModal _updateVariantPricesModal;
     private UpdateVariantStocksModal _updateVariantStocksModal;
     private UpdateVariantBarcodesModal _updateVariantBarcodesModal;
+    private UpdateVariantSkusModal _updateVariantSkusModal;
     private UpdateVariantHsCodesModal _updateVariantHsCodesModal;
     private IEnumerable<VariantDto> SelectedVariants => Model.Variants.Where(x => x.Selected);
 
@@ -161,7 +170,8 @@
 
     private void BulkUpdateStock() => _updateVariantStocksModal.Show(SelectedVariants);
 
-    private void BulkUpdateBarcodeSku() => _updateVariantBarcodesModal.Show(SelectedVariants);
+    private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(SelectedVariants);
+    private void BulkUpdateSku() => _updateVariantSkusModal.Show(SelectedVariants);
 
     private void BulkUpdateHsCode() => _updateVariantHsCodesModal.Show(SelectedVariants);
 

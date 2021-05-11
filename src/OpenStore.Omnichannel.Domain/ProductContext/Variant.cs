@@ -80,5 +80,15 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             CompareAtPrice = compareAtPrice;
             Cost = cost;
         }
+
+        public void UpdateBarcode(string barcode)
+        {
+            Barcode = barcode;
+        }
+
+        public void UpdateSku(string sku)
+        {
+            Sku = sku;
+        }
     }
 }
