@@ -86,6 +86,8 @@
                 </ListGroupItem>
             }
         }
+        
+        @ChildContent
     </ListGroup>
 </Card>
 
@@ -96,6 +98,9 @@
 
     [Parameter]
     public EventCallback<ProductDto> ModelChanged { get; set; }
+    
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
     private async Task OptionsChanged()
     {

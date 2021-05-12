@@ -81,4 +81,22 @@
     <data name="UpdateVariantSkusModal.Title" xml:space="preserve">
         <value>Toplu Varyant SKU Güncelleme</value>
     </data>
+    <data name="UpdateVariantCreateModal.Options" xml:space="preserve">
+        <value>Opsiyonlar</value>
+    </data>
+    <data name="UpdateVariantCreateModal.Title" xml:space="preserve">
+        <value>Varyant Ekleme</value>
+    </data>
+    <data name="UpdateVariantPricesModal.PriceApplyAll" xml:space="preserve">
+        <value>Hepsine Uygula</value>
+    </data>
+    <data name="UpdateVariantStocksModal.ApplyAll" xml:space="preserve">
+        <value>Hepsine Uygula</value>
+    </data>
+    <data name="Label.ProductHasNoVariant" xml:space="preserve">
+        <value>Ürün varyantı mevcut değil</value>
+    </data>
+    <data name="HasMultipleVariants" xml:space="preserve">
+        <value>Bu ürün birden fazla opsiyon barındırır (Örn: Renk , Beden)</value>
+    </data>
 </root>

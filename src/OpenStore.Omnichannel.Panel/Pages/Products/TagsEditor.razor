@@ -14,14 +14,14 @@
     [Parameter]
     public ProductDto Model { get; set; }
     
-    private List<string> _tags = new();
+    private HashSet<string> _tags = new();
 
     protected override void OnInitialized()
     {
-        _tags = Model.Tags?.Split(',').ToList() ?? new List<string>();
+        _tags = Model.Tags?.Split(',').ToHashSet() ?? new HashSet<string>();
     }
 
-    private void ChipsChanged(List<string> chips)
+    private void ChipsChanged(HashSet<string> chips)
     {
         Model.Tags = string.Join(',', chips);
     }

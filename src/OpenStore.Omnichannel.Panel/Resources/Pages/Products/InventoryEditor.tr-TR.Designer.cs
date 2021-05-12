@@ -68,5 +68,17 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
         }
+        
+        internal static string Input_Barcode {
+            get {
+                return ResourceManager.GetString("Input.Barcode", resourceCulture);
+            }
+        }
+        
+        internal static string Input_Sku {
+            get {
+                return ResourceManager.GetString("Input.Sku", resourceCulture);
+            }
+        }
     }
 }

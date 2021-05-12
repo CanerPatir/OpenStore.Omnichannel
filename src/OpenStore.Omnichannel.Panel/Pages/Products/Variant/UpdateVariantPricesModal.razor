@@ -14,6 +14,33 @@
                     <ListGroupItem>
                         <Row>
                             <Column ColumnSize="ColumnSize.Is3">
+                                <Button Size="Size.Small" Color="Color.Secondary" Clicked="ApplyAll">
+                                    @L["UpdateVariantPricesModal.PriceApplyAll"]
+                                </Button>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is3">
+                                <NumericEdit TValue="decimal"
+                                             @bind-Value="@_applyAllPrice"
+                                             Decimals="2"
+                                             Size="Size.Small"/>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is3">
+                                <NumericEdit TValue="decimal?"
+                                             @bind-Value="@_applyAllCompareAtPrice"
+                                             Decimals="2"
+                                             Size="Size.Small"/>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is3">
+                                <NumericEdit TValue="decimal?"
+                                             @bind-Value="@_applyAllCost"
+                                             Decimals="2"
+                                             Size="Size.Small"/>
+                            </Column>
+                        </Row>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is3">
                             </Column>
                             <Column ColumnSize="ColumnSize.Is3">
                                 @L["UpdateVariantPricesModal.Input.Price"]
@@ -83,6 +110,9 @@
     private IEnumerable<VariantDto> _variants;
     private List<UpdateVariantPriceModel> _updateVariantPriceModelList;
     private bool _saving;
+    private decimal _applyAllPrice;
+    private decimal? _applyAllCompareAtPrice;
+    private decimal? _applyAllCost;
 
     [Parameter]
     public Guid ProductId { get; set; }
@@ -134,6 +164,16 @@
             variantDto.Cost = updateVariantPriceRequest.Cost;
         }
         await ModelChanged.InvokeAsync();
+    }
+
+    private void ApplyAll()
+    {
+        foreach (var updateVariantPriceModel in _updateVariantPriceModelList)
+        {
+            updateVariantPriceModel.Price = _applyAllPrice;
+            updateVariantPriceModel.CompareAtPrice = _applyAllCompareAtPrice;
+            updateVariantPriceModel.Cost = _applyAllCost;
+        }
     }
 
 }

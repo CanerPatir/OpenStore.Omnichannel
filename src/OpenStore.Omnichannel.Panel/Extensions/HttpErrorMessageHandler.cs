@@ -16,18 +16,18 @@ namespace OpenStore.Omnichannel.Panel.Extensions
     {
         private readonly NavigationManager _navigationManager;
         private readonly SignOutSessionStateManager _signOutSessionStateManager;
-        private readonly AlertService _alertService;
+        private readonly DialogService _dialogService;
         private readonly IStringLocalizer<App> _sharedLocalizer;
 
         public HttpErrorMessageHandler(
             NavigationManager navigationManager,
             SignOutSessionStateManager signOutSessionStateManager,
-            AlertService alertService,
+            DialogService dialogService,
             IStringLocalizer<App> sharedLocalizer)
         {
             _navigationManager = navigationManager;
             _signOutSessionStateManager = signOutSessionStateManager;
-            _alertService = alertService;
+            _dialogService = dialogService;
             _sharedLocalizer = sharedLocalizer;
         }
 
@@ -65,7 +65,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 || method == HttpMethod.Patch
                 || method == HttpMethod.Delete)
             {
-                _alertService.ShowSuccess(_sharedLocalizer["GenericSuccessMessage"]);
+                _dialogService.ShowSuccess(_sharedLocalizer["GenericSuccessMessage"]);
             }
         }
 
@@ -124,20 +124,20 @@ namespace OpenStore.Omnichannel.Panel.Extensions
 
             if (ex.StatusCode == HttpStatusCode.NotFound)
             {
-                _alertService.ShowWarning(_sharedLocalizer["Warning.NotFound"]);
+                _dialogService.ShowWarning(_sharedLocalizer["Warning.NotFound"]);
             }
             else if (ex.StatusCode == HttpStatusCode.BadRequest)
             {
-                _alertService.ShowWarning(_sharedLocalizer[ex.GetMessageKey()]);
+                _dialogService.ShowWarning(_sharedLocalizer[ex.GetMessageKey()]);
             }
             else if (ex.StatusCode == HttpStatusCode.Forbidden)
             {
-                _alertService.ShowWarning(_sharedLocalizer["Warning.Forbidden"]);
+                _dialogService.ShowWarning(_sharedLocalizer["Warning.Forbidden"]);
             }
             else
             {
                 var message = ex.GetAggregatedErrorMessage();
-                _alertService.ShowError(_sharedLocalizer[message]);
+                _dialogService.ShowError(_sharedLocalizer[message]);
             }
 
             throw ex;

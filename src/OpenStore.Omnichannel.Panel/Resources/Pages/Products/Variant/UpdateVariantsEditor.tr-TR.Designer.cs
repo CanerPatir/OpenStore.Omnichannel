@@ -171,5 +171,41 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
                 return ResourceManager.GetString("UpdateVariantSkusModal.Title", resourceCulture);
             }
         }
+        
+        internal static string UpdateVariantCreateModal_Options {
+            get {
+                return ResourceManager.GetString("UpdateVariantCreateModal.Options", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantCreateModal_Title {
+            get {
+                return ResourceManager.GetString("UpdateVariantCreateModal.Title", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantPricesModal_PriceApplyAll {
+            get {
+                return ResourceManager.GetString("UpdateVariantPricesModal.PriceApplyAll", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateVariantStocksModal_ApplyAll {
+            get {
+                return ResourceManager.GetString("UpdateVariantStocksModal.ApplyAll", resourceCulture);
+            }
+        }
+        
+        internal static string Label_ProductHasNoVariant {
+            get {
+                return ResourceManager.GetString("Label.ProductHasNoVariant", resourceCulture);
+            }
+        }
+        
+        internal static string HasMultipleVariants {
+            get {
+                return ResourceManager.GetString("HasMultipleVariants", resourceCulture);
+            }
+        }
     }
 }

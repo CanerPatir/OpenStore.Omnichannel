@@ -45,13 +45,13 @@
     /// The list of the "applied" chips
     /// </summary>
     [Parameter]
-    public List<string> Chips { get; set; } = new List<string>();
+    public HashSet<string> Chips { get; set; } = new();
 
     /// <summary>
     /// The callback when the chips list has changed
     /// </summary>
     [Parameter]
-    public EventCallback<List<string>> OnChipsChanged { get; set; }
+    public EventCallback<HashSet<string>> OnChipsChanged { get; set; }
 
     /// <summary>
     /// Indicates whether or not chips are readonly
@@ -248,21 +248,21 @@
     public class ChipValidationArgs
     {
         /// <summary>
-        /// The current chip value that could potentially be added
-        /// </summary>
+    /// The current chip value that could potentially be added
+    /// </summary>
         public string CurrentChip { get; set; }
 
         /// <summary>
-        /// A list of all chips
-        /// </summary>
-        public List<string> Chips { get; set; }
+    /// A list of all chips
+    /// </summary>
+        public HashSet<string> Chips { get; set; }
 
         /// <summary>
-        /// The list of validation errors
-        /// </summary>
+    /// The list of validation errors
+    /// </summary>
         public List<string> ValidationErrors { get; set; }
 
-        public ChipValidationArgs(List<string> chips, string currentChip, List<string> validationErrors)
+        public ChipValidationArgs(HashSet<string> chips, string currentChip, List<string> validationErrors)
         {
             Chips = chips;
             CurrentChip = currentChip;

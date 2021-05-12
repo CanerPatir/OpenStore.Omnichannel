@@ -22,6 +22,20 @@
         .dropdown-item {
             cursor: pointer;
         }
+
+        .blockUI.blockOverlay {
+            z-index: 10000000!important;
+        }
+        
+        .blockUI.blockMsg.blockPage {
+            z-index: 10000001!important;
+            margin: auto!important;
+            left:50%!important;
+            top:50%!important;
+            width: unset!important;
+            border: unset!important;
+            background-color: unset!important;
+        }
     </style>
 </head>
 
@@ -29,6 +43,7 @@
     <div id="app">Loading...</div>
     <script src="js/app.min.js"></script>
     <script src="js/app.extensions.js"></script>
+    <script src="vendor/jQuery.blockUI.js" async></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" async></script>
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_content/Blazorise/blazorise.js"></script>

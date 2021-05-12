@@ -69,4 +69,10 @@
     <data name="Generic.Delete" xml:space="preserve">
         <value>Sil</value>
     </data>
+    <data name="Domain.MultipleVariantProductMustHasOptions" xml:space="preserve">
+        <value>Varyantlı ürünler için en az bir opsiyon değeri belirtilmelidir</value>
+    </data>
+    <data name="Domain.VariantAlreadyExistsThatHasSameOptions" xml:space="preserve">
+        <value>Aynı opsiyon değerlerine sahip başka bir varyant mevcut</value>
+    </data>
 </root>

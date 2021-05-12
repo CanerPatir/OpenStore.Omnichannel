@@ -9,6 +9,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<(ProductMediaDto dto, ProductMedia model)>>;
 
     public record CreateProduct(ProductDto Model) : IRequest<Guid>;
+    
+    public record CreateVariant(Guid ProductId, VariantDto Model) : IRequest<Guid>;
 
     public record UpdateProductVariantQuantities(Guid ProductId, IEnumerable<UpdateProductVariantQuantity> Variants) : IRequest;
 

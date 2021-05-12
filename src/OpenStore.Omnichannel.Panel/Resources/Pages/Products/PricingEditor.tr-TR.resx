@@ -22,10 +22,10 @@
         <value>Fiyat</value>
     </data>
     <data name="Input.ComparePrice" xml:space="preserve">
-        <value>Karşılaştırma Fiyatı</value>
+        <value>Karşılaştırma Fiyatı (opsiyonel)</value>
     </data>
     <data name="Input.Cost" xml:space="preserve">
-        <value>Maliyet</value>
+        <value>Maliyet (optisyonel)</value>
     </data>
     <data name="Input.Margin" xml:space="preserve">
         <value>Kar Yüzdesi</value>

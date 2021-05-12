@@ -3,18 +3,22 @@ using Microsoft.JSInterop;
 
 namespace OpenStore.Omnichannel.Panel.Services
 {
-    public class AlertService
+    public class DialogService
     {
         private readonly IJSRuntime _jsRuntime;
         private readonly IStringLocalizer<App> _sharedLocalizer;
 
-        public AlertService(IJSRuntime jsRuntime, IStringLocalizer<App> sharedLocalizer)
+        public DialogService(IJSRuntime jsRuntime, IStringLocalizer<App> sharedLocalizer)
         {
             _jsRuntime = jsRuntime;
             _sharedLocalizer = sharedLocalizer;
         }
 
         private IJSInProcessRuntime JsRuntimeSync => (IJSInProcessRuntime) _jsRuntime;
+
+        public void BlockUi() => JsRuntimeSync.InvokeVoid("__blockUI");
+
+        public void UnblockUi() => JsRuntimeSync.InvokeVoid("__unblockUI");
 
         public void Alert(object message) => JsRuntimeSync.InvokeVoid("alert", message);
 

@@ -6,6 +6,6 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
     public class ProductOptionDto
     {
          public string Name { get; set; }
-         public List<string> Values { get; set; } = new();
+         public HashSet<string> Values { get; set; } = new();
     }
 }

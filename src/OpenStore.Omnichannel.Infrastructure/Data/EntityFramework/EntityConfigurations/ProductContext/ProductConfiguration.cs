@@ -27,7 +27,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
             builder.Property(x => x.Options)
                 .HasConversion(
                     x => JsonSerializer.Serialize(x, new JsonSerializerOptions()),
-                    x => JsonSerializer.Deserialize<HashSet<ProductOption>>(x, new JsonSerializerOptions())
+                    x => JsonSerializer.Deserialize<List<ProductOption>>(x, new JsonSerializerOptions())
                 );
             
             builder.HasMany(x => x.Medias)

@@ -84,5 +84,8 @@ namespace OpenStore.Omnichannel.Api.Store
         [HttpPost("{id:guid}/variants/update-skus")]
         public Task UpdateProductVariantSkus(Guid id, UpdateVariantSkusRequest request)
             => _mediator.Send(new UpdateProductVariantSkus(id, request.Variants.Select(x => new UpdateProductVariantSku(x.VariantId, x.Sku))), CancellationToken);
+        
+        [HttpPost("{id:guid}/variants")]
+        public Task<Guid> CreateVariant(Guid id, VariantDto model) => _mediator.Send(new CreateVariant(id, model), CancellationToken);
     }
 }

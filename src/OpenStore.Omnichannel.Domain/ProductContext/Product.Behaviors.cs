@@ -8,10 +8,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 {
     public partial class Product
     {
+        private const int MaxVariantCount = 100;
+
         public static Product Create(CreateProduct command, Func<Guid, ProductMedia> attacher)
         {
             var model = command.Model;
-            var productOptions = new HashSet<ProductOption>();
+            var productOptions = new List<ProductOption>();
             if (model.HasMultipleVariants)
             {
                 if (model.Options is null || !model.Options.Any())
@@ -19,10 +21,10 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                     throw new DomainException(Msg.Domain.Product.MultipleVariantProductMustHasOptions);
                 }
 
-                productOptions = model.Options.Select(x => new ProductOption(x.Name, x.Values)).ToHashSet();
+                productOptions = model.Options.Select(x => new ProductOption(x.Name, x.Values.ToHashSet())).ToList();
             }
 
-            var product = new Product()
+            var product = new Product
             {
                 Id = Guid.NewGuid(),
                 Handle = model.Handle,
@@ -56,26 +58,62 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             return product;
         }
 
-        public void AddVariant(VariantDto variantDto)
+        private Variant AddVariant(VariantDto variantDto)
         {
-            _variants.Add(
-                new Variant(
-                    Id, variantDto.Option1,
-                    variantDto.Option2,
-                    variantDto.Option3,
-                    variantDto.Price,
-                    variantDto.CompareAtPrice,
-                    variantDto.Cost,
-                    variantDto.CalculateTaxAdditionally,
-                    variantDto.Quantity,
-                    variantDto.Sku,
-                    variantDto.Barcode,
-                    variantDto.TrackQuantity,
-                    variantDto.ContinueSellingWhenOutOfStock
-                )
+            if (_variants.Count == MaxVariantCount)
+            {
+                throw new DomainException(Msg.Domain.Product.MaxVariantLimitExceeded);
+            }
+
+            var variant = new Variant(
+                Id, variantDto.Option1,
+                variantDto.Option2,
+                variantDto.Option3,
+                variantDto.Price,
+                variantDto.CompareAtPrice,
+                variantDto.Cost,
+                variantDto.CalculateTaxAdditionally,
+                variantDto.Quantity,
+                variantDto.Sku,
+                variantDto.Barcode,
+                variantDto.TrackQuantity,
+                variantDto.ContinueSellingWhenOutOfStock
             );
+            _variants.Add(variant);
 
             ApplyChange(new VariantAddedToProduct(Id, variantDto));
+
+            return variant;
+        }
+
+        public Variant CreateVariant(CreateVariant command)
+        {
+            var model = command.Model;
+            if (Variants.Any(x => string.Equals(x.Option1, model.Option1, StringComparison.InvariantCultureIgnoreCase)
+                                  && string.Equals(x.Option2, model.Option2, StringComparison.InvariantCultureIgnoreCase)
+                                  && string.Equals(x.Option3, model.Option3, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                throw new DomainException(Msg.Domain.Product.VariantAlreadyExistsThatHasSameOptions);
+            }
+
+            _options = _options.Select(x => x).ToList();
+
+            if (model.Option1 is not null)
+            {
+                _options[0].Values.Add(model.Option1);
+            }
+
+            if (model.Option2 is not null)
+            {
+                _options[1].Values.Add(model.Option2);
+            }
+
+            if (model.Option3 is not null)
+            {
+                _options[2].Values.Add(model.Option3);
+            }
+
+            return AddVariant(model);
         }
 
         public void AssignMedia(ProductMediaDto productMediaDto, Func<Guid, ProductMedia> attacher)
@@ -94,7 +132,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));
         }
-        
+
         public void UpdateVariantQuantities(UpdateProductVariantQuantities command)
         {
             foreach (var updateProductVariantQuantity in command.Variants)
@@ -199,7 +237,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             variant.UpdatePrice(command.Price, command.CompareAtPrice, command.Cost);
             ApplyChange(new ProductVariantPriceUpdated(Id, variant.Id, variant.Price, variant.CompareAtPrice, variant.Cost));
         }
-        
+
         public void UpdateVariantBarcodes(UpdateProductVariantBarcodes command)
         {
             foreach (var updateVariantPriceCommand in command.Variants)
@@ -219,7 +257,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             variant.UpdateBarcode(command.Barcode);
             ApplyChange(new ProductVariantBarcodeUpdated(Id, variant.Id, variant.Barcode));
         }
-        
+
         public void UpdateVariantSkus(UpdateProductVariantSkus command)
         {
             foreach (var updateVariantPriceCommand in command.Variants)

@@ -46,7 +46,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 {
                     var navigationManager = sp.GetRequiredService<NavigationManager>();
                     var signOutSessionStateManager = sp.GetRequiredService<SignOutSessionStateManager>();
-                    var alertService = sp.GetRequiredService<AlertService>();
+                    var alertService = sp.GetRequiredService<DialogService>();
                     var sharedLocalizer = sp.GetRequiredService<IStringLocalizer<App>>();
                     return new HttpErrorMessageHandler(navigationManager, signOutSessionStateManager, alertService, sharedLocalizer);
                 })
@@ -65,7 +65,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 return new ApiClient(httpClient);
             });
 
-            builder.Services.AddSingleton<AlertService>();
+            builder.Services.AddSingleton<DialogService>();
 
             return builder;
         }

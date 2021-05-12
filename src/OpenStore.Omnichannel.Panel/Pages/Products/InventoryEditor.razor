@@ -6,6 +6,22 @@
         <h5 class="mt-2 mb-3">
             @L["Title"]
         </h5>
+ 
+        <Fields Class="row" Margin="Margin.Is3.FromBottom">
+            <Field ColumnSize="ColumnSize.Is6">
+                <FieldLabel>@L["Input.Barcode"]</FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@Model.Barcode"/>
+                </FieldBody>
+            </Field>
+            <Field ColumnSize="ColumnSize.Is6">
+                <FieldLabel>@L["Input.Sku"]</FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@Model.Sku"/>
+                </FieldBody>
+            </Field>
+        </Fields>
+
         <Field Margin="Margin.Is1.FromBottom">
             <FieldBody>
                 <Check TValue="bool" @bind-Checked="@Model.TrackQuantity">@L["Input.TrackQuantity"]</Check>
@@ -15,7 +31,7 @@
     @if (Model.TrackQuantity)
     {
         <ListGroupItem>
-            <Field ColumnSize="ColumnSize.Is3" Margin="Margin.Is2.FromBottom">
+            <Field ColumnSize="ColumnSize.Is3" Margin="Margin.Is3.FromBottom">
                 <FieldLabel>@L["Input.Quantity"]</FieldLabel>
                 <FieldBody>
                     <InputNumber @bind-Value="@Model.Quantity"

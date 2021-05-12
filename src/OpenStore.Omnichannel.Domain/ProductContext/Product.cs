@@ -14,8 +14,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 {
     public partial class Product : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     {
+        private List<ProductOption> _options = new();
         private readonly HashSet<Variant> _variants = new();
-        private HashSet<ProductOption> _options = new();
         private readonly HashSet<ProductMedia> _medias = new();
 
         public string Handle { get; protected set; }
@@ -36,8 +36,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public Guid? BrandId { get; protected set; }
         public virtual Brand Brand { get; protected set; }
 
-        public virtual IReadOnlyCollection<Variant> Variants => _variants;
         public virtual IReadOnlyCollection<ProductOption> Options => _options;
+        public virtual IReadOnlyCollection<Variant> Variants => _variants;
         public virtual IReadOnlyCollection<ProductMedia> Medias => _medias;
 
         #region auditable members

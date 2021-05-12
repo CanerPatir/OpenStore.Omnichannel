@@ -24,7 +24,9 @@ namespace OpenStore.Omnichannel.Panel.Services
             return await response.Content.ReadFromJsonAsync<Guid>();
         }
 
-        public async Task<ProductDto> Get(Guid id) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{id}");
+        public Task UpdateProduct(Guid productId, ProductDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}", model);
+
+        public async Task<ProductDto> Get(Guid productId) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{productId}");
 
         public Task<PagedListDto<ProductListItemReadModel>> GetAll(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/all", request);
 
@@ -46,22 +48,31 @@ namespace OpenStore.Omnichannel.Panel.Services
             productDto.Status = ProductStatus.Active;
         }
 
-        public async Task<IEnumerable<ProductMediaDto>> AssignProductMedia(Guid id, List<FileUploadDto> fileUploadDtoList)
+        public async Task<IEnumerable<ProductMediaDto>> AssignProductMedia(Guid productId, List<FileUploadDto> fileUploadDtoList)
         {
-            var response = await HttpClient.PostAsJsonAsync($"{Path}/{id}/assign-media", fileUploadDtoList);
+            var response = await HttpClient.PostAsJsonAsync($"{Path}/{productId}/assign-media", fileUploadDtoList);
             return await response.Content.ReadFromJsonAsync<List<ProductMediaDto>>();
         }
 
-        public Task UpdateProductMedias(Guid id, IEnumerable<ProductMediaDto> medias) => HttpClient.PostAsJsonAsync($"{Path}/{id}/update-medias", medias);
-        
-        public Task DeleteProductMedia(Guid id, Guid productMediaId) => HttpClient.DeleteAsync($"{Path}/{id}/medias/{productMediaId}");
-       
-        public Task UpdateVariantPrices(Guid id, UpdateVariantPricesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-prices", request);
-        
-        public Task UpdateVariantStocks(Guid id, UpdateVariantStocksRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-stocks", request);
-        
-        public Task UpdateVariantBarcodes(Guid id, UpdateVariantBarcodesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-barcodes", request);
-        
-        public Task UpdateVariantSkus(Guid id, UpdateVariantSkusRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{id}/variants/update-skus", request);
+        public Task UpdateProductMedias(Guid productId, IEnumerable<ProductMediaDto> medias) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/update-medias", medias);
+
+        public Task DeleteProductMedia(Guid productId, Guid productMediaId) => HttpClient.DeleteAsync($"{Path}/{productId}/medias/{productMediaId}");
+
+        public Task UpdateVariantPrices(Guid productId, UpdateVariantPricesRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/update-prices", request);
+
+        public Task UpdateVariantStocks(Guid productId, UpdateVariantStocksRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/update-stocks", request);
+
+        public Task UpdateVariantBarcodes(Guid productId, UpdateVariantBarcodesRequest request) =>
+            HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/update-barcodes", request);
+
+        public Task UpdateVariantSkus(Guid productId, UpdateVariantSkusRequest request) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/update-skus", request);
+
+        public async Task<Guid> CreateVariant(Guid productId, VariantDto model)
+        {
+            var response = await HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants", model);
+            return await response.Content.ReadFromJsonAsync<Guid>();
+        }
+
+        public Task UpdateVariant(Guid productId, Guid variantId, VariantDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}/variants/{variantId}", model);
     }
 }

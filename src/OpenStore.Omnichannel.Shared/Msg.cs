@@ -15,6 +15,8 @@ namespace OpenStore.Omnichannel
                 public const string ProductHandleAlreadyExists = nameof(Domain) + DiscriminatorChar + nameof(ProductHandleAlreadyExists);
                 public const string VariantStockIsNotTracking = nameof(Domain) + DiscriminatorChar + nameof(VariantStockIsNotTracking);
                 public const string QuantityShouldBeGreaterOrEqualThenZero = nameof(Domain) + DiscriminatorChar + nameof(QuantityShouldBeGreaterOrEqualThenZero);
+                public const string VariantAlreadyExistsThatHasSameOptions = nameof(Domain) + DiscriminatorChar + nameof(VariantAlreadyExistsThatHasSameOptions);
+                public const string MaxVariantLimitExceeded = nameof(Domain) + DiscriminatorChar + nameof(MaxVariantLimitExceeded);
             }
 
             public static class Inventory

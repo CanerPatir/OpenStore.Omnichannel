@@ -8,18 +8,57 @@
         </ModalHeader>
         <ModalBody Class="overflow-auto" Style="max-height: 500px">
 
-            @if (_model is not null)
+            @if (_model != null)
             {
                 <Card Margin="Margin.Is3.FromBottom">
                     <CardBody>
-                        asdfasdfa
+                        <h5 class="mb-3">
+                            @L["UpdateVariantCreateModal.Options"]
+                        </h5>
+                        <Validations @ref="_validations" Mode="ValidationMode.Manual">
+                            @foreach (var productOption in Product.Options)
+                            {
+                                var index = Product.Options.IndexOf(productOption);
+                                <Validation MessageLocalizer="Localize" Validator="OptionValidator">
+                                    <Field Margin="Margin.Is2.FromBottom">
+                                        <FieldLabel>@productOption.Name</FieldLabel>
+                                        <FieldBody>
+                                            @if (index == 0)
+                                            {
+                                                <TextEdit @bind-Text="@_model.Option1">
+                                                    <Feedback>
+                                                        <ValidationError>@SharedLocalizer["Validation.Required"]</ValidationError>
+                                                    </Feedback>
+                                                </TextEdit>
+                                            }
+                                            else if (index == 1)
+                                            {
+                                                <TextEdit @bind-Text="@_model.Option2">
+                                                    <Feedback>
+                                                        <ValidationError>@SharedLocalizer["Validation.Required"]</ValidationError>
+                                                    </Feedback>
+                                                </TextEdit>
+                                            }
+                                            else if (index == 2)
+                                            {
+                                                <TextEdit @bind-Text="@_model.Option3">
+                                                    <Feedback>
+                                                        <ValidationError>@L["Validation.Required"]</ValidationError>
+                                                    </Feedback>
+                                                </TextEdit>
+                                            }
+
+                                        </FieldBody>
+                                    </Field>
+                                </Validation>
+                            }
+                        </Validations>
                     </CardBody>
                 </Card>
-            
-                <PricingEditor Model="_model"/>
-                <InventoryEditor Model="_model"/>
+                <PricingEditor Model="@_model"/>
+                <InventoryEditor Model="@_model"/>
             }
-            
+
         </ModalBody>
         <ModalFooter>
             <Button Color="Color.Light" Clicked="@Cancel">@SharedLocalizer["Generic.Cancel"]</Button>
@@ -29,6 +68,7 @@
 </Modal>
 
 @code {
+    private Validations _validations;
     private Modal _modalRef;
     private VariantDto _model;
     private bool _saving;
@@ -42,6 +82,8 @@
     public void Show()
     {
         _model = new VariantDto();
+        _validations?.ClearAll();
+
         _modalRef.Show();
     }
 
@@ -49,19 +91,51 @@
 
     private async Task Save()
     {
+        if (!_validations.ValidateAll())
+        {
+            return;
+        }
         _saving = true;
         try
         {
+            _model.Id = await ApiClient.Product.CreateVariant(Product.Id.Value, _model);
             _modalRef.Hide();
-            Product.Variants.Add(_model);
-            await ModelChanged.InvokeAsync();
-            _model = null;
+            await UpdateLocalState();
+    // _model = null;
         }
         finally
         {
-            await InvokeAsync(StateHasChanged);
             _saving = false;
+            await InvokeAsync(StateHasChanged);
         }
+    }
+    
+    private async Task UpdateLocalState()
+    {
+        Product.Variants.Add(_model);
+
+        if (_model.Option1 is not null)
+        {
+            Product.Options[0].Values.Add(_model.Option1);
+        }
+
+        if (_model.Option2 is not null)
+        {
+            Product.Options[1].Values.Add(_model.Option2);
+        }
+        
+        if (_model.Option3 is not null)
+        {
+            Product.Options[2].Values.Add(_model.Option3);
+        }
+         
+        await ModelChanged.InvokeAsync();
+    }
+
+    private void OptionValidator(ValidatorEventArgs e)
+    {
+        var option = Convert.ToString(e.Value);
+        e.Status = string.IsNullOrEmpty(option) ? ValidationStatus.Error : ValidationStatus.Success;
     }
 
 }

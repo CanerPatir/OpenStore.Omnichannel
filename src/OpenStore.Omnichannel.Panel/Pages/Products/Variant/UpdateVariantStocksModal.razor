@@ -14,6 +14,18 @@
                     <ListGroupItem>
                         <Row>
                             <Column ColumnSize="ColumnSize.Is6">
+                                <Button Size="Size.Small" Color="Color.Secondary" Clicked="ApplyAll">
+                                    @L["UpdateVariantStocksModal.ApplyAll"]
+                                </Button>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is6">
+                                  <InputNumber @bind-Value="@_applyAllQuantity" min="0" class="form-control form-control-sm"/>
+                            </Column>
+                        </Row>
+                    </ListGroupItem>
+                    <ListGroupItem>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is6">
                             </Column>
                             <Column ColumnSize="ColumnSize.Is6">
                                 @L["UpdateVariantStocksModal.Input.Quantity"]
@@ -72,6 +84,7 @@
     private IEnumerable<VariantDto> _variants;
     private List<UpdateVariantStockModel> _updateVariantStockModelList;
     private bool _saving;
+    private int _applyAllQuantity;
 
     [Parameter]
     public EventCallback ModelChanged { get; set; }
@@ -120,6 +133,14 @@
             variantDto.Quantity = updateVariantPriceRequest.Quantity;
         }
         await ModelChanged.InvokeAsync();
+    }
+
+    private void ApplyAll()
+    {
+        foreach (var updateVariantStockModel in _updateVariantStockModelList.Where(x => x.TrackQuantity))
+        {
+            updateVariantStockModel.Quantity = _applyAllQuantity;
+        }
     }
 
 }

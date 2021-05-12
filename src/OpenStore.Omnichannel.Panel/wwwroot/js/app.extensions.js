@@ -1,8 +1,8 @@
 window.appCulture = {
-    set:(value) => {
+    set: (value) => {
         window.localStorage["culture"] = value;
     },
-    get:() => {
+    get: () => {
         return window.localStorage["culture"];
     }
 }
@@ -30,7 +30,7 @@ window.__loadScript = function (scriptPath, isAsync) {
 }
 
 window.__removeScript = scriptPath => {
-    const theScript = document.querySelector("script[src='"+scriptPath+"']");
+    const theScript = document.querySelector("script[src='" + scriptPath + "']");
     theScript.parentNode.removeChild(theScript);
     delete loadedScripts[scriptPath];
 };
@@ -82,3 +82,11 @@ window.__showToast = (type, message, header) => {
     }
     toastr[type](message, header, options);
 }
+
+window.__blockUI = () => {
+    $.blockUI({ message: '<div class="spinner-border" role="status"><span class="sr-only"></span></div>' });
+};
+
+window.__unblockUI = () => {
+    $.unblockUI();
+};

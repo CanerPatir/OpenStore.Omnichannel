@@ -1,123 +1,139 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @inject IStringLocalizer<UpdateVariantsEditor> L
 
-<Card Margin="Margin.Is3.FromBottom">
 
-    <ListGroup>
-        <ListGroupItem>
-            <div class="d-flex">
-                <h5 class="mt-2 mb-2">
-                    @L["Title"]
-                </h5>
-                <div class="ms-auto">
-                    <Button Color="Color.Link" Clicked="ShowAddVariantModal">@L["Button.AddVariant"]</Button>
-                </div>
-            </div>
+@if (_allVariantsRemoved || !_originalHasMultipleVariants)
+{
+    <CreateVariantsEditor Model="@Model" ModelChanged="@CreateNewVariantsModelChanged">
 
-            <div class="d-flex flex-wrap align-items-center p-2">
-                <div>
-                    @L["Label.BulkSelect"]
-                </div>
-                @foreach (var option in Model.Options)
-                {
-                    foreach (var optionValue in option.Values)
-                    {
-                        <div class="ms-0">
-                            <Button Color="Color.Link" Clicked="() => SelectOptionValue(optionValue)">@optionValue</Button>
-                        </div>
-                    }
-                }
-            </div>
-        </ListGroupItem>
-
-        @if (Model.Variants.Any())
+        @if (Model.HasMultipleVariants && _createNewVariantsModelChanged && Model.Variants.Any())
         {
-            <ListGroupItem Padding="Padding.Is3">
-                <div class="d-flex align-items-center" style="min-height: 36px">
-                    <div class="width-10 align-middle">
-                        <Check TValue="bool" Class="form-check-input" CheckedChanged="SelectedAll"/>
+            <Button Clicked="SaveNewVariants" Margin="Margin.IsAuto.FromLeft" Color="Color.Primary">@L["Button.SaveNewVariants"]</Button>
+        }
+    </CreateVariantsEditor>
+}
+else
+{
+    <Card Margin="Margin.Is3.FromBottom">
+        <ListGroup>
+            @if (Model.Variants.Any())
+            {
+                <ListGroupItem>
+                    <div class="d-flex">
+                        <h5 class="mt-2 mb-2">
+                            @L["Title"]
+                        </h5>
+                        <div class="ms-auto">
+                            <Button Color="Color.Link" Clicked="ShowAddVariantModal">@L["Button.AddVariant"]</Button>
+                        </div>
                     </div>
-                    <div class="ms-3">
-                        <h6 class="m-0">
-                            @L["ListGroupItem.ShowingXVariants", Model.Variants.Count]
-                        </h6>
-                    </div>
-                    <div class="ms-auto">
-                        @if (Model.Variants.Any(x => x.Selected))
+
+                    <div class="d-flex flex-wrap align-items-center p-2">
+                        <div>
+                            @L["Label.BulkSelect"]
+                        </div>
+                        @foreach (var optionValue in Model.Options.SelectMany(x => x.Values).OrderBy(x => x))
                         {
-                            <Dropdown>
-                                <DropdownToggle Color="Color.Light">
-                                    @L["Dropdown.BulkOperation"]
-                                </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem Clicked="BulkUpdatePrice">@L["DropdownItem.BulkUpdatePrice"]</DropdownItem>
-                                    @if (Model.Variants.Any(x => x.TrackQuantity))
-                                    {
-                                        <DropdownItem Clicked="BulkUpdateStock">@L["DropdownItem.BulkUpdateStock"]</DropdownItem>
-                                    }
-                                    <DropdownItem Clicked="BulkUpdateBarcode">@L["DropdownItem.BulkUpdateBarcode"]</DropdownItem>
-                                    <DropdownItem Clicked="BulkUpdateSku">@L["DropdownItem.BulkUpdateSku"]</DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
+                            <div class="ms-0">
+                                <Button Color="Color.Link" Clicked="() => SelectOptionValue(optionValue)">@optionValue</Button>
+                            </div>
                         }
                     </div>
-                </div>
-            </ListGroupItem>
-        }
+                </ListGroupItem>
 
-        @foreach (var variant in Model.Variants)
-        {
-            <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset">
-                <div class="d-flex align-items-center">
-                    <div class="width-10 align-middle">
-                        <Check TValue="bool" Class="form-check-input" @bind-Checked="@variant.Selected"/>
-                    </div>
-                    <div class="ms-3 d-flex w-100 align-items-center" @onclick="@(_ => GoVariantDetail(variant))">
-                        <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
-                            <img class="mw-100 mh-100" src="@GetVariantImage(variant)" alt=""/>
+                <ListGroupItem Padding="Padding.Is3">
+                    <div class="d-flex align-items-center" style="min-height: 36px">
+                        <div class="width-10 align-middle">
+                            <Check TValue="bool" Class="form-check-input" CheckedChanged="SelectedAll"/>
                         </div>
                         <div class="ms-3">
                             <h6 class="m-0">
-                                @variant.Title
+                                @L["ListGroupItem.ShowingXVariants", Model.Variants.Count]
                             </h6>
-                            <small>@variant.Barcode</small>
                         </div>
                         <div class="ms-auto">
-                            <h6 class="m-0 d-flex justify-content-end">@variant.Price.ToCurrencyString()</h6>
-                            @if (variant.TrackQuantity)
+                            @if (Model.Variants.Any(x => x.Selected))
                             {
-                                <small>@variant.Quantity @L["ListGroupItem.VariantQuantity"]</small>
+                                <Dropdown>
+                                    <DropdownToggle Color="Color.Light">
+                                        @L["Dropdown.BulkOperation"]
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem Clicked="BulkUpdatePrice">@L["DropdownItem.BulkUpdatePrice"]</DropdownItem>
+                                        @if (Model.Variants.Any(x => x.TrackQuantity))
+                                        {
+                                            <DropdownItem Clicked="BulkUpdateStock">@L["DropdownItem.BulkUpdateStock"]</DropdownItem>
+                                        }
+                                        <DropdownItem Clicked="BulkUpdateBarcode">@L["DropdownItem.BulkUpdateBarcode"]</DropdownItem>
+                                        <DropdownItem Clicked="BulkUpdateSku">@L["DropdownItem.BulkUpdateSku"]</DropdownItem>
+                                        <DropdownDivider/>
+                                        <DropdownItem Class="text-danger" Clicked="BulkDelete">@SharedLocalizer["Generic.Delete"]</DropdownItem>
+
+                                    </DropdownMenu>
+                                </Dropdown>
                             }
                         </div>
                     </div>
+                </ListGroupItem>
 
-                </div>
-            </ListGroupItem>
-        }
+                foreach (var variant in Model.Variants.OrderBy(x => x.Option1))
+                {
+                    <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset">
+                        <div class="d-flex align-items-center">
+                            <div class="width-10 align-middle">
+                                <Check TValue="bool" Class="form-check-input" @bind-Checked="@variant.Selected"/>
+                            </div>
+                            <div class="ms-3 d-flex w-100 align-items-center" @onclick="@(_ => GoVariantDetail(variant))">
+                                <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                    <img class="mw-100 mh-100" src="@GetVariantImage(variant)" alt=""/>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="m-0">
+                                        @variant.Title
+                                    </h6>
+                                    <small>@variant.Barcode</small>
+                                </div>
+                                <div class="ms-auto">
+                                    <h6 class="m-0 d-flex justify-content-end">@variant.Price.ToCurrencyString()</h6>
+                                    @if (variant.TrackQuantity)
+                                    {
+                                        <small>@variant.Quantity @L["ListGroupItem.VariantQuantity"]</small>
+                                    }
+                                </div>
+                            </div>
 
-        @if (Model.Variants.Any())
-        {
-            <ListGroupItem Padding="Padding.Is4">
-                <div class="d-flex align-items-center">
-                    <div>
-                        @L["ListGroupItem.TotalQuantity"]
+                        </div>
+                    </ListGroupItem>
+                }
+
+                <ListGroupItem Padding="Padding.Is4">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            @L["ListGroupItem.TotalQuantity"]
+                        </div>
+                        <div class="ms-auto">
+                            @(Model.Variants.Sum(x => x.Quantity))
+                        </div>
                     </div>
-                    <div class="ms-auto">
-                        @(Model.Variants.Sum(x => x.Quantity))
-                    </div>
-                </div>
-            </ListGroupItem>
-        }
-    </ListGroup>
-</Card>
+                </ListGroupItem>
+            }
+            else
+            {
+                <ListGroupItem Class="text-center">
+                    <small class="text-muted">@L["Label.ProductHasNoVariant"]</small>
+                </ListGroupItem>
+            }
+        </ListGroup>
+    </Card>
 
-<UpdateVariantCreateModal @ref="_updateVariantCreateModal" Product="@Model" ModelChanged="@StateHasChanged"/>
-@if (Model.Id.HasValue)
-{
-    <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-    <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-    <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-    <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantCreateModal @ref="_updateVariantCreateModal" Product="@Model" ModelChanged="@StateHasChanged"/>
+    if (Model.Id.HasValue)
+    {
+        <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+        <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+        <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+        <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+    }
 }
 
 @code {
@@ -128,12 +144,30 @@
     private UpdateVariantSkusModal _updateVariantSkusModal;
     private UpdateVariantCreateModal _updateVariantCreateModal;
     private IEnumerable<VariantDto> SelectedVariants => Model.Variants.Where(x => x.Selected);
+    private bool _allVariantsRemoved = false;
+    private bool _createNewVariantsModelChanged = false;
+    private bool _originalHasMultipleVariants;
 
     [Parameter]
     public ProductDto Model { get; set; }
 
+    [Parameter]
+    public EventCallback<ProductDto> ModelChanged { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _originalHasMultipleVariants = Model.HasMultipleVariants;
+    }
+
     // ReSharper disable PossibleInvalidOperationException
-    private string GetVariantImage(VariantDto variant) => Model.Medias.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value))?.Url;
+    private string GetVariantImage(VariantDto variant)
+    {
+        if (!variant.Id.HasValue)
+        {
+            return null;
+        }
+        return Model.Medias.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value))?.Url;
+    }
 
     // ReSharper disable PossibleInvalidOperationException
     private void GoVariantDetail(VariantDto variant) => Navigation.NavigateTo($"products/{Model.Id.Value}/variants/{variant.Id.Value}");
@@ -163,5 +197,46 @@
     private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(SelectedVariants);
 
     private void BulkUpdateSku() => _updateVariantSkusModal.Show(SelectedVariants);
+
+    private async Task BulkDelete()
+    {
+        if (!DeleteConfirm())
+        {
+            return;
+        }
+
+        var selectedVariants = SelectedVariants.ToList();
+
+    // await ApiClient.Product.RemoveVariants(selectedVariants.Select(x => x.Id));
+    // todo: RemoveVariants
+
+        foreach (var selectedVariant in selectedVariants)
+        {
+            Model.Variants.Remove(selectedVariant);
+        }
+        if (!Model.Variants.Any())
+        {
+            Model.HasMultipleVariants = false;
+            Model.Variants.Add(new VariantDto()); // add default variant
+            Model.Options.Clear();
+            _allVariantsRemoved = true;
+        }
+
+        await ModelChanged.InvokeAsync();
+    }
+
+    private async Task CreateNewVariantsModelChanged()
+    {
+        _createNewVariantsModelChanged = true;
+        await ModelChanged.InvokeAsync();
+    }
+
+    private async Task SaveNewVariants()
+    {
+    // todo: MakeProductVariantable
+
+        _allVariantsRemoved = false;
+        _originalHasMultipleVariants = true;
+    }
 
 }

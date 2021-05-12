@@ -30,4 +30,10 @@
     <data name="CardTitle.Channels" xml:space="preserve">
         <value>Satış Kanalları</value>
     </data>
+    <data name="Input.Barcode" xml:space="preserve">
+        <value>Barkod</value>
+    </data>
+    <data name="Input.Sku" xml:space="preserve">
+        <value>Sku</value>
+    </data>
 </root>

@@ -146,5 +146,17 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Generic.Delete", resourceCulture);
             }
         }
+        
+        internal static string Domain_MultipleVariantProductMustHasOptions {
+            get {
+                return ResourceManager.GetString("Domain.MultipleVariantProductMustHasOptions", resourceCulture);
+            }
+        }
+        
+        internal static string Domain_VariantAlreadyExistsThatHasSameOptions {
+            get {
+                return ResourceManager.GetString("Domain.VariantAlreadyExistsThatHasSameOptions", resourceCulture);
+            }
+        }
     }
 }

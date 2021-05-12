@@ -18,25 +18,29 @@
     protected NavigationManager Navigation { get; init; }
 
     [Inject]
-    protected AlertService AlertService { get; init; }
+    protected DialogService DialogService { get; init; }
 
-    protected void Alert(object message) => AlertService.Alert(message);
-
-    protected bool Confirm(string message) => AlertService.Confirm(message);
+    protected void BlockUi() => DialogService.BlockUi();
     
-    protected bool DeleteConfirm() => AlertService.DeleteConfirm();
+    protected void UnblockUi() => DialogService.UnblockUi();
+    
+    protected void Alert(object message) => DialogService.Alert(message);
 
-    protected bool ConsoleLog(object message) => AlertService.ConsoleLog(message);
+    protected bool Confirm(string message) => DialogService.Confirm(message);
+    
+    protected bool DeleteConfirm() => DialogService.DeleteConfirm();
 
-    protected bool ConsoleError(object message) => AlertService.ConsoleError(message);
+    protected bool ConsoleLog(object message) => DialogService.ConsoleLog(message);
 
-    protected void ShowSuccess(string message, string title = null) => AlertService.ShowSuccess(message, title);
+    protected bool ConsoleError(object message) => DialogService.ConsoleError(message);
 
-    protected void ShowCreatedSuccess() => AlertService.ShowCreatedSuccess();
+    protected void ShowSuccess(string message, string title = null) => DialogService.ShowSuccess(message, title);
 
-    protected void ShowError(string message, string title = null) => AlertService.ShowError(message, title);
+    protected void ShowCreatedSuccess() => DialogService.ShowCreatedSuccess();
 
-    protected void ShowWarning(string message, string title = null) => AlertService.ShowWarning(message, title);
+    protected void ShowError(string message, string title = null) => DialogService.ShowError(message, title);
+
+    protected void ShowWarning(string message, string title = null) => DialogService.ShowWarning(message, title);
 
     protected string Localize(string message, IEnumerable<string> arguments) => SharedLocalizer[message, arguments];
 
