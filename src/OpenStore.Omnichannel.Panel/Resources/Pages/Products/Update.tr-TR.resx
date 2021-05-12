@@ -21,4 +21,7 @@
     <data name="Alert.ArchiveConfirmation" xml:space="preserve">
         <value>Arşivlenmiş ürünler katalogda gizli durumda yer alır ve satış görmez. Ürünü arşivlemek istediğinizden emin misiniz?</value>
     </data>
+    <data name="Button.Archive" xml:space="preserve">
+        <value>Ürünü Arşivle</value>
+    </data>
 </root>

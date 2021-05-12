@@ -106,12 +106,6 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
             }
         }
         
-        internal static string DropdownItem_BulkUpdateHsCode {
-            get {
-                return ResourceManager.GetString("DropdownItem.BulkUpdateHsCode", resourceCulture);
-            }
-        }
-        
         internal static string UpdateVariantPricesModal_Title {
             get {
                 return ResourceManager.GetString("UpdateVariantPricesModal.Title", resourceCulture);

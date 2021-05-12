@@ -48,9 +48,6 @@
     <data name="DropdownItem.BulkUpdateBarcode" xml:space="preserve">
         <value>Toplu barkod güncelle</value>
     </data>
-    <data name="DropdownItem.BulkUpdateHsCode" xml:space="preserve">
-        <value>Toplu HS kod güncelle</value>
-    </data>
     <data name="UpdateVariantPricesModal.Title" xml:space="preserve">
         <value>Toplu Varyant Fiyat Güncelleme</value>
     </data>

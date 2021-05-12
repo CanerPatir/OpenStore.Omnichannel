@@ -50,5 +50,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("Alert.ArchiveConfirmation", resourceCulture);
             }
         }
+        
+        internal static string Button_Archive {
+            get {
+                return ResourceManager.GetString("Button.Archive", resourceCulture);
+            }
+        }
     }
 }

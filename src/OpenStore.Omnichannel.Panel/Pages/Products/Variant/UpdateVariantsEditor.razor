@@ -62,7 +62,6 @@
                                     }
                                     <DropdownItem Clicked="BulkUpdateBarcode">@L["DropdownItem.BulkUpdateBarcode"]</DropdownItem>
                                     <DropdownItem Clicked="BulkUpdateSku">@L["DropdownItem.BulkUpdateSku"]</DropdownItem>
-                                    <DropdownItem Clicked="BulkUpdateHsCode">@L["DropdownItem.BulkUpdateHsCode"]</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                         }
@@ -119,11 +118,10 @@
 
 @if (Model.Id.HasValue)
 {
-    <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
-    <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
-    <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
-    <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(() => StateHasChanged())"/>
-    <UpdateVariantHsCodesModal @ref="_updateVariantHsCodesModal" ProductId="@Model.Id.Value"/>
+    <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
 }
 
 
@@ -133,7 +131,6 @@
     private UpdateVariantStocksModal _updateVariantStocksModal;
     private UpdateVariantBarcodesModal _updateVariantBarcodesModal;
     private UpdateVariantSkusModal _updateVariantSkusModal;
-    private UpdateVariantHsCodesModal _updateVariantHsCodesModal;
     private IEnumerable<VariantDto> SelectedVariants => Model.Variants.Where(x => x.Selected);
 
     [Parameter]
@@ -172,7 +169,5 @@
 
     private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(SelectedVariants);
     private void BulkUpdateSku() => _updateVariantSkusModal.Show(SelectedVariants);
-
-    private void BulkUpdateHsCode() => _updateVariantHsCodesModal.Show(SelectedVariants);
-
+    
 }
