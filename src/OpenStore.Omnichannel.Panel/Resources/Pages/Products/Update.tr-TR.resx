@@ -24,4 +24,10 @@
     <data name="Button.Archive" xml:space="preserve">
         <value>Ürünü Arşivle</value>
     </data>
+    <data name="CardTitle.Collections" xml:space="preserve">
+        <value>Koleksiyonlar</value>
+    </data>
+    <data name="CardTitle.Channels" xml:space="preserve">
+        <value>Satış Kanalları</value>
+    </data>
 </root>

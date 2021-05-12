@@ -1,11 +1,6 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @inject IStringLocalizer<UpdateVariantsEditor> L
 
-<style>
-    .custom-control-label{
-        display: none;
-    }
-</style>
 <Card Margin="Margin.Is3.FromBottom">
 
     <ListGroup>
@@ -116,6 +111,7 @@
     </ListGroup>
 </Card>
 
+<UpdateVariantCreateModal @ref="_updateVariantCreateModal" Product="@Model" ModelChanged="@StateHasChanged"/>
 @if (Model.Id.HasValue)
 {
     <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
@@ -124,13 +120,13 @@
     <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
 }
 
-
 @code {
 
     private UpdateVariantPricesModal _updateVariantPricesModal;
     private UpdateVariantStocksModal _updateVariantStocksModal;
     private UpdateVariantBarcodesModal _updateVariantBarcodesModal;
     private UpdateVariantSkusModal _updateVariantSkusModal;
+    private UpdateVariantCreateModal _updateVariantCreateModal;
     private IEnumerable<VariantDto> SelectedVariants => Model.Variants.Where(x => x.Selected);
 
     [Parameter]
@@ -158,16 +154,14 @@
         }
     }
 
-    private void ShowAddVariantModal()
-    {
-        throw new NotImplementedException();
-    }
+    private void ShowAddVariantModal() => _updateVariantCreateModal.Show();
 
     private void BulkUpdatePrice() => _updateVariantPricesModal.Show(SelectedVariants);
 
     private void BulkUpdateStock() => _updateVariantStocksModal.Show(SelectedVariants);
 
     private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(SelectedVariants);
+
     private void BulkUpdateSku() => _updateVariantSkusModal.Show(SelectedVariants);
-    
+
 }

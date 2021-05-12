@@ -2,8 +2,7 @@
 @using System.Globalization
 @inject IStringLocalizer<PricingEditor> L
 
-<Card Margin="Margin.Is3.FromBottom">
-    <ListGroup>
+     <ListGroup Margin="Margin.Is3.FromBottom">
         <ListGroupItem>
             <h5 class="mt-2 mb-3">
                 @L["Title"]
@@ -50,8 +49,7 @@
             </Field>
         </ListGroupItem>
     </ListGroup>
-</Card>
-
+ 
 @code {
 
     [Parameter]

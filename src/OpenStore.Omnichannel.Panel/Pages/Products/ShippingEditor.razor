@@ -1,64 +1,62 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @inject IStringLocalizer<ShippingEditor> L
 
-<Card Margin="global::Blazorise.Margin.Is3.FromBottom">
-    <ListGroup>
+<ListGroup Margin="global::Blazorise.Margin.Is3.FromBottom">
+    <ListGroupItem>
+        <h5 class="mt-2 mb-2">
+            @L["Title"]
+        </h5>
+        <Field>
+            <FieldBody>
+                <Check TValue="bool" Readonly="@Model.IsEdit" @bind-Checked="@Model.IsPhysicalProduct">@L["Input.IsPhysicalProduct"]</Check>
+            </FieldBody>
+        </Field>
+    </ListGroupItem>
+    @if (Model.IsPhysicalProduct)
+    {
         <ListGroupItem>
-            <h5 class="mt-2 mb-2">
-                @L["Title"]
-            </h5>
-            <Field>
-                <FieldBody>
-                    <Check TValue="bool" Readonly="@Model.IsEdit" @bind-Checked="@Model.IsPhysicalProduct">@L["Input.IsPhysicalProduct"]</Check>
-                </FieldBody>
-            </Field>
-        </ListGroupItem>
-        @if (Model.IsPhysicalProduct)
-        {
-            <ListGroupItem>
-                <Row>
-                    <Field ColumnSize="ColumnSize.Is3">
-                        <FieldLabel>@L["Input.Weight"]</FieldLabel>
-                        <FieldBody>
-                            <NumericEdit TValue="decimal?" @bind-Value="@Model.Weight" Decimals="1">
-                            </NumericEdit>
-                        </FieldBody>
-                    </Field>
-                    <Field ColumnSize="ColumnSize.Is2">
-                        <FieldLabel>@L["Input.WeightUnit"]</FieldLabel>
-                        <FieldBody>
-                            <Select TValue="string" @bind-SelectedValue="@Model.WeightUnit" class="form-control">
-                                <SelectItem TValue="string" Value="@((string) null)"></SelectItem>
-                                <SelectItem TValue="string" Value='"kg"'>kg</SelectItem>
-                                <SelectItem TValue="string" Value='"g"'>g</SelectItem>
-                                <SelectItem TValue="string" Value='"lb"'>lb</SelectItem>
-                            </Select>
-                        </FieldBody>
-                    </Field>
-                    <FieldHelp>@L["InputHelp.Weight"]</FieldHelp>
+            <Row>
+                <Field ColumnSize="ColumnSize.Is3">
+                    <FieldLabel>@L["Input.Weight"]</FieldLabel>
+                    <FieldBody>
+                        <NumericEdit TValue="decimal?" @bind-Value="@Model.Weight" Decimals="1">
+                        </NumericEdit>
+                    </FieldBody>
+                </Field>
+                <Field ColumnSize="ColumnSize.Is2">
+                    <FieldLabel>@L["Input.WeightUnit"]</FieldLabel>
+                    <FieldBody>
+                        <Select TValue="string" @bind-SelectedValue="@Model.WeightUnit" class="form-control">
+                            <SelectItem TValue="string" Value="@((string) null)"></SelectItem>
+                            <SelectItem TValue="string" Value='"kg"'>kg</SelectItem>
+                            <SelectItem TValue="string" Value='"g"'>g</SelectItem>
+                            <SelectItem TValue="string" Value='"lb"'>lb</SelectItem>
+                        </Select>
+                    </FieldBody>
+                </Field>
+                <FieldHelp>@L["InputHelp.Weight"]</FieldHelp>
 
-                </Row>
-            </ListGroupItem>
-            <ListGroupItem>
-                <Row>
-                    <Field ColumnSize="ColumnSize.Is5">
-                        <FieldLabel>@L["Input.HsCode"]</FieldLabel>
-                        <FieldBody>
-                            <TextEdit @bind-Text="@Model.HsCode" >
-                            </TextEdit>
-                            @* *@
-                            @* <Autocomplete TItem="MySelectModel" TValue="string" *@
-                            @*     Data="@Model.HsCode" *@
-                            @*     @bind-SelectedValue="@Model.HsCode" *@
-                            @*     Placeholder="Search..." /> *@
-                        </FieldBody>
-                    </Field>
-                    <FieldHelp>@L["InputHelp.HsCode"]</FieldHelp>
-                </Row>
-            </ListGroupItem>
-        }
-    </ListGroup>
-</Card>
+            </Row>
+        </ListGroupItem>
+        <ListGroupItem>
+            <Row>
+                <Field ColumnSize="ColumnSize.Is5">
+                    <FieldLabel>@L["Input.HsCode"]</FieldLabel>
+                    <FieldBody>
+                        <TextEdit @bind-Text="@Model.HsCode">
+                        </TextEdit>
+                        @* *@
+                        @* <Autocomplete TItem="MySelectModel" TValue="string" *@
+                        @*     Data="@Model.HsCode" *@
+                        @*     @bind-SelectedValue="@Model.HsCode" *@
+                        @*     Placeholder="Search..." /> *@
+                    </FieldBody>
+                </Field>
+                <FieldHelp>@L["InputHelp.HsCode"]</FieldHelp>
+            </Row>
+        </ListGroupItem>
+    }
+</ListGroup>
 
 @code {
 

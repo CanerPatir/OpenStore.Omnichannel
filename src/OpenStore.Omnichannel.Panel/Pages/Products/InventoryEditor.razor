@@ -1,39 +1,37 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @inject IStringLocalizer<InventoryEditor> L
 
-<Card Margin="Margin.Is3.FromBottom">
-    <ListGroup>
+<ListGroup Margin="Margin.Is3.FromBottom">
+    <ListGroupItem>
+        <h5 class="mt-2 mb-3">
+            @L["Title"]
+        </h5>
+        <Field Margin="Margin.Is1.FromBottom">
+            <FieldBody>
+                <Check TValue="bool" @bind-Checked="@Model.TrackQuantity">@L["Input.TrackQuantity"]</Check>
+            </FieldBody>
+        </Field>
+    </ListGroupItem>
+    @if (Model.TrackQuantity)
+    {
         <ListGroupItem>
-            <h5 class="mt-2 mb-3">
-                @L["Title"]
-            </h5>
+            <Field ColumnSize="ColumnSize.Is3" Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Input.Quantity"]</FieldLabel>
+                <FieldBody>
+                    <InputNumber @bind-Value="@Model.Quantity"
+                                 min="0"
+                                 class="form-control"
+                                 DisplayName="@L["Input.Stock"]"/>
+                </FieldBody>
+            </Field>
             <Field Margin="Margin.Is1.FromBottom">
                 <FieldBody>
-                    <Check TValue="bool" @bind-Checked="@Model.TrackQuantity">@L["Input.TrackQuantity"]</Check>
+                    <Check TValue="bool" @bind-Checked="@Model.ContinueSellingWhenOutOfStock">@L["Input.SellWhenOutOfStock"]</Check>
                 </FieldBody>
             </Field>
         </ListGroupItem>
-        @if (Model.TrackQuantity)
-        {
-            <ListGroupItem>
-                <Field ColumnSize="ColumnSize.Is3" Margin="Margin.Is2.FromBottom">
-                    <FieldLabel>@L["Input.Quantity"]</FieldLabel>
-                    <FieldBody>
-                        <InputNumber @bind-Value="@Model.Quantity"
-                                     min="0"
-                                     class="form-control"
-                                     DisplayName="@L["Input.Stock"]"/>
-                    </FieldBody>
-                </Field>
-                <Field Margin="Margin.Is1.FromBottom">
-                    <FieldBody>
-                        <Check TValue="bool" @bind-Checked="@Model.ContinueSellingWhenOutOfStock">@L["Input.SellWhenOutOfStock"]</Check>
-                    </FieldBody>
-                </Field>
-            </ListGroupItem>
-        }
-    </ListGroup>
-</Card>
+    }
+</ListGroup>
 
 @code {
 

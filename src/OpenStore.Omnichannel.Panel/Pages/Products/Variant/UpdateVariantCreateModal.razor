@@ -1,0 +1,67 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@inject IStringLocalizer<UpdateVariantsEditor> L
+
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true">
+        <ModalHeader>
+            <ModalTitle>@L["UpdateVariantCreateModal.Title"]</ModalTitle>
+        </ModalHeader>
+        <ModalBody Class="overflow-auto" Style="max-height: 500px">
+
+            @if (_model is not null)
+            {
+                <Card Margin="Margin.Is3.FromBottom">
+                    <CardBody>
+                        asdfasdfa
+                    </CardBody>
+                </Card>
+            
+                <PricingEditor Model="_model"/>
+                <InventoryEditor Model="_model"/>
+            }
+            
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Light" Clicked="@Cancel">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Loading="_saving" Color="Color.Success" Clicked="@Save">@SharedLocalizer["Generic.Save"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal _modalRef;
+    private VariantDto _model;
+    private bool _saving;
+
+    [Parameter]
+    public ProductDto Product { get; set; }
+
+    [Parameter]
+    public EventCallback ModelChanged { get; set; }
+
+    public void Show()
+    {
+        _model = new VariantDto();
+        _modalRef.Show();
+    }
+
+    private void Cancel() => _modalRef.Hide();
+
+    private async Task Save()
+    {
+        _saving = true;
+        try
+        {
+            _modalRef.Hide();
+            Product.Variants.Add(_model);
+            await ModelChanged.InvokeAsync();
+            _model = null;
+        }
+        finally
+        {
+            await InvokeAsync(StateHasChanged);
+            _saving = false;
+        }
+    }
+
+}

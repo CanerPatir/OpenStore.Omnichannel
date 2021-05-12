@@ -56,5 +56,17 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("Button.Archive", resourceCulture);
             }
         }
+        
+        internal static string CardTitle_Collections {
+            get {
+                return ResourceManager.GetString("CardTitle.Collections", resourceCulture);
+            }
+        }
+        
+        internal static string CardTitle_Channels {
+            get {
+                return ResourceManager.GetString("CardTitle.Channels", resourceCulture);
+            }
+        }
     }
 }

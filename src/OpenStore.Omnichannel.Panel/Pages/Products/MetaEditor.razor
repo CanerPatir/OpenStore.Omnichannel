@@ -2,54 +2,52 @@
 @inject IStringLocalizer<MetaEditor> L
 
 
-<Card Margin="Margin.Is3.FromBottom">
-    <ListGroup>
-        <ListGroupItem>
-            <h5 class="mt-2 mb-2">
-                @L["Title"]
-            </h5>
-            <div>
-                <p class="se-title">
-                    @Model.MetaTitle
-                </p>
-                <div class="se-link">
-                    https://your-site.open-store.com/products/@Model.Handle
-                </div>
-                <div class="se-desc">
-                    @Model.MetaDescription
-                </div>
+<ListGroup Margin="Margin.Is3.FromBottom">
+    <ListGroupItem>
+        <h5 class="mt-2 mb-2">
+            @L["Title"]
+        </h5>
+        <div>
+            <p class="se-title">
+                @Model.MetaTitle
+            </p>
+            <div class="se-link">
+                https://your-site.open-store.com/products/@Model.Handle
             </div>
-        </ListGroupItem>
-        <ListGroupItem>
+            <div class="se-desc">
+                @Model.MetaDescription
+            </div>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
 
-            <Field Margin="Margin.Is3.FromBottom">
-                <FieldLabel>@L["Form.MetaTitle"]</FieldLabel>
-                <FieldBody>
-                    <TextEdit @bind-Text="@Model.MetaTitle"/>
-                </FieldBody>
-            </Field>
-            <Field Margin="Margin.Is3.FromBottom">
-                <FieldLabel>@L["Form.MetaDescription"]</FieldLabel>
-                <FieldBody>
-                    <MemoEdit @bind-Text="@Model.MetaDescription" Rows="5"/>
-                </FieldBody>
-            </Field>
-            <Field Margin="Margin.Is3.FromBottom">
-                <FieldLabel>@L["Form.Handle"]</FieldLabel>
-                <FieldBody>
-                    <Addons>
-                        <Addon AddonType="AddonType.Start">
-                            <AddonLabel Style="border-bottom-right-radius: 0; border-top-right-radius: 0">https://your-site.open-store.com/products/</AddonLabel>
-                        </Addon>
-                        <Addon AddonType="AddonType.Body">
-                            <TextEdit Readonly="@Model.IsEdit" @bind-Text="@Model.Handle"/>
-                        </Addon>
-                    </Addons>
-                </FieldBody>
-            </Field>
-        </ListGroupItem>
-    </ListGroup>
-</Card>
+        <Field Margin="Margin.Is3.FromBottom">
+            <FieldLabel>@L["Form.MetaTitle"]</FieldLabel>
+            <FieldBody>
+                <TextEdit @bind-Text="@Model.MetaTitle"/>
+            </FieldBody>
+        </Field>
+        <Field Margin="Margin.Is3.FromBottom">
+            <FieldLabel>@L["Form.MetaDescription"]</FieldLabel>
+            <FieldBody>
+                <MemoEdit @bind-Text="@Model.MetaDescription" Rows="5"/>
+            </FieldBody>
+        </Field>
+        <Field Margin="Margin.Is3.FromBottom">
+            <FieldLabel>@L["Form.Handle"]</FieldLabel>
+            <FieldBody>
+                <Addons>
+                    <Addon AddonType="AddonType.Start">
+                        <AddonLabel Style="border-bottom-right-radius: 0; border-top-right-radius: 0">https://your-site.open-store.com/products/</AddonLabel>
+                    </Addon>
+                    <Addon AddonType="AddonType.Body">
+                        <TextEdit Readonly="@Model.IsEdit" @bind-Text="@Model.Handle"/>
+                    </Addon>
+                </Addons>
+            </FieldBody>
+        </Field>
+    </ListGroupItem>
+</ListGroup>
 
 @code {
 
