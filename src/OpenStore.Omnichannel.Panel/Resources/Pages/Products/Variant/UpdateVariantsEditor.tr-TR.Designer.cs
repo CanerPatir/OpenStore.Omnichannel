@@ -207,5 +207,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Variant {
                 return ResourceManager.GetString("HasMultipleVariants", resourceCulture);
             }
         }
+        
+        internal static string Button_SaveNewVariants {
+            get {
+                return ResourceManager.GetString("Button.SaveNewVariants", resourceCulture);
+            }
+        }
     }
 }

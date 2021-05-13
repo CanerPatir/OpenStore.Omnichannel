@@ -1,11 +1,11 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using OpenStore.Omnichannel.Shared.Request
 @inject IStringLocalizer<UpdateVariantsEditor> L
 
 
 @if (_allVariantsRemoved || !_originalHasMultipleVariants)
 {
     <CreateVariantsEditor Model="@Model" ModelChanged="@CreateNewVariantsModelChanged">
-
         @if (Model.HasMultipleVariants && _createNewVariantsModelChanged && Model.Variants.Any())
         {
             <Button Clicked="SaveNewVariants" Margin="Margin.IsAuto.FromLeft" Color="Color.Primary">@L["Button.SaveNewVariants"]</Button>
@@ -207,22 +207,29 @@ else
 
         var selectedVariants = SelectedVariants.ToList();
 
-    // await ApiClient.Product.RemoveVariants(selectedVariants.Select(x => x.Id));
-    // todo: RemoveVariants
-
-        foreach (var selectedVariant in selectedVariants)
+        BlockUi();
+        try
         {
-            Model.Variants.Remove(selectedVariant);
-        }
-        if (!Model.Variants.Any())
-        {
-            Model.HasMultipleVariants = false;
-            Model.Variants.Add(new VariantDto()); // add default variant
-            Model.Options.Clear();
-            _allVariantsRemoved = true;
-        }
+            await ApiClient.Product.DeleteVariants(Model.Id.Value, selectedVariants.Select(x => x.Id.Value));
+        
+            foreach (var selectedVariant in selectedVariants)
+            {
+                Model.Variants.Remove(selectedVariant);
+            }
+            if (!Model.Variants.Any())
+            {
+                Model.HasMultipleVariants = false;
+                Model.Variants.Add(new VariantDto()); // add default variant
+                Model.Options.Clear();
+                _allVariantsRemoved = true;
+            }
 
-        await ModelChanged.InvokeAsync();
+            await ModelChanged.InvokeAsync();
+        }
+        finally
+        {
+            UnblockUi();
+        }
     }
 
     private async Task CreateNewVariantsModelChanged()
@@ -233,10 +240,23 @@ else
 
     private async Task SaveNewVariants()
     {
-    // todo: MakeProductVariantable
-
-        _allVariantsRemoved = false;
-        _originalHasMultipleVariants = true;
+        BlockUi();
+        try
+        {
+            var ids = (await ApiClient.Product.MakeProductAsMultiVariantRequest(Model.Id.Value,  new MakeProductAsMultiVariantRequest(Model.Options, Model.Variants))).ToList();
+            for (var i = 0; i < ids.Count; i++)
+            {
+                Model.Variants[i].Id = ids[i];
+            }
+     
+            Model.HasMultipleVariants = true;
+            _allVariantsRemoved = false;
+            _originalHasMultipleVariants = true;
+        }
+        finally
+        {
+            UnblockUi();
+        }
     }
 
 }

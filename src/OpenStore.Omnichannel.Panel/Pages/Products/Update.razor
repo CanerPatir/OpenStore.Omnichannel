@@ -139,11 +139,12 @@
             return;
         }
 
+        _saving = true;
         try
         {
-            // todo: productSave
-            _saving = true;
             _product.Description = await _contentEditor.GetDescriptionHtml();
+    // todo: productSave
+
         }
         finally
         {

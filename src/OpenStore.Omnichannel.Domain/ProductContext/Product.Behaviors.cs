@@ -21,7 +21,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                     throw new DomainException(Msg.Domain.Product.MultipleVariantProductMustHasOptions);
                 }
 
-                productOptions = model.Options.Select(x => new ProductOption(x.Name, x.Values.ToHashSet())).ToList();
+                productOptions = MapProductOptions(model.Options);
             }
 
             var product = new Product
@@ -57,6 +57,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             return product;
         }
+
+        private static List<ProductOption> MapProductOptions(IEnumerable<ProductOptionDto> model) => model.Select(x => new ProductOption(x.Name, x.Values.ToHashSet())).ToList();
 
         private Variant AddVariant(VariantDto variantDto)
         {
@@ -246,7 +248,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             }
         }
 
-        public void UpdateVariantBarcode(UpdateProductVariantBarcode command)
+        private void UpdateVariantBarcode(UpdateProductVariantBarcode command)
         {
             var variant = Variants.SingleOrDefault(v => v.Id == command.VariantId);
             if (variant is null)
@@ -266,7 +268,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             }
         }
 
-        public void UpdateVariantSku(UpdateProductVariantSku command)
+        private void UpdateVariantSku(UpdateProductVariantSku command)
         {
             var variant = Variants.SingleOrDefault(v => v.Id == command.VariantId);
             if (variant is null)
@@ -276,6 +278,45 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             variant.UpdateSku(command.Sku);
             ApplyChange(new ProductVariantSkuUpdated(Id, variant.Id, variant.Sku));
+        }
+
+        public IEnumerable<Variant> DeleteVariants(DeleteVariants command)
+        {
+            foreach (var variantId in command.VariantIds)
+            {
+                var variant = _variants.SingleOrDefault(x => x.Id == variantId);
+                if (variant != null && _variants.Remove(variant))
+                {
+                    ApplyChange(new VariantRemoved(Id, variantId));
+                    yield return variant;
+                }
+            }
+
+            if (!_variants.Any())
+            {
+                HasMultipleVariants = false;
+                _options = new List<ProductOption>();
+                _variants.Add(Variant.CreateDefaultVariant(Id));
+                ApplyChange(new ProductTurnedIntoSingleVariantProduct(Id));
+            }
+        }
+
+        public IEnumerable<Variant> MakeMultiVariant(MakeProductAsMultiVariant command)
+        {
+            if (HasMultipleVariants)
+            {
+                yield break;
+            }
+            var (_, productOptionsModel, variantModels) = command;
+            _options = MapProductOptions(productOptionsModel);
+            HasMultipleVariants = true;
+            ApplyChange(new ProductMadeMultiVariant(Id, productOptionsModel));
+            
+            _variants.Clear();
+            foreach (var commandVariant in variantModels)
+            {
+                yield return AddVariant(commandVariant);
+            }
         }
     }
 }

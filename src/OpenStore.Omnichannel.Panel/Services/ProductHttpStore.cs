@@ -24,6 +24,7 @@ namespace OpenStore.Omnichannel.Panel.Services
             return await response.Content.ReadFromJsonAsync<Guid>();
         }
 
+        //todo: implement
         public Task UpdateProduct(Guid productId, ProductDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}", model);
 
         public async Task<ProductDto> Get(Guid productId) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{productId}");
@@ -73,6 +74,15 @@ namespace OpenStore.Omnichannel.Panel.Services
             return await response.Content.ReadFromJsonAsync<Guid>();
         }
 
+        //todo: implement
         public Task UpdateVariant(Guid productId, Guid variantId, VariantDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}/variants/{variantId}", model);
+
+        public Task DeleteVariants(Guid productId, IEnumerable<Guid> model) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/delete-bulk", model);
+
+        public async Task<IEnumerable<Guid>> MakeProductAsMultiVariantRequest(Guid productId, MakeProductAsMultiVariantRequest  request)
+        { 
+            var response = await HttpClient.PostAsJsonAsync($"{Path}/{productId}/make-multi-variant", request);
+            return await response.Content.ReadFromJsonAsync<List<Guid>>();
+        }
     }
 }

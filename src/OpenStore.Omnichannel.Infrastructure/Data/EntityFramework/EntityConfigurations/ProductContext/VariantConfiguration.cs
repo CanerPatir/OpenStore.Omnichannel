@@ -1,4 +1,5 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Infrastructure.Data.EntityFramework.EntityConfiguration;
 using OpenStore.Omnichannel.Domain.InventoryContext;
@@ -24,7 +25,8 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
 
             builder.HasOne<Inventory>(x => x.Inventory)
                 .WithOne(x => x.Variant)
-                .IsRequired(false);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

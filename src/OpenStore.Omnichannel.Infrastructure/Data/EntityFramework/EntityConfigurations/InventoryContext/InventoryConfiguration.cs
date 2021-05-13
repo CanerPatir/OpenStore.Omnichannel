@@ -11,7 +11,8 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
         {
             builder.HasOne<Variant>(x => x.Variant)
                 .WithOne(x => x.Inventory)
-                .IsRequired(false);
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

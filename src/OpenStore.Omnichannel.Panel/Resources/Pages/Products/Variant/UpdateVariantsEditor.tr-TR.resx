@@ -99,4 +99,7 @@
     <data name="HasMultipleVariants" xml:space="preserve">
         <value>Bu ürün birden fazla opsiyon barındırır (Örn: Renk , Beden)</value>
     </data>
+    <data name="Button.SaveNewVariants" xml:space="preserve">
+        <value>Varyantları Kaydet</value>
+    </data>
 </root>

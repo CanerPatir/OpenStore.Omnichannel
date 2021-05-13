@@ -120,8 +120,8 @@
         }
         finally
         {
-            await InvokeAsync(StateHasChanged);
             _saving = false;
+            await InvokeAsync(StateHasChanged);
         }
     }
 

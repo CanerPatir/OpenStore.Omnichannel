@@ -37,4 +37,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record UpdateProductVariantSkus(Guid ProductId, IEnumerable<UpdateProductVariantSku> Variants) : IRequest;
 
     public record UpdateProductVariantSku(Guid VariantId, string Sku) : IRequest;
+    
+    public record DeleteVariants(Guid ProductId, IEnumerable<Guid> VariantIds) : IRequest;
+    
+    public record MakeProductAsMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options, IEnumerable<VariantDto> Variants) : IRequest<IEnumerable<Guid>>;
 }

@@ -64,4 +64,10 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record ProductVariantBarcodeUpdated(Guid ProductId, Guid VariantId, string Barcode) : DomainEventBase(ProductId);
     
     public record ProductVariantSkuUpdated(Guid ProductId, Guid VariantId, string Sku) : DomainEventBase(ProductId);
+    
+    public record VariantRemoved(Guid ProductId, Guid VariantId) : DomainEventBase(ProductId);
+    
+    public record ProductTurnedIntoSingleVariantProduct(Guid ProductId) : DomainEventBase(ProductId);
+
+    public record ProductMadeMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options) : DomainEventBase(ProductId);
 }

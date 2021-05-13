@@ -44,7 +44,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             decimal price, decimal? compareAtPrice, decimal? cost, bool calculateTaxAdditionally,
             int quantity, string sku, string barcode, bool trackQuantity, bool continueSellingWhenOutOfStock)
         {
-            Id = Guid.NewGuid();
+            // Id = Guid.NewGuid();
             ProductId = productId;
             Option1 = option1;
             Option2 = option2;
@@ -63,6 +63,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                 Inventory = Inventory.Create(Id, quantity, continueSellingWhenOutOfStock);
             }
         }
+
+        internal static Variant CreateDefaultVariant(Guid productId) => new()
+        {
+            ProductId = productId,
+            TrackQuantity = true
+        };
 
         public void UpdateQuantity(int quantity)
         {

@@ -87,5 +87,11 @@ namespace OpenStore.Omnichannel.Api.Store
         
         [HttpPost("{id:guid}/variants")]
         public Task<Guid> CreateVariant(Guid id, VariantDto model) => _mediator.Send(new CreateVariant(id, model), CancellationToken);
+        
+        [HttpPost("{id:guid}/variants/delete-bulk")]
+        public Task DeleteVariants(Guid id, IEnumerable<Guid> model) => _mediator.Send(new DeleteVariants(id, model), CancellationToken);
+        
+        [HttpPost("{id:guid}/make-multi-variant")]
+        public Task<IEnumerable<Guid>> MakeProductAsMultiVariant(Guid id, MakeProductAsMultiVariantRequest request) => _mediator.Send(new MakeProductAsMultiVariant(id, request.Options, request.Variants), CancellationToken);
     }
 }
