@@ -1,96 +1,114 @@
 @page "/products/add"
-@using OpenStore.Omnichannel.Shared.Dto.Product
+
 @using OpenStore.Omnichannel.Panel.Pages.Products.Media
 @using OpenStore.Omnichannel.Panel.Pages.Products.Variant
+@using System.ComponentModel
+
+@implements IDisposable
 
 @inject IStringLocalizer<Create> L
+@inject ProductCreateViewModel ViewModel;
 
-<Container>
-    <Row class="justify-content-center">
-        <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-            <OsPageTitle RootHref="products">
-                <TitleSection>
-                    @if (string.IsNullOrWhiteSpace(_product.Title))
-                    {
-                        <span>@L["NewProduct"]</span>
-                    }
-                    else
-                    {
-                        <span>@_product.Title</span>
-                    }
-                </TitleSection>
-                <ButtonsSection>
-                    <Button Loading="_saving" Clicked="Save" Color="Color.Success">
-                        @if (!_saving)
+<CascadingValue Value="ViewModel">
+    <Container>
+        <Row class="justify-content-center">
+            <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                <OsPageTitle RootHref="products">
+                    <TitleSection>
+                        @if (string.IsNullOrWhiteSpace(ViewModel.Product.Title))
                         {
-                            <Icon Name="IconName.Save" Class="me-1"></Icon>
+                            <span>@L["NewProduct"]</span>
                         }
-                        @L["Button.Save"]
-                    </Button>
-                </ButtonsSection>
-            </OsPageTitle>
-
-            <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="_product">
-                <Row>
-                    <Column ColumnSize="ColumnSize.Is12">
-                        <Alert Color="Color.Danger" Visible="@_formHasErrors">
-                            <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
-                                @L["Alert.ValidationErrors"]
-                            </Heading>
-                            <Blazorise.ValidationSummary Margin="Margin.Is0"/>
-                        </Alert>
-                    </Column>
-                </Row>
-                <Row>
-                    <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                        <ProductContentEditor @ref="_contentEditor" Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
-                        <MediaEditor Model="@_product"/>
-                        <CreateVariantsEditor Model="@_product" ModelChanged="@(p => StateHasChanged())"/>
-                        @if (!_product.HasMultipleVariants)
+                        else
                         {
-                            <PricingEditor Model="@_product.Variants.First()"/>
-                            <InventoryEditor Model="@_product.Variants.First()"/>
-                            <ShippingEditor Model="@_product"/>
+                            <span>@ViewModel.Product.Title</span>
                         }
-                        <MetaEditor Model="@_product"/>
-                    </Column>
-
-                    <Column ColumnSize="ColumnSize.Is4.OnDesktop">
-                        <ListGroup Margin="Margin.Is3.FromBottom">
-                            <StatusEditor Model="@_product"/>
-                        </ListGroup>
-                        <ListGroup Margin="Margin.Is3.FromBottom">
-                            <TagsEditor Model="@_product"/>
-                        </ListGroup>
-                    </Column>
-                </Row>
-            </Validations>
-            <hr class="mb-4">
-            <Row>
-                <div class="d-flex align-items-center mb-4">
-                    <div class="ms-auto">
-                        <Button Loading="_saving" Clicked="Save" Color="Color.Success">
-                            @if (!_saving)
+                    </TitleSection>
+                    <ButtonsSection>
+                        <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
+                            @if (!ViewModel.Saving)
                             {
                                 <Icon Name="IconName.Save" Class="me-1"></Icon>
                             }
                             @L["Button.Save"]
                         </Button>
+                    </ButtonsSection>
+                </OsPageTitle>
+
+                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Product">
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is12">
+                            <Alert Color="Color.Danger" Visible="@_formHasErrors">
+                                <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
+                                    @L["Alert.ValidationErrors"]
+                                </Heading>
+                                <Blazorise.ValidationSummary Margin="Margin.Is0"/>
+                            </Alert>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                            <ProductContentEditor @ref="_contentEditor"/>
+                            <MediaEditor Model="@ViewModel.Product"/>
+                            <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@(p => StateHasChanged())"/>
+                            @if (!ViewModel.Product.HasMultipleVariants)
+                            {
+                                <PricingEditor Model="@ViewModel.Product.Variants.First()"/>
+                                <InventoryEditor Model="@ViewModel.Product.Variants.First()"/>
+                            }
+                            <ShippingEditor/>
+                            <MetaEditor/>
+                        </Column>
+
+                        <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <StatusEditor/>
+                            </ListGroup>
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <TagsEditor/>
+                            </ListGroup>
+                        </Column>
+                    </Row>
+                </Validations>
+                <hr class="mb-4">
+                <Row>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="ms-auto">
+                            <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
+                                @if (!ViewModel.Saving)
+                                {
+                                    <Icon Name="IconName.Save" Class="me-1"></Icon>
+                                }
+                                @L["Button.Save"]
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            </Row>
-        </Column>
-    </Row>
-</Container>
+                </Row>
+            </Column>
+        </Row>
+    </Container>
+</CascadingValue>
 
 
 @code {
-    private readonly ProductDto _product = new();
+    // private readonly ProductDto _product = new();
     private Validations _validations;
     private ProductContentEditor _contentEditor;
 
-    private bool _saving;
     private bool _formHasErrors;
+
+    protected override void OnInitialized()
+    {
+        ViewModel.PropertyChanged += OnPropertyChanged;
+        ViewModel.Init();
+    }
+
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= OnPropertyChanged;
+    }
 
     private async Task Save()
     {
@@ -100,19 +118,7 @@
             return;
         }
 
-        try
-        {
-            _saving = true;
-            _product.Description = await _contentEditor.GetDescriptionHtml();
-            var productId = await ApiClient.Product.CreateProduct(_product);
-    // ShowSuccess(L["Success.ProductCreated"]);
-            Navigation.NavigateTo($"products/{productId}");
-        }
-        finally
-        {
-            _saving = false;
-            await InvokeAsync(StateHasChanged);
-        }
+        await ViewModel.Create(await _contentEditor.GetDescriptionHtml());
     }
-
+    
 }

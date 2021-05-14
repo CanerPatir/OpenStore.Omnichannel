@@ -37,17 +37,9 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public Task<PagedListDto<ProductListItemReadModel>> GetArchived(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/archived", request);
 
-        public async Task Archive(ProductDto productDto)
-        {
-            await HttpClient.PostAsync($"{Path}/{productDto.Id.Value}/archive", null!);
-            productDto.Status = ProductStatus.Archived;
-        }
+        public Task Archive(Guid productId) => HttpClient.PostAsync($"{Path}/{productId}/archive", null!);
 
-        public async Task UnArchive(ProductDto productDto)
-        {
-            await HttpClient.PostAsync($"{Path}/{productDto.Id.Value}/un-archive", null!);
-            productDto.Status = ProductStatus.Active;
-        }
+        public Task UnArchive(Guid productId) => HttpClient.PostAsync($"{Path}/{productId}/un-archive", null!);
 
         public async Task<IEnumerable<ProductMediaDto>> AssignProductMedia(Guid productId, List<FileUploadDto> fileUploadDtoList)
         {
@@ -79,8 +71,8 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public Task DeleteVariants(Guid productId, IEnumerable<Guid> model) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/delete-bulk", model);
 
-        public async Task<IEnumerable<Guid>> MakeProductAsMultiVariantRequest(Guid productId, MakeProductAsMultiVariantRequest  request)
-        { 
+        public async Task<IEnumerable<Guid>> MakeProductAsMultiVariantRequest(Guid productId, MakeProductAsMultiVariantRequest request)
+        {
             var response = await HttpClient.PostAsJsonAsync($"{Path}/{productId}/make-multi-variant", request);
             return await response.Content.ReadFromJsonAsync<List<Guid>>();
         }

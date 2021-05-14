@@ -9,13 +9,13 @@
         </h5>
         <div>
             <p class="se-title">
-                @Model.MetaTitle
+                @ViewModel.Product.MetaTitle
             </p>
             <div class="se-link">
-                https://your-site.open-store.com/products/@Model.Handle
+                https://your-site.open-store.com/products/@ViewModel.Product.Handle
             </div>
             <div class="se-desc">
-                @Model.MetaDescription
+                @ViewModel.Product.MetaDescription
             </div>
         </div>
     </ListGroupItem>
@@ -24,13 +24,13 @@
         <Field Margin="Margin.Is3.FromBottom">
             <FieldLabel>@L["Form.MetaTitle"]</FieldLabel>
             <FieldBody>
-                <TextEdit @bind-Text="@Model.MetaTitle"/>
+                <TextEdit @bind-Text="@ViewModel.Product.MetaTitle"/>
             </FieldBody>
         </Field>
         <Field Margin="Margin.Is3.FromBottom">
             <FieldLabel>@L["Form.MetaDescription"]</FieldLabel>
             <FieldBody>
-                <MemoEdit @bind-Text="@Model.MetaDescription" Rows="5"/>
+                <MemoEdit @bind-Text="@ViewModel.Product.MetaDescription" Rows="5"/>
             </FieldBody>
         </Field>
         <Field Margin="Margin.Is3.FromBottom">
@@ -41,7 +41,7 @@
                         <AddonLabel Style="border-bottom-right-radius: 0; border-top-right-radius: 0">https://your-site.open-store.com/products/</AddonLabel>
                     </Addon>
                     <Addon AddonType="AddonType.Body">
-                        <TextEdit Readonly="@Model.IsEdit" @bind-Text="@Model.Handle"/>
+                        <TextEdit Readonly="@ViewModel.Product.IsEdit" @bind-Text="@ViewModel.Product.Handle"/>
                     </Addon>
                 </Addons>
             </FieldBody>
@@ -51,7 +51,7 @@
 
 @code {
 
-    [Parameter]
-    public ProductDto Model { get; set; }
+    [CascadingParameter]
+    public ProductViewModelBase ViewModel { get; set; }
 
 }

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using OpenStore.Omnichannel.Panel.Services;
+using OpenStore.Omnichannel.Panel.ViewModels;
 
 namespace OpenStore.Omnichannel.Panel.Extensions
 {
@@ -66,6 +67,9 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             });
 
             builder.Services.AddSingleton<DialogService>();
+            builder.Services.AddSingleton<ProductCreateViewModel>();
+            builder.Services.AddSingleton<ProductUpdateViewModel>();
+            builder.Services.AddSingleton<ProductIndexViewModel>();
 
             return builder;
         }

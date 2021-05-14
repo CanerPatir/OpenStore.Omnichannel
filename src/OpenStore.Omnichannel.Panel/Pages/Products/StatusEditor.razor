@@ -1,12 +1,14 @@
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using System.ComponentModel
 @inject IStringLocalizer<StatusEditor> L
+@implements IDisposable
 
 <ListGroupItem>
     <h5>
         @L["Title"]
     </h5>
 
-    @if (Model.Status == ProductStatus.Archived)
+    @if (ViewModel.Product.Status == ProductStatus.Archived)
     {
         <Card Style="background-color: #f4f6f8">
             <CardBody>
@@ -23,7 +25,7 @@
                 </Row>
                 <Row Margin="global::Blazorise.Margin.Is3.FromTop">
                     <Column Class="text-center">
-                        <Button Color="Color.Secondary" Loading="_unArchiving" Clicked="UnArchive">@L["ButtonTitle.UnArchive"]</Button>
+                        <Button Color="Color.Secondary" Loading="ViewModel.UnArchiving" Clicked="ViewModel.UnArchive">@L["ButtonTitle.UnArchive"]</Button>
                     </Column>
                 </Row>
             </CardBody>
@@ -33,18 +35,18 @@
     {
         <Field>
             <FieldBody>
-                <Select TValue="ProductStatus" @bind-SelectedValue="@Model.Status" class="form-control">
+                <Select TValue="ProductStatus" @bind-SelectedValue="@ViewModel.Product.Status" class="form-control">
                     <ChildContent>
                         <SelectItem Value="ProductStatus.Draft">@L["Status.Draft"]</SelectItem>
                         <SelectItem Value="ProductStatus.Active">@L["Status.Active"]</SelectItem>
                     </ChildContent>
                     <Feedback>
 
-                        @if (Model.Status == ProductStatus.Draft)
+                        @if (ViewModel.Product.Status == ProductStatus.Draft)
                         {
                             <FieldHelp>@L["InputHelp.Draft"]</FieldHelp>
                         }
-                        else if (Model.Status == ProductStatus.Active)
+                        else if (ViewModel.Product.Status == ProductStatus.Active)
                         {
                             <FieldHelp>@L["InputHelp.Active"]</FieldHelp>
                         }
@@ -57,27 +59,20 @@
 </ListGroupItem>
 
 @code {
-    private bool _unArchiving;
-    
-    [Parameter]
-    public ProductDto Model { get; set; }
+     
+    [CascadingParameter]
+    public ProductViewModelBase ViewModel { get; set; }
 
-    [Parameter]
-    public EventCallback<ProductDto> ModelChanged { get; set; }
-
-    private async Task UnArchive()
+    protected override void OnInitialized()
     {
-        _unArchiving = true;
-        try
-        {
-            await ApiClient.Product.UnArchive(Model);
-            await ModelChanged.InvokeAsync(Model);
-        }
-        finally
-        {
-            _unArchiving = false;
-            StateHasChanged();
-        }
+        ViewModel.PropertyChanged += OnPropertyChanged;
     }
+    
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= OnPropertyChanged;
+    }
+
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
 
 }

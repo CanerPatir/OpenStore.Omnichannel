@@ -8,25 +8,25 @@
         </h5>
         <Field>
             <FieldBody>
-                <Check TValue="bool" Readonly="@Model.IsEdit" @bind-Checked="@Model.IsPhysicalProduct">@L["Input.IsPhysicalProduct"]</Check>
+                <Check TValue="bool" Readonly="@ViewModel.Product.IsEdit" @bind-Checked="@ViewModel.Product.IsPhysicalProduct">@L["Input.IsPhysicalProduct"]</Check>
             </FieldBody>
         </Field>
     </ListGroupItem>
-    @if (Model.IsPhysicalProduct)
+    @if (ViewModel.Product.IsPhysicalProduct)
     {
         <ListGroupItem>
             <Row>
                 <Field ColumnSize="ColumnSize.Is3">
                     <FieldLabel>@L["Input.Weight"]</FieldLabel>
                     <FieldBody>
-                        <NumericEdit TValue="decimal?" @bind-Value="@Model.Weight" Decimals="1">
+                        <NumericEdit TValue="decimal?" @bind-Value="@ViewModel.Product.Weight" Decimals="1">
                         </NumericEdit>
                     </FieldBody>
                 </Field>
                 <Field ColumnSize="ColumnSize.Is2">
                     <FieldLabel>@L["Input.WeightUnit"]</FieldLabel>
                     <FieldBody>
-                        <Select TValue="string" @bind-SelectedValue="@Model.WeightUnit" class="form-control">
+                        <Select TValue="string" @bind-SelectedValue="@ViewModel.Product.WeightUnit" class="form-control">
                             <SelectItem TValue="string" Value="@((string) null)"></SelectItem>
                             <SelectItem TValue="string" Value='"kg"'>kg</SelectItem>
                             <SelectItem TValue="string" Value='"g"'>g</SelectItem>
@@ -43,7 +43,7 @@
                 <Field ColumnSize="ColumnSize.Is5">
                     <FieldLabel>@L["Input.HsCode"]</FieldLabel>
                     <FieldBody>
-                        <TextEdit @bind-Text="@Model.HsCode">
+                        <TextEdit @bind-Text="@ViewModel.Product.HsCode">
                         </TextEdit>
                         @* *@
                         @* <Autocomplete TItem="MySelectModel" TValue="string" *@
@@ -60,7 +60,7 @@
 
 @code {
 
-    [Parameter]
-    public ProductDto Model { get; set; }
-
+    [CascadingParameter]
+    public ProductViewModelBase ViewModel { get; set; }
+ 
 }

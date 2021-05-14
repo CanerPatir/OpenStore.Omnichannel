@@ -7,7 +7,7 @@
             <Field Margin="Margin.Is3.FromBottom">
                 <FieldLabel>@L["Form.ProductTitle"]</FieldLabel>
                 <FieldBody>
-                    <TextEdit @bind-Text="@Model.Title" KeyUp="KeyUp" MaxLength="80">
+                    <TextEdit @bind-Text="@ViewModel.Product.Title" KeyUp="KeyUp" MaxLength="80">
                         <Feedback>
                             <ValidationError/>
                         </Feedback>
@@ -48,7 +48,7 @@
                         @* </RichTextEditToolbarGroup> *@
                     </Toolbar>
                     <Editor>
-                        @((MarkupString) Model.Description)
+                        @((MarkupString) ViewModel.Product.Description)
                     </Editor>
                 </RichTextEdit>
             </FieldBody>
@@ -59,27 +59,16 @@
 
 @code {
 
-    [Parameter]
-    public ProductDto Model { get; set; }
-
-    [Parameter]
-    public EventCallback<ProductDto> ModelChanged { get; set; }
+    [CascadingParameter]
+    public ProductViewModelBase ViewModel { get; set; }
 
     private RichTextEdit _richTextEditRef;
-
 
     public ValueTask<string> GetDescriptionHtml() => _richTextEditRef.GetHtmlAsync();
 
     private async Task KeyUp()
     {
-        if (Model.IsCreate)
-        {
-            Model.Handle = new SlugHelper().GenerateSlug(Model.Title);
-            Model.MetaTitle = Model.Title;
-            Model.MetaDescription = await _richTextEditRef.GetTextAsync();
-        }
-
-        await ModelChanged.InvokeAsync();
+        ViewModel.ChangeProductMeta(await _richTextEditRef.GetTextAsync());
     }
 
 }
