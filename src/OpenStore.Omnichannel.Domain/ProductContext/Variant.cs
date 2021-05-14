@@ -1,6 +1,7 @@
 using System;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.InventoryContext;
+using OpenStore.Omnichannel.Shared.Dto.Product;
 
 // ReSharper disable ReturnTypeCanBeEnumerable.Global
 // ReSharper disable MemberCanBeProtected.Global
@@ -39,7 +40,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         {
         }
 
-        internal Variant(Guid productId,
+        private Variant(Guid productId,
             string option1, string option2, string option3,
             decimal price, decimal? compareAtPrice, decimal? cost, bool calculateTaxAdditionally,
             int quantity, string sku, string barcode, bool trackQuantity, bool continueSellingWhenOutOfStock)
@@ -62,6 +63,28 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             {
                 Inventory = Inventory.Create(Id, quantity, continueSellingWhenOutOfStock);
             }
+        }
+
+        internal static Variant Create(Guid productId, VariantDto variantDto)
+        {
+            return new(
+                productId,
+                variantDto.Option1,
+                variantDto.Option2,
+                variantDto.Option3,
+                variantDto.Price,
+                variantDto.CompareAtPrice,
+                variantDto.Cost,
+                variantDto.CalculateTaxAdditionally,
+                variantDto.Quantity,
+                variantDto.Sku,
+                variantDto.Barcode,
+                variantDto.TrackQuantity,
+                variantDto.ContinueSellingWhenOutOfStock
+            )
+            {
+                Id = Guid.NewGuid()
+            };
         }
 
         internal static Variant CreateDefaultVariant(Guid productId) => new()

@@ -67,20 +67,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                 throw new DomainException(Msg.Domain.Product.MaxVariantLimitExceeded);
             }
 
-            var variant = new Variant(
-                Id, variantDto.Option1,
-                variantDto.Option2,
-                variantDto.Option3,
-                variantDto.Price,
-                variantDto.CompareAtPrice,
-                variantDto.Cost,
-                variantDto.CalculateTaxAdditionally,
-                variantDto.Quantity,
-                variantDto.Sku,
-                variantDto.Barcode,
-                variantDto.TrackQuantity,
-                variantDto.ContinueSellingWhenOutOfStock
-            );
+            var variant = Variant.Create(Id, variantDto);
             _variants.Add(variant);
 
             ApplyChange(new VariantAddedToProduct(Id, variantDto));
