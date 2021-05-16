@@ -25,9 +25,9 @@ namespace OpenStore.Omnichannel.Application.Command
             _repository = repository;
         }
 
-        public async Task<IEnumerable<ProductMediaDto>> Handle(AssignProductMedia request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductMediaDto>> Handle(AssignProductMedia command, CancellationToken cancellationToken)
         {
-            var (id, fileUploads) = request;
+            var (id, fileUploads) = command;
             var list = (await _mediator.Send(new CreateProductMedia(fileUploads), cancellationToken)).ToList();
             var product = await  _repository.Query
                 .Include(x => x.Medias)

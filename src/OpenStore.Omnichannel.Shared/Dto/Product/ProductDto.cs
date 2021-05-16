@@ -40,7 +40,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         };
 
         public IEnumerable<ProductMediaDto> Medias { get; set; } = new List<ProductMediaDto>();
-        public List<ProductOptionDto> Options { get; set; } = new List<ProductOptionDto>();
+        public List<ProductOptionDto> Options { get; set; } = new();
 
         [NotMapped] public bool IsEdit => Id.HasValue && Id != default;
         [NotMapped] public bool IsCreate => !IsEdit;

@@ -15,9 +15,9 @@ namespace OpenStore.Omnichannel.Application.Command
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(UnArchiveProduct request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UnArchiveProduct command, CancellationToken cancellationToken)
         {
-            var product = await _repository.GetAsync(request.Id, cancellationToken);
+            var product = await _repository.GetAsync(command.Id, cancellationToken);
             product.UnArchive();
             await _repository.SaveChangesAsync(cancellationToken);
 

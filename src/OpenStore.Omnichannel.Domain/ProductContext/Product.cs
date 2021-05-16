@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.LookupContext;
 
@@ -54,6 +55,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public bool SoftDeleted { get; set; }
 
         #endregion
+
+        [NotMapped] public bool IsSingleVariant => !HasMultipleVariants;
 
         protected Product()
         {

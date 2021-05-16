@@ -16,12 +16,12 @@ namespace OpenStore.Omnichannel.Application.Command
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(UpdateProductMedias request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateProductMedias command, CancellationToken cancellationToken)
         {
             var product = await _repository.Query
                 .Include(x => x.Medias)
-                .SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-            product.UpdateProductMedias(request);
+                .SingleOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
+            product.UpdateProductMedias(command);
             await _repository.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

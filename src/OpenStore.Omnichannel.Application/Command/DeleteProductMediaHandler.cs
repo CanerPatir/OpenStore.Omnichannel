@@ -23,12 +23,12 @@ namespace OpenStore.Omnichannel.Application.Command
             _objectStorageService = objectStorageService;
         }
 
-        public async Task<Unit> Handle(DeleteProductMedia request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteProductMedia command, CancellationToken cancellationToken)
         {
-            var product = await _repository.GetAsync(request.Id, cancellationToken);
-            product.DeleteMedia(request);
+            var product = await _repository.GetAsync(command.Id, cancellationToken);
+            product.DeleteMedia(command);
 
-            var productMedia = await _productMediaRepository.GetAsync(request.ProductMediaId, cancellationToken);
+            var productMedia = await _productMediaRepository.GetAsync(command.ProductMediaId, cancellationToken);
             _productMediaRepository.Remove(productMedia);
             
             await _productMediaRepository.SaveChangesAsync(cancellationToken);

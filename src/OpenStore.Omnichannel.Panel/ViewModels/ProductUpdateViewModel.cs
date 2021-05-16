@@ -29,13 +29,18 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
         // ReSharper disable once PossibleInvalidOperationException
         public Guid ProductId => Product.Id.Value;
         
+        public async Task Retrieve(Guid id)
+        {
+            Product = await ApiClient.Product.Get(id);
+        }
+
         public async Task Update(string description)
         {
             Saving = true;
             try
             {
                 Product.Description = description;
-                await ApiClient.Product.UpdateProduct(Product.Id.Value, Product);
+                await ApiClient.Product.UpdateProduct(ProductId, Product);
             }
             finally
             {

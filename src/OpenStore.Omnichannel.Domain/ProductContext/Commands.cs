@@ -9,7 +9,9 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<(ProductMediaDto dto, ProductMedia model)>>;
 
     public record CreateProduct(ProductDto Model) : IRequest<Guid>;
-    
+
+    public record UpdateProduct(Guid Id, ProductDto Model) : IRequest;
+
     public record CreateVariant(Guid ProductId, VariantDto Model) : IRequest<Guid>;
 
     public record UpdateProductVariantQuantities(Guid ProductId, IEnumerable<UpdateProductVariantQuantity> Variants) : IRequest;
@@ -33,12 +35,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record UpdateProductVariantBarcodes(Guid ProductId, IEnumerable<UpdateProductVariantBarcode> Variants) : IRequest;
 
     public record UpdateProductVariantBarcode(Guid VariantId, string Barcode) : IRequest;
-    
+
     public record UpdateProductVariantSkus(Guid ProductId, IEnumerable<UpdateProductVariantSku> Variants) : IRequest;
 
     public record UpdateProductVariantSku(Guid VariantId, string Sku) : IRequest;
-    
+
     public record DeleteVariants(Guid ProductId, IEnumerable<Guid> VariantIds) : IRequest;
-    
+
     public record MakeProductAsMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options, IEnumerable<VariantDto> Variants) : IRequest<IEnumerable<Guid>>;
 }

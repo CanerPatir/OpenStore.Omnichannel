@@ -25,7 +25,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public decimal Price { get; protected set; } = 0;
         public decimal? CompareAtPrice { get; protected set; }
         public decimal? Cost { get; protected set; }
-        public bool CalculateTaxAdditionally { get; set; }
+        public bool CalculateTaxAdditionally { get; protected set; }
 
         // Inventory
 
@@ -118,6 +118,22 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public void UpdateSku(string sku)
         {
             Sku = sku;
+        }
+
+        public void UpdateMasterData(VariantDto variantModel)
+        {
+            Price = variantModel.Price;
+            CompareAtPrice = variantModel.CompareAtPrice;
+            Cost = variantModel.Cost;
+            CalculateTaxAdditionally = variantModel.CalculateTaxAdditionally;
+
+            Barcode = variantModel.Barcode;
+            Sku = variantModel.Sku;
+            TrackQuantity = variantModel.TrackQuantity;
+            UpdateQuantity(variantModel.Quantity);
+            ContinueSellingWhenOutOfStock = variantModel.ContinueSellingWhenOutOfStock;
+
+            ApplyChange(new VariantMasterDataUpdated(ProductId, Id, Price, CompareAtPrice, Cost, CalculateTaxAdditionally, Barcode, Sku, TrackQuantity, ContinueSellingWhenOutOfStock));
         }
     }
 }

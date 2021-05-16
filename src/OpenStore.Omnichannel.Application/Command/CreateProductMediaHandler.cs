@@ -17,18 +17,20 @@ namespace OpenStore.Omnichannel.Application.Command
         private readonly IOpenStoreObjectMapper _mapper;
         private readonly IObjectStorageService _objectStorageService;
 
-        public CreateProductMediaHandler(ICrudRepository<ProductMedia> repository,
+        public CreateProductMediaHandler(
+            ICrudRepository<ProductMedia> repository,
             IOpenStoreObjectMapper mapper,
-            IObjectStorageService objectStorageService)
+            IObjectStorageService objectStorageService
+        )
         {
             _repository = repository;
             _mapper = mapper;
             _objectStorageService = objectStorageService;
         }
 
-        public async Task<IEnumerable<(ProductMediaDto, ProductMedia)>> Handle(CreateProductMedia request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<(ProductMediaDto, ProductMedia)>> Handle(CreateProductMedia command, CancellationToken cancellationToken)
         {
-            var mediasTasks = request.Uploads.Select(async x =>
+            var mediasTasks = command.Uploads.Select(async x =>
             {
                 var (host, path) = await _objectStorageService.Write(FileNameStrategy(x.FileName), x.FileContent);
                 return ProductMedia.Create(host, path, x.Type, Path.GetExtension(x.FileName), x.FileName, x.Position, x.Size, x.FileName);

@@ -30,6 +30,9 @@ namespace OpenStore.Omnichannel.Api.Store
 
         [HttpPost]
         public Task<Guid> CreateProduct(ProductDto model) => _mediator.Send(new CreateProduct(model), CancellationToken);
+        
+        [HttpPut("{id:guid}")]
+        public Task UpdateProduct(Guid id, ProductDto model) => _mediator.Send(new UpdateProduct(id, model), CancellationToken);
 
         [HttpPost("{id:guid}/archive")]
         public Task ArchiveProduct(Guid id) => _mediator.Send(new ArchiveProduct(id), CancellationToken);

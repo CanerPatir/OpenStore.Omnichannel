@@ -24,10 +24,9 @@ namespace OpenStore.Omnichannel.Panel.Services
             return await response.Content.ReadFromJsonAsync<Guid>();
         }
 
-        //todo: implement
         public Task UpdateProduct(Guid productId, ProductDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}", model);
 
-        public async Task<ProductDto> Get(Guid productId) => await HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{productId}");
+        public Task<ProductDto> Get(Guid productId) => HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{productId}");
 
         public Task<PagedListDto<ProductListItemReadModel>> GetAll(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/all", request);
 

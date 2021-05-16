@@ -294,16 +294,42 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             {
                 yield break;
             }
+
             var (_, productOptionsModel, variantModels) = command;
             _options = MapProductOptions(productOptionsModel);
             HasMultipleVariants = true;
             ApplyChange(new ProductMadeMultiVariant(Id, productOptionsModel));
-            
+
             _variants.Clear();
             foreach (var commandVariant in variantModels)
             {
                 yield return AddVariant(commandVariant);
             }
+        }
+
+        public void UpdatedMasterData(UpdateProduct command)
+        {
+            var (_, model) = command;
+
+            Handle = model.Handle;
+            Title = model.Title;
+            Description = model.Description;
+            Status = model.Status;
+            Weight = model.Weight;
+            WeightUnit = model.WeightUnit;
+            HsCode = model.HsCode;
+            IsPhysicalProduct = model.IsPhysicalProduct;
+            MetaTitle = model.MetaTitle;
+            MetaDescription = model.MetaDescription;
+            Tags = model.Tags;
+
+            if (IsSingleVariant)
+            {
+                var variant = Variants.First();
+                variant.UpdateMasterData(model.Variants.First());
+            }
+
+            ApplyChange(new ProductMasterDataUpdated(Id, Handle, Title, Description, Status, Weight, WeightUnit , HsCode, IsPhysicalProduct, MetaTitle, MetaDescription, Tags));
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto.Product;
@@ -14,7 +13,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
         public virtual ProductDto Product
         {
             get => _product;
-            set => SetValue(ref _product, value);
+            protected set => SetValue(ref _product, value);
         }
 
         public bool Archiving
@@ -36,11 +35,6 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
         protected ProductViewModelBase(IApiClient apiClient)
         {
             ApiClient = apiClient;
-        }
-
-        public async Task Retrieve(Guid id)
-        {
-            Product = await ApiClient.Product.Get(id);
         }
 
         public async Task Archive()

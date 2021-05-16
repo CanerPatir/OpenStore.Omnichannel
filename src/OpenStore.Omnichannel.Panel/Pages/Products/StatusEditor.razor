@@ -59,7 +59,7 @@
 </ListGroupItem>
 
 @code {
-     
+
     [CascadingParameter]
     public ProductViewModelBase ViewModel { get; set; }
 
@@ -67,7 +67,7 @@
     {
         ViewModel.PropertyChanged += OnPropertyChanged;
     }
-    
+
     public void Dispose()
     {
         ViewModel.PropertyChanged -= OnPropertyChanged;
