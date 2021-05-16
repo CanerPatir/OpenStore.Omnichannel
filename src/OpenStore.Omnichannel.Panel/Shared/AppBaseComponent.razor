@@ -48,7 +48,7 @@
     private Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
     [Inject]
-    protected IApiClient ApiClient { get; init; }
+    protected IApiClient ApiClient { get; init; } // todo: remove this and engage to mvvm
 
     protected async Task<bool> IsInRole(string role)
     {
@@ -63,11 +63,5 @@
     }
 
     protected async Task<ClaimsPrincipal> GetUser() => AuthenticationStateTask == null ? null : (await AuthenticationStateTask)?.User;
-
-    protected async Task<Guid> GetUserId() => (await GetUser()).GetId();
-
-    protected async Task<bool> IsAuthenticated() => (await GetUser())?.Identity?.IsAuthenticated ?? false;
-
-    private void ReloadPage() => Navigation.Reload();
-
+    
 }

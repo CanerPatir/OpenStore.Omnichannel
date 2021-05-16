@@ -5,8 +5,8 @@
 
 @if (_allVariantsRemoved || !_originalHasMultipleVariants)
 {
-    <CreateVariantsEditor Model="@Model" ModelChanged="@CreateNewVariantsModelChanged">
-        @if (Model.HasMultipleVariants && _createNewVariantsModelChanged && Model.Variants.Any())
+    <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@CreateNewVariantsModelChanged">
+        @if (ViewModel.Product.HasMultipleVariants && _createNewVariantsModelChanged && ViewModel.Product.Variants.Any())
         {
             <Button Clicked="SaveNewVariants" Margin="Margin.IsAuto.FromLeft" Color="Color.Primary">@L["Button.SaveNewVariants"]</Button>
         }
@@ -16,7 +16,7 @@ else
 {
     <Card Margin="Margin.Is3.FromBottom">
         <ListGroup>
-            @if (Model.Variants.Any())
+            @if (ViewModel.Product.Variants.Any())
             {
                 <ListGroupItem>
                     <div class="d-flex">
@@ -32,7 +32,7 @@ else
                         <div>
                             @L["Label.BulkSelect"]
                         </div>
-                        @foreach (var optionValue in Model.Options.SelectMany(x => x.Values).OrderBy(x => x))
+                        @foreach (var optionValue in ViewModel.Product.Options.SelectMany(x => x.Values).OrderBy(x => x))
                         {
                             <div class="ms-0">
                                 <Button Color="Color.Link" Clicked="() => SelectOptionValue(optionValue)">@optionValue</Button>
@@ -48,11 +48,11 @@ else
                         </div>
                         <div class="ms-3">
                             <h6 class="m-0">
-                                @L["ListGroupItem.ShowingXVariants", Model.Variants.Count]
+                                @L["ListGroupItem.ShowingXVariants", ViewModel.Product.Variants.Count]
                             </h6>
                         </div>
                         <div class="ms-auto">
-                            @if (Model.Variants.Any(x => x.Selected))
+                            @if (ViewModel.Product.Variants.Any(x => x.Selected))
                             {
                                 <Dropdown>
                                     <DropdownToggle Color="Color.Light">
@@ -60,7 +60,7 @@ else
                                     </DropdownToggle>
                                     <DropdownMenu>
                                         <DropdownItem Clicked="BulkUpdatePrice">@L["DropdownItem.BulkUpdatePrice"]</DropdownItem>
-                                        @if (Model.Variants.Any(x => x.TrackQuantity))
+                                        @if (ViewModel.Product.Variants.Any(x => x.TrackQuantity))
                                         {
                                             <DropdownItem Clicked="BulkUpdateStock">@L["DropdownItem.BulkUpdateStock"]</DropdownItem>
                                         }
@@ -76,7 +76,7 @@ else
                     </div>
                 </ListGroupItem>
 
-                foreach (var variant in Model.Variants.OrderBy(x => x.Option1))
+                foreach (var variant in ViewModel.Product.Variants.OrderBy(x => x.Option1))
                 {
                     <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset">
                         <div class="d-flex align-items-center">
@@ -112,7 +112,7 @@ else
                             @L["ListGroupItem.TotalQuantity"]
                         </div>
                         <div class="ms-auto">
-                            @(Model.Variants.Sum(x => x.Quantity))
+                            @(ViewModel.Product.Variants.Sum(x => x.Quantity))
                         </div>
                     </div>
                 </ListGroupItem>
@@ -126,14 +126,11 @@ else
         </ListGroup>
     </Card>
 
-    <UpdateVariantCreateModal @ref="_updateVariantCreateModal" Product="@Model" ModelChanged="@StateHasChanged"/>
-    if (Model.Id.HasValue)
-    {
-        <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-        <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-        <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-        <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@Model.Id.Value" ModelChanged="@(StateHasChanged)"/>
-    }
+    <UpdateVariantCreateModal @ref="_updateVariantCreateModal" Product="@ViewModel.Product" ModelChanged="@StateHasChanged"/>
+    <UpdateVariantPricesModal @ref="_updateVariantPricesModal" ProductId="@ViewModel.ProductId" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantStocksModal @ref="_updateVariantStocksModal" ProductId="@ViewModel.ProductId" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantBarcodesModal @ref="_updateVariantBarcodesModal" ProductId="@ViewModel.ProductId" ModelChanged="@(StateHasChanged)"/>
+    <UpdateVariantSkusModal @ref="_updateVariantSkusModal" ProductId="@ViewModel.ProductId" ModelChanged="@(StateHasChanged)"/>
 }
 
 @code {
@@ -143,20 +140,16 @@ else
     private UpdateVariantBarcodesModal _updateVariantBarcodesModal;
     private UpdateVariantSkusModal _updateVariantSkusModal;
     private UpdateVariantCreateModal _updateVariantCreateModal;
-    private IEnumerable<VariantDto> SelectedVariants => Model.Variants.Where(x => x.Selected);
     private bool _allVariantsRemoved = false;
     private bool _createNewVariantsModelChanged = false;
     private bool _originalHasMultipleVariants;
 
-    [Parameter]
-    public ProductDto Model { get; set; }
-
-    [Parameter]
-    public EventCallback<ProductDto> ModelChanged { get; set; }
+    [CascadingParameter]
+    public ProductUpdateViewModel ViewModel { get; set; }
 
     protected override void OnInitialized()
     {
-        _originalHasMultipleVariants = Model.HasMultipleVariants;
+        _originalHasMultipleVariants = ViewModel.Product.HasMultipleVariants;
     }
 
     // ReSharper disable PossibleInvalidOperationException
@@ -166,15 +159,16 @@ else
         {
             return null;
         }
-        return Model.Medias.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value))?.Url;
+
+        return ViewModel.Product.Medias.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value))?.Url;
     }
 
     // ReSharper disable PossibleInvalidOperationException
-    private void GoVariantDetail(VariantDto variant) => Navigation.NavigateTo($"products/{Model.Id.Value}/variants/{variant.Id.Value}");
+    private void GoVariantDetail(VariantDto variant) => Navigation.NavigateTo($"products/{ViewModel.ProductId}/variants/{variant.Id.Value}");
 
     private void SelectedAll(bool isChecked)
     {
-        foreach (var modelVariant in Model.Variants)
+        foreach (var modelVariant in ViewModel.Product.Variants)
         {
             modelVariant.Selected = isChecked;
         }
@@ -182,21 +176,21 @@ else
 
     private void SelectOptionValue(string optionValue)
     {
-        foreach (var modelVariant in Model.Variants)
+        foreach (var modelVariant in ViewModel.Product.Variants)
         {
-            modelVariant.Selected = (modelVariant.Option1 == optionValue || modelVariant.Option2 == optionValue || modelVariant.Option3 == optionValue);
+            modelVariant.Selected = modelVariant.Option1 == optionValue || modelVariant.Option2 == optionValue || modelVariant.Option3 == optionValue;
         }
     }
 
     private void ShowAddVariantModal() => _updateVariantCreateModal.Show();
 
-    private void BulkUpdatePrice() => _updateVariantPricesModal.Show(SelectedVariants);
+    private void BulkUpdatePrice() => _updateVariantPricesModal.Show(ViewModel.SelectedVariants);
 
-    private void BulkUpdateStock() => _updateVariantStocksModal.Show(SelectedVariants);
+    private void BulkUpdateStock() => _updateVariantStocksModal.Show(ViewModel.SelectedVariants);
 
-    private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(SelectedVariants);
+    private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(ViewModel.SelectedVariants);
 
-    private void BulkUpdateSku() => _updateVariantSkusModal.Show(SelectedVariants);
+    private void BulkUpdateSku() => _updateVariantSkusModal.Show(ViewModel.SelectedVariants);
 
     private async Task BulkDelete()
     {
@@ -205,58 +199,19 @@ else
             return;
         }
 
-        var selectedVariants = SelectedVariants.ToList();
-
-        BlockUi();
-        try
-        {
-            await ApiClient.Product.DeleteVariants(Model.Id.Value, selectedVariants.Select(x => x.Id.Value));
-        
-            foreach (var selectedVariant in selectedVariants)
-            {
-                Model.Variants.Remove(selectedVariant);
-            }
-            if (!Model.Variants.Any())
-            {
-                Model.HasMultipleVariants = false;
-                Model.Variants.Add(new VariantDto()); // add default variant
-                Model.Options.Clear();
-                _allVariantsRemoved = true;
-            }
-
-            await ModelChanged.InvokeAsync();
-        }
-        finally
-        {
-            UnblockUi();
-        }
+        _allVariantsRemoved = await ViewModel.DeleteSelectedVariants();
     }
 
-    private async Task CreateNewVariantsModelChanged()
+    private void CreateNewVariantsModelChanged()
     {
         _createNewVariantsModelChanged = true;
-        await ModelChanged.InvokeAsync();
     }
 
     private async Task SaveNewVariants()
     {
-        BlockUi();
-        try
-        {
-            var ids = (await ApiClient.Product.MakeProductAsMultiVariantRequest(Model.Id.Value,  new MakeProductAsMultiVariantRequest(Model.Options, Model.Variants))).ToList();
-            for (var i = 0; i < ids.Count; i++)
-            {
-                Model.Variants[i].Id = ids[i];
-            }
-     
-            Model.HasMultipleVariants = true;
-            _allVariantsRemoved = false;
-            _originalHasMultipleVariants = true;
-        }
-        finally
-        {
-            UnblockUi();
-        }
+        await ViewModel.SaveNewVariants();
+        _allVariantsRemoved = false;
+        _originalHasMultipleVariants = true;
     }
 
 }
