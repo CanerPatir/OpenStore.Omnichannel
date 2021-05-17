@@ -29,7 +29,7 @@
                         </Button>
                     </ButtonsSection>
                 </OsPageTitle>
-                
+
                 <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Model">
                     <Row>
                         <Column ColumnSize="ColumnSize.Is4.OnDesktop">
@@ -47,6 +47,54 @@
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                             <Card Margin="Margin.Is3.FromBottom">
                                 <CardBody>
+                                    <h5 class="mb-3">
+                                        @L["Title.Options"]
+                                    </h5>
+
+                                    <Row>
+                                        <Column ColumnSize="ColumnSize.Is8">
+                                            @foreach (var productOption in ViewModel.Product.Options)
+                                            {
+                                                var index = ViewModel.Product.Options.IndexOf(productOption);
+                                                <Validation MessageLocalizer="Localize" Validator="OptionValidator">
+                                                    <Field Margin="Margin.Is2.FromBottom">
+                                                        <FieldLabel>@productOption.Name</FieldLabel>
+                                                        <FieldBody>
+                                                            @if (index == 0)
+                                                            {
+                                                                <TextEdit @bind-Text="@ViewModel.Model.Option1">
+                                                                    <Feedback>
+                                                                        <ValidationError>@SharedLocalizer["Validation.Required"]</ValidationError>
+                                                                    </Feedback>
+                                                                </TextEdit>
+                                                            }
+                                                            else if (index == 1)
+                                                            {
+                                                                <TextEdit @bind-Text="@ViewModel.Model.Option2">
+                                                                    <Feedback>
+                                                                        <ValidationError>@SharedLocalizer["Validation.Required"]</ValidationError>
+                                                                    </Feedback>
+                                                                </TextEdit>
+                                                            }
+                                                            else if (index == 2)
+                                                            {
+                                                                <TextEdit @bind-Text="@ViewModel.Model.Option3">
+                                                                    <Feedback>
+                                                                        <ValidationError>@L["Validation.Required"]</ValidationError>
+                                                                    </Feedback>
+                                                                </TextEdit>
+                                                            }
+
+                                                        </FieldBody>
+                                                    </Field>
+                                                </Validation>
+                                            }
+
+                                        </Column>
+                                        <Column ColumnSize="ColumnSize.Is4">
+
+                                        </Column>
+                                    </Row>
 
                                 </CardBody>
                             </Card>
@@ -87,6 +135,7 @@
     </Row>
 </Container>
 
+
 @code {
     private Validations _validations;
 
@@ -102,7 +151,7 @@
     }
 
     private Task Save() => ViewModel.Save();
-    
+
     private async Task Delete()
     {
         if (!DeleteConfirm())
@@ -110,6 +159,12 @@
             return;
         }
         await ViewModel.Delete();
+    }
+
+    private void OptionValidator(ValidatorEventArgs e)
+    {
+        var option = Convert.ToString(e.Value);
+        e.Status = string.IsNullOrEmpty(option) ? ValidationStatus.Error : ValidationStatus.Success;
     }
 
 }

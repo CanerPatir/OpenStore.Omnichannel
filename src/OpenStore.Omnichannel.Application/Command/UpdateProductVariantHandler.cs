@@ -20,6 +20,7 @@ namespace OpenStore.Omnichannel.Application.Command
             var product = await _repository.GetAsync(command.ProductId, cancellationToken);
             product.UpdateVariant(command);
             await _repository.SaveChangesAsync(cancellationToken);
+            
             return Unit.Value;
         }
     }

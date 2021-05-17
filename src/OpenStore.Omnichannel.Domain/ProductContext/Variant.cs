@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Shared.Dto.Product;
@@ -121,21 +122,30 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             Sku = sku;
         }
 
-        public void UpdateMasterData(VariantDto variantModel)
+        public void UpdateMasterData(VariantDto model)
         {
-            Price = variantModel.Price;
-            CompareAtPrice = variantModel.CompareAtPrice;
-            Cost = variantModel.Cost;
-            CalculateTaxAdditionally = variantModel.CalculateTaxAdditionally;
+            Price = model.Price;
+            CompareAtPrice = model.CompareAtPrice;
+            Cost = model.Cost;
+            CalculateTaxAdditionally = model.CalculateTaxAdditionally;
 
-            Barcode = variantModel.Barcode;
-            Sku = variantModel.Sku;
-            TrackQuantity = variantModel.TrackQuantity;
-            UpdateQuantity(variantModel.Quantity);
-            ContinueSellingWhenOutOfStock = variantModel.ContinueSellingWhenOutOfStock;
+            Barcode = model.Barcode;
+            Sku = model.Sku;
+            TrackQuantity = model.TrackQuantity;
+            UpdateQuantity(model.Quantity);
+            ContinueSellingWhenOutOfStock = model.ContinueSellingWhenOutOfStock;
 
             ApplyChange(new VariantMasterDataUpdated(ProductId, Id, Price, CompareAtPrice, Cost, CalculateTaxAdditionally, Barcode, Sku, TrackQuantity,
                 ContinueSellingWhenOutOfStock));
+        }
+
+        public void UpdateOptionValues(string option1, string option2, string option3)
+        {
+            Option1 = option1;
+            Option2 = option2;
+            Option3 = option3;
+
+            ApplyChange(new VariantOptionsUpdated(ProductId, Id, Option1, Option2, Option3));
         }
     }
 }

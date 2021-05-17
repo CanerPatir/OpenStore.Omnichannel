@@ -334,13 +334,57 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
         public void UpdateVariant(UpdateProductVariant command)
         {
-            var variant = Variants.SingleOrDefault(x => x.Id == command.VariantId);
+            var (_, variantId, model) = command;
+            var variant = Variants.SingleOrDefault(x => x.Id == variantId);
             if (variant is null)
             {
                 throw new DomainException(Msg.ResourceNotFound);
             }
             
-            variant.UpdateMasterData(command.Model);
+            variant.UpdateMasterData(model);
+            UpdateOptionValues(variant, model);
+        }
+
+        private void UpdateOptionValues( Variant variant, VariantDto model)
+        {
+            var sameOptionExits = Variants.Where(x => x.Id != variant.Id)
+                .Any(x => string.Equals(x.Option1, model.Option1, StringComparison.InvariantCultureIgnoreCase) 
+                          && string.Equals(x.Option2, model.Option2, StringComparison.InvariantCultureIgnoreCase) 
+                          && string.Equals(x.Option3, model.Option3, StringComparison.InvariantCultureIgnoreCase) 
+                );
+
+            if (sameOptionExits)
+            {
+                throw new DomainException(Msg.Domain.Product.VariantAlreadyExistsThatHasSameOptions);
+            }
+
+            _options = _options.Select(x => x).ToList();
+            var optionValueChangeExists = false;
+
+            if (!string.Equals(variant.Option1, model.Option1, StringComparison.InvariantCultureIgnoreCase))
+            {
+                _options[0].Values.Add(model.Option1);
+                _options[0].Values.Remove(variant.Option1);
+                optionValueChangeExists = true;
+            }
+
+            if (!string.Equals(variant.Option2, model.Option2, StringComparison.InvariantCultureIgnoreCase))
+            {
+                _options[1].Values.Add(model.Option2);
+                _options[1].Values.Remove(variant.Option2);
+                optionValueChangeExists = true;
+            }
+
+            if (!string.Equals(variant.Option3, model.Option3, StringComparison.InvariantCultureIgnoreCase))
+            {
+                _options[2].Values.Add(model.Option3);
+                _options[2].Values.Remove(variant.Option3);
+                optionValueChangeExists = true;
+            }
+
+            if (!optionValueChangeExists) return;
+
+            variant.UpdateOptionValues(model.Option1, model.Option2, model.Option3);
         }
     }
 }

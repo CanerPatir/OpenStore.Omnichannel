@@ -51,6 +51,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         decimal Price, decimal? CompareAtPrice, decimal? Cost, bool CalculateTaxAdditionally, 
         string Barcode, string Sku, bool TrackQuantity, bool ContinueSellingWhenOutOfStock) : DomainEventBase(ProductId);
 
+    public record VariantOptionsUpdated(Guid ProductId, Guid VariantId, string Option1, string Option2, string Option3) : DomainEventBase(ProductId);
+    
     public record VariantAddedToProduct(Guid ProductId, VariantDto Variant) : DomainEventBase(ProductId);
 
     public record MediaAssignedToProduct(Guid ProductId, ProductMediaDto ProductMedia) : DomainEventBase(ProductId);
