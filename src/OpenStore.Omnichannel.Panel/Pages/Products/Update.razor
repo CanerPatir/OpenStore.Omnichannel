@@ -51,7 +51,7 @@
                                 <ProductContentEditor @ref="_contentEditor"/>
                                 <MediaEditor Model="@ViewModel.Product"/>
 
-                                <UpdateVariantsEditor />
+                                <UpdateVariantsEditor/>
                                 @if (!ViewModel.Product.HasMultipleVariants)
                                 {
                                     <PricingEditor Model="@ViewModel.Product.Variants.First()"/>

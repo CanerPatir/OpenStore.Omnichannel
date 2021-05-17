@@ -1,5 +1,6 @@
 @page "/products/{ProductId:guid}/variants/{VariantId:guid}"
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using Humanizer
 
 
 @inject IStringLocalizer<UpdateVariant> L
@@ -35,14 +36,61 @@
                         <Column ColumnSize="ColumnSize.Is4.OnDesktop">
                             <Card Margin="Margin.Is3.FromBottom">
                                 <CardBody>
+                                    <div class="d-flex align-items-center">
+                                        <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                            <img class="mw-100 mh-100" src="@ViewModel.DisplayImageUrl" alt=""/>
+                                        </div>
+                                        <div class="ms-3 d-flex flex-column">
+                                            <h6 class="m-0" title="@ViewModel.Product.Title" aria-label="@ViewModel.Product.Title">
+                                                @ViewModel.Product.Title.Truncate(25)
+                                            </h6>
+                                            <span class="text-muted mb-1">
+                                                @if (ViewModel.Product.Status == ProductStatus.Draft)
+                                                {
+                                                    <text>@L["Label.Draft"]</text>
+                                                }
+                                                else if (ViewModel.Product.Status == ProductStatus.Active)
+                                                {
+                                                    <text>@L["Label.Active"]</text>
+                                                }
+                                                else if (ViewModel.Product.Status == ProductStatus.Archived)
+                                                {
+                                                    <text>@L["Label.Archived"]</text>
+                                                }
+                                            </span>
+                                            <small class="mb-1">@ViewModel.Product.Variants.Count @L["Label.Variants"]</small>
+                                            <a href="@($"products/{ViewModel.ProductId}")">@L["Link.BackToProduct"]</a>
+                                        </div>
 
+                                    </div>
                                 </CardBody>
                             </Card>
-                            <Card Margin="Margin.Is3.FromBottom">
-                                <CardBody>
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <ListGroupItem Class="list-group-item-gray-300" Padding="Padding.Is3">
+                                    @L["CardHeader.Variants"]
+                                </ListGroupItem>
 
-                                </CardBody>
-                            </Card>
+                                <style>
+                                    .list-group-item-action{
+                                        cursor: pointer;
+                                    }
+                                </style>
+                                @foreach (var variant in ViewModel.Product.Variants.OrderBy(x => x.Option1))
+                                {
+                                    var _class = variant == ViewModel.Model ? "ps-4" : "ps-4 list-group-item-action";
+                                    <ListGroupItem Class="@_class">
+                                        <div class="d-flex align-items-center" @onclick="@( _ => GoVariant(variant))">
+                                            <div class=" width-40 height-40 bg-gray-100 d-flex align-items-center justify-content-center">
+                                                <img class="mw-100 mh-100" src="@ViewModel.VariantDisplayImageUrl(variant)" alt=""/>
+                                            </div>
+                                            <div class="ms-3">
+                                                @variant.Title
+                                            </div>
+                                        </div>
+                                    </ListGroupItem>
+                                }
+                            </ListGroup>
+
                         </Column>
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                             <Card Margin="Margin.Is3.FromBottom">
@@ -108,7 +156,6 @@
                 <hr class="mb-4">
                 <Row>
                     <div class="d-flex align-items-center mb-4">
-
                         <div>
                             <Button Loading="ViewModel.Deleting" Clicked="Delete" Color="Color.Danger">
                                 @if (!ViewModel.Deleting)
@@ -145,10 +192,10 @@
     [Parameter]
     public Guid VariantId { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await ViewModel.Retrieve(ProductId, VariantId);
-    }
+    } 
 
     private Task Save() => ViewModel.Save();
 
@@ -165,6 +212,15 @@
     {
         var option = Convert.ToString(e.Value);
         e.Status = string.IsNullOrEmpty(option) ? ValidationStatus.Error : ValidationStatus.Success;
+    }
+    
+    private void GoVariant(VariantDto variant)
+    {
+        if (variant == ViewModel.Model)
+        {
+            return;
+        }
+        Navigation.NavigateTo($"products/{ViewModel.ProductId}/variants/{variant.Id.Value}");
     }
 
 }

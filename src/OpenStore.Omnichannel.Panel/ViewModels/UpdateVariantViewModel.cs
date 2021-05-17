@@ -51,6 +51,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
 
         public Guid ProductId => Product.Id.Value;
         public Guid VariantId => Model.Id.Value;
+        public string DisplayImageUrl => VariantDisplayImageUrl(Model);
 
         public async Task Retrieve(Guid productId, Guid variantId)
         {
@@ -84,5 +85,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
                 Deleting = false;
             }
         }
+
+        public string VariantDisplayImageUrl(VariantDto variant) => Product.Medias.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value))?.Url;
     }
 }
