@@ -131,9 +131,13 @@
     private Validations _validations;
     private ProductContentEditor _contentEditor;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         ViewModel.PropertyChanged += OnPropertyChangedHandler;
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
         await ViewModel.Retrieve(Id);
     }
 

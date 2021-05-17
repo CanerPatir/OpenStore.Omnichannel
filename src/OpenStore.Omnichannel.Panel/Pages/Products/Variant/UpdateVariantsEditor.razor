@@ -146,8 +146,8 @@ else
 
     [CascadingParameter]
     public ProductUpdateViewModel ViewModel { get; set; }
-
-    protected override void OnInitialized()
+    
+    protected override void OnParametersSet()
     {
         _originalHasMultipleVariants = ViewModel.Product.HasMultipleVariants;
     }
