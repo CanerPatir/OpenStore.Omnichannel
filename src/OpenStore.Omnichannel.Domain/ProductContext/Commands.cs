@@ -12,6 +12,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
     public record UpdateProduct(Guid Id, ProductDto Model) : IRequest;
 
+    public record UpdateProductVariant(Guid ProductId, Guid VariantId, VariantDto Model) : IRequest;
+
     public record CreateVariant(Guid ProductId, VariantDto Model) : IRequest<Guid>;
 
     public record UpdateProductVariantQuantities(Guid ProductId, IEnumerable<UpdateProductVariantQuantity> Variants) : IRequest;

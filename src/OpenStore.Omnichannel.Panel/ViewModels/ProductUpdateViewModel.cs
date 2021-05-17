@@ -94,6 +94,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
                 }
 
                 Product.HasMultipleVariants = true;
+                OnPropertyChanged();
             }
             finally
             {

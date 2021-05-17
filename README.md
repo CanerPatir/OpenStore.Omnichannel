@@ -19,4 +19,4 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 
 ## mini todo
 * remove Shared dependency from Domain
-* Product Update / Create convert ProductDto to View Model
+* update prevent exit if there is change

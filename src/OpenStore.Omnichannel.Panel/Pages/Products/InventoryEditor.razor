@@ -34,10 +34,13 @@
             <Field ColumnSize="ColumnSize.Is3" Margin="Margin.Is3.FromBottom">
                 <FieldLabel>@L["Input.Quantity"]</FieldLabel>
                 <FieldBody>
-                    <InputNumber @bind-Value="@Model.Quantity"
-                                 min="0"
-                                 class="form-control"
-                                 DisplayName="@L["Input.Stock"]"/>
+                    <EditForm Model="Model">
+                        <InputNumber @bind-Value="@Model.Quantity"
+                                                         min="0"
+                                                         class="form-control"
+                                                         DisplayName="@L["Input.Stock"]"/>
+                    </EditForm>
+                    
                 </FieldBody>
             </Field>
             <Field Margin="Margin.Is1.FromBottom">

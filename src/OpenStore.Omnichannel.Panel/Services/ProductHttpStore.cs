@@ -65,10 +65,11 @@ namespace OpenStore.Omnichannel.Panel.Services
             return await response.Content.ReadFromJsonAsync<Guid>();
         }
 
-        //todo: implement
         public Task UpdateVariant(Guid productId, Guid variantId, VariantDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}/variants/{variantId}", model);
 
         public Task DeleteVariants(Guid productId, IEnumerable<Guid> model) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/delete-bulk", model);
+       
+        public Task DeleteVariant(Guid productId, Guid variantId) => DeleteVariants(productId, new[] {variantId});
 
         public async Task<IEnumerable<Guid>> MakeProductAsMultiVariantRequest(Guid productId, MakeProductAsMultiVariantRequest request)
         {

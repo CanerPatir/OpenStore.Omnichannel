@@ -90,7 +90,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         internal static Variant CreateDefaultVariant(Guid productId) => new()
         {
             ProductId = productId,
-            TrackQuantity = true
+            TrackQuantity = true,
+            Inventory = Inventory.CreateDefault()
         };
 
         public void UpdateQuantity(int quantity)
@@ -133,7 +134,8 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             UpdateQuantity(variantModel.Quantity);
             ContinueSellingWhenOutOfStock = variantModel.ContinueSellingWhenOutOfStock;
 
-            ApplyChange(new VariantMasterDataUpdated(ProductId, Id, Price, CompareAtPrice, Cost, CalculateTaxAdditionally, Barcode, Sku, TrackQuantity, ContinueSellingWhenOutOfStock));
+            ApplyChange(new VariantMasterDataUpdated(ProductId, Id, Price, CompareAtPrice, Cost, CalculateTaxAdditionally, Barcode, Sku, TrackQuantity,
+                ContinueSellingWhenOutOfStock));
         }
     }
 }

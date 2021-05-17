@@ -70,6 +70,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             builder.Services.AddSingleton<ProductCreateViewModel>();
             builder.Services.AddSingleton<ProductUpdateViewModel>();
             builder.Services.AddSingleton<ProductIndexViewModel>();
+            builder.Services.AddSingleton<UpdateVariantViewModel>();
 
             return builder;
         }

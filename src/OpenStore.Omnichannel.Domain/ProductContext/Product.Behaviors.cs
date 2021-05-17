@@ -331,5 +331,16 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             ApplyChange(new ProductMasterDataUpdated(Id, Handle, Title, Description, Status, Weight, WeightUnit , HsCode, IsPhysicalProduct, MetaTitle, MetaDescription, Tags));
         }
+
+        public void UpdateVariant(UpdateProductVariant command)
+        {
+            var variant = Variants.SingleOrDefault(x => x.Id == command.VariantId);
+            if (variant is null)
+            {
+                throw new DomainException(Msg.ResourceNotFound);
+            }
+            
+            variant.UpdateMasterData(command.Model);
+        }
     }
 }

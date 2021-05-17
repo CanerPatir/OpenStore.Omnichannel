@@ -19,7 +19,7 @@ namespace OpenStore.Omnichannel.Domain.InventoryContext
 
         private Inventory(Guid variantId, int quantity, bool continueSellingWhenOutOfStock)
         {
-            Id = Guid.NewGuid();
+            // Id = Guid.NewGuid();
             VariantId = variantId;
             Quantity = quantity;
             AvailableQuantity = quantity;
@@ -32,6 +32,8 @@ namespace OpenStore.Omnichannel.Domain.InventoryContext
             inventory.ApplyChange(new InventoryCreated(inventory.Id, inventory.VariantId, inventory.Quantity, inventory.ContinueSellingWhenOutOfStock));
             return inventory;
         }
+        
+        internal static Inventory CreateDefault() => new();
 
         public void Change(int quantity)
         {
