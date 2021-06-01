@@ -1,7 +1,9 @@
 @page "/products/{ProductId:guid}/variants/{VariantId:guid}"
 @using OpenStore.Omnichannel.Shared.Dto.Product
 @using Humanizer
+@using System.ComponentModel
 
+@implements IDisposable
 
 @inject IStringLocalizer<UpdateVariant> L
 @inject UpdateVariantViewModel ViewModel
@@ -79,7 +81,7 @@
                                 {
                                     var _class = variant == ViewModel.Model ? "ps-4" : "ps-4 list-group-item-action";
                                     <ListGroupItem Class="@_class">
-                                        <div class="d-flex align-items-center" @onclick="@( _ => GoVariant(variant))">
+                                        <div class="d-flex align-items-center" @onclick="@(_ => GoVariant(variant))">
                                             <div class=" width-40 height-40 bg-gray-100 d-flex align-items-center justify-content-center">
                                                 <img class="mw-100 mh-100" src="@ViewModel.VariantDisplayImageUrl(variant)" alt=""/>
                                             </div>
@@ -137,10 +139,9 @@
                                                     </Field>
                                                 </Validation>
                                             }
-
                                         </Column>
                                         <Column ColumnSize="ColumnSize.Is4">
-
+                                            <UpdateVariantImageEditor  />
                                         </Column>
                                     </Row>
 
@@ -195,7 +196,19 @@
     protected override async Task OnParametersSetAsync()
     {
         await ViewModel.Retrieve(ProductId, VariantId);
-    } 
+    }
+    
+    protected override void OnInitialized()
+    {
+        ViewModel.PropertyChanged += OnPropertyChanged;
+    }
+
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= OnPropertyChanged;
+    }
 
     private Task Save() => ViewModel.Save();
 
@@ -213,7 +226,7 @@
         var option = Convert.ToString(e.Value);
         e.Status = string.IsNullOrEmpty(option) ? ValidationStatus.Error : ValidationStatus.Success;
     }
-    
+
     private void GoVariant(VariantDto variant)
     {
         if (variant == ViewModel.Model)

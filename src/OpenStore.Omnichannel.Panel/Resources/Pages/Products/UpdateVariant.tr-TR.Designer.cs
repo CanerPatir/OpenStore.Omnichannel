@@ -86,5 +86,23 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("CardHeader.Variants", resourceCulture);
             }
         }
+        
+        internal static string Button_SelectVariantImage {
+            get {
+                return ResourceManager.GetString("Button.SelectVariantImage", resourceCulture);
+            }
+        }
+        
+        internal static string Button_ChangeVariantImage {
+            get {
+                return ResourceManager.GetString("Button.ChangeVariantImage", resourceCulture);
+            }
+        }
+        
+        internal static string SelectVariantImageModal_Title {
+            get {
+                return ResourceManager.GetString("SelectVariantImageModal.Title", resourceCulture);
+            }
+        }
     }
 }

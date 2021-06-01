@@ -5,7 +5,7 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="7.0.1" />
-        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="2.9.0" />
+        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="3.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="$(NetPackagesVersion)" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="$(OpenIddictVersion)" />
