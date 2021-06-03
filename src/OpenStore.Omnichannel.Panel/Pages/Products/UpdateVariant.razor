@@ -84,7 +84,7 @@
                                     <ListGroupItem Class="@_class">
                                         <div class="d-flex align-items-center" @onclick="@(_ => GoVariant(variant))">
                                             <div class=" width-40 height-40 bg-gray-100 d-flex align-items-center justify-content-center">
-                                                <img class="mw-100 mh-100" src="@ViewModel.VariantDisplayImageUrl(variant)" alt=""/>
+                                                <img class="mw-100 mh-100" src="@ViewModel.VariantDisplayImage?.Url" alt=""/>
                                             </div>
                                             <div class="ms-3">
                                                 @variant.Title
@@ -144,7 +144,7 @@
                                         <Column ColumnSize="ColumnSize.Is4">
                                             <div class="d-flex flex-column align-items-center">
                                                 <div class=" width-100 height-100 bg-gray-100 d-flex align-items-center justify-content-center">
-                                                    <img class="mw-100 mh-100" src="@ViewModel.ModelDisplayImageUrl" alt=""/>
+                                                    <img class="mw-100 mh-100" src="@ViewModel.VariantDisplayImage?.Url" alt=""/>
                                                 </div>
                                                 @if (!ViewModel.ModelDisplayImageUrlExists)
                                                 {
@@ -201,11 +201,11 @@
             <ModalTitle>@L["SelectVariantImageModal.Title"]</ModalTitle>
         </ModalHeader>
         <ModalBody Class="overflow-auto" Style="max-height: 500px">
-            <VariantMediaEditor/>
+            <VariantMediaEditor VariantMedia="@ViewModel.VariantDisplayImage" VariantMediaChanged="@OnVariantMediaChanged"/>
         </ModalBody>
         <ModalFooter>
             <Button Color="Color.Light" Clicked="@(_ => _modalRef.Hide())">@SharedLocalizer["Generic.Cancel"]</Button>
-            <Button Color="Color.Success">@SharedLocalizer["Generic.Save"]</Button>
+            <Button Color="Color.Success" Disabled="@(_selectedVariantMedia is null)" Clicked="SaveVariantMedia">@SharedLocalizer["Generic.Save"]</Button>
         </ModalFooter>
     </ModalContent>
 </Modal>
@@ -263,6 +263,18 @@
             return;
         }
         Navigation.NavigateTo($"products/{ViewModel.ProductId}/variants/{variant.Id.Value}");
+    }
+
+    private ProductMediaDto _selectedVariantMedia;
+
+    private void OnVariantMediaChanged(ProductMediaDto selectedVariantMedia)
+    {
+        _selectedVariantMedia = selectedVariantMedia;
+    }
+
+    private async Task SaveVariantMedia()
+    {
+        // todo: SaveVariantMedia
     }
 
 }

@@ -41,23 +41,30 @@
 
     private List<MediaEditorItemModel> _items = new();
 
+    [Parameter]
+    public ProductMediaDto VariantMedia { get; set; }
+
+    [Parameter]
+    public EventCallback<ProductMediaDto> VariantMediaChanged { get; set; }
+
     protected override void OnInitialized()
     {
         ViewModel.PropertyChanged += OnPropertyChanged;
+    }
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= OnPropertyChanged;
     }
 
     private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         _items = Model.Medias.Select(x => new MediaEditorItemModel
         {
-            Dto = x
+            Dto = x,
+            Selected = x == VariantMedia
         }).OrderBy(x => x.Dto.Position).ToList();
         StateHasChanged();
-    }
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= OnPropertyChanged;
     }
 
     async Task OnInputFileChange(InputFileChangeEventArgs e)
@@ -69,9 +76,9 @@
         await using var openReadStream = file.OpenReadStream(MaxAllowed);
         await openReadStream.ReadAsync(bytes);
         dtoList.Add(new FileUploadDto(file.Name, file.ContentType, file.Size, index++, bytes));
-        
+
         var mediaDtoList = Model.IsCreate ? await ApiClient.Media.UploadProductMedia(dtoList) : await ApiClient.Product.AssignProductMedia(Model.Id.Value, dtoList);
- 
+
         var model = new List<ProductMediaDto>();
         model.AddRange(Model.Medias);
         model.AddRange(mediaDtoList);
@@ -82,20 +89,21 @@
             Dto = x
         }).OrderBy(x => x.Dto.Position).ToList();
 
-        _items.Last().Selected = true;
-        
+    // _items.Last().Selected = true;
+
         StateHasChanged();
     // await ModelChanged.InvokeAsync(model);
     }
 
-    private void OnSelectedChanged(MediaEditorItemModel item, bool selected)
+    private async Task OnSelectedChanged(MediaEditorItemModel item, bool selected)
     {
         if (!selected) return;
 
-        foreach (var mediaEditorItemModel in _items.Where(i => i!= item))
+        foreach (var mediaEditorItemModel in _items.Where(i => i != item))
         {
             mediaEditorItemModel.Selected = false;
         }
+        await VariantMediaChanged.InvokeAsync(item.Dto);
     }
 
 }
