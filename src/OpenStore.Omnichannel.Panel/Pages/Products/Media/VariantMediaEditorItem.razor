@@ -1,0 +1,24 @@
+<div class="draggable-image-grid-item @(Model.Selected ? "selected" : "")">
+    <div class="draggable-image-grid-item-image-container">
+        <img class="draggable-image-grid-item-image" src="@Model.Dto.Url" alt="@Model.Dto.Filename">
+    </div>
+    <div class="checkbox-container">
+        <input type="checkbox" checked="@Model.Selected" @onchange="OnChange" />
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public MediaEditorItemModel Model { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> SelectedChanged { get; set; }
+
+    private async Task OnChange(ChangeEventArgs obj)
+    {
+        Model.Selected = (bool) obj.Value;
+        await SelectedChanged.InvokeAsync(Model.Selected);
+    }
+
+}

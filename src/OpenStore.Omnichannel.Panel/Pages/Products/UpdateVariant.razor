@@ -1,5 +1,6 @@
 @page "/products/{ProductId:guid}/variants/{VariantId:guid}"
 @using OpenStore.Omnichannel.Shared.Dto.Product
+@using OpenStore.Omnichannel.Panel.Pages.Products.Media
 @using Humanizer
 @using System.ComponentModel
 
@@ -141,7 +142,19 @@
                                             }
                                         </Column>
                                         <Column ColumnSize="ColumnSize.Is4">
-                                            <UpdateVariantImageEditor  />
+                                            <div class="d-flex flex-column align-items-center">
+                                                <div class=" width-100 height-100 bg-gray-100 d-flex align-items-center justify-content-center">
+                                                    <img class="mw-100 mh-100" src="@ViewModel.ModelDisplayImageUrl" alt=""/>
+                                                </div>
+                                                @if (!ViewModel.ModelDisplayImageUrlExists)
+                                                {
+                                                    <Button Clicked="SelectVariantImage" Margin="Margin.Is2.FromTop" Color="Color.Link">@L["Button.SelectVariantImage"]</Button>
+                                                }
+                                                else
+                                                {
+                                                    <Button Clicked="SelectVariantImage" Margin="Margin.Is2.FromTop" Color="Color.Link">@L["Button.ChangeVariantImage"]</Button>
+                                                }
+                                            </div>
                                         </Column>
                                     </Row>
 
@@ -182,10 +195,24 @@
         </Column>
     </Row>
 </Container>
-
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true">
+        <ModalHeader>
+            <ModalTitle>@L["SelectVariantImageModal.Title"]</ModalTitle>
+        </ModalHeader>
+        <ModalBody Class="overflow-auto" Style="max-height: 500px">
+            <VariantMediaEditor/>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Light" Clicked="@(_ => _modalRef.Hide())">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Color="Color.Success">@SharedLocalizer["Generic.Save"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
 
 @code {
     private Validations _validations;
+    private Modal _modalRef;
 
     [Parameter]
     public Guid ProductId { get; set; }
@@ -193,11 +220,13 @@
     [Parameter]
     public Guid VariantId { get; set; }
 
+    private void SelectVariantImage() => _modalRef.Show();
+
     protected override async Task OnParametersSetAsync()
     {
         await ViewModel.Retrieve(ProductId, VariantId);
     }
-    
+
     protected override void OnInitialized()
     {
         ViewModel.PropertyChanged += OnPropertyChanged;

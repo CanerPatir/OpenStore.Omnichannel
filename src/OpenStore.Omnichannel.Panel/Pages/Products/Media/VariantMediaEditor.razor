@@ -1,0 +1,101 @@
+@using OpenStore.Omnichannel.Shared.Dto.Product
+@using OpenStore.Omnichannel.Shared.Dto
+@using System.ComponentModel
+
+@implements IDisposable
+
+@inject IStringLocalizer<VariantMediaEditor> L
+@inject UpdateVariantViewModel ViewModel
+
+@if (Model != null)
+{
+    <div class="draggable-container">
+        <div class="draggable-image-grid _16ROL">
+            @for (var i = 0; i <= Model.Medias.Count(); i++)
+            {
+                <div class="draggable-image-grid-item-placeholder"></div>
+            }
+        </div>
+        <div class="draggable-image-grid" ondragover="event.preventDefault();">
+            <div>
+                <div class="drop-area">
+                    <InputFile OnChange="OnInputFileChange"
+                               accept="image/png,image/gif,image/jpeg,image/webp"/>
+                    <span>@L["DropArea.DropTitle"]</span>
+                </div>
+            </div>
+
+            @foreach (var item in _items)
+            {
+                <VariantMediaEditorItem Model="item" SelectedChanged="@(e => OnSelectedChanged(item, e))"/>
+            }
+        </div>
+    </div>
+}
+
+
+@code {
+        const long MaxAllowed = 2048000L;
+
+    private ProductDto Model => ViewModel.Product;
+
+    private List<MediaEditorItemModel> _items = new();
+
+    protected override void OnInitialized()
+    {
+        ViewModel.PropertyChanged += OnPropertyChanged;
+    }
+
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        _items = Model.Medias.Select(x => new MediaEditorItemModel
+        {
+            Dto = x
+        }).OrderBy(x => x.Dto.Position).ToList();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        ViewModel.PropertyChanged -= OnPropertyChanged;
+    }
+
+    async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        var dtoList = new List<FileUploadDto>();
+        var index = Model.Medias.Count();
+        var file = e.File;
+        var bytes = new byte[file.Size];
+        await using var openReadStream = file.OpenReadStream(MaxAllowed);
+        await openReadStream.ReadAsync(bytes);
+        dtoList.Add(new FileUploadDto(file.Name, file.ContentType, file.Size, index++, bytes));
+        
+        var mediaDtoList = Model.IsCreate ? await ApiClient.Media.UploadProductMedia(dtoList) : await ApiClient.Product.AssignProductMedia(Model.Id.Value, dtoList);
+ 
+        var model = new List<ProductMediaDto>();
+        model.AddRange(Model.Medias);
+        model.AddRange(mediaDtoList);
+
+        Model.Medias = model;
+        _items = Model.Medias.Select(x => new MediaEditorItemModel
+        {
+            Dto = x
+        }).OrderBy(x => x.Dto.Position).ToList();
+
+        _items.Last().Selected = true;
+        
+        StateHasChanged();
+    // await ModelChanged.InvokeAsync(model);
+    }
+
+    private void OnSelectedChanged(MediaEditorItemModel item, bool selected)
+    {
+        if (!selected) return;
+
+        foreach (var mediaEditorItemModel in _items.Where(i => i!= item))
+        {
+            mediaEditorItemModel.Selected = false;
+        }
+    }
+
+}

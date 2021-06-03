@@ -51,7 +51,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
 
         public Guid ProductId => Product.Id.Value;
         public Guid VariantId => Model.Id.Value;
-        public string DisplayImageUrl => Product.Medias.FirstOrDefault()?.Url;
+        public string DisplayImageUrl => Product.Medias.OrderBy(x => x.Position).FirstOrDefault()?.Url;
         public string ModelDisplayImageUrl => VariantDisplayImageUrl(Model);
         public bool ModelDisplayImageUrlExists => !string.IsNullOrWhiteSpace(ModelDisplayImageUrl);
 
