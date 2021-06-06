@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "OpenStore.Omnichannel.Tools": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

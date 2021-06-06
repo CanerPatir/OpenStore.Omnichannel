@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <UserSecretsId>dotnet-OpenStore.Omnichannel.Tools-7C7AE3C4-C0EB-4582-99EF-EBB09C9FEC13</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bogus" Version="33.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\OpenStore.Omnichannel.Infrastructure\OpenStore.Omnichannel.Infrastructure.csproj" />
+    </ItemGroup>
+</Project>

@@ -54,7 +54,7 @@ namespace OpenStore.Omnichannel.Identity
                 {
                 })
                 // .AddOpenStoreRecurringJob<IdentityBackgroundService>(IdentityBackgroundService.EveryHour)
-                .AddCommonInfrastructure(mvcBuilder, Environment, Configuration);
+                .AddInfrastructure(mvcBuilder, Environment, Configuration);
             
             // services.AddDbContext<ApplicationDbContext>(options =>
             // {

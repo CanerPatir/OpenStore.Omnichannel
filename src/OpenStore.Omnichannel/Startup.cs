@@ -30,7 +30,7 @@ namespace OpenStore.Omnichannel
         {
             var mvcBuilder = services.AddControllersForAssemblies();
             services.AddResponseCompression();
-            services.AddCommonInfrastructure(mvcBuilder, Environment, Configuration, withScheduledJobs: true);
+            services.AddInfrastructure(mvcBuilder, Environment, Configuration, withScheduledJobs: true);
           
             services.AddCors(o => o.AddPolicy(AllowAllCorsPolicy, builder =>
             {

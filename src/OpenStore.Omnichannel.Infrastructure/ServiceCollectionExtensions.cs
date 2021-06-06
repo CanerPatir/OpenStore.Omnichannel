@@ -21,7 +21,7 @@ namespace OpenStore.Omnichannel.Infrastructure
         /// <summary>
         /// Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
         /// </summary>
-        public static IServiceCollection AddCommonInfrastructure(this IServiceCollection services, IMvcBuilder mvcBuilder,
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IMvcBuilder mvcBuilder,
             IHostEnvironment environment,
             IConfiguration configuration,
             bool withScheduledJobs = false)

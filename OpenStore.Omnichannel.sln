@@ -36,6 +36,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSore.Omnichannel.Shared
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Panel.UIAutomation", "test\OpenStore.Omnichannel.Panel.UIAutomation\OpenStore.Omnichannel.Panel.UIAutomation.csproj", "{44DE1DDB-D77A-4036-852A-7480E01C24A1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{F50EEFB3-8AC3-45E3-B899-363C5948A781}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Tools", "tools\OpenStore.Omnichannel.Tools\OpenStore.Omnichannel.Tools.csproj", "{185F23A2-1140-4C86-A112-497203415A5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,7 @@ Global
 		{3A08BCD2-5C8F-4971-A2B8-A772D8313B81} = {3013B3D8-6676-47BC-8396-276111A475A6}
 		{DFE913DE-D625-4F15-833A-50D15C52487D} = {584967D8-F0EF-47B0-B73C-021E594A95AF}
 		{44DE1DDB-D77A-4036-852A-7480E01C24A1} = {584967D8-F0EF-47B0-B73C-021E594A95AF}
+		{185F23A2-1140-4C86-A112-497203415A5B} = {F50EEFB3-8AC3-45E3-B899-363C5948A781}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{64D507E4-EEA0-4F01-A7C5-A100407868E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -92,5 +97,9 @@ Global
 		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44DE1DDB-D77A-4036-852A-7480E01C24A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185F23A2-1140-4C86-A112-497203415A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185F23A2-1140-4C86-A112-497203415A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185F23A2-1140-4C86-A112-497203415A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185F23A2-1140-4C86-A112-497203415A5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
