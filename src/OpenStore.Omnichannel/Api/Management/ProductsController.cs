@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenStore.Application;
 using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Application.Command;
+using OpenStore.Omnichannel.Application.Command.ProductContext;
 using OpenStore.Omnichannel.Application.Query;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
@@ -15,7 +16,7 @@ using OpenStore.Omnichannel.Shared.Dto.Product;
 using OpenStore.Omnichannel.Shared.ReadModel;
 using OpenStore.Omnichannel.Shared.Request;
 
-namespace OpenStore.Omnichannel.Api.Store
+namespace OpenStore.Omnichannel.Api.Management
 {
     [Route("api/[controller]")]
     [RequiresStoreAuthorize]
@@ -99,5 +100,9 @@ namespace OpenStore.Omnichannel.Api.Store
         
         [HttpPost("{id:guid}/make-multi-variant")]
         public Task<IEnumerable<Guid>> MakeProductAsMultiVariant(Guid id, MakeProductAsMultiVariantRequest request) => _mediator.Send(new MakeProductAsMultiVariant(id, request.Options, request.Variants), CancellationToken);
+        
+        [HttpPost("{id:guid}/variants/{variantId:guid}/change-variant-media/{mediaId:guid}")]
+        public Task SaveVariantMedia(Guid id, Guid variantId, Guid mediaId) => _mediator.Send(new ChangeVariantMedia(id, variantId, mediaId), CancellationToken);
+
     }
 }

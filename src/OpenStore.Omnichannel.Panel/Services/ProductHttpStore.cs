@@ -68,7 +68,7 @@ namespace OpenStore.Omnichannel.Panel.Services
         public Task UpdateVariant(Guid productId, Guid variantId, VariantDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}/variants/{variantId}", model);
 
         public Task DeleteVariants(Guid productId, IEnumerable<Guid> model) => HttpClient.PostAsJsonAsync($"{Path}/{productId}/variants/delete-bulk", model);
-       
+
         public Task DeleteVariant(Guid productId, Guid variantId) => DeleteVariants(productId, new[] {variantId});
 
         public async Task<IEnumerable<Guid>> MakeProductAsMultiVariantRequest(Guid productId, MakeProductAsMultiVariantRequest request)
@@ -76,5 +76,7 @@ namespace OpenStore.Omnichannel.Panel.Services
             var response = await HttpClient.PostAsJsonAsync($"{Path}/{productId}/make-multi-variant", request);
             return await response.Content.ReadFromJsonAsync<List<Guid>>();
         }
+
+        public Task SaveVariantMedia(Guid productId, Guid variantId, Guid mediaId) => HttpClient.PostAsync($"{Path}/{productId}/variants/{variantId}/change-variant-media/{mediaId}", null);
     }
 }

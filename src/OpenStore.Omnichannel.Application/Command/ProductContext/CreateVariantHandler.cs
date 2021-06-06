@@ -5,7 +5,7 @@ using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
-namespace OpenStore.Omnichannel.Application.Command
+namespace OpenStore.Omnichannel.Application.Command.ProductContext
 {
     public class CreateVariantHandler : IRequestHandler<CreateVariant, Guid>
     {

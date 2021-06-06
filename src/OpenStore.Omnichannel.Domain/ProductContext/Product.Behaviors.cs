@@ -386,5 +386,24 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
             variant.UpdateOptionValues(model.Option1, model.Option2, model.Option3);
         }
+
+        public void ChangeVariantMedia(ChangeVariantMedia command)
+        {
+            var (_, variantId, mediaId) = command;
+            
+            var variantMedias = Medias.Where(x => x.VariantIds.Contains(variantId));
+            var variant = Variants.Single(x => x.Id == variantId);
+            
+            foreach (var variantMedia in variantMedias)
+            {
+                variantMedia.RemoveVariant(variant);
+            }
+
+            var productMedia = Medias.Single(x => x.Id == mediaId);
+
+            productMedia.AddVariant(variant);
+            
+            ApplyChange(new VariantMediaChanged(Id, variantId, mediaId));
+        }
     }
 }

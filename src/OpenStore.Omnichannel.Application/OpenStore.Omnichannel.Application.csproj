@@ -12,7 +12,4 @@
     <ItemGroup>
         <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-    </ItemGroup>
 </Project>

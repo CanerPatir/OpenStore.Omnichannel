@@ -10,7 +10,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
-namespace OpenStore.Omnichannel.Application.Command
+namespace OpenStore.Omnichannel.Application.Command.ProductContext
 {
     public record AssignProductMedia(Guid Id, IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<ProductMediaDto>>;
 

@@ -51,5 +51,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products.Media {
                 return ResourceManager.GetString("DropArea.DropTitle", resourceCulture);
             }
         }
+        
+        internal static string SelectVariantImageModal_Title {
+            get {
+                return ResourceManager.GetString("SelectVariantImageModal.Title", resourceCulture);
+            }
+        }
     }
 }

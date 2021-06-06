@@ -45,7 +45,4 @@
     <data name="Button.ChangeVariantImage" xml:space="preserve">
         <value>Varyant resmi Değiştir</value>
     </data>
-    <data name="SelectVariantImageModal.Title" xml:space="preserve">
-        <value>Varyant Resim Seçimi</value>
-    </data>
 </root>

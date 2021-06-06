@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
 // ReSharper disable CollectionNeverUpdated.Local
@@ -9,7 +10,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 {
     public class ProductMedia : MediaEntity
     {
-        private readonly HashSet<Guid> _variantIds = new();
+        private HashSet<Guid> _variantIds = new();
 
         public Guid? ProductId { get; set; }
 
@@ -65,6 +66,18 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             Title = productMediaDto.Title;
             Position = productMediaDto.Position;
             Size = productMediaDto.Size;
+        }
+
+        public void RemoveVariant(Variant variant)
+        {
+            _variantIds = _variantIds.Select(x => x).ToHashSet();
+            _variantIds.Remove(variant.Id);
+        }
+
+        public void AddVariant(Variant variant)
+        {
+            _variantIds = _variantIds.Select(x => x).ToHashSet();
+            _variantIds.Add(variant.Id);
         }
     }
 }

@@ -82,4 +82,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record ProductTurnedIntoSingleVariantProduct(Guid ProductId) : DomainEventBase(ProductId);
 
     public record ProductMadeMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options) : DomainEventBase(ProductId);
+    
+    public record VariantMediaChanged(Guid ProductId, Guid VariantId, Guid MediaId) : DomainEventBase(ProductId);
 }

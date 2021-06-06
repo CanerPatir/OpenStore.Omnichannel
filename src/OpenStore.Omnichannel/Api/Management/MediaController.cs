@@ -9,7 +9,7 @@ using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
-namespace OpenStore.Omnichannel.Api.Store
+namespace OpenStore.Omnichannel.Api.Management
 {
     [Route("api/[controller]")]
     [RequiresStoreAuthorize]

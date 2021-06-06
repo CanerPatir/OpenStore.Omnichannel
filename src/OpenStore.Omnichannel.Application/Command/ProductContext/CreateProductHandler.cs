@@ -8,7 +8,7 @@ using OpenStore.Application.Crud;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
-namespace OpenStore.Omnichannel.Application.Command
+namespace OpenStore.Omnichannel.Application.Command.ProductContext
 {
     public class CreateProductHandler : IRequestHandler<CreateProduct, Guid>
     {

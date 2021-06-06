@@ -9,6 +9,7 @@ using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Tasks.InMemory;
 using OpenStore.Omnichannel.Application;
 using OpenStore.Omnichannel.Application.Command;
+using OpenStore.Omnichannel.Application.Command.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
 using OpenStore.Omnichannel.Infrastructure.ObjectStorage;

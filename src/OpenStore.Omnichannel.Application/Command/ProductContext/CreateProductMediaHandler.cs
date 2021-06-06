@@ -9,7 +9,7 @@ using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
-namespace OpenStore.Omnichannel.Application.Command
+namespace OpenStore.Omnichannel.Application.Command.ProductContext
 {
     public class CreateProductMediaHandler : IRequestHandler<CreateProductMedia, IEnumerable<(ProductMediaDto, ProductMedia)>>
     {

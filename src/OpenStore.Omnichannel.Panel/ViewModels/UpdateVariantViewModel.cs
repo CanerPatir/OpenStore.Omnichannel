@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using OpenStore.Omnichannel.Panel.Services;
+using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels
@@ -14,8 +17,10 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
 
         private bool _deleting;
         private bool _saving;
+        private bool _savingVariantImage;
         private ProductDto _product;
         private VariantDto _model;
+        private List<MediaEditorItemModel> _mediaEditorItems = new();
 
         public UpdateVariantViewModel(IApiClient apiClient, NavigationManager navigationManager)
         {
@@ -35,6 +40,12 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
             protected set => SetValue(ref _model, value);
         }
 
+        public virtual List<MediaEditorItemModel> MediaEditorItems
+        {
+            get => _mediaEditorItems;
+            protected set => SetValue(ref _mediaEditorItems, value);
+        }
+
         public bool Deleting
         {
             get => _deleting;
@@ -47,13 +58,27 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
             private set => SetValue(ref _saving, value);
         }
 
+        public bool SavingVariantImage
+        {
+            get => _savingVariantImage;
+            private set => SetValue(ref _savingVariantImage, value);
+        }
+
         public bool IsNull => Model is null;
 
+        // ReSharper disable once PossibleInvalidOperationException
         public Guid ProductId => Product.Id.Value;
+
+        // ReSharper disable once PossibleInvalidOperationException
+        // ReSharper disable once MemberCanBePrivate.Global
         public Guid VariantId => Model.Id.Value;
+
         public string DisplayImageUrl => Product.Medias.OrderBy(x => x.Position).FirstOrDefault()?.Url;
+
         public ProductMediaDto VariantDisplayImage => GetVariantDisplayImage(Model);
+
         public bool ModelDisplayImageUrlExists => !string.IsNullOrWhiteSpace(VariantDisplayImage?.Url);
+        public MediaEditorItemModel SelectedMediaEditorItem => MediaEditorItems.SingleOrDefault(x => x.Selected);
 
         public async Task Retrieve(Guid productId, Guid variantId)
         {
@@ -88,13 +113,88 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
             }
         }
 
-        private ProductMediaDto GetVariantDisplayImage(VariantDto variant)
+        public ProductMediaDto GetVariantDisplayImage(VariantDto variant)
         {
             if (variant == null)
             {
                 return null;
             }
+
             return Product?.Medias?.FirstOrDefault(x => x.VariantIds.Contains(variant.Id.Value));
         }
+
+        #region VariantMediaEditor
+
+        public async Task UploadNewMedia(IBrowserFile file, long maxAllowed)
+        {
+            var dtoList = new List<FileUploadDto>();
+            var index = Product.Medias.Count();
+            var bytes = new byte[file.Size];
+            await using var openReadStream = file.OpenReadStream(maxAllowed);
+            await openReadStream.ReadAsync(bytes);
+            dtoList.Add(new FileUploadDto(file.Name, file.ContentType, file.Size, index++, bytes));
+
+            var mediaDtoList = await _apiClient.Product.AssignProductMedia(ProductId, dtoList);
+
+            var model = new List<ProductMediaDto>();
+            model.AddRange(Product.Medias);
+            model.AddRange(mediaDtoList);
+
+            Product.Medias = model;
+            MediaEditorItems = Product.Medias.Select(x => new MediaEditorItemModel
+            {
+                Dto = x
+            }).OrderBy(x => x.Dto.Position).ToList();
+        }
+
+        public void InitMediaEditorItems()
+        {
+            MediaEditorItems = Product.Medias.Select(x => new MediaEditorItemModel
+            {
+                Dto = x,
+            }).OrderBy(x => x.Dto.Position).ToList();
+            ClearVariantMediaSelection();
+        }
+
+        public void SelectVariantMedia(MediaEditorItemModel selected)
+        {
+            foreach (var mediaEditorItemModel in MediaEditorItems.Where(i => i != selected))
+            {
+                mediaEditorItemModel.Selected = false;
+            }
+        }
+
+        public void ClearVariantMediaSelection()
+        {
+            foreach (var mediaEditorItemModel in MediaEditorItems)
+            {
+                mediaEditorItemModel.Selected = mediaEditorItemModel.Dto == VariantDisplayImage;
+            }
+        }
+
+        public async Task SaveVariantMedia()
+        {
+            if (SelectedMediaEditorItem.Dto == VariantDisplayImage) return;
+
+            SavingVariantImage = true;
+            try
+            {
+                var mediaId = SelectedMediaEditorItem.Dto.Id;
+                await _apiClient.Product.SaveVariantMedia(ProductId, VariantId, mediaId);
+                foreach (var mediaDto in Product.Medias.Where(x => x.VariantIds.Contains(VariantId)))
+                {
+                    mediaDto.VariantIds.Remove(VariantId);
+                }
+
+                var productMediaDto = Product.Medias?.FirstOrDefault(x => x.Id == mediaId);
+                productMediaDto?.VariantIds.Add(VariantId);
+            }
+            finally
+            {
+                SavingVariantImage = false;
+            }
+        }
+
+        #endregion
     }
 }

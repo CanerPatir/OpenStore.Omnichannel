@@ -16,7 +16,7 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public int Position { get; set; }
         public long? Size { get; set; }
 
-        public IEnumerable<Guid> VariantIds { get; set; } = new List<Guid>();
+        public HashSet<Guid> VariantIds { get; set; } = new();
         
         [NotMapped] public string Url => $"{Host?.TrimEnd('/')}/{Path}";
     }

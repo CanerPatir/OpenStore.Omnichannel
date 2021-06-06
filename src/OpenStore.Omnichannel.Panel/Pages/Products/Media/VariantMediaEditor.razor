@@ -7,103 +7,85 @@
 @inject IStringLocalizer<VariantMediaEditor> L
 @inject UpdateVariantViewModel ViewModel
 
-@if (Model != null)
-{
-    <div class="draggable-container">
-        <div class="draggable-image-grid _16ROL">
-            @for (var i = 0; i <= Model.Medias.Count(); i++)
-            {
-                <div class="draggable-image-grid-item-placeholder"></div>
-            }
-        </div>
-        <div class="draggable-image-grid" ondragover="event.preventDefault();">
-            <div>
-                <div class="drop-area">
-                    <InputFile OnChange="OnInputFileChange"
-                               accept="image/png,image/gif,image/jpeg,image/webp"/>
-                    <span>@L["DropArea.DropTitle"]</span>
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true">
+        <ModalHeader>
+            <ModalTitle>@L["SelectVariantImageModal.Title"]</ModalTitle>
+        </ModalHeader>
+        <ModalBody Class="overflow-auto" Style="max-height: 500px">
+
+            <div class="draggable-container">
+                <div class="draggable-image-grid _16ROL">
+                    @for (var i = 0; i <= ViewModel.MediaEditorItems.Count; i++)
+                    {
+                        <div class="draggable-image-grid-item-placeholder"></div>
+                    }
+                </div>
+                <div class="draggable-image-grid" ondragover="event.preventDefault();">
+                    <div>
+                        <div class="drop-area">
+                            <InputFile OnChange="OnInputFileChange"
+                                       accept="image/png,image/gif,image/jpeg,image/webp"/>
+                            <span>@L["DropArea.DropTitle"]</span>
+                        </div>
+                    </div>
+
+                    @foreach (var item in ViewModel.MediaEditorItems)
+                    {
+                        <VariantMediaEditorItem Model="item" SelectedChanged="@(e => OnSelectedChanged(item, e))"/>
+                    }
                 </div>
             </div>
 
-            @foreach (var item in _items)
-            {
-                <VariantMediaEditorItem Model="item" SelectedChanged="@(e => OnSelectedChanged(item, e))"/>
-            }
-        </div>
-    </div>
-}
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Light" Clicked="Close">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Color="Color.Success" Clicked="SaveVariantMedia"
+                    Loading="@ViewModel.SavingVariantImage"
+                    Disabled="@(ViewModel.VariantDisplayImage is null && ViewModel.SelectedMediaEditorItem is null)">
+                @SharedLocalizer["Generic.Save"]
+            </Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
 
 
 @code {
         const long MaxAllowed = 2048000L;
 
-    private ProductDto Model => ViewModel.Product;
+    private Modal _modalRef;
+    
+    protected override void OnInitialized() => ViewModel.PropertyChanged += OnPropertyChanged;
 
-    private List<MediaEditorItemModel> _items = new();
+    public void Dispose() => ViewModel.PropertyChanged -= OnPropertyChanged;
 
-    [Parameter]
-    public ProductMediaDto VariantMedia { get; set; }
+    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
 
-    [Parameter]
-    public EventCallback<ProductMediaDto> VariantMediaChanged { get; set; }
+    private Task OnInputFileChange(InputFileChangeEventArgs e) => ViewModel.UploadNewMedia(e.File, MaxAllowed);
 
-    protected override void OnInitialized()
-    {
-        ViewModel.PropertyChanged += OnPropertyChanged;
-    }
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= OnPropertyChanged;
-    }
-
-    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-    {
-        _items = Model.Medias.Select(x => new MediaEditorItemModel
-        {
-            Dto = x,
-            Selected = x == VariantMedia
-        }).OrderBy(x => x.Dto.Position).ToList();
-        StateHasChanged();
-    }
-
-    async Task OnInputFileChange(InputFileChangeEventArgs e)
-    {
-        var dtoList = new List<FileUploadDto>();
-        var index = Model.Medias.Count();
-        var file = e.File;
-        var bytes = new byte[file.Size];
-        await using var openReadStream = file.OpenReadStream(MaxAllowed);
-        await openReadStream.ReadAsync(bytes);
-        dtoList.Add(new FileUploadDto(file.Name, file.ContentType, file.Size, index++, bytes));
-
-        var mediaDtoList = Model.IsCreate ? await ApiClient.Media.UploadProductMedia(dtoList) : await ApiClient.Product.AssignProductMedia(Model.Id.Value, dtoList);
-
-        var model = new List<ProductMediaDto>();
-        model.AddRange(Model.Medias);
-        model.AddRange(mediaDtoList);
-
-        Model.Medias = model;
-        _items = Model.Medias.Select(x => new MediaEditorItemModel
-        {
-            Dto = x
-        }).OrderBy(x => x.Dto.Position).ToList();
-
-    // _items.Last().Selected = true;
-
-        StateHasChanged();
-    // await ModelChanged.InvokeAsync(model);
-    }
-
-    private async Task OnSelectedChanged(MediaEditorItemModel item, bool selected)
+    private void OnSelectedChanged(MediaEditorItemModel item, bool selected)
     {
         if (!selected) return;
 
-        foreach (var mediaEditorItemModel in _items.Where(i => i != item))
-        {
-            mediaEditorItemModel.Selected = false;
-        }
-        await VariantMediaChanged.InvokeAsync(item.Dto);
+        ViewModel.SelectVariantMedia(item);
     }
 
+    public void Show()
+    {
+        ViewModel.InitMediaEditorItems();
+        _modalRef.Show();
+    }
+    
+    private async Task SaveVariantMedia()
+    {
+        await ViewModel.SaveVariantMedia();
+        Close();
+    }
+
+    private void Close()
+    {
+        ViewModel.ClearVariantMediaSelection();
+        _modalRef.Hide();
+    }
+    
 }

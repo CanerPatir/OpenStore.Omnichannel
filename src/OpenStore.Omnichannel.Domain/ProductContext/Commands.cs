@@ -45,4 +45,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record DeleteVariants(Guid ProductId, IEnumerable<Guid> VariantIds) : IRequest;
 
     public record MakeProductAsMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options, IEnumerable<VariantDto> Variants) : IRequest<IEnumerable<Guid>>;
+
+    public record ChangeVariantMedia(Guid ProductId, Guid VariantId, Guid MediaId) : IRequest;
 }

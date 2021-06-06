@@ -4,21 +4,21 @@ using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
-namespace OpenStore.Omnichannel.Application.Command
+namespace OpenStore.Omnichannel.Application.Command.ProductContext
 {
-    public class ArchiveProductHandler : IRequestHandler<ArchiveProduct>
+    public class UnArchiveProductHandler : IRequestHandler<UnArchiveProduct>
     {
         private readonly ICrudRepository<Product> _repository;
 
-        public ArchiveProductHandler(ICrudRepository<Product> repository)
+        public UnArchiveProductHandler(ICrudRepository<Product> repository)
         {
             _repository = repository;
         }
 
-        public async Task<Unit> Handle(ArchiveProduct command, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UnArchiveProduct command, CancellationToken cancellationToken)
         {
             var product = await _repository.GetAsync(command.Id, cancellationToken);
-            product.Archive();
+            product.UnArchive();
             await _repository.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

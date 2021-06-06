@@ -98,11 +98,5 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Products {
                 return ResourceManager.GetString("Button.ChangeVariantImage", resourceCulture);
             }
         }
-        
-        internal static string SelectVariantImageModal_Title {
-            get {
-                return ResourceManager.GetString("SelectVariantImageModal.Title", resourceCulture);
-            }
-        }
     }
 }

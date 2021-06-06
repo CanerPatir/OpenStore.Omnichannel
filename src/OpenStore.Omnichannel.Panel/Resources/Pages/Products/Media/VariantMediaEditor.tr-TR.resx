@@ -21,4 +21,7 @@
     <data name="DropArea.DropTitle" xml:space="preserve">
         <value>Eklem için tıkla veya buraya sürükle</value>
     </data>
+    <data name="SelectVariantImageModal.Title" xml:space="preserve">
+        <value>Varyant Resim Seçimi</value>
+    </data>
 </root>
