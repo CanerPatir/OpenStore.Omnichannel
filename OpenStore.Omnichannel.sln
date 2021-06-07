@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{F50EEFB3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Tools", "tools\OpenStore.Omnichannel.Tools\OpenStore.Omnichannel.Tools.csproj", "{185F23A2-1140-4C86-A112-497203415A5B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Storefront", "src\OpenStore.Omnichannel.Storefront\OpenStore.Omnichannel.Storefront.csproj", "{CE108ADB-01C0-425D-BF65-CEC6AC12065B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,7 @@ Global
 		{DFE913DE-D625-4F15-833A-50D15C52487D} = {584967D8-F0EF-47B0-B73C-021E594A95AF}
 		{44DE1DDB-D77A-4036-852A-7480E01C24A1} = {584967D8-F0EF-47B0-B73C-021E594A95AF}
 		{185F23A2-1140-4C86-A112-497203415A5B} = {F50EEFB3-8AC3-45E3-B899-363C5948A781}
+		{CE108ADB-01C0-425D-BF65-CEC6AC12065B} = {73CDCE53-8C9B-4D33-AE02-BC18C01AE54F}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{64D507E4-EEA0-4F01-A7C5-A100407868E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -101,5 +104,9 @@ Global
 		{185F23A2-1140-4C86-A112-497203415A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{185F23A2-1140-4C86-A112-497203415A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{185F23A2-1140-4C86-A112-497203415A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE108ADB-01C0-425D-BF65-CEC6AC12065B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE108ADB-01C0-425D-BF65-CEC6AC12065B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE108ADB-01C0-425D-BF65-CEC6AC12065B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE108ADB-01C0-425D-BF65-CEC6AC12065B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -95,7 +95,7 @@ namespace OpenStore.Omnichannel.Identity
                     OpenIddictConstants.Permissions.Scopes.Email,
                     OpenIddictConstants.Permissions.Scopes.Profile,
                     OpenIddictConstants.Permissions.Scopes.Roles,
-                    // OpenIddictConstants.Permissions.Prefixes.Scope + OpenStoreIdentityConstants.OpenStorePimResource,
+                    OpenIddictConstants.Permissions.Prefixes.Scope + "OSScp_API"
                 },
                 Requirements =
                 {

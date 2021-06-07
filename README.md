@@ -2,6 +2,14 @@
 
 - 
 
+## Development
+
+### Modules
+
+- Storefront -> https://localhost:5005
+- Panel -> https://localhost:5003
+- Api -> https://localhost:5001
+- Identity -> https://localhost:5001/identity/
 
 ## Marketplace Integration
 

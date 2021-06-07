@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
+<head>
+    @RenderSection("PageHead", required: false)
+    <partial name="_PageHeadElement"/>
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+<partial name="_Layout.Header"/>
+@RenderBody()
+<partial name="_Layout.Footer"/>
+@RenderSection("Scripts", required: false)
+</body>
+</html>
