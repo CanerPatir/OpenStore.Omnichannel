@@ -8,7 +8,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Api\Storefront" />
         <Folder Include="wwwroot\content" />
     </ItemGroup>
 

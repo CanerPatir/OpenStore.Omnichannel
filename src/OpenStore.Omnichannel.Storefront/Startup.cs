@@ -14,11 +14,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using OpenStore.Omnichannel.Storefront.Infrastructure;
 using OpenStore.Omnichannel.Storefront.Services;
+using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront
 {
     public class Startup
     {
+        public const string ApiClientKey = "OpenStoreApiClient";
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -80,6 +83,15 @@ namespace OpenStore.Omnichannel.Storefront
 
                     options.AccessDeniedPath = "/";
                 });
+            
+            var apiConfiguration = Configuration.GetSection("Api").Get<ApiConfiguration>();
+            services.AddHttpClient(ApiClientKey, client =>
+            {
+                client.BaseAddress = new Uri(apiConfiguration.Url);
+                client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);
+            });
+
+            services.AddSingleton<IApiClient, ApiClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
