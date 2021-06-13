@@ -4,9 +4,6 @@ namespace OpenStore.Omnichannel.Storefront.Controllers
 {
     public class PageController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
     }
 }

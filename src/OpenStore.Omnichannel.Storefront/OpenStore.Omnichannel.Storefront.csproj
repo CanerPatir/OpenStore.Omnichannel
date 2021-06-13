@@ -14,10 +14,7 @@
         <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(NetPackagesVersion)" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Services" />
+        <PackageReference Include="Scrutor" Version="3.3.0" />
     </ItemGroup>
 
     <ItemGroup>

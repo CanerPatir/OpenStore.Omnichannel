@@ -1,14 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName">
 <head>
-    @RenderSection("PageHead", required: false)
+    @await RenderSectionAsync("PageHead", required: false)
     <partial name="_PageHeadElement"/>
-    @RenderSection("Styles", required: false)
+    <partial name="_ThemeStyles"/>
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-<partial name="_Layout.Header"/>
+@await Component.InvokeAsync("Header")
 @RenderBody()
-<partial name="_Layout.Footer"/>
-@RenderSection("Scripts", required: false)
+@await Component.InvokeAsync("Footer")
+<partial name="_ThemeScripts"/>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

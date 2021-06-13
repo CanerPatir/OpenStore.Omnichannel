@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using OpenStore.Omnichannel.Storefront.Infrastructure;
+using OpenStore.Omnichannel.Storefront.Services;
 
 namespace OpenStore.Omnichannel.Storefront
 {
@@ -28,8 +29,9 @@ namespace OpenStore.Omnichannel.Storefront
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithSingletonLifetime());
 
+            services.AddControllersWithViews();
             services.AddAntiforgery();
             services.AddResponseCompression();
 

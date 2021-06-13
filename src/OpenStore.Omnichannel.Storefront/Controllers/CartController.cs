@@ -5,9 +5,6 @@ namespace OpenStore.Omnichannel.Storefront.Controllers
     public class CartController : Controller
     {
         // GET
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
     }
 }
