@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpenStore.Omnichannel.Panel.Resources.Shared {
+namespace OpenStore.Omnichannel.Panel.Resources.Pages.OnlineStore {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppNavMenu_tr_TR {
+    internal class Preferences_tr_TR {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppNavMenu_tr_TR() {
+        internal Preferences_tr_TR() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Shared.AppNavMenu_tr_TR", typeof(AppNavMenu_tr_TR).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("OpenStore.Omnichannel.Panel.Resources.Pages.OnlineStore.Preferences_tr_TR", typeof(Preferences_tr_TR).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,87 +45,87 @@ namespace OpenStore.Omnichannel.Panel.Resources.Shared {
             }
         }
         
-        internal static string MenuHeader_Channels {
+        internal static string Label_General {
             get {
-                return ResourceManager.GetString("MenuHeader.Channels", resourceCulture);
+                return ResourceManager.GetString("Label.General", resourceCulture);
             }
         }
         
-        internal static string Menu_Home {
+        internal static string Label_General_P {
             get {
-                return ResourceManager.GetString("Menu.Home", resourceCulture);
+                return ResourceManager.GetString("Label.General.P", resourceCulture);
             }
         }
         
-        internal static string Menu_Orders {
+        internal static string Button_Edit {
             get {
-                return ResourceManager.GetString("Menu.Orders", resourceCulture);
+                return ResourceManager.GetString("Button.Edit", resourceCulture);
             }
         }
         
-        internal static string Menu_Products {
+        internal static string Label_StoreName {
             get {
-                return ResourceManager.GetString("Menu.Products", resourceCulture);
+                return ResourceManager.GetString("Label.StoreName", resourceCulture);
             }
         }
         
-        internal static string Menu_AllProducts {
+        internal static string Label_Contact {
             get {
-                return ResourceManager.GetString("Menu.AllProducts", resourceCulture);
+                return ResourceManager.GetString("Label.Contact", resourceCulture);
             }
         }
         
-        internal static string Menu_Inventory {
+        internal static string Label_Contact_P {
             get {
-                return ResourceManager.GetString("Menu.Inventory", resourceCulture);
+                return ResourceManager.GetString("Label.Contact.P", resourceCulture);
             }
         }
         
-        internal static string Menu_Collections {
+        internal static string Label_Email {
             get {
-                return ResourceManager.GetString("Menu.Collections", resourceCulture);
+                return ResourceManager.GetString("Label.Email", resourceCulture);
             }
         }
         
-        internal static string Menu_Customers {
+        internal static string Label_Phone {
             get {
-                return ResourceManager.GetString("Menu.Customers", resourceCulture);
+                return ResourceManager.GetString("Label.Phone", resourceCulture);
             }
         }
         
-        internal static string Menu_Analytics {
+        internal static string Label_Address {
             get {
-                return ResourceManager.GetString("Menu.Analytics", resourceCulture);
+                return ResourceManager.GetString("Label.Address", resourceCulture);
             }
         }
         
-        internal static string Menu_Documentation {
+        internal static string Label_CopyrightText {
             get {
-                return ResourceManager.GetString("Menu.Documentation", resourceCulture);
+                return ResourceManager.GetString("Label.CopyrightText", resourceCulture);
             }
         }
         
-        internal static string Menu_Channels {
+        internal static string Label_FacebookUrl {
             get {
-                return ResourceManager.GetString("Menu.Channels", resourceCulture);
+                return ResourceManager.GetString("Label.FacebookUrl", resourceCulture);
             }
         }
         
-        internal static string Menu_OnlineStore {
+        internal static string Label_InstagramUrl {
             get {
-                return ResourceManager.GetString("Menu.OnlineStore", resourceCulture);
+                return ResourceManager.GetString("Label.InstagramUrl", resourceCulture);
             }
         }
         
-        internal static string Menu_Discounts {
+        internal static string Label_TwitterUrl {
             get {
-                return ResourceManager.GetString("Menu.Discounts", resourceCulture);
+                return ResourceManager.GetString("Label.TwitterUrl", resourceCulture);
             }
         }
         
-        internal static string Menu_OnlineStore_Preferences {
+        internal static string Label_YoutubeUrl {
             get {
-                return ResourceManager.GetString("Menu.OnlineStore.Preferences", resourceCulture);
+                return ResourceManager.GetString("Label.YoutubeUrl", resourceCulture);
             }
         }
     }

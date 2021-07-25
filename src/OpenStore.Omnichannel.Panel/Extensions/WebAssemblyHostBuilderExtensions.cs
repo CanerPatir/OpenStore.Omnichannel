@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Panel.ViewModels;
+using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
 
 namespace OpenStore.Omnichannel.Panel.Extensions
 {
@@ -26,7 +27,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
                 .AddBootstrapProviders()
                 .AddFontAwesomeIcons()
-                .AddBlazoriseRichTextEdit(options => { options.DynamicLoadReferences = true; })
+                .AddBlazoriseRichTextEdit(options => { options.DynamicallyLoadReferences = true; })
                 ;
 
             var environment = builder.HostEnvironment;
@@ -71,6 +72,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             builder.Services.AddSingleton<ProductUpdateViewModel>();
             builder.Services.AddSingleton<ProductIndexViewModel>();
             builder.Services.AddSingleton<UpdateVariantViewModel>();
+            builder.Services.AddSingleton<PreferencesViewModel>();
 
             return builder;
         }

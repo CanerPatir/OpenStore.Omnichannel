@@ -1,0 +1,104 @@
+@using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement
+
+@inject PreferencesViewModel ViewModel
+@inject IStringLocalizer<Preferences> L
+
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true" Size="ModalSize.Default">
+        <ModalHeader>
+            <ModalTitle>@L["Label.Contact"]</ModalTitle>
+            <Button Color="Color.Light" Clicked="Cancel">
+                <Icon Name="IconName.Times"/>
+            </Button>
+        </ModalHeader>
+        <ModalBody>
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.Email"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.Email" Role="TextRole.Email">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.Phone"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.Phone">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.Address"] </FieldLabel>
+                <FieldBody>
+                    <MemoEdit @bind-Text="@ViewModel.StorePreferences.Contact.Address">
+                    </MemoEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.CopyrightText"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.CopyrightText">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.FacebookUrl"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.FacebookUrl" Role="TextRole.Url">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.TwitterUrl"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.TwitterUrl" Role="TextRole.Url">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.InstagramUrl"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.InstagramUrl" Role="TextRole.Url">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+
+            <Field Margin="Margin.Is2.FromBottom">
+                <FieldLabel>@L["Label.YoutubeUrl"] </FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.StorePreferences.Contact.YoutubeUrl" Role="TextRole.Url">
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Light" Clicked="@Cancel">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Loading="ViewModel.IsSaving" Color="Color.Success" Clicked="@Save">@SharedLocalizer["Generic.Save"]</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    
+    private Modal _modalRef;
+
+    public void Show() => _modalRef.Show();
+
+    private async Task Cancel()
+    {
+        await ViewModel.Retrieve();
+        _modalRef.Hide();
+    }
+
+    private async Task Save()
+    {
+        await ViewModel.Save();
+        _modalRef.Hide();
+    }
+
+}

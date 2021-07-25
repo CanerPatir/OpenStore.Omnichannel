@@ -75,13 +75,24 @@
             </div>
             <div class="menu-divider"></div>
             <div class="menu-header">@L["Menu.Channels"]</div>
-            <div class="menu-item @GetLiClassContains("store-management")">
-                <NavLink href="store-management" class="menu-link">
+            
+            <div class="menu-item has-sub">
+                <a href="#" class="menu-link">
                     <span class="menu-icon">
-                        <i class="fas fa-store"></i>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Store"></Icon>
                     </span>
                     <span class="menu-text">@L["Menu.OnlineStore"]</span>
-                </NavLink>
+                    <span class="menu-caret">
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item @GetLiClassContains("store-management")">
+                        <NavLink href="store-management/preferences" class="menu-link">
+                            <span class="menu-text">@L["Menu.OnlineStore.Preferences"]</span>
+                        </NavLink>
+                    </div> 
+                </div>
             </div>
             <div class="menu-item">
                 <a href="analytics.html" class="menu-link">

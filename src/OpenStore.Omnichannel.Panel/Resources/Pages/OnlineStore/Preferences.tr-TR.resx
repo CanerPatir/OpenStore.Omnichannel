@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="Label.General" xml:space="preserve">
+        <value>Genel</value>
+    </data>
+    <data name="Label.General.P" xml:space="preserve">
+        <value>Genel mağaza ayarları</value>
+    </data>
+    <data name="Button.Edit" xml:space="preserve">
+        <value>Düzenle</value>
+    </data>
+    <data name="Label.StoreName" xml:space="preserve">
+        <value>Mağaza adı</value>
+    </data>
+    <data name="Label.Contact" xml:space="preserve">
+        <value>İletişim Bilgileri</value>
+    </data>
+    <data name="Label.Contact.P" xml:space="preserve">
+        <value>Sosyal medya adresleri, email, fiziksel adres gibi mağzanıza dair iletişim bilgilerini düzenleyebilirsiniz</value>
+    </data>
+    <data name="Label.Email" xml:space="preserve">
+        <value>E-Posta</value>
+    </data>
+    <data name="Label.Phone" xml:space="preserve">
+        <value>Telefon</value>
+    </data>
+    <data name="Label.Address" xml:space="preserve">
+        <value>Address</value>
+    </data>
+    <data name="Label.CopyrightText" xml:space="preserve">
+        <value>CopyrightText</value>
+    </data>
+    <data name="Label.FacebookUrl" xml:space="preserve">
+        <value>Facebook bağlantısı</value>
+    </data>
+    <data name="Label.InstagramUrl" xml:space="preserve">
+        <value>Instagram bağlantısı</value>
+    </data>
+    <data name="Label.TwitterUrl" xml:space="preserve">
+        <value>Twitter bağlantısı</value>
+    </data>
+    <data name="Label.YoutubeUrl" xml:space="preserve">
+        <value>Youtube bağlantısı</value>
+    </data>
+</root>

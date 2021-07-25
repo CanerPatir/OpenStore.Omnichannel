@@ -10,8 +10,10 @@ using OpenStore.Infrastructure.Data.EntityFramework;
 using OpenStore.Infrastructure.Mapping.AutoMapper;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Domain.StoreContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.Dto.Store;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
 {
@@ -75,6 +77,11 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
                 cfg.CreateMap<VariantDto, Variant>().ReverseMap()
                     .ForMember(x => x.Quantity, opts => opts.MapFrom(v => v.Inventory != null ? v.Inventory.Quantity : 0));
                 cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
+                
+                cfg.CreateMap<StorePreferencesDto, StorePreferences>().ReverseMap();
+                cfg.CreateMap<StorePreferencesContactDto, StorePreferencesContact>().ReverseMap();
+                
+                
             });
             return services;
         }

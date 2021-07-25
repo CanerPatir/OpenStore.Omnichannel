@@ -57,4 +57,7 @@
     <data name="Menu.Discounts" xml:space="preserve">
         <value>İndirimler</value>
     </data>
+    <data name="Menu.OnlineStore.Preferences" xml:space="preserve">
+        <value>Ayarlar</value>
+    </data>
 </root>

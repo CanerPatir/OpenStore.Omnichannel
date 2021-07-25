@@ -8,6 +8,7 @@ namespace OpenStore.Omnichannel.Panel.Services
     {
         ProductHttpStore Product { get; }
         MediaHttpStore Media { get; }
+        StoreHttpStore Store { get; }
         Task<bool> Ping();
     }
 
@@ -17,12 +18,14 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public ProductHttpStore Product { get; }
         public MediaHttpStore Media { get; }
+        public StoreHttpStore Store { get; }
 
         public ApiClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
             Product = new ProductHttpStore(httpClient);
             Media = new MediaHttpStore(httpClient);
+            Store = new StoreHttpStore(httpClient);
         }
 
         public async Task<bool> Ping()
