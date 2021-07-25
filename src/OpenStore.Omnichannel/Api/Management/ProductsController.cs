@@ -6,9 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Application;
 using OpenStore.Infrastructure.Web;
-using OpenStore.Omnichannel.Application.Command;
 using OpenStore.Omnichannel.Application.Command.ProductContext;
-using OpenStore.Omnichannel.Application.Query;
+using OpenStore.Omnichannel.Application.Query.ProductContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Shared.Dto;
@@ -31,7 +30,7 @@ namespace OpenStore.Omnichannel.Api.Management
 
         [HttpPost]
         public Task<Guid> CreateProduct(ProductDto model) => _mediator.Send(new CreateProduct(model), CancellationToken);
-        
+
         [HttpPut("{id:guid}")]
         public Task UpdateProduct(Guid id, ProductDto model) => _mediator.Send(new UpdateProduct(id, model), CancellationToken);
 
@@ -75,34 +74,35 @@ namespace OpenStore.Omnichannel.Api.Management
 
         [HttpPost("{id:guid}/variants/update-prices")]
         public Task UpdateProductVariantPrices(Guid id, UpdateVariantPricesRequest request)
-            => _mediator.Send(new UpdateProductVariantPrices(id, request.Variants.Select(x => new UpdateProductVariantPrice(x.VariantId, x.Price, x.CompareAtPrice, x.Cost))), CancellationToken);
+            => _mediator.Send(new UpdateProductVariantPrices(id, request.Variants.Select(x => new UpdateProductVariantPrice(x.VariantId, x.Price, x.CompareAtPrice, x.Cost))),
+                CancellationToken);
 
         [HttpPost("{id:guid}/variants/update-stocks")]
         public Task UpdateProductVariantQuantities(Guid id, UpdateVariantStocksRequest request)
             => _mediator.Send(new UpdateProductVariantQuantities(id, request.Variants.Select(x => new UpdateProductVariantQuantity(x.VariantId, x.Quantity))), CancellationToken);
-        
+
         [HttpPost("{id:guid}/variants/update-barcodes")]
         public Task UpdateProductVariantBarcodes(Guid id, UpdateVariantBarcodesRequest request)
             => _mediator.Send(new UpdateProductVariantBarcodes(id, request.Variants.Select(x => new UpdateProductVariantBarcode(x.VariantId, x.Barcode))), CancellationToken);
-        
+
         [HttpPost("{id:guid}/variants/update-skus")]
         public Task UpdateProductVariantSkus(Guid id, UpdateVariantSkusRequest request)
             => _mediator.Send(new UpdateProductVariantSkus(id, request.Variants.Select(x => new UpdateProductVariantSku(x.VariantId, x.Sku))), CancellationToken);
-        
+
         [HttpPost("{id:guid}/variants")]
         public Task<Guid> CreateVariant(Guid id, VariantDto model) => _mediator.Send(new CreateVariant(id, model), CancellationToken);
-        
+
         [HttpPut("{id:guid}/variants/{variantId:guid}")]
-        public Task UpdateProductVariant(Guid id, Guid variantId, VariantDto model) => _mediator.Send(new UpdateProductVariant(id, variantId,  model), CancellationToken);
-        
+        public Task UpdateProductVariant(Guid id, Guid variantId, VariantDto model) => _mediator.Send(new UpdateProductVariant(id, variantId, model), CancellationToken);
+
         [HttpPost("{id:guid}/variants/delete-bulk")]
         public Task DeleteVariants(Guid id, IEnumerable<Guid> model) => _mediator.Send(new DeleteVariants(id, model), CancellationToken);
-        
+
         [HttpPost("{id:guid}/make-multi-variant")]
-        public Task<IEnumerable<Guid>> MakeProductAsMultiVariant(Guid id, MakeProductAsMultiVariantRequest request) => _mediator.Send(new MakeProductAsMultiVariant(id, request.Options, request.Variants), CancellationToken);
-        
+        public Task<IEnumerable<Guid>> MakeProductAsMultiVariant(Guid id, MakeProductAsMultiVariantRequest request) =>
+            _mediator.Send(new MakeProductAsMultiVariant(id, request.Options, request.Variants), CancellationToken);
+
         [HttpPost("{id:guid}/variants/{variantId:guid}/change-variant-media/{mediaId:guid}")]
         public Task SaveVariantMedia(Guid id, Guid variantId, Guid mediaId) => _mediator.Send(new ChangeVariantMedia(id, variantId, mediaId), CancellationToken);
-
     }
 }

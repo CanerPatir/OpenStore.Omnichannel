@@ -9,7 +9,7 @@ using OpenStore.Application.Exceptions;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
-namespace OpenStore.Omnichannel.Application.Query
+namespace OpenStore.Omnichannel.Application.Query.ProductContext
 {
     public record GetProductForUpdate(Guid Id) : IRequest<ProductDto>;
 

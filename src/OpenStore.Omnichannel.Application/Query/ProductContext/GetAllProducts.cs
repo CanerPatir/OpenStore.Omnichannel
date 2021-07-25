@@ -9,7 +9,7 @@ using OpenStore.Omnichannel.Application.Extensions;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.ReadModel;
 
-namespace OpenStore.Omnichannel.Application.Query
+namespace OpenStore.Omnichannel.Application.Query.ProductContext
 {
     public record GetAllProducts(PageRequest PageRequest, ProductStatus? Status) : IRequest<PagedList<ProductListItemReadModel>>;
 

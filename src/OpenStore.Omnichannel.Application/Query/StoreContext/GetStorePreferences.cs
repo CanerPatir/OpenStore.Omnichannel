@@ -7,7 +7,7 @@ using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.StoreContext;
 using OpenStore.Omnichannel.Shared.Dto.Store;
 
-namespace OpenStore.Omnichannel.Application.Query
+namespace OpenStore.Omnichannel.Application.Query.StoreContext
 {
     public record GetStorePreferences : IRequest<StorePreferencesDto>;
     

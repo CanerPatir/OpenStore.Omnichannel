@@ -31,19 +31,19 @@ namespace OpenStore.Omnichannel
             var mvcBuilder = services.AddControllersForAssemblies();
             services.AddResponseCompression();
             services.AddInfrastructure(mvcBuilder, Environment, Configuration, withScheduledJobs: true);
-          
+
             services.AddCors(o => o.AddPolicy(AllowAllCorsPolicy, builder =>
             {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
-            
+
             if (Environment.IsDevelopment())
             {
                 services.AddOpenStoreSwaggerForModule<Startup>(Environment, "OpenStore.Omnichannel");
             }
-            
+
             services.AddAuthentication(options => { options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme; });
             // Register the OpenIddict validation components.
             services
@@ -68,7 +68,7 @@ namespace OpenStore.Omnichannel
 
                     // Register the ASP.NET Core host.
                     options.UseAspNetCore();
-                    
+
                     // For applications that need immediate access token or authorization
                     // revocation, the database entry of the received tokens and their
                     // associated authorizations can be validated for each API call.
@@ -86,7 +86,7 @@ namespace OpenStore.Omnichannel
             {
                 app.UseOpenStoreSwaggerForModule("OpenStore.Omnichannel");
             }
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
