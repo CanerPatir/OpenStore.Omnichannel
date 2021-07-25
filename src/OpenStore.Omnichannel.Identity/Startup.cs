@@ -47,15 +47,13 @@ namespace OpenStore.Omnichannel.Identity
                 .AddControllersWithViewsForAssemblies(Assembly)
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
-            
+
             services
                 .Configure<RouteOptions>(options => { options.LowercaseUrls = true; })
-                .AddOpenStoreObjectMapper(mc =>
-                {
-                })
+                .AddOpenStoreObjectMapper(mc => { })
                 // .AddOpenStoreRecurringJob<IdentityBackgroundService>(IdentityBackgroundService.EveryHour)
                 .AddInfrastructure(mvcBuilder, Environment, Configuration);
-            
+
             // services.AddDbContext<ApplicationDbContext>(options =>
             // {
             //     // Configure the context to use Microsoft SQL Server.
@@ -238,10 +236,7 @@ namespace OpenStore.Omnichannel.Identity
                 .UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapDefaultControllerRoute();
-                })
+                .UseEndpoints(endpoints => { endpoints.MapDefaultControllerRoute(); })
                 ;
         }
 

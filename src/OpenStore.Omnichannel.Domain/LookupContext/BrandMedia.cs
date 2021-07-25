@@ -6,7 +6,7 @@ namespace OpenStore.Omnichannel.Domain.LookupContext
     {
         public Guid? BrandId { get; set; }
         public virtual Brand Brand { get; protected set; }
-        
+
         protected BrandMedia()
         {
         }

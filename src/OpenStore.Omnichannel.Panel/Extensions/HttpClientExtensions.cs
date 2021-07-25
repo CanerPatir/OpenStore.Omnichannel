@@ -14,8 +14,8 @@ namespace System.Net.Http
         {
             var query = new Dictionary<string, string>
             {
-                {"PageNumber", request.PageNumber.ToString()},
-                {"PageSize", request.PageSize.ToString()},
+                { "PageNumber", request.PageNumber.ToString() },
+                { "PageSize", request.PageSize.ToString() },
             };
             if (request.SortColumn != null)
             {

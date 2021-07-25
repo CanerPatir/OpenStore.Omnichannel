@@ -26,7 +26,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
         // Product context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductMedia> ProductMedias { get; set; }
-        
+
         // Inventory context
         public DbSet<Inventory> Inventories { get; set; }
 
@@ -41,7 +41,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
         public DbSet<CategoryMedia> CategoryMedias { get; set; }
         public DbSet<CategoryProduct> CategoryProducts { get; set; }
         public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
-        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -59,6 +59,5 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context
 
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
         }
-
     }
 }

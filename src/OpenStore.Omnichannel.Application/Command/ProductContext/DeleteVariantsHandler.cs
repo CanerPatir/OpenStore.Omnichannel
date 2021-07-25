@@ -27,7 +27,7 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext
             {
                 _variantRepository.Remove(deleteVariant);
             }
-            
+
             await _repository.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

@@ -61,6 +61,5 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         protected Product()
         {
         }
-
     }
 }

@@ -31,8 +31,9 @@ namespace OpenStore.Omnichannel.Identity.Controllers
             var client = await _applicationManager.FindByClientIdAsync(clientId);
             var redirectUris = JsonSerializer.Deserialize<string[]>(client.RedirectUris);
             var postLogoutRedirectUris = JsonSerializer.Deserialize<string[]>(client.PostLogoutRedirectUris);
-            var scopes = JsonSerializer.Deserialize<string[]>(client.Permissions).Where(x => x.StartsWith(OpenIddictConstants.Permissions.Prefixes.Scope)).Select(x => x.Split(":")[1]);
-            
+            var scopes = JsonSerializer.Deserialize<string[]>(client.Permissions).Where(x => x.StartsWith(OpenIddictConstants.Permissions.Prefixes.Scope))
+                .Select(x => x.Split(":")[1]);
+
             return Ok(new Dictionary<string, string>
             {
                 ["authority"] = GetIssuer(_openIdDictServerOptions),

@@ -30,8 +30,8 @@ namespace OpenStore.Omnichannel.Identity.Controllers.Api
 
         [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme, Roles = ApplicationRoles.Administrator)]
         [HttpGet("{id}/roles")]
-        public Task<IEnumerable<string>> GetUserRoles(Guid id) => _userService.GetUserRoles(id, CancellationToken);  
-        
+        public Task<IEnumerable<string>> GetUserRoles(Guid id) => _userService.GetUserRoles(id, CancellationToken);
+
         [HttpPost("change-password")]
         public Task ChangePassword(ChangePasswordRequest model)
         {

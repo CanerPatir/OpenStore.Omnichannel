@@ -10,7 +10,7 @@ namespace OpenStore.Omnichannel.Storefront.Components
         public Task<IViewComponentResult> InvokeAsync()
         {
             var term = Convert.ToString(ViewContext.RouteData.Values[nameof(SearchBoxViewModel.Term)] ?? "");
-            return Task.FromResult((IViewComponentResult) View(new SearchBoxViewModel(term)));
+            return Task.FromResult((IViewComponentResult)View(new SearchBoxViewModel(term)));
         }
     }
 }

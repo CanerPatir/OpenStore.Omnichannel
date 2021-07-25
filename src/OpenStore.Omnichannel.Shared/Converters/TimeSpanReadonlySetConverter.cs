@@ -12,7 +12,7 @@ namespace OpenStore.Omnichannel
     {
         private static readonly JsonSerializerOptions JsonSerializerOptions = new()
         {
-            Converters = {new TimeSpanConverter()}
+            Converters = { new TimeSpanConverter() }
         };
 
         public override ISet<TimeSpan> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

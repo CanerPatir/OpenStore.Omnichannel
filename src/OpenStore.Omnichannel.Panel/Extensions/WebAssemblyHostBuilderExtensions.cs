@@ -56,7 +56,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
                 {
                     var navigationManager = sp.GetRequiredService<NavigationManager>();
                     var handler = new AuthorizationMessageHandler(sp.GetRequiredService<IAccessTokenProvider>(), navigationManager);
-                    return handler.ConfigureHandler(new[] {clientBaseAddress.ToString()});
+                    return handler.ConfigureHandler(new[] { clientBaseAddress.ToString() });
                 })
                 ;
 

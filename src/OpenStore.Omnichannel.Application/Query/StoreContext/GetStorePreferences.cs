@@ -10,7 +10,7 @@ using OpenStore.Omnichannel.Shared.Dto.Store;
 namespace OpenStore.Omnichannel.Application.Query.StoreContext
 {
     public record GetStorePreferences : IRequest<StorePreferencesDto>;
-    
+
     public class GetStorePreferencesHandler : IRequestHandler<GetStorePreferences, StorePreferencesDto>
     {
         private readonly ICrudRepository<StorePreferences> _repository;
@@ -31,7 +31,7 @@ namespace OpenStore.Omnichannel.Application.Query.StoreContext
                 storePreferences = await _repository.InsertAsync(storePreferences, cancellationToken);
                 await _repository.SaveChangesAsync(cancellationToken);
             }
-            
+
             return _mapper.Map<StorePreferencesDto>(storePreferences);
         }
     }

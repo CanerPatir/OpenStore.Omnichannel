@@ -329,7 +329,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
                 variant.UpdateMasterData(model.Variants.First());
             }
 
-            ApplyChange(new ProductMasterDataUpdated(Id, Handle, Title, Description, Status, Weight, WeightUnit , HsCode, IsPhysicalProduct, MetaTitle, MetaDescription, Tags));
+            ApplyChange(new ProductMasterDataUpdated(Id, Handle, Title, Description, Status, Weight, WeightUnit, HsCode, IsPhysicalProduct, MetaTitle, MetaDescription, Tags));
         }
 
         public void UpdateVariant(UpdateProductVariant command)
@@ -340,17 +340,17 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             {
                 throw new DomainException(Msg.ResourceNotFound);
             }
-            
+
             variant.UpdateMasterData(model);
             UpdateOptionValues(variant, model);
         }
 
-        private void UpdateOptionValues( Variant variant, VariantDto model)
+        private void UpdateOptionValues(Variant variant, VariantDto model)
         {
             var sameOptionExits = Variants.Where(x => x.Id != variant.Id)
-                .Any(x => string.Equals(x.Option1, model.Option1, StringComparison.InvariantCultureIgnoreCase) 
-                          && string.Equals(x.Option2, model.Option2, StringComparison.InvariantCultureIgnoreCase) 
-                          && string.Equals(x.Option3, model.Option3, StringComparison.InvariantCultureIgnoreCase) 
+                .Any(x => string.Equals(x.Option1, model.Option1, StringComparison.InvariantCultureIgnoreCase)
+                          && string.Equals(x.Option2, model.Option2, StringComparison.InvariantCultureIgnoreCase)
+                          && string.Equals(x.Option3, model.Option3, StringComparison.InvariantCultureIgnoreCase)
                 );
 
             if (sameOptionExits)
@@ -390,10 +390,10 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public void ChangeVariantMedia(ChangeVariantMedia command)
         {
             var (_, variantId, mediaId) = command;
-            
+
             var variantMedias = Medias.Where(x => x.VariantIds.Contains(variantId));
             var variant = Variants.Single(x => x.Id == variantId);
-            
+
             foreach (var variantMedia in variantMedias)
             {
                 variantMedia.RemoveVariant(variant);
@@ -402,7 +402,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
             var productMedia = Medias.Single(x => x.Id == mediaId);
 
             productMedia.AddVariant(variant);
-            
+
             ApplyChange(new VariantMediaChanged(Id, variantId, mediaId));
         }
     }

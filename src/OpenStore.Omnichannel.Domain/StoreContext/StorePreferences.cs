@@ -1,3 +1,5 @@
+using OpenStore.Omnichannel.Shared.Dto.Store;
+
 namespace OpenStore.Omnichannel.Domain.StoreContext
 {
     public class StorePreferences : AuditableEntity
@@ -9,5 +11,23 @@ namespace OpenStore.Omnichannel.Domain.StoreContext
         {
             Contact = new StorePreferencesContact();
         }
+
+        public void Update(StorePreferencesDto model)
+        {
+            Name = model.Name;
+            Contact = new StorePreferencesContact
+            {
+                Email = model.Contact.Email,
+                Address = model.Contact.Address,
+                Phone = model.Contact.Phone,
+                CopyrightText = model.Contact.CopyrightText,
+                FacebookUrl = model.Contact.FacebookUrl,
+                InstagramUrl = model.Contact.InstagramUrl,
+                TwitterUrl = model.Contact.TwitterUrl,
+                YoutubeUrl = model.Contact.YoutubeUrl,
+            };
+            
+            ApplyChange(new StorePreferencesUpdated(Id, model));
+         }
     }
 }

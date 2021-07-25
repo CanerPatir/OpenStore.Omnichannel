@@ -77,11 +77,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework
                 cfg.CreateMap<VariantDto, Variant>().ReverseMap()
                     .ForMember(x => x.Quantity, opts => opts.MapFrom(v => v.Inventory != null ? v.Inventory.Quantity : 0));
                 cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
-                
+
                 cfg.CreateMap<StorePreferencesDto, StorePreferences>().ReverseMap();
                 cfg.CreateMap<StorePreferencesContactDto, StorePreferencesContact>().ReverseMap();
-                
-                
             });
             return services;
         }

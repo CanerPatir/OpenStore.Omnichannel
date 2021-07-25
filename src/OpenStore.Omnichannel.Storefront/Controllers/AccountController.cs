@@ -13,7 +13,7 @@ namespace OpenStore.Omnichannel.Storefront.Controllers
         {
             return View();
         }
-    
+
         [HttpPost]
         public IActionResult SignOut() => SignOut(CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
     }

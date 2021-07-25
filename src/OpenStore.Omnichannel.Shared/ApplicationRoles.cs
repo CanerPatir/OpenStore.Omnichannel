@@ -8,7 +8,7 @@ namespace OpenStore.Omnichannel
         public const string Administrator = nameof(Administrator);
         public const string StoreOwner = nameof(StoreOwner);
         public const string StoreAdmin = nameof(StoreAdmin);
-        
+
         public static string[] AsArray => new[]
         {
             Customer,

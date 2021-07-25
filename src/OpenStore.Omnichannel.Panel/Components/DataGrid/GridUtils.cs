@@ -13,7 +13,7 @@ namespace OpenStore.Omnichannel.Panel.Components.DataGrid
         {
             var memberExpression = TryGetMemberExpression(propertyExpression);
 
-            var member = (PropertyInfo) memberExpression.Member;
+            var member = (PropertyInfo)memberExpression.Member;
             // var propertyType = member.PropertyType;
             // var name = member.Name;
             var strArray = memberExpression.ToString().Split('.');
@@ -23,7 +23,7 @@ namespace OpenStore.Omnichannel.Panel.Components.DataGrid
         public static IQueryable<T> Search<T>(this IQueryable<T> source, Expression<Func<T, object>> propertyExpression, string term)
         {
             var memberExpression = TryGetMemberExpression(propertyExpression);
-            var member = (PropertyInfo) memberExpression.Member;
+            var member = (PropertyInfo)memberExpression.Member;
 
             return source.Where(m => member.GetValue(m, null).ToString().IgnoreCaseContains(term));
         }
@@ -33,7 +33,7 @@ namespace OpenStore.Omnichannel.Panel.Components.DataGrid
             var members = propertyExpressions.Select(propertyExpression =>
             {
                 var memberExpression = TryGetMemberExpression(propertyExpression);
-                var member = (PropertyInfo) memberExpression.Member;
+                var member = (PropertyInfo)memberExpression.Member;
 
                 return member;
             });
@@ -49,7 +49,7 @@ namespace OpenStore.Omnichannel.Panel.Components.DataGrid
 
             try
             {
-                memberExpression = ((UnaryExpression) propertyExpression.Body).Operand as MemberExpression;
+                memberExpression = ((UnaryExpression)propertyExpression.Body).Operand as MemberExpression;
             }
             catch (InvalidCastException ex)
             {

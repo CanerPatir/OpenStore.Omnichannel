@@ -16,13 +16,12 @@ namespace OpenStore.Omnichannel.Shared.Dto
 
         [Required(ErrorMessage = Msg.Validation.Required)]
         public string Surname { get; set; }
-        
+
         public string PhotoPath { get; set; }
         public string PhoneNumber { get; set; }
 
         public string FullName => $"{Name} {Surname}";
 
         public bool EmailConfirmed { get; set; }
-
     }
 }

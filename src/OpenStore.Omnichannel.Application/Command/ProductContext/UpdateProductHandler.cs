@@ -27,7 +27,7 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext
                     throw new DomainException(Msg.Domain.Product.ProductHandleAlreadyExists);
                 }
             }
-            
+
             product.UpdatedMasterData(command);
             await _repository.SaveChangesAsync(cancellationToken);
             return Unit.Value;

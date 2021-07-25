@@ -14,8 +14,8 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public bool CalculateTaxAdditionally { get; set; }
 
         // Inventory
-        public string Sku { get;  set; }
-        public string Barcode { get;  set; }
+        public string Sku { get; set; }
+        public string Barcode { get; set; }
         public bool TrackQuantity { get; set; } = true;
         public bool ContinueSellingWhenOutOfStock { get; set; }
         public int Quantity { get; set; }
@@ -24,9 +24,11 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
         public string Option1 { get; set; }
         public string Option2 { get; set; }
         public string Option3 { get; set; }
-        
+
         [NotMapped] public bool Selected { get; set; }
-        [NotMapped] public string Title
+
+        [NotMapped]
+        public string Title
         {
             get
             {
@@ -35,21 +37,14 @@ namespace OpenStore.Omnichannel.Shared.Dto.Product
                 {
                     title += $" / {Option2}";
                 }
-                
+
                 if (!string.IsNullOrWhiteSpace(Option3))
                 {
                     title += $" / {Option3}";
                 }
 
-                return title; 
+                return title;
             }
         }
-
-
-        
-        
-        
-        
-        
     }
 }

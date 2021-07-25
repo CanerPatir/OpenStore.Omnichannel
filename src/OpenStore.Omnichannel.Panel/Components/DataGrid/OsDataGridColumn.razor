@@ -9,7 +9,7 @@
 
     [Parameter]
     public string HeaderCssClass { get; set; } = "pt-0 pb-2";
-    
+
     [Parameter]
     public string RowCssClass { get; set; } = "align-middle";
 
@@ -33,7 +33,7 @@
 
     [Parameter]
     public RenderFragment<TItem> RowTemplate { get; set; }
-    
+
     public Guid Guid { get; private set; }
 
     protected override void OnInitialized()

@@ -8,7 +8,7 @@ namespace OpenStore.Omnichannel.Panel
     public static class LocalizationExtensions
     {
         private static readonly CultureInfo DefaultCultureInfo = new CultureInfo("tr-TR");
-        
+
         public static void InitCulture(this IJSInProcessRuntime jsRuntime)
         {
             var result = jsRuntime.Invoke<string>("appCulture.get");
@@ -21,7 +21,7 @@ namespace OpenStore.Omnichannel.Panel
             {
                 culture = new CultureInfo(result);
             }
-            
+
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
         }

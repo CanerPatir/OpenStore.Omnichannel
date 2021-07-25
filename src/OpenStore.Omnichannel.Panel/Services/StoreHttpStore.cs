@@ -14,8 +14,7 @@ namespace OpenStore.Omnichannel.Panel.Services
         protected override string Path => "api/store";
 
         public Task<StorePreferencesDto> GetStorePreferences() => HttpClient.GetFromJsonAsync<StorePreferencesDto>($"{Path}/preferences");
-         
-        public Task UpdateStorePreferences(StorePreferencesDto model) => HttpClient.PutAsJsonAsync($"{Path}/preferences", model);
 
+        public Task UpdateStorePreferences(StorePreferencesDto model) => HttpClient.PutAsJsonAsync($"{Path}/preferences", model);
     }
 }

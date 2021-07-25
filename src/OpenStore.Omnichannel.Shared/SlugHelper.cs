@@ -48,7 +48,7 @@ namespace OpenStore.Omnichannel
         {
             return Regex.Replace(str, collapse ? @"\s+" : @"\s", " ");
         }
- 
+
         private static string RemoveDiacritics(string str)
         {
             var stFormD = str.Normalize(NormalizationForm.FormD);

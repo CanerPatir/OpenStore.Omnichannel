@@ -6,7 +6,7 @@ namespace OpenStore.Omnichannel.Domain.LookupContext
     {
         public Guid? CategoryId { get; set; }
         public virtual Category Category { get; protected set; }
-        
+
         protected CategoryMedia()
         {
         }

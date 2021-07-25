@@ -22,14 +22,14 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
             builder.Property(x => x.Options).HasField("_options");
             // builder.Property(x => x.Medias).HasField("_medias");
             // builder.Property(x => x.Variants).HasField("_variants");
-            builder.Property(x => x.Weight).HasPrecision(9, 2); 
-            
+            builder.Property(x => x.Weight).HasPrecision(9, 2);
+
             builder.Property(x => x.Options)
                 .HasConversion(
                     x => JsonSerializer.Serialize(x, new JsonSerializerOptions()),
                     x => JsonSerializer.Deserialize<List<ProductOption>>(x, new JsonSerializerOptions())
                 );
-            
+
             builder.HasMany(x => x.Medias)
                 .WithOne()
                 .HasForeignKey(x => x.ProductId)

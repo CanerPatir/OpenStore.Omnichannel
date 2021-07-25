@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +6,7 @@ namespace OpenStore.Omnichannel
 {
     public class IdentityConfiguration
     {
-        public int SessionExpireTimeInMinutes { get; set; } 
+        public int SessionExpireTimeInMinutes { get; set; }
         public string Authority { get; init; }
         public HashSet<Uri> WebPostLogoutRedirectUris { get; init; }
         public HashSet<Uri> WebRedirectUris { get; init; }

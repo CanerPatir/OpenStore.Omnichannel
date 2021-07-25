@@ -21,10 +21,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     DisplayTitle = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Brands", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Brands", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Categories",
@@ -61,10 +58,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     FriendlyName = table.Column<string>(type: "TEXT", nullable: true),
                     Xml = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DataProtectionKeys", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_DataProtectionKeys", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictApplications",
@@ -84,10 +78,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     Requirements = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OpenIddictApplications", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_OpenIddictApplications", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "OpenIddictScopes",
@@ -103,10 +94,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     Properties = table.Column<string>(type: "TEXT", nullable: true),
                     Resources = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OpenIddictScopes", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_OpenIddictScopes", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "OutBoxMessages",
@@ -122,10 +110,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     CorrelationId = table.Column<string>(type: "TEXT", nullable: true),
                     CommittedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OutBoxMessages", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_OutBoxMessages", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Roles",
@@ -137,10 +122,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     NormalizedName = table.Column<string>(type: "TEXT", maxLength: 191, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Roles", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "SaleChannel",
@@ -155,10 +137,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
                     UpdatedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SaleChannel", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_SaleChannel", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Users",
@@ -192,10 +171,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "BrandMedias",

@@ -14,7 +14,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
             base.Configure(builder);
 
             builder.Property(x => x.VariantIds).HasField("_variantIds");
-            
+
             builder.Property(x => x.VariantIds)
                 .HasConversion(
                     x => JsonSerializer.Serialize(x, new JsonSerializerOptions()),

@@ -16,8 +16,8 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
         public ProductUpdateViewModel(IApiClient apiClient, DialogService dialogService) : base(apiClient)
         {
             _dialogService = dialogService;
-        }  
-        
+        }
+
         public bool Saving
         {
             get => _saving;
@@ -28,7 +28,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
 
         // ReSharper disable once PossibleInvalidOperationException
         public Guid ProductId => Product.Id.Value;
-        
+
         public async Task Retrieve(Guid id)
         {
             Product = await ApiClient.Product.Get(id);
@@ -54,7 +54,7 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
             try
             {
                 var selectedVariants = Product.Variants.Where(x => x.Selected).ToList();
-                
+
                 await ApiClient.Product.DeleteVariants(ProductId, selectedVariants.Select(x => x.Id.Value));
 
                 foreach (var selectedVariant in selectedVariants)
@@ -83,7 +83,6 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
 
         public async Task SaveNewVariants()
         {
-            
             _dialogService.BlockUi();
             try
             {
@@ -100,7 +99,6 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
             {
                 _dialogService.UnblockUi();
             }
-
         }
     }
 }

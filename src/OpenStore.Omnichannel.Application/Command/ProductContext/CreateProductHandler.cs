@@ -30,7 +30,7 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext
             {
                 throw new DomainException(Msg.Domain.Product.ProductHandleAlreadyExists);
             }
-            
+
             var product = Product.Create(command, id => _productMediaRepository.Query.Single(x => x.Id == id));
             await _repository.InsertAsync(product, cancellationToken);
             await _repository.SaveChangesAsync(cancellationToken);

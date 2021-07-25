@@ -14,7 +14,7 @@ namespace OpenStore.Omnichannel.Panel.Services
             _sharedLocalizer = sharedLocalizer;
         }
 
-        private IJSInProcessRuntime JsRuntimeSync => (IJSInProcessRuntime) _jsRuntime;
+        private IJSInProcessRuntime JsRuntimeSync => (IJSInProcessRuntime)_jsRuntime;
 
         public void BlockUi() => JsRuntimeSync.InvokeVoid("__blockUI");
 

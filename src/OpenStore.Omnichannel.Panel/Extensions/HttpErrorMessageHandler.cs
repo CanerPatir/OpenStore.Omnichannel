@@ -58,7 +58,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             {
                 return;
             }
-            
+
             var method = request.Method;
             if (method == HttpMethod.Post
                 || method == HttpMethod.Put

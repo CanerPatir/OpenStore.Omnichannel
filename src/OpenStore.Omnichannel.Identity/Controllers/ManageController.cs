@@ -74,7 +74,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 }
             }
 
-            return RedirectToAction(nameof(ManageLogins), new {Message = message});
+            return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
         //
@@ -99,7 +99,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
             var user = await GetCurrentUserAsync();
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
             await _messageDeliveryService.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return RedirectToAction(nameof(VerifyPhoneNumber), new {PhoneNumber = model.PhoneNumber});
+            return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
         }
 
         //
@@ -143,7 +143,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
         {
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(await GetCurrentUserAsync(), phoneNumber);
             // Send an SMS to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel {PhoneNumber = phoneNumber});
+            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
         //
@@ -164,7 +164,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new {Message = ManageMessageId.AddPhoneSuccess});
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.AddPhoneSuccess });
                 }
             }
 
@@ -186,11 +186,11 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new {Message = ManageMessageId.RemovePhoneSuccess});
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.RemovePhoneSuccess });
                 }
             }
 
-            return RedirectToAction(nameof(Index), new {Message = ManageMessageId.Error});
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
         //
@@ -220,14 +220,14 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User changed their password successfully.");
-                    return RedirectToAction(nameof(Index), new {Message = ManageMessageId.ChangePasswordSuccess});
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
 
                 AddErrors(result);
                 return View(model);
             }
 
-            return RedirectToAction(nameof(Index), new {Message = ManageMessageId.Error});
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
         //
@@ -256,14 +256,14 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new {Message = ManageMessageId.SetPasswordSuccess});
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.SetPasswordSuccess });
                 }
 
                 AddErrors(result);
                 return View(model);
             }
 
-            return RedirectToAction(nameof(Index), new {Message = ManageMessageId.Error});
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
         //GET: /Manage/ManageLogins
@@ -317,12 +317,12 @@ namespace OpenStore.Omnichannel.Identity.Controllers
             var info = await _signInManager.GetExternalLoginInfoAsync(await _userManager.GetUserIdAsync(user));
             if (info == null)
             {
-                return RedirectToAction(nameof(ManageLogins), new {Message = ManageMessageId.Error});
+                return RedirectToAction(nameof(ManageLogins), new { Message = ManageMessageId.Error });
             }
 
             var result = await _userManager.AddLoginAsync(user, info);
             var message = result.Succeeded ? ManageMessageId.AddLoginSuccess : ManageMessageId.Error;
-            return RedirectToAction(nameof(ManageLogins), new {Message = message});
+            return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
         #region Helpers

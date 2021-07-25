@@ -14,7 +14,7 @@ namespace OpenStore.Omnichannel
         string Message { get; }
         CultureInfo Culture { get; }
         NotificationChannel Channel { get; }
-        DateTime CreatedAt { get; } 
+        DateTime CreatedAt { get; }
         bool IsDelivered { get; }
         bool? IsReceived { get; }
         string ActionLink { get; }

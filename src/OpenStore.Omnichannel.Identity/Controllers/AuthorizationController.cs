@@ -178,10 +178,10 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                     principal.SetScopes(request.GetScopes());
                     principal.SetResources(await _scopeManager.ListResourcesAsync(principal.GetScopes()).ToListAsync());
 
-                    principal.SetClaims(OpenIddictConstants.Claims.Name, new[] {$"{user.Name} {user.Surname}"}.ToImmutableArray());
+                    principal.SetClaims(OpenIddictConstants.Claims.Name, new[] { $"{user.Name} {user.Surname}" }.ToImmutableArray());
                     if (!string.IsNullOrWhiteSpace(user.PhotoPath))
                     {
-                        principal.SetClaims(OpenIddictConstants.Claims.Picture, new[] {user.PhotoPath}.ToImmutableArray());
+                        principal.SetClaims(OpenIddictConstants.Claims.Picture, new[] { user.PhotoPath }.ToImmutableArray());
                     }
 
                     // Automatically create a permanent authorization to avoid requiring explicit consent

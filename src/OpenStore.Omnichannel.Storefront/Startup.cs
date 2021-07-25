@@ -21,7 +21,7 @@ namespace OpenStore.Omnichannel.Storefront
     public class Startup
     {
         public const string ApiClientKey = "OpenStoreApiClient";
-        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -39,7 +39,7 @@ namespace OpenStore.Omnichannel.Storefront
             services.AddResponseCompression();
 
             var identityConfiguration = Configuration.GetSection("IdentityConfiguration").Get<IdentityConfiguration>();
-            
+
             services
                 .AddAuthentication(options =>
                 {
@@ -83,7 +83,7 @@ namespace OpenStore.Omnichannel.Storefront
 
                     options.AccessDeniedPath = "/";
                 });
-            
+
             var apiConfiguration = Configuration.GetSection("Api").Get<ApiConfiguration>();
             services.AddHttpClient(ApiClientKey, client =>
             {

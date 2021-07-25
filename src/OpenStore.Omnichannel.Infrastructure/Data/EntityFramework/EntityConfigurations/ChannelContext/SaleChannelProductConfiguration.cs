@@ -8,7 +8,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
     {
         public void Configure(EntityTypeBuilder<SaleChannelProduct> builder)
         {
-            builder.HasKey(t => new {t.SaleChannelId, t.ProductId});
+            builder.HasKey(t => new { t.SaleChannelId, t.ProductId });
 
             builder
                 .HasOne(x => x.SaleChannel)

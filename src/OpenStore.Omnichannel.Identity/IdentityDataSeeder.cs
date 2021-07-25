@@ -61,8 +61,8 @@ namespace OpenStore.Omnichannel.Identity
                 },
                 Type = OpenIddictConstants.ClientTypes.Public
             };
-            
-            
+
+
             openIddictApplicationDescriptor.PostLogoutRedirectUris.AddRange(_identityConfig.PanelPostLogoutRedirectUris);
             openIddictApplicationDescriptor.RedirectUris.AddRange(_identityConfig.PanelRedirectUris);
 
@@ -103,7 +103,7 @@ namespace OpenStore.Omnichannel.Identity
                 },
                 Type = OpenIddictConstants.ClientTypes.Confidential
             };
-            
+
             openIddictApplicationDescriptor.PostLogoutRedirectUris.AddRange(_identityConfig.WebPostLogoutRedirectUris);
             openIddictApplicationDescriptor.RedirectUris.AddRange(_identityConfig.WebRedirectUris);
 

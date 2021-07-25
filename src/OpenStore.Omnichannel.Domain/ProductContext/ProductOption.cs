@@ -10,7 +10,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         public string Name { get; protected set; }
 
         public HashSet<string> Values { get; protected set; }
-        
+
         [JsonConstructor]
         public ProductOption(string name, HashSet<string> values)
         {

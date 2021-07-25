@@ -30,13 +30,13 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext
 
             var productMedia = await _productMediaRepository.GetAsync(command.ProductMediaId, cancellationToken);
             _productMediaRepository.Remove(productMedia);
-            
+
             await _productMediaRepository.SaveChangesAsync(cancellationToken);
 
 #pragma warning disable 4014
             _objectStorageService.Delete(productMedia.Host, productMedia.Path);
 #pragma warning restore 4014
-            
+
             return Unit.Value;
         }
     }

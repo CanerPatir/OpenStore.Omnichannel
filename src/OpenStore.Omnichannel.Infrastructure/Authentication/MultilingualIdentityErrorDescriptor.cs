@@ -32,7 +32,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Authentication
             error.Description = _openStoreLocalizer[Msg.Validation.PasswordTooShort, length];
             return error;
         }
-        
+
         public override IdentityError PasswordMismatch()
         {
             var error = base.PasswordMismatch();

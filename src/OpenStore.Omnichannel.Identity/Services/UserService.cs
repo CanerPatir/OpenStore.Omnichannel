@@ -87,10 +87,10 @@ namespace OpenStore.Omnichannel.Identity.Services
         public async Task ChangePassword(Guid userId, ChangePasswordRequest model, CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            var result  = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
             if (!result.Succeeded)
             {
-                throw new OpenStore.Application.Exceptions.ApplicationException(string.Join(",", Msg.Application.PasswordChangeError ,result.Errors.Select(x => x.Description)));
+                throw new OpenStore.Application.Exceptions.ApplicationException(string.Join(",", Msg.Application.PasswordChangeError, result.Errors.Select(x => x.Description)));
             }
         }
     }

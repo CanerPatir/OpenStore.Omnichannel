@@ -27,10 +27,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
                     UpdatedBy = table.Column<string>(type: "TEXT", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StorePreferences", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_StorePreferences", x => x.Id); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

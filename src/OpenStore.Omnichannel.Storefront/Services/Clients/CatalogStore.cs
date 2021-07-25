@@ -7,7 +7,7 @@ namespace OpenStore.Omnichannel.Storefront.Services.Clients
         public CatalogStore(HttpClient httpClient) : base(httpClient)
         {
         }
-        
-        protected override string Path => "api-sf/catalog"; 
+
+        protected override string Path => "api-sf/catalog";
     }
 }

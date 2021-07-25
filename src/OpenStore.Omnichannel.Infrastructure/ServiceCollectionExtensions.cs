@@ -37,16 +37,10 @@ namespace OpenStore.Omnichannel.Infrastructure
                 .AddAuthorizationInfrastructure(configuration)
                 .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly)
                 .AddOpenStoreInMemoryBackgroundTasks()
-                .AddOpenStoreMailInfrastructure(mailConf =>
-                {
-                    mailConf.UseSmtp(configuration, "Mail:Smtp");
-                })
+                .AddOpenStoreMailInfrastructure(mailConf => { mailConf.UseSmtp(configuration, "Mail:Smtp"); })
                 ;
 
-            services.AddOpenStoreResxLocalization(mvcBuilder, options =>
-            {
-                options.Assembly = callingAssembly;
-            });
+            services.AddOpenStoreResxLocalization(mvcBuilder, options => { options.Assembly = callingAssembly; });
 
             services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
             services.AddSingleton<IObjectStorageService, FileSystemObjectStorageService>();

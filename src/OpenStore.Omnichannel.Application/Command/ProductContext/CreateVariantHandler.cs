@@ -21,7 +21,7 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext
         public async Task<Guid> Handle(CreateVariant command, CancellationToken cancellationToken)
         {
             var product = await _repository.GetAsync(command.ProductId, cancellationToken);
-            
+
             var variant = product.CreateVariant(command);
             await _variantRepository.InsertAsync(variant, cancellationToken);
 

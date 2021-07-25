@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 // ReSharper disable CheckNamespace
 
 namespace OpenStore.Omnichannel
@@ -17,5 +18,4 @@ namespace OpenStore.Omnichannel
 
         public IEnumerable<T> Items { get; set; }
     }
-
 }

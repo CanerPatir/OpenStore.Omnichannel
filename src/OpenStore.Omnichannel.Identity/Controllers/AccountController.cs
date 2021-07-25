@@ -15,7 +15,6 @@ namespace OpenStore.Omnichannel.Identity.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IMessageDeliveryService _messageDeliveryService;
@@ -26,7 +25,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
             SignInManager<ApplicationUser> signInManager,
             IMessageDeliveryService messageDeliveryService,
             IUserService userService
-            )
+        )
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -84,7 +83,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
 
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl, RememberMe = model.RememberMe});
+                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 }
 
                 if (result.IsLockedOut)
@@ -181,7 +180,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new {ReturnUrl = returnUrl});
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return new ChallengeResult(provider, properties);
         }
@@ -207,7 +206,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
 
             if (result.RequiresTwoFactor)
             {
-                return RedirectToAction(nameof(SendCode), new {ReturnUrl = returnUrl});
+                return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl });
             }
 
             if (result.IsLockedOut)
@@ -220,7 +219,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel {Email = email});
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
             }
         }
 
@@ -240,7 +239,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                     return View("ExternalLoginFailure");
                 }
 
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -307,7 +306,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new {userId = user.Id, code}, Request.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, Request.Scheme);
 
                 await _messageDeliveryService.SendEmailAsync(model.Email, new EmailModel
                 {
@@ -393,8 +392,8 @@ namespace OpenStore.Omnichannel.Identity.Controllers
             }
 
             var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem {Text = purpose, Value = purpose}).ToList();
-            return View(new SendCodeViewModel {Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe});
+            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //
@@ -436,7 +435,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 await _messageDeliveryService.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
             }
 
-            return RedirectToAction(nameof(VerifyCode), new {Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe});
+            return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         //
@@ -452,7 +451,7 @@ namespace OpenStore.Omnichannel.Identity.Controllers
                 return View("Error");
             }
 
-            return View(new VerifyCodeViewModel {Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe});
+            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         //

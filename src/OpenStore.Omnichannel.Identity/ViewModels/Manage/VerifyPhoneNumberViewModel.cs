@@ -4,8 +4,7 @@ namespace OpenStore.Omnichannel.Identity.ViewModels.Manage
 {
     public class VerifyPhoneNumberViewModel
     {
-        [Required]
-        public string Code { get; set; }
+        [Required] public string Code { get; set; }
 
         [Required]
         [Phone]

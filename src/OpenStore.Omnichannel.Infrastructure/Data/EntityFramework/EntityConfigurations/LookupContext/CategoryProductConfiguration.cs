@@ -8,7 +8,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfig
     {
         public void Configure(EntityTypeBuilder<CategoryProduct> builder)
         {
-            builder.HasKey(t => new {t.CategoryId, t.ProductId});
+            builder.HasKey(t => new { t.CategoryId, t.ProductId });
 
             builder
                 .HasOne(x => x.Category)

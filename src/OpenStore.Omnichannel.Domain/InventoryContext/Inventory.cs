@@ -28,11 +28,14 @@ namespace OpenStore.Omnichannel.Domain.InventoryContext
 
         public static Inventory Create(Guid variantId, int quantity, bool continueSellingWhenOutOfStock)
         {
-            var inventory = new Inventory(variantId, quantity, continueSellingWhenOutOfStock);
+            var inventory = new Inventory(variantId, quantity, continueSellingWhenOutOfStock)
+            {
+                Id = Guid.NewGuid()
+            };
             inventory.ApplyChange(new InventoryCreated(inventory.Id, inventory.VariantId, inventory.Quantity, inventory.ContinueSellingWhenOutOfStock));
             return inventory;
         }
-        
+
         internal static Inventory CreateDefault() => new();
 
         public void Change(int quantity)

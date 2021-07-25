@@ -21,8 +21,8 @@ namespace OpenStore.Omnichannel.Identity.Controllers.Api
 
         public override Task<object> Create(RoleDto dto)
         {
-             NotSupported();
-             return Task.FromResult(new object());
+            NotSupported();
+            return Task.FromResult(new object());
         }
 
         public override Task Delete(Guid id) => NotSupported();

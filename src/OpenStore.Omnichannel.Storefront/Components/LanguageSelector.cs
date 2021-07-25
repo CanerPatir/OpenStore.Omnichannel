@@ -8,7 +8,7 @@ namespace OpenStore.Omnichannel.Storefront.Components
     {
         public Task<IViewComponentResult> InvokeAsync()
         {
-            return Task.FromResult((IViewComponentResult) View(new LanguageSelectorViewModel()));
+            return Task.FromResult((IViewComponentResult)View(new LanguageSelectorViewModel()));
         }
-    } 
+    }
 }

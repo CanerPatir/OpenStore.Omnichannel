@@ -1,13 +1,14 @@
 using System;
 using System.Globalization;
 using System.Text.Json.Serialization;
- 
+
 namespace OpenStore.Omnichannel.Shared.Dto
 {
     public class NotificationDto : INotification
     {
         [JsonConstructor]
-        public NotificationDto(Guid id, Guid userId, DateTime time, string title, string message, CultureInfo culture, NotificationChannel channel, DateTime createdAt, bool isDelivered,
+        public NotificationDto(Guid id, Guid userId, DateTime time, string title, string message, CultureInfo culture, NotificationChannel channel, DateTime createdAt,
+            bool isDelivered,
             bool? isReceived, string actionLink)
         {
             Id = id;
@@ -37,7 +38,7 @@ namespace OpenStore.Omnichannel.Shared.Dto
         public DateTime CreatedAt { get; }
         public bool IsDelivered { get; }
         public bool? IsReceived { get; set; }
-        
+
         public string ActionLink { get; }
 
         #region equality
@@ -49,12 +50,11 @@ namespace OpenStore.Omnichannel.Shared.Dto
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != GetType()) return false;
-            return Equals((NotificationDto) obj);
+            return Equals((NotificationDto)obj);
         }
 
         public override int GetHashCode() => Id.GetHashCode();
 
         #endregion
-       
     }
 }

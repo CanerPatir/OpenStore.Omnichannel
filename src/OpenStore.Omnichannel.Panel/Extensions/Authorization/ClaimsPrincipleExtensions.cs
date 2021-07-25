@@ -27,7 +27,7 @@ namespace OpenStore.Omnichannel.Panel
 
             return GetRolesFromClaim(userRoleClaim.Value);
         }
-        
+
         public static bool IsRolesEmpty(this ClaimsPrincipal claimsPrincipal)
         {
             try
@@ -40,7 +40,7 @@ namespace OpenStore.Omnichannel.Panel
                 return true;
             }
         }
-        
+
         public static bool InRole(this ClaimsPrincipal claimsPrincipal, string role)
         {
             try

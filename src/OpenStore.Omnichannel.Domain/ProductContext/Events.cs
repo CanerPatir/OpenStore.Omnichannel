@@ -47,12 +47,12 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         decimal? Weight, string WeightUnit, string HsCode, bool IsPhysicalProduct,
         string MetaTitle, string MetaDescription, string Tags) : DomainEventBase(ProductId);
 
-    public record VariantMasterDataUpdated(Guid ProductId, Guid VariantId, 
-        decimal Price, decimal? CompareAtPrice, decimal? Cost, bool CalculateTaxAdditionally, 
+    public record VariantMasterDataUpdated(Guid ProductId, Guid VariantId,
+        decimal Price, decimal? CompareAtPrice, decimal? Cost, bool CalculateTaxAdditionally,
         string Barcode, string Sku, bool TrackQuantity, bool ContinueSellingWhenOutOfStock) : DomainEventBase(ProductId);
 
     public record VariantOptionsUpdated(Guid ProductId, Guid VariantId, string Option1, string Option2, string Option3) : DomainEventBase(ProductId);
-    
+
     public record VariantAddedToProduct(Guid ProductId, VariantDto Variant) : DomainEventBase(ProductId);
 
     public record MediaAssignedToProduct(Guid ProductId, ProductMediaDto ProductMedia) : DomainEventBase(ProductId);
@@ -82,6 +82,6 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
     public record ProductTurnedIntoSingleVariantProduct(Guid ProductId) : DomainEventBase(ProductId);
 
     public record ProductMadeMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options) : DomainEventBase(ProductId);
-    
+
     public record VariantMediaChanged(Guid ProductId, Guid VariantId, Guid MediaId) : DomainEventBase(ProductId);
 }

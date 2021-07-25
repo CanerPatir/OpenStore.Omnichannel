@@ -6,7 +6,6 @@ using OpenStore.Omnichannel.Domain.LookupContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.LookupContext
 {
-
     public class BrandConfiguration : BaseEntityTypeConfiguration<Guid, Brand>
     {
         public override void Configure(EntityTypeBuilder<Brand> builder)

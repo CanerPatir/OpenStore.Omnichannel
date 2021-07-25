@@ -29,14 +29,15 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext
         {
             var (id, fileUploads) = command;
             var list = (await _mediator.Send(new CreateProductMedia(fileUploads), cancellationToken)).ToList();
-            var product = await  _repository.Query
+            var product = await _repository.Query
                 .Include(x => x.Medias)
                 .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
-            
+
             foreach (var (dto, productMedia) in list)
             {
                 product.AssignAttachedMedia(productMedia, dto);
             }
+
             await _repository.SaveChangesAsync(cancellationToken);
             return list.Select(x => x.dto);
         }
