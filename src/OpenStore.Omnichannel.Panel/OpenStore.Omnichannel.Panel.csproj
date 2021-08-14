@@ -6,18 +6,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Blazorise" Version="0.9.4.1" />
-        <PackageReference Include="Blazorise.Bootstrap" Version="0.9.4.1" />
-        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.1" />
-        <PackageReference Include="Blazorise.RichTextEdit" Version="0.9.4.1" />
-        <PackageReference Include="Blazorise.Components" Version="0.9.4.1" />
+        <PackageReference Include="Blazorise" Version="0.9.4.3" />
+        <PackageReference Include="Blazorise.Bootstrap" Version="0.9.4.3" />
+        <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.4.3" />
+        <PackageReference Include="Blazorise.RichTextEdit" Version="0.9.4.3" />
+        <PackageReference Include="Blazorise.Components" Version="0.9.4.3" />
         <PackageReference Include="Humanizer.Core" Version="2.11.10" />
         <PackageReference Include="Majorsoft.Blazor.Components.Debounce" Version="1.4.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(NetPackagesVersion)" PrivateAssets="all" />
         <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.9" />
         <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     </ItemGroup>
