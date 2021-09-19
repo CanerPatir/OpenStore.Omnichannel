@@ -5,10 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenIddict.Validation.AspNetCore;
 using OpenStore.Infrastructure.Localization;
+using OpenStore.Infrastructure.Messaging.Kafka;
 using OpenStore.Infrastructure.Web.ErrorHandling;
 using OpenStore.Infrastructure.Web.Modularization;
 using OpenStore.Infrastructure.Web.Swagger;
 using OpenStore.Omnichannel.Infrastructure;
+using OpenStore.Omnichannel.ReadModel.Projections;
+using OpenStore.Omnichannel.ReadModel.Projections.Consumers;
 
 namespace OpenStore.Omnichannel
 {
@@ -77,6 +80,11 @@ namespace OpenStore.Omnichannel
                     // options.EnableAuthorizationEntryValidation();
                     // options.EnableTokenEntryValidation();
                 });
+            
+            
+            services.AddKafkaConsumer<Consumer, ProductMessage>("product-events", Configuration.GetSection("Kafka"));
+
+            services.AddHostedService<TestWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +118,7 @@ namespace OpenStore.Omnichannel
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            
         }
 
         private bool ForceHttps() => Configuration.GetValue<bool>("HttpsRedirection");

@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "OpenStore.Omnichannel.ReadModel.Projections": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
