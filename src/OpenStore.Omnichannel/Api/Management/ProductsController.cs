@@ -12,7 +12,6 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
-using OpenStore.Omnichannel.Shared.ReadModel;
 using OpenStore.Omnichannel.Shared.Request;
 
 namespace OpenStore.Omnichannel.Api.Management
@@ -47,19 +46,19 @@ namespace OpenStore.Omnichannel.Api.Management
         public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdate(id), CancellationToken);
 
         [HttpGet("all")]
-        public Task<PagedList<ProductListItemReadModel>> GetAllProducts([FromQuery] PageRequestQueryModel pageRequest)
+        public Task<PagedList<ProductListItemDto>> GetAllProducts([FromQuery] PageRequestQueryModel pageRequest)
             => _mediator.Send(new GetAllProducts(pageRequest, null), CancellationToken);
 
         [HttpGet("active")]
-        public Task<PagedList<ProductListItemReadModel>> GetActiveProducts([FromQuery] PageRequestQueryModel pageRequest)
+        public Task<PagedList<ProductListItemDto>> GetActiveProducts([FromQuery] PageRequestQueryModel pageRequest)
             => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Active), CancellationToken);
 
         [HttpGet("draft")]
-        public Task<PagedList<ProductListItemReadModel>> GetDraftProducts([FromQuery] PageRequestQueryModel pageRequest)
+        public Task<PagedList<ProductListItemDto>> GetDraftProducts([FromQuery] PageRequestQueryModel pageRequest)
             => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Draft), CancellationToken);
 
         [HttpGet("archived")]
-        public Task<PagedList<ProductListItemReadModel>> GetArchivedProducts([FromQuery] PageRequestQueryModel pageRequest)
+        public Task<PagedList<ProductListItemDto>> GetArchivedProducts([FromQuery] PageRequestQueryModel pageRequest)
             => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Archived), CancellationToken);
 
         [HttpPost("{id:guid}/assign-media")]

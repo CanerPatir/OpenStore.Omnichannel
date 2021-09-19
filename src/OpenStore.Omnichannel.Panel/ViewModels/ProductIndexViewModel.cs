@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using OpenStore.Omnichannel.Panel.Services;
-using OpenStore.Omnichannel.Shared.ReadModel;
+using OpenStore.Omnichannel.Shared.Dto;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels
 {
@@ -13,9 +13,9 @@ namespace OpenStore.Omnichannel.Panel.ViewModels
             _apiClient = apiClient;
         }
 
-        public async Task<PagedListDto<ProductListItemReadModel>> GetAll(PageRequest pageRequest) => await _apiClient.Product.GetAll(pageRequest);
-        public async Task<PagedListDto<ProductListItemReadModel>> GetActive(PageRequest pageRequest) => await _apiClient.Product.GetActive(pageRequest);
-        public async Task<PagedListDto<ProductListItemReadModel>> GetDraft(PageRequest pageRequest) => await _apiClient.Product.GetDraft(pageRequest);
-        public async Task<PagedListDto<ProductListItemReadModel>> GetArchived(PageRequest pageRequest) => await _apiClient.Product.GetArchived(pageRequest);
+        public async Task<PagedListDto<ProductListItemDto>> GetAll(PageRequest pageRequest) => await _apiClient.Product.GetAll(pageRequest);
+        public async Task<PagedListDto<ProductListItemDto>> GetActive(PageRequest pageRequest) => await _apiClient.Product.GetActive(pageRequest);
+        public async Task<PagedListDto<ProductListItemDto>> GetDraft(PageRequest pageRequest) => await _apiClient.Product.GetDraft(pageRequest);
+        public async Task<PagedListDto<ProductListItemDto>> GetArchived(PageRequest pageRequest) => await _apiClient.Product.GetArchived(pageRequest);
     }
 }

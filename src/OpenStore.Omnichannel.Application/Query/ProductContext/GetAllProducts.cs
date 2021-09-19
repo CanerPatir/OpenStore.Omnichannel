@@ -7,13 +7,13 @@ using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Application.Extensions;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.ReadModel;
+using OpenStore.Omnichannel.Shared.Dto;
 
 namespace OpenStore.Omnichannel.Application.Query.ProductContext
 {
-    public record GetAllProducts(PageRequest PageRequest, ProductStatus? Status) : IRequest<PagedList<ProductListItemReadModel>>;
+    public record GetAllProducts(PageRequest PageRequest, ProductStatus? Status) : IRequest<PagedList<ProductListItemDto>>;
 
-    public class GetAllProductsHandler : IRequestHandler<GetAllProducts, PagedList<ProductListItemReadModel>>
+    public class GetAllProductsHandler : IRequestHandler<GetAllProducts, PagedList<ProductListItemDto>>
     {
         private readonly ICrudRepository<Product> _repository;
 
@@ -22,7 +22,7 @@ namespace OpenStore.Omnichannel.Application.Query.ProductContext
             _repository = repository;
         }
 
-        public Task<PagedList<ProductListItemReadModel>> Handle(GetAllProducts request, CancellationToken cancellationToken)
+        public Task<PagedList<ProductListItemDto>> Handle(GetAllProducts request, CancellationToken cancellationToken)
         {
             var (pageRequest, productStatus) = request;
 
@@ -56,7 +56,7 @@ namespace OpenStore.Omnichannel.Application.Query.ProductContext
                 .GetPaged(
                     pageRequest.PageNumber,
                     pageRequest.PageSize,
-                    p => new ProductListItemReadModel(
+                    p => new ProductListItemDto(
                         p.Id,
                         p.Medias.OrderBy(x => x.Position).FirstOrDefault()?.Url,
                         p.Status,

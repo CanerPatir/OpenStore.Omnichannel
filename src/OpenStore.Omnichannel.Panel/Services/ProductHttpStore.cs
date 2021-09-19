@@ -5,7 +5,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
-using OpenStore.Omnichannel.Shared.ReadModel;
 using OpenStore.Omnichannel.Shared.Request;
 
 namespace OpenStore.Omnichannel.Panel.Services
@@ -28,13 +27,13 @@ namespace OpenStore.Omnichannel.Panel.Services
 
         public Task<ProductDto> Get(Guid productId) => HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{productId}");
 
-        public Task<PagedListDto<ProductListItemReadModel>> GetAll(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/all", request);
+        public Task<PagedListDto<ProductListItemDto>> GetAll(PageRequest request) => HttpClient.GetPage<ProductListItemDto>($"{Path}/all", request);
 
-        public Task<PagedListDto<ProductListItemReadModel>> GetActive(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/active", request);
+        public Task<PagedListDto<ProductListItemDto>> GetActive(PageRequest request) => HttpClient.GetPage<ProductListItemDto>($"{Path}/active", request);
 
-        public Task<PagedListDto<ProductListItemReadModel>> GetDraft(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/draft", request);
+        public Task<PagedListDto<ProductListItemDto>> GetDraft(PageRequest request) => HttpClient.GetPage<ProductListItemDto>($"{Path}/draft", request);
 
-        public Task<PagedListDto<ProductListItemReadModel>> GetArchived(PageRequest request) => HttpClient.GetPage<ProductListItemReadModel>($"{Path}/archived", request);
+        public Task<PagedListDto<ProductListItemDto>> GetArchived(PageRequest request) => HttpClient.GetPage<ProductListItemDto>($"{Path}/archived", request);
 
         public Task Archive(Guid productId) => HttpClient.PostAsync($"{Path}/{productId}/archive", null!);
 

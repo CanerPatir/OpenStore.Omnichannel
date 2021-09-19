@@ -82,9 +82,8 @@ namespace OpenStore.Omnichannel
                 });
             
             
-            services.AddKafkaConsumer<Consumer, ProductMessage>("product-events", Configuration.GetSection("Kafka"));
-
-            services.AddHostedService<TestWorker>();
+            // services.AddKafkaConsumer<Consumer, ProductMessage>("product-events", Configuration.GetSection("Kafka"));
+            // services.AddHostedService<TestWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +117,6 @@ namespace OpenStore.Omnichannel
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            
         }
 
         private bool ForceHttps() => Configuration.GetValue<bool>("HttpsRedirection");

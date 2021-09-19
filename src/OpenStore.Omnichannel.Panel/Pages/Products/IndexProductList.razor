@@ -1,7 +1,7 @@
 @inject IStringLocalizer<Index> L
 
-<OsDataGrid TItem="ProductListItemReadModel" FetchData="FetchData" PageSize="PageSize">
-    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Title"]" TItem="ProductListItemReadModel">
+<OsDataGrid TItem="ProductListItemDto" FetchData="FetchData" PageSize="PageSize">
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Title"]" TItem="ProductListItemDto">
         <RowTemplate Context="item">
             <div class="d-flex align-items-center">
                 <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
@@ -21,13 +21,13 @@
         </RowTemplate>
     </OsDataGridColumn>
 
-    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Status"]" TItem="ProductListItemReadModel">
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Status"]" TItem="ProductListItemDto">
         <RowTemplate Context="item">
             @(item.Status == ProductStatus.Active ? L["ProductListItem.Active"] : L["ProductListItem.Draft"])
         </RowTemplate>
     </OsDataGridColumn>
 
-    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Inventory"]" TItem="ProductListItemReadModel">
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Inventory"]" TItem="ProductListItemDto">
         <RowTemplate Context="item">
             @if (item.AvailableQuantity == null)
             {
@@ -47,13 +47,13 @@
         </RowTemplate>
     </OsDataGridColumn>
 
-    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Category"]" TItem="ProductListItemReadModel">
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Category"]" TItem="ProductListItemDto">
         <RowTemplate Context="item">
             @*todo: category*@
         </RowTemplate>
     </OsDataGridColumn>
 
-    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Type"]" TItem="ProductListItemReadModel">
+    <OsDataGridColumn CustomTitle="@L["ColumnHeader.Type"]" TItem="ProductListItemDto">
         <RowTemplate Context="item">
             @(item.IsPhysicalProduct ? L["ProductList.PhysicalProduct"] : L["ProductList.NonPhysicalProduct"])
         </RowTemplate>
@@ -64,6 +64,6 @@
         private const int PageSize = 50;
 
     [Parameter]
-    public Func<PageRequest, Task<PagedListDto<ProductListItemReadModel>>> FetchData { get; set; }
+    public Func<PageRequest, Task<PagedListDto<ProductListItemDto>>> FetchData { get; set; }
 
 }

@@ -1,8 +1,8 @@
 using System;
 
-namespace OpenStore.Omnichannel.Shared.ReadModel
+namespace OpenStore.Omnichannel.Shared.Dto
 {
-    public record ProductListItemReadModel(Guid Id,
+    public record ProductListItemDto(Guid Id,
         string PhotoUrl,
         ProductStatus Status,
         string Title,
