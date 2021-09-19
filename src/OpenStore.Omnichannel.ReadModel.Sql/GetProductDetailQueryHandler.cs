@@ -2,7 +2,7 @@
 
 namespace OpenStore.Omnichannel.ReadModel.Sql
 {
-    public class GetProductDetailQueryHandler
+    public class GetProductDetailQueryHandler 
     {
     }
 }

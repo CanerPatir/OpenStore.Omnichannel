@@ -20,7 +20,6 @@
     <ItemGroup>
         <ProjectReference Include="..\OpenStore.Omnichannel.Infrastructure\OpenStore.Omnichannel.Infrastructure.csproj" />
         <ProjectReference Include="..\OpenStore.Omnichannel.Identity\OpenStore.Omnichannel.Identity.csproj" />
-        <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Projections\OpenStore.Omnichannel.ReadModel.Projections.csproj" />
     </ItemGroup>
 
     <ItemGroup>

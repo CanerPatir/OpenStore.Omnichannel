@@ -1,10 +1,24 @@
-using Microsoft.AspNetCore.Components;
+using System;
+using System.Threading.Tasks;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
+using OpenStore.Omnichannel.ReadModel.Query;
+using OpenStore.Omnichannel.ReadModel.Query.Result;
 
 namespace OpenStore.Omnichannel.Api.Storefront
 {
-    [Route("api-sf/[controller]")]
+    [Microsoft.AspNetCore.Components.Route("api-sf/[controller]")]
     public class CatalogController : BaseApiController
     {
+        private readonly IMediator _mediator;
+
+        public CatalogController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+        [HttpGet("product-detail/{id:guid}")]
+        public async Task<GetProductDetailResult> GetProductDetail([FromRoute] Guid id) => _mediator.Send(new GetProductDetailQuery());
     }
 }

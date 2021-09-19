@@ -13,10 +13,12 @@
         <PackageReference Include="OpenStore.Infrastructure.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
-      <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Projections\OpenStore.Omnichannel.ReadModel.Projections.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Sql\OpenStore.Omnichannel.ReadModel.Sql.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Data\EntityFramework\Migrations" />
+        <Folder Include="Data\EntityFramework\Migrations" />
     </ItemGroup>
 </Project>
