@@ -5,9 +5,9 @@ using OpenStore.Infrastructure.Messaging;
 
 namespace OpenStore.Omnichannel.ReadModel.Projections.Consumers
 {
-    public class Consumer :  IOpenStoreConsumer<MessageEnvelop>
+    public class OutBoxMessageConsumer :  IOpenStoreConsumer<MessageEnvelop>
     {
-        public Consumer()
+        public OutBoxMessageConsumer()
         {
         }
  

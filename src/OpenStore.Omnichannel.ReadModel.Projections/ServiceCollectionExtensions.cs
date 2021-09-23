@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenStore.Application;
 using OpenStore.Infrastructure.Data;
 using OpenStore.Infrastructure.Messaging.Kafka;
 using OpenStore.Omnichannel.ReadModel.Projections.Consumers;
@@ -15,7 +16,7 @@ namespace OpenStore.Omnichannel.ReadModel.Projections
             services.AddHostedService<OutBoxPollHost>();
             
             services.AddKafkaProducer(kafkaConfigSection);
-            services.AddKafkaConsumer<Consumer, ProductMessage>(OpenStoreOutboxTopic, kafkaConfigSection);
+            services.AddKafkaConsumer<OutBoxMessageConsumer, MessageEnvelop>(OpenStoreOutboxTopic, kafkaConfigSection);
 
             // services.AddHostedService<TestWorker>();
             return services;
