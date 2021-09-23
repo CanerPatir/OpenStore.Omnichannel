@@ -5,31 +5,20 @@ using OpenStore.Infrastructure.Messaging;
 
 namespace OpenStore.Omnichannel.ReadModel.Projections.Consumers
 {
-    public class ProductMessage : MessageEnvelop
-    {
-    }
-
-    public class ListingMessage : MessageEnvelop
-    {
-    }
-
-    public class Consumer :
-        IOpenStoreConsumer<ProductMessage>,
-        IOpenStoreConsumer<ListingMessage>
+    public class Consumer :  IOpenStoreConsumer<MessageEnvelop>
     {
         public Consumer()
         {
         }
-
-        public async Task Consume(ProductMessage message, CancellationToken cancellationToken)
+ 
+        public Task Consume(MessageEnvelop message, CancellationToken cancellationToken)
         {
-            // await _elasticSearchStore.Index<ProductDocument>(, cancellationToken: cancellationToken)
-            throw new System.NotImplementedException();
-        }
-
-        public Task Consume(ListingMessage message, CancellationToken cancellationToken)
-        {
-            throw new System.NotImplementedException();
+            var domainEvent = message.RecreateMessage();
+            if (domainEvent is )
+            {
+                
+            }
+ 
         }
     }
 }

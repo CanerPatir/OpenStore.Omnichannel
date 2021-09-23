@@ -32,6 +32,7 @@ namespace OpenStore.Omnichannel.Infrastructure
             var callingAssembly = Assembly.GetCallingAssembly();
             var infrastructureAssembly = Assembly.GetExecutingAssembly();
             var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
+            var projectionsAssembly = typeof(MessageFromOutboxNotificationHandler).Assembly;
 
             services
                 .AddProjections(configuration.GetSection(KafkaConfigSectionKey))
@@ -39,7 +40,7 @@ namespace OpenStore.Omnichannel.Infrastructure
                 .AddMemoryCache()
                 .AddEntityFrameworkInfrastructure(environment, configuration)
                 .AddAuthorizationInfrastructure(configuration)
-                .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly)
+                .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly, projectionsAssembly)
                 .AddOpenStoreInMemoryBackgroundTasks()
                 .AddOpenStoreMailInfrastructure(mailConf => { mailConf.UseSmtp(configuration, "Mail:Smtp"); })
                 ;
