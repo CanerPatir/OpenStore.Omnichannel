@@ -13,11 +13,14 @@ using OpenStore.Omnichannel.Application.Command.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
 using OpenStore.Omnichannel.Infrastructure.ObjectStorage;
+using OpenStore.Omnichannel.ReadModel.Projections;
 
 namespace OpenStore.Omnichannel.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
+        private const string KafkaConfigSectionKey = "kafka";
+
         /// <summary>
         /// Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
         /// </summary>
@@ -31,6 +34,7 @@ namespace OpenStore.Omnichannel.Infrastructure
             var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
 
             services
+                .AddProjections(configuration.GetSection(KafkaConfigSectionKey))
                 .AddHttpContextAccessor()
                 .AddMemoryCache()
                 .AddEntityFrameworkInfrastructure(environment, configuration)

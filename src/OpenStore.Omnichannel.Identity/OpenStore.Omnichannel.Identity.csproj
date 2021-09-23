@@ -8,7 +8,7 @@
     <ItemGroup>
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.3.3" />
         <PackageReference Include="OpenIddict.Quartz" Version="$(OpenIddictVersion)" />
-        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="93.0.4577.6300" />
+        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="94.0.4606.4101" />
     </ItemGroup>
     
     <ItemGroup>

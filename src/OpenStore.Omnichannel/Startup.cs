@@ -80,10 +80,6 @@ namespace OpenStore.Omnichannel
                     // options.EnableAuthorizationEntryValidation();
                     // options.EnableTokenEntryValidation();
                 });
-            
-            
-            // services.AddKafkaConsumer<Consumer, ProductMessage>("product-events", Configuration.GetSection("Kafka"));
-            // services.AddHostedService<TestWorker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

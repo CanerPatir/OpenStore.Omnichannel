@@ -12,7 +12,7 @@
         <PackageLicenseUrl>https://github.com/canerpatir/OpenStore/blob/master/LICENCE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/canerpatir/OpenStore</PackageProjectUrl>
         <LangVersion>latest</LangVersion>
-        <OpenStoreBuildingBlocksVersion>0.3.18</OpenStoreBuildingBlocksVersion>
+        <OpenStoreBuildingBlocksVersion>0.3.20</OpenStoreBuildingBlocksVersion>
         <NetPackagesVersion>5.0.10</NetPackagesVersion>
         <OpenIddictVersion>3.1.1</OpenIddictVersion>
 
