@@ -8,12 +8,12 @@ using OpenStore.Infrastructure.Email.Smtp;
 using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Tasks.InMemory;
 using OpenStore.Omnichannel.Application;
-using OpenStore.Omnichannel.Application.Command;
 using OpenStore.Omnichannel.Application.Command.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
 using OpenStore.Omnichannel.Infrastructure.ObjectStorage;
-using OpenStore.Omnichannel.ReadModel.Projections;
+using OpenStore.Omnichannel.Projections;
+using OpenStore.Omnichannel.ReadModel.Sql;
 
 namespace OpenStore.Omnichannel.Infrastructure
 {
@@ -32,7 +32,8 @@ namespace OpenStore.Omnichannel.Infrastructure
             var callingAssembly = Assembly.GetCallingAssembly();
             var infrastructureAssembly = Assembly.GetExecutingAssembly();
             var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
-            var projectionsAssembly = typeof(MessageFromOutboxNotificationHandler).Assembly;
+            var projectionsAssembly = typeof(OutBoxMessageHandler).Assembly;
+            var readModelSqlAssembly = typeof(GetProductDetailQueryHandler).Assembly;
 
             services
                 .AddProjections(configuration.GetSection(KafkaConfigSectionKey))
@@ -40,7 +41,7 @@ namespace OpenStore.Omnichannel.Infrastructure
                 .AddMemoryCache()
                 .AddEntityFrameworkInfrastructure(environment, configuration)
                 .AddAuthorizationInfrastructure(configuration)
-                .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly, projectionsAssembly)
+                .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly, projectionsAssembly, readModelSqlAssembly)
                 .AddOpenStoreInMemoryBackgroundTasks()
                 .AddOpenStoreMailInfrastructure(mailConf => { mailConf.UseSmtp(configuration, "Mail:Smtp"); })
                 ;

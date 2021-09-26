@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace OpenStore.Omnichannel.ReadModel.Projections
+namespace OpenStore.Omnichannel.Projections
 {
     public class TestWorker : BackgroundService
     {

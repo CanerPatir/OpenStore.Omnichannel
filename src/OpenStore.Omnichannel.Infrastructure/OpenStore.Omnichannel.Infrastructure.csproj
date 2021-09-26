@@ -15,7 +15,7 @@
     <ItemGroup>
         <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
         <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
-        <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Projections\OpenStore.Omnichannel.ReadModel.Projections.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Projections\OpenStore.Omnichannel.Projections.csproj" />
         <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Sql\OpenStore.Omnichannel.ReadModel.Sql.csproj" />
     </ItemGroup>
     <ItemGroup>

@@ -9,9 +9,7 @@ using OpenStore.Infrastructure.Messaging.Kafka;
 using OpenStore.Infrastructure.Web.ErrorHandling;
 using OpenStore.Infrastructure.Web.Modularization;
 using OpenStore.Infrastructure.Web.Swagger;
-using OpenStore.Omnichannel.Infrastructure;
-using OpenStore.Omnichannel.ReadModel.Projections;
-using OpenStore.Omnichannel.ReadModel.Projections.Consumers;
+using OpenStore.Omnichannel.Infrastructure; 
 
 namespace OpenStore.Omnichannel
 {

@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Store
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadModel", "ReadModel", "{5DBF8790-5DF0-47EB-A73A-E3C730C80F26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.ReadModel.Projections", "src\OpenStore.Omnichannel.ReadModel.Projections\OpenStore.Omnichannel.ReadModel.Projections.csproj", "{FC59FC18-DC06-4457-9634-1D6F58632FA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Projections", "src\OpenStore.Omnichannel.Projections\OpenStore.Omnichannel.Projections.csproj", "{FC59FC18-DC06-4457-9634-1D6F58632FA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.ReadModel.Sql", "src\OpenStore.Omnichannel.ReadModel.Sql\OpenStore.Omnichannel.ReadModel.Sql.csproj", "{536ED82C-24F5-4E75-A9EB-5631E27C4585}"
 EndProject

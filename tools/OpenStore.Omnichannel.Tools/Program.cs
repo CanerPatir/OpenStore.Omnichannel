@@ -23,17 +23,11 @@ namespace OpenStore.Omnichannel.Tools
                     services.AddHostedService<DataGenerator>();
                     services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(hostContext.Configuration);
                     services.AddSingleton<IOpenStoreUserContextAccessor, NullUserContextAccessor>();
-                    services.AddSingleton<IOpenStoreMessageNotifier, NullDomainEventNotifier>();
                 });
     }
 
     class NullUserContextAccessor : IOpenStoreUserContextAccessor
     {
         public string GetUserEmail() => null;
-    }
-
-    class NullDomainEventNotifier : IOpenStoreMessageNotifier
-    {
-        public Task Notify(MessageEnvelop outBoxMessage) => Task.CompletedTask;
     }
 }
