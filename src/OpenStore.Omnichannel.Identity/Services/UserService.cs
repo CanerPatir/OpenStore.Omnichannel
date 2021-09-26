@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenIddict.Core;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
-using OpenStore.Infrastructure.Data.EntityFramework.Crud;
+using OpenStore.Data.EntityFramework.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Request;

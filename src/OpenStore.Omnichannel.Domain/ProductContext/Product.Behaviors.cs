@@ -43,7 +43,24 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
 
                 _options = productOptions
             };
-            product.ApplyChange(ProductCreated.From(product, model.Options));
+            product.ApplyChange(
+                new ProductCreated(
+                    product.Id,
+                    product.Handle,
+                    product.Title,
+                    product.Description,
+                    product.HasMultipleVariants,
+                    product.Status,
+                    model.Options,
+                    product.MetaTitle,
+                    product.MetaDescription,
+                    product.Tags,
+                    product.IsPhysicalProduct,
+                    product.Weight,
+                    product.WeightUnit,
+                    product.HsCode
+                )
+            );
 
             foreach (var variantModel in model.Variants)
             {

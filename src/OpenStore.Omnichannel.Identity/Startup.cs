@@ -13,7 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Abstractions;
-using OpenStore.Infrastructure.Data.EntityFramework.Seed;
+using OpenStore.Data.EntityFramework.Seed;
 using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Mapping.AutoMapper;
 using OpenStore.Infrastructure.Web.ErrorHandling;

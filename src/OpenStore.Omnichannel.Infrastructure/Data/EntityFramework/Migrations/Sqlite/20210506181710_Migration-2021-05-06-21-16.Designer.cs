@@ -134,7 +134,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("OpenStore.Infrastructure.Data.OutBoxMessage", b =>
+            modelBuilder.Entity("OpenStore.Data.OutBoxMessage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

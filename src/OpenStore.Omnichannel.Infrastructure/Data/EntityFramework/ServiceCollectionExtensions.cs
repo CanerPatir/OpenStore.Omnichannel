@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OpenStore.Infrastructure.Data.EntityFramework;
+using OpenStore.Data.EntityFramework;
 using OpenStore.Infrastructure.Mapping.AutoMapper;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.ProductContext;

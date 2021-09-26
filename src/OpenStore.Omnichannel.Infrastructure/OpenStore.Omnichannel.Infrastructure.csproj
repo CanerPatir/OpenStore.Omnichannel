@@ -10,7 +10,7 @@
         <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
         <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="$(OpenIddictVersion)" />
         <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
-        <PackageReference Include="OpenStore.Infrastructure.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />

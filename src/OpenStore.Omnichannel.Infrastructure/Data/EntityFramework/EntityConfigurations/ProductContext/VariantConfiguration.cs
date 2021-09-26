@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OpenStore.Infrastructure.Data.EntityFramework.EntityConfiguration;
+using OpenStore.Data.EntityFramework.EntityConfiguration;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 

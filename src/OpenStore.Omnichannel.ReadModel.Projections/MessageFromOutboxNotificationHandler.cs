@@ -15,7 +15,9 @@ namespace OpenStore.Omnichannel.ReadModel.Projections
             _producer = producer;
         }
 
-        public Task Handle(MessageEnvelop message, CancellationToken cancellationToken) => _producer.Produce(ServiceCollectionExtensions.OpenStoreOutboxTopic, null,
+        public Task Handle(MessageEnvelop message, CancellationToken cancellationToken) => 
+            _producer.Produce(ServiceCollectionExtensions.OpenStoreOutboxTopic, 
+                null,
             JsonSerializer.Serialize(message, new JsonSerializerOptions()), cancellationToken);
     }
 }

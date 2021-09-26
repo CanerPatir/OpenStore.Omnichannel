@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OpenStore.Infrastructure.Data.EntityFramework.EntityConfiguration;
+using OpenStore.Data.EntityFramework.EntityConfiguration;
 using OpenStore.Omnichannel.Domain.LookupContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.LookupContext

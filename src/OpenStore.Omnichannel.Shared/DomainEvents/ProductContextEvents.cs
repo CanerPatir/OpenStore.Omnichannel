@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
+// ReSharper disable once CheckNamespace
 namespace OpenStore.Omnichannel.Domain.ProductContext
 {
     public record ProductMediaCreated(
@@ -20,26 +21,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext
         string Description, bool HasMultipleVariants, ProductStatus Status,
         IEnumerable<ProductOptionDto> Options, string MetaTitle, string MetaDescription, string Tags,
         bool IsPhysicalProduct, decimal? Weight, string WeightUnit, string HsCode
-    ) : DomainEventBase(ProductId)
-    {
-        public static ProductCreated From(Product product, IEnumerable<ProductOptionDto> options)
-            => new(
-                product.Id,
-                product.Handle,
-                product.Title,
-                product.Description,
-                product.HasMultipleVariants,
-                product.Status,
-                options,
-                product.MetaTitle,
-                product.MetaDescription,
-                product.Tags,
-                product.IsPhysicalProduct,
-                product.Weight,
-                product.WeightUnit,
-                product.HsCode
-            );
-    }
+    ) : DomainEventBase(ProductId);
 
     public record ProductMasterDataUpdated(
         Guid ProductId,

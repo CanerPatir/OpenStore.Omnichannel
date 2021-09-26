@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenStore.Application;
-using OpenStore.Infrastructure.Data;
+using OpenStore.Data;
 using OpenStore.Infrastructure.Messaging.Kafka;
 using OpenStore.Omnichannel.ReadModel.Projections.Consumers;
 

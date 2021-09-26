@@ -6,6 +6,10 @@
 
     <ItemGroup>
         <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
-        <PackageReference Include="OpenStore.Infrastructure.Data" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Data" Version="$(OpenStoreBuildingBlocksVersion)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
     </ItemGroup>
 </Project>

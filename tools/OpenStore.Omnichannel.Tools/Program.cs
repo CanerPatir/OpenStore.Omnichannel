@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenStore.Application;
 using OpenStore.Domain;
-using OpenStore.Infrastructure.Data.EntityFramework;
+using OpenStore.Data.EntityFramework;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 
 namespace OpenStore.Omnichannel.Tools
@@ -23,7 +23,7 @@ namespace OpenStore.Omnichannel.Tools
                     services.AddHostedService<DataGenerator>();
                     services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(hostContext.Configuration);
                     services.AddSingleton<IOpenStoreUserContextAccessor, NullUserContextAccessor>();
-                    services.AddSingleton<IOpenStoreDomainEventNotifier, NullDomainEventNotifier>();
+                    services.AddSingleton<IOpenStoreMessageNotifier, NullDomainEventNotifier>();
                 });
     }
 
@@ -32,9 +32,8 @@ namespace OpenStore.Omnichannel.Tools
         public string GetUserEmail() => null;
     }
 
-    class NullDomainEventNotifier : IOpenStoreDomainEventNotifier
+    class NullDomainEventNotifier : IOpenStoreMessageNotifier
     {
-        public Task Notify(IDomainEvent @event) => Task.CompletedTask;
-        public Task NotifyMany(IEnumerable<IDomainEvent> events) => Task.CompletedTask;
+        public Task Notify(MessageEnvelop outBoxMessage) => Task.CompletedTask;
     }
 }

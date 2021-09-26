@@ -18,7 +18,7 @@ namespace OpenStore.Omnichannel.Api.Storefront
             _mediator = mediator;
         }
 
-        [HttpGet("product-detail/{id:guid}")]
-        public async Task<GetProductDetailResult> GetProductDetail([FromRoute] Guid id) => _mediator.Send(new GetProductDetailQuery());
+       // [HttpGet("product-detail/{id:guid}")]
+       // public async Task<GetProductDetailResult> GetProductDetail([FromRoute] Guid id) => _mediator.Send(new GetProductDetailQuery());
     }
 }
