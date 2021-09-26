@@ -20,6 +20,7 @@ namespace OpenStore.Omnichannel.Infrastructure
     public static class ServiceCollectionExtensions
     {
         private const string KafkaConfigSectionKey = "kafka";
+        private const string ElasticSearchConfigSectionKey = "elasticsearch";
 
         /// <summary>
         /// Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
@@ -36,7 +37,10 @@ namespace OpenStore.Omnichannel.Infrastructure
             var readModelSqlAssembly = typeof(GetProductDetailQueryHandler).Assembly;
 
             services
-                .AddProjections(configuration.GetSection(KafkaConfigSectionKey))
+                .AddProjections(
+                    configuration.GetSection(KafkaConfigSectionKey),
+                    configuration.GetSection(ElasticSearchConfigSectionKey)
+                )
                 .AddHttpContextAccessor()
                 .AddMemoryCache()
                 .AddEntityFrameworkInfrastructure(environment, configuration)

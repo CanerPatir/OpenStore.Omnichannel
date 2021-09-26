@@ -16,6 +16,7 @@ namespace OpenStore.Omnichannel.Projections
             _mediator = mediator;
         }
 
+        // todo: Monitor performance
         public async Task Consume(OutBoxMessage message, CancellationToken cancellationToken)
         {
             var domainEvent = message.RecreateMessage();

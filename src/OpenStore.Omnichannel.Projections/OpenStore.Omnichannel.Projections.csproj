@@ -6,6 +6,8 @@
 
     <ItemGroup>
         <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Infrastructure.Messaging.Kafka" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Data.Search.ElasticSearch" Version="$(OpenStoreBuildingBlocksVersion)" />
         <PackageReference Include="OpenStore.Data" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
 

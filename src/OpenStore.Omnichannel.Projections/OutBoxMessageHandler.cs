@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,9 +16,16 @@ namespace OpenStore.Omnichannel.Projections
             _producer = producer;
         }
 
-        public override Task Handle(OutBoxMessage outBoxMessage, CancellationToken cancellationToken) =>
-            _producer.Produce(ServiceCollectionExtensions.OpenStoreOutboxTopic,
-                null,
-                JsonSerializer.Serialize(outBoxMessage, new JsonSerializerOptions()), cancellationToken);
+        // todo: monitor performance
+        public override async Task Handle(OutBoxMessageBatch outBoxMessageBatch, CancellationToken cancellationToken)
+        {
+            foreach (var outBoxMessagesByAggregateId in outBoxMessageBatch.Messages.GroupBy(x => x.AggregateId))
+            {
+                await _producer.ProduceMany(ServiceCollectionExtensions.OpenStoreOutboxTopic,
+                    outBoxMessagesByAggregateId.Key, 
+                    outBoxMessagesByAggregateId.ToList(),
+                    cancellationToken);
+            }
+        }
     }
 }
