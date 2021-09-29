@@ -1,19 +1,23 @@
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using OpenStore.Data.OutBox;
-using OpenStore.Infrastructure.Messaging.Kafka;
 
 namespace OpenStore.Omnichannel.Projections
 {
     public class OutBoxMessageHandler : BaseOutBoxMessageHandler
     {
-        private readonly KafkaProducer _producer;
+        // private readonly KafkaProducer _producer;
+        private readonly ILogger<OutBoxMessageHandler> _logger;
 
-        public OutBoxMessageHandler(KafkaProducer producer)
+        public OutBoxMessageHandler(
+            // KafkaProducer producer,
+            ILogger<OutBoxMessageHandler> logger
+        )
         {
-            _producer = producer;
+            // _producer = producer;
+            _logger = logger;
         }
 
         // todo: monitor performance
@@ -21,10 +25,11 @@ namespace OpenStore.Omnichannel.Projections
         {
             foreach (var outBoxMessagesByAggregateId in outBoxMessageBatch.Messages.GroupBy(x => x.AggregateId))
             {
-                await _producer.ProduceMany(ServiceCollectionExtensions.OpenStoreOutboxTopic,
-                    outBoxMessagesByAggregateId.Key, 
-                    outBoxMessagesByAggregateId.ToList(),
-                    cancellationToken);
+                _logger.LogInformation($"{outBoxMessageBatch.Messages.Count} retrieved");
+                // await _producer.ProduceMany(ServiceCollectionExtensions.OpenStoreOutboxTopic,
+                //     outBoxMessagesByAggregateId.Key, 
+                //     outBoxMessagesByAggregateId.ToList(),
+                //     cancellationToken);
             }
         }
     }
