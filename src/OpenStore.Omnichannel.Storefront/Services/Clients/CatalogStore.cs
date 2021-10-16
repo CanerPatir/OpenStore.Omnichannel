@@ -1,13 +1,12 @@
 using System.Net.Http;
 
-namespace OpenStore.Omnichannel.Storefront.Services.Clients
-{
-    public class CatalogStore : HttpStore
-    {
-        public CatalogStore(HttpClient httpClient) : base(httpClient)
-        {
-        }
+namespace OpenStore.Omnichannel.Storefront.Services.Clients;
 
-        protected override string Path => "api-sf/catalog";
+public class CatalogStore : HttpStore
+{
+    public CatalogStore(HttpClient httpClient) : base(httpClient)
+    {
     }
+
+    protected override string Path => "api-sf/catalog";
 }

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace OpenStore.Omnichannel.Shared.Dto.Product
+namespace OpenStore.Omnichannel.Shared.Dto.Product;
+
+public class ProductOptionDto
 {
-    public class ProductOptionDto
-    {
-        public string Name { get; set; }
-        public HashSet<string> Values { get; set; } = new();
-    }
+    public string Name { get; set; }
+    public HashSet<string> Values { get; set; } = new();
 }

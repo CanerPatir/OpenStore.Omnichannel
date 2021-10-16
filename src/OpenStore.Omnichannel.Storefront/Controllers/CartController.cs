@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace OpenStore.Omnichannel.Storefront.Controllers
+namespace OpenStore.Omnichannel.Storefront.Controllers;
+
+public class CartController : Controller
 {
-    public class CartController : Controller
-    {
-        // GET
-        public IActionResult Index() => View();
-    }
+    // GET
+    public IActionResult Index() => View();
 }

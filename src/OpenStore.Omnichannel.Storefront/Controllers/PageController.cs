@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace OpenStore.Omnichannel.Storefront.Controllers
+namespace OpenStore.Omnichannel.Storefront.Controllers;
+
+public class PageController : Controller
 {
-    public class PageController : Controller
-    {
-        public IActionResult Index() => View();
-    }
+    public IActionResult Index() => View();
 }

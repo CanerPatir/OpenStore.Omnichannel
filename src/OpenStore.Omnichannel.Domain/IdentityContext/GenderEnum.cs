@@ -1,8 +1,7 @@
-namespace OpenStore.Omnichannel.Domain.IdentityContext
+namespace OpenStore.Omnichannel.Domain.IdentityContext;
+
+public enum GenderEnum
 {
-    public enum GenderEnum
-    {
-        Male,
-        Female
-    }
+    Male,
+    Female
 }

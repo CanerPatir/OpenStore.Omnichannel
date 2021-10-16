@@ -1,6 +1,5 @@
-namespace OpenStore.Omnichannel.Identity.Resources
+namespace OpenStore.Omnichannel.Identity.Resources;
+
+internal class SharedResource
 {
-    internal class SharedResource
-    {
-    }
 }

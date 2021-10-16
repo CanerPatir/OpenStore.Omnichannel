@@ -1,10 +1,9 @@
 // ReSharper disable once CheckNamespace
 
-namespace OpenStore.Omnichannel
+namespace OpenStore.Omnichannel;
+
+public enum SortDirection
 {
-    public enum SortDirection
-    {
-        Ascending,
-        Descending,
-    }
+    Ascending,
+    Descending,
 }

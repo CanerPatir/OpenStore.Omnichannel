@@ -1,12 +1,11 @@
 // ReSharper disable once CheckNamespace
 
-namespace OpenStore.Omnichannel
+namespace OpenStore.Omnichannel;
+
+public enum NotificationChannel
 {
-    public enum NotificationChannel
-    {
-        Email,
-        Web,
-        Push,
-        Sms
-    }
+    Email,
+    Web,
+    Push,
+    Sms
 }

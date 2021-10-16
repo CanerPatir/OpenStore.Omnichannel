@@ -1,8 +1,7 @@
-namespace OpenStore.Omnichannel.Storefront.Infrastructure
+namespace OpenStore.Omnichannel.Storefront.Infrastructure;
+
+public class ApiConfiguration
 {
-    public class ApiConfiguration
-    {
-        public string Url { get; init; }
-        public int TimeoutMilliseconds { get; init; }
-    }
+    public string Url { get; init; }
+    public int TimeoutMilliseconds { get; init; }
 }

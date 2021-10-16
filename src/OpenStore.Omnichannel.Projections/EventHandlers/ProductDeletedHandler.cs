@@ -1,13 +1,12 @@
 using MediatR;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
-namespace OpenStore.Omnichannel.Projections.EventHandlers
+namespace OpenStore.Omnichannel.Projections.EventHandlers;
+
+public class ProductDeletedHandler: NotificationHandler<ProductDeleted>
 {
-    public class ProductDeletedHandler: NotificationHandler<ProductDeleted>
+    protected override void Handle(ProductDeleted notification)
     {
-        protected override void Handle(ProductDeleted notification)
-        {
-            throw new System.NotImplementedException();
-        }
+        throw new System.NotImplementedException();
     }
 }

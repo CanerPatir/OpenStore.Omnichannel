@@ -1,8 +1,7 @@
-﻿namespace OpenStore.Omnichannel.Identity.ViewModels.Manage
+﻿namespace OpenStore.Omnichannel.Identity.ViewModels.Manage;
+
+public class RemoveLoginViewModel
 {
-    public class RemoveLoginViewModel
-    {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-    }
+    public string LoginProvider { get; set; }
+    public string ProviderKey { get; set; }
 }

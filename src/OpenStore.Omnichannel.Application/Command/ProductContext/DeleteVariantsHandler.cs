@@ -1,36 +1,33 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
-namespace OpenStore.Omnichannel.Application.Command.ProductContext
+namespace OpenStore.Omnichannel.Application.Command.ProductContext;
+
+public class DeleteVariantsHandler : IRequestHandler<DeleteVariants>
 {
-    public class DeleteVariantsHandler : IRequestHandler<DeleteVariants>
+    private readonly ICrudRepository<Product> _repository;
+    private readonly ICrudRepository<Variant> _variantRepository;
+
+    public DeleteVariantsHandler(ICrudRepository<Product> repository, ICrudRepository<Variant> variantRepository)
     {
-        private readonly ICrudRepository<Product> _repository;
-        private readonly ICrudRepository<Variant> _variantRepository;
+        _repository = repository;
+        _variantRepository = variantRepository;
+    }
 
-        public DeleteVariantsHandler(ICrudRepository<Product> repository, ICrudRepository<Variant> variantRepository)
+    public async Task<Unit> Handle(DeleteVariants command, CancellationToken cancellationToken)
+    {
+        var (productId, variantIds) = command;
+        var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == productId, cancellationToken);
+        var deleteVariants = product.DeleteVariants(command);
+        foreach (var deleteVariant in deleteVariants)
         {
-            _repository = repository;
-            _variantRepository = variantRepository;
+            _variantRepository.Remove(deleteVariant);
         }
 
-        public async Task<Unit> Handle(DeleteVariants command, CancellationToken cancellationToken)
-        {
-            var (productId, variantIds) = command;
-            var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == productId, cancellationToken);
-            var deleteVariants = product.DeleteVariants(command);
-            foreach (var deleteVariant in deleteVariants)
-            {
-                _variantRepository.Remove(deleteVariant);
-            }
+        await _repository.SaveChangesAsync(cancellationToken);
 
-            await _repository.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
-        }
+        return Unit.Value;
     }
 }

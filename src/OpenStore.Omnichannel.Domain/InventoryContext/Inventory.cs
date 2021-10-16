@@ -2,74 +2,73 @@ using System;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
-namespace OpenStore.Omnichannel.Domain.InventoryContext
+namespace OpenStore.Omnichannel.Domain.InventoryContext;
+
+public class Inventory : Entity<Guid>
 {
-    public class Inventory : Entity<Guid>
+    public Guid VariantId { get; protected set; }
+    public virtual Variant Variant { get; protected set; }
+
+    public int Quantity { get; protected set; }
+    public int AvailableQuantity { get; protected set; }
+    public bool ContinueSellingWhenOutOfStock { get; protected set; }
+
+    protected Inventory()
     {
-        public Guid VariantId { get; protected set; }
-        public virtual Variant Variant { get; protected set; }
+    }
 
-        public int Quantity { get; protected set; }
-        public int AvailableQuantity { get; protected set; }
-        public bool ContinueSellingWhenOutOfStock { get; protected set; }
+    private Inventory(Guid variantId, int quantity, bool continueSellingWhenOutOfStock)
+    {
+        // Id = Guid.NewGuid();
+        VariantId = variantId;
+        Quantity = quantity;
+        AvailableQuantity = quantity;
+        ContinueSellingWhenOutOfStock = continueSellingWhenOutOfStock;
+    }
 
-        protected Inventory()
+    public static Inventory Create(Guid variantId, int quantity, bool continueSellingWhenOutOfStock)
+    {
+        var inventory = new Inventory(variantId, quantity, continueSellingWhenOutOfStock)
         {
+            Id = Guid.NewGuid()
+        };
+        inventory.ApplyChange(new InventoryCreated(inventory.Id, inventory.VariantId, inventory.Quantity, inventory.ContinueSellingWhenOutOfStock));
+        return inventory;
+    }
+
+    internal static Inventory CreateDefault() => new();
+
+    public void Change(int quantity)
+    {
+        if (quantity < 0)
+        {
+            throw new DomainException(Msg.Domain.Inventory.QuantityShouldBeGreaterOrEqualThenZero);
         }
 
-        private Inventory(Guid variantId, int quantity, bool continueSellingWhenOutOfStock)
+        var diff = Quantity - quantity;
+        Quantity = quantity;
+        AvailableQuantity = quantity;
+
+        ApplyChange(new InventoryChanged(Id, Quantity, AvailableQuantity));
+    }
+
+    public void Reserve(int pieces)
+    {
+        if (!ContinueSellingWhenOutOfStock && AvailableQuantity < pieces)
         {
-            // Id = Guid.NewGuid();
-            VariantId = variantId;
-            Quantity = quantity;
-            AvailableQuantity = quantity;
-            ContinueSellingWhenOutOfStock = continueSellingWhenOutOfStock;
+            throw new DomainException(Msg.Domain.Inventory.OutOfStock);
         }
 
-        public static Inventory Create(Guid variantId, int quantity, bool continueSellingWhenOutOfStock)
-        {
-            var inventory = new Inventory(variantId, quantity, continueSellingWhenOutOfStock)
-            {
-                Id = Guid.NewGuid()
-            };
-            inventory.ApplyChange(new InventoryCreated(inventory.Id, inventory.VariantId, inventory.Quantity, inventory.ContinueSellingWhenOutOfStock));
-            return inventory;
-        }
+        AvailableQuantity -= pieces;
 
-        internal static Inventory CreateDefault() => new();
+        ApplyChange(new InventoryReserved(Id, Quantity, AvailableQuantity));
+    }
 
-        public void Change(int quantity)
-        {
-            if (quantity < 0)
-            {
-                throw new DomainException(Msg.Domain.Inventory.QuantityShouldBeGreaterOrEqualThenZero);
-            }
+    public void Release(int pieces)
+    {
+        var newAvailableQty = AvailableQuantity + pieces;
+        AvailableQuantity = Math.Max(Quantity, newAvailableQty);
 
-            var diff = Quantity - quantity;
-            Quantity = quantity;
-            AvailableQuantity = quantity;
-
-            ApplyChange(new InventoryChanged(Id, Quantity, AvailableQuantity));
-        }
-
-        public void Reserve(int pieces)
-        {
-            if (!ContinueSellingWhenOutOfStock && AvailableQuantity < pieces)
-            {
-                throw new DomainException(Msg.Domain.Inventory.OutOfStock);
-            }
-
-            AvailableQuantity -= pieces;
-
-            ApplyChange(new InventoryReserved(Id, Quantity, AvailableQuantity));
-        }
-
-        public void Release(int pieces)
-        {
-            var newAvailableQty = AvailableQuantity + pieces;
-            AvailableQuantity = Math.Max(Quantity, newAvailableQty);
-
-            ApplyChange(new InventoryReleased(Id, Quantity, AvailableQuantity));
-        }
+        ApplyChange(new InventoryReleased(Id, Quantity, AvailableQuantity));
     }
 }

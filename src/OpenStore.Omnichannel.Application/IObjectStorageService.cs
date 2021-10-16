@@ -1,10 +1,7 @@
-using System.Threading.Tasks;
+namespace OpenStore.Omnichannel.Application;
 
-namespace OpenStore.Omnichannel.Application
+public interface IObjectStorageService
 {
-    public interface IObjectStorageService
-    {
-        Task<(string host, string path)> Write(string fileName, byte[] content);
-        Task Delete(string host, string path);
-    }
+    Task<(string host, string path)> Write(string fileName, byte[] content);
+    Task Delete(string host, string path);
 }

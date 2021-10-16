@@ -1,33 +1,32 @@
 using OpenStore.Omnichannel.Shared.Dto.Store;
 
-namespace OpenStore.Omnichannel.Domain.StoreContext
+namespace OpenStore.Omnichannel.Domain.StoreContext;
+
+public class StorePreferences : AuditableEntity
 {
-    public class StorePreferences : AuditableEntity
+    public string Name { get; set; }
+    public virtual StorePreferencesContact Contact { get; set; }
+
+    public StorePreferences()
     {
-        public string Name { get; set; }
-        public virtual StorePreferencesContact Contact { get; set; }
+        Contact = new StorePreferencesContact();
+    }
 
-        public StorePreferences()
+    public void Update(StorePreferencesDto model)
+    {
+        Name = model.Name;
+        Contact = new StorePreferencesContact
         {
-            Contact = new StorePreferencesContact();
-        }
-
-        public void Update(StorePreferencesDto model)
-        {
-            Name = model.Name;
-            Contact = new StorePreferencesContact
-            {
-                Email = model.Contact.Email,
-                Address = model.Contact.Address,
-                Phone = model.Contact.Phone,
-                CopyrightText = model.Contact.CopyrightText,
-                FacebookUrl = model.Contact.FacebookUrl,
-                InstagramUrl = model.Contact.InstagramUrl,
-                TwitterUrl = model.Contact.TwitterUrl,
-                YoutubeUrl = model.Contact.YoutubeUrl,
-            };
+            Email = model.Contact.Email,
+            Address = model.Contact.Address,
+            Phone = model.Contact.Phone,
+            CopyrightText = model.Contact.CopyrightText,
+            FacebookUrl = model.Contact.FacebookUrl,
+            InstagramUrl = model.Contact.InstagramUrl,
+            TwitterUrl = model.Contact.TwitterUrl,
+            YoutubeUrl = model.Contact.YoutubeUrl,
+        };
             
-            ApplyChange(new StorePreferencesUpdated(Id, model));
-         }
+        ApplyChange(new StorePreferencesUpdated(Id, model));
     }
 }

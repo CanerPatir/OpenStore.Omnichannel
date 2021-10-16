@@ -1,7 +1,6 @@
-﻿namespace OpenStore.Omnichannel.Identity.ViewModels.Manage
+﻿namespace OpenStore.Omnichannel.Identity.ViewModels.Manage;
+
+public class FactorViewModel
 {
-    public class FactorViewModel
-    {
-        public string Purpose { get; set; }
-    }
+    public string Purpose { get; set; }
 }

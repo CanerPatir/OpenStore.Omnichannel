@@ -1,48 +1,43 @@
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Application.Exceptions;
 using OpenStore.Domain;
 
-namespace OpenStore.Omnichannel.Application.Extensions
+namespace OpenStore.Omnichannel.Application.Extensions;
+
+internal static class RepositoryQueryExtensions
 {
-    internal static class RepositoryQueryExtensions
+    public static async Task<T> GetRequired<T>(this ICrudRepository<T> repository, Guid id, CancellationToken cancellationToken = default)
+        where T : class, IEntity
     {
-        public static async Task<T> GetRequired<T>(this ICrudRepository<T> repository, Guid id, CancellationToken cancellationToken = default)
-            where T : class, IEntity
+        var entity = await repository.GetAsync(id, cancellationToken);
+
+        if (entity == default)
         {
-            var entity = await repository.GetAsync(id, cancellationToken);
-
-            if (entity == default)
-            {
-                throw new ResourceNotFoundException("Required resource not found");
-            }
-
-            return entity;
+            throw new ResourceNotFoundException("Required resource not found");
         }
 
-        public static async Task<PagedList<TDto>> GetPaged<T, TDto>(this IQueryable<T> query,
-            int pageNumber,
-            int pageSize,
-            Func<T, TDto> mapper,
-            CancellationToken cancellationToken = default)
-            where T : class, IEntity
-        {
-            var count = await query.CountAsync(cancellationToken);
+        return entity;
+    }
 
-            query = query.Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .OrderBy(x => x.Id);
+    public static async Task<PagedList<TDto>> GetPaged<T, TDto>(this IQueryable<T> query,
+        int pageNumber,
+        int pageSize,
+        Func<T, TDto> mapper,
+        CancellationToken cancellationToken = default)
+        where T : class, IEntity
+    {
+        var count = await query.CountAsync(cancellationToken);
 
-            var items = await query
-                // .AsNoTracking()
-                .ToListAsync(cancellationToken);
+        query = query.Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .OrderBy(x => x.Id);
 
-            return new PagedList<TDto>(items.Select(mapper), count, pageNumber, pageSize);
-        }
+        var items = await query
+            // .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return new PagedList<TDto>(items.Select(mapper), count, pageNumber, pageSize);
     }
 }

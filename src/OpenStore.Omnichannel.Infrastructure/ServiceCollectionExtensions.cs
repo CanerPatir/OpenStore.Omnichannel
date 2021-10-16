@@ -15,51 +15,50 @@ using OpenStore.Omnichannel.Infrastructure.ObjectStorage;
 using OpenStore.Omnichannel.Projections;
 using OpenStore.Omnichannel.ReadModel.Sql;
 
-namespace OpenStore.Omnichannel.Infrastructure
+namespace OpenStore.Omnichannel.Infrastructure;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
+    private const string KafkaConfigSectionKey = "kafka";
+    private const string ElasticSearchConfigSectionKey = "elasticsearch";
+
+    /// <summary>
+    /// Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
+    /// </summary>
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IMvcBuilder mvcBuilder,
+        IHostEnvironment environment,
+        IConfiguration configuration,
+        bool withScheduledJobs = false)
     {
-        private const string KafkaConfigSectionKey = "kafka";
-        private const string ElasticSearchConfigSectionKey = "elasticsearch";
+        var callingAssembly = Assembly.GetCallingAssembly();
+        var infrastructureAssembly = Assembly.GetExecutingAssembly();
+        var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
+        var projectionsAssembly = typeof(OutBoxMessageHandler).Assembly;
+        var readModelSqlAssembly = typeof(GetProductDetailQueryHandler).Assembly;
 
-        /// <summary>
-        /// Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
-        /// </summary>
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IMvcBuilder mvcBuilder,
-            IHostEnvironment environment,
-            IConfiguration configuration,
-            bool withScheduledJobs = false)
+        services
+            .AddProjections(
+                configuration.GetSection(KafkaConfigSectionKey),
+                configuration.GetSection(ElasticSearchConfigSectionKey)
+            )
+            .AddHttpContextAccessor()
+            .AddMemoryCache()
+            .AddEntityFrameworkInfrastructure(environment, configuration)
+            .AddAuthorizationInfrastructure(configuration)
+            .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly, projectionsAssembly, readModelSqlAssembly)
+            .AddOpenStoreInMemoryBackgroundTasks()
+            .AddOpenStoreMailInfrastructure(mailConf => { mailConf.UseSmtp(configuration, "Mail:Smtp"); })
+            ;
+
+        services.AddOpenStoreResxLocalization(mvcBuilder, options => { options.Assembly = callingAssembly; });
+
+        services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
+        services.AddSingleton<IObjectStorageService, FileSystemObjectStorageService>();
+
+        if (withScheduledJobs)
         {
-            var callingAssembly = Assembly.GetCallingAssembly();
-            var infrastructureAssembly = Assembly.GetExecutingAssembly();
-            var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
-            var projectionsAssembly = typeof(OutBoxMessageHandler).Assembly;
-            var readModelSqlAssembly = typeof(GetProductDetailQueryHandler).Assembly;
-
-            services
-                .AddProjections(
-                    configuration.GetSection(KafkaConfigSectionKey),
-                    configuration.GetSection(ElasticSearchConfigSectionKey)
-                )
-                .AddHttpContextAccessor()
-                .AddMemoryCache()
-                .AddEntityFrameworkInfrastructure(environment, configuration)
-                .AddAuthorizationInfrastructure(configuration)
-                .AddOpenStoreCore(callingAssembly, callingAssembly, applicationAssembly, infrastructureAssembly, projectionsAssembly, readModelSqlAssembly)
-                .AddOpenStoreInMemoryBackgroundTasks()
-                .AddOpenStoreMailInfrastructure(mailConf => { mailConf.UseSmtp(configuration, "Mail:Smtp"); })
-                ;
-
-            services.AddOpenStoreResxLocalization(mvcBuilder, options => { options.Assembly = callingAssembly; });
-
-            services.AddTransient<IMessageDeliveryService, MessageDeliveryService>();
-            services.AddSingleton<IObjectStorageService, FileSystemObjectStorageService>();
-
-            if (withScheduledJobs)
-            {
-            }
-
-            return services;
         }
+
+        return services;
     }
 }

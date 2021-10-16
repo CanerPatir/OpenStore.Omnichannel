@@ -16,111 +16,110 @@ using OpenStore.Omnichannel.Storefront.Infrastructure;
 using OpenStore.Omnichannel.Storefront.Services;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
-namespace OpenStore.Omnichannel.Storefront
+namespace OpenStore.Omnichannel.Storefront;
+
+public class Startup
 {
-    public class Startup
+    public const string ApiClientKey = "OpenStoreApiClient";
+
+    public Startup(IConfiguration configuration)
     {
-        public const string ApiClientKey = "OpenStoreApiClient";
+        Configuration = configuration;
+    }
 
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+    public IConfiguration Configuration { get; }
 
-        public IConfiguration Configuration { get; }
+    // This method gets called by the runtime. Use this method to add services to the container.
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithSingletonLifetime());
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithSingletonLifetime());
+        services.AddControllersWithViews();
+        services.AddAntiforgery();
+        services.AddResponseCompression();
 
-            services.AddControllersWithViews();
-            services.AddAntiforgery();
-            services.AddResponseCompression();
+        var identityConfiguration = Configuration.GetSection("IdentityConfiguration").Get<IdentityConfiguration>();
 
-            var identityConfiguration = Configuration.GetSection("IdentityConfiguration").Get<IdentityConfiguration>();
-
-            services
-                .AddAuthentication(options =>
-                {
-                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                })
-                .AddCookie(options =>
-                {
-                    options.Cookie.Name = "OpenStore";
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(identityConfiguration.SessionExpireTimeInMinutes);
-                    options.SlidingExpiration = true;
-                    options.LoginPath = "/login";
-                    options.LogoutPath = "/logout";
-                })
-                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
-                {
-                    options.Authority = identityConfiguration.Authority;
-                    options.ClientId = "OpenStore.Web";
-                    options.ClientSecret = "secret";
-
-                    options.SaveTokens = true;
-                    options.RequireHttpsMetadata = true;
-                    options.ResponseType = OpenIdConnectResponseType.Code;
-                    options.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
-
-                    options.GetClaimsFromUserInfoEndpoint = true;
-                    options.Scope.Add("openid");
-                    options.Scope.Add("profile");
-                    options.Scope.Add("email");
-                    options.Scope.Add("roles");
-                    options.Scope.Add("offline_access");
-
-                    options.SecurityTokenValidator = new JwtSecurityTokenHandler
-                    {
-                        // Disable the built-in JWT claims mapping feature.
-                        InboundClaimTypeMap = new Dictionary<string, string>()
-                    };
-
-                    options.TokenValidationParameters.NameClaimType = "name";
-                    options.TokenValidationParameters.RoleClaimType = "role";
-
-                    options.AccessDeniedPath = "/";
-                });
-
-            var apiConfiguration = Configuration.GetSection("Api").Get<ApiConfiguration>();
-            services.AddHttpClient(ApiClientKey, client =>
+        services
+            .AddAuthentication(options =>
             {
-                client.BaseAddress = new Uri(apiConfiguration.Url);
-                client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.Cookie.Name = "OpenStore";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(identityConfiguration.SessionExpireTimeInMinutes);
+                options.SlidingExpiration = true;
+                options.LoginPath = "/login";
+                options.LogoutPath = "/logout";
+            })
+            .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+            {
+                options.Authority = identityConfiguration.Authority;
+                options.ClientId = "OpenStore.Web";
+                options.ClientSecret = "secret";
+
+                options.SaveTokens = true;
+                options.RequireHttpsMetadata = true;
+                options.ResponseType = OpenIdConnectResponseType.Code;
+                options.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
+
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.Scope.Add("openid");
+                options.Scope.Add("profile");
+                options.Scope.Add("email");
+                options.Scope.Add("roles");
+                options.Scope.Add("offline_access");
+
+                options.SecurityTokenValidator = new JwtSecurityTokenHandler
+                {
+                    // Disable the built-in JWT claims mapping feature.
+                    InboundClaimTypeMap = new Dictionary<string, string>()
+                };
+
+                options.TokenValidationParameters.NameClaimType = "name";
+                options.TokenValidationParameters.RoleClaimType = "role";
+
+                options.AccessDeniedPath = "/";
             });
 
-            services.AddSingleton<IApiClient, ApiClient>();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        var apiConfiguration = Configuration.GetSection("Api").Get<ApiConfiguration>();
+        services.AddHttpClient(ApiClientKey, client =>
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            client.BaseAddress = new Uri(apiConfiguration.Url);
+            client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);
+        });
 
-            app
-                .UseResponseCompression()
-                .UseHttpsRedirection()
-                .UseStaticFiles()
-                .UseRouting()
-                .UseAuthentication()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Home}/{action=Index}/{id?}");
-                });
+        services.AddSingleton<IApiClient, ApiClient>();
+    }
+
+    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
         }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app
+            .UseResponseCompression()
+            .UseHttpsRedirection()
+            .UseStaticFiles()
+            .UseRouting()
+            .UseAuthentication()
+            .UseAuthorization()
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
     }
 }

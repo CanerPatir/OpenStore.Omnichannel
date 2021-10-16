@@ -1,6 +1,5 @@
-namespace OpenStore.Omnichannel.Storefront.Models.Components
+namespace OpenStore.Omnichannel.Storefront.Models.Components;
+
+public class HeaderViewModel
 {
-    public class HeaderViewModel
-    {
-    }
 }

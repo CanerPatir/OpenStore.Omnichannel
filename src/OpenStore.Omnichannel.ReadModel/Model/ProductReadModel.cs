@@ -1,7 +1,6 @@
-namespace OpenStore.Omnichannel.ReadModel.Model
+namespace OpenStore.Omnichannel.ReadModel.Model;
+
+public class ProductReadModel
 {
-    public class ProductReadModel
-    {
         
-    }
 }

@@ -1,11 +1,10 @@
 // ReSharper disable once CheckNamespace
 
-namespace OpenStore.Omnichannel
+namespace OpenStore.Omnichannel;
+
+public enum ProductStatus
 {
-    public enum ProductStatus
-    {
-        Draft,
-        Active,
-        Archived
-    }
+    Draft,
+    Active,
+    Archived
 }

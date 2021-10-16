@@ -1,9 +1,8 @@
 // ReSharper disable once CheckNamespace
 
-namespace OpenStore.Omnichannel
+namespace OpenStore.Omnichannel;
+
+public static class ApplicationPolicies
 {
-    public static class ApplicationPolicies
-    {
-        public const string AdministratorPolicy = nameof(AdministratorPolicy);
-    }
+    public const string AdministratorPolicy = nameof(AdministratorPolicy);
 }

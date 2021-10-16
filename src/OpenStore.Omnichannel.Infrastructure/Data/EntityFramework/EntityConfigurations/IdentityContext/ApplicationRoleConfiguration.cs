@@ -3,15 +3,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using static OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.StringLengthConstants;
 
-namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.IdentityContext
+namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.IdentityContext;
+
+public class ApplicationRoleConfiguration : IEntityTypeConfiguration<ApplicationRole>
 {
-    public class ApplicationRoleConfiguration : IEntityTypeConfiguration<ApplicationRole>
+    public void Configure(EntityTypeBuilder<ApplicationRole> builder)
     {
-        public void Configure(EntityTypeBuilder<ApplicationRole> builder)
-        {
-            builder.ToTable("Roles");
-            builder.Property(x => x.Name).HasMaxLength(_191_);
-            builder.Property(x => x.NormalizedName).HasMaxLength(_191_);
-        }
+        builder.ToTable("Roles");
+        builder.Property(x => x.Name).HasMaxLength(_191_);
+        builder.Property(x => x.NormalizedName).HasMaxLength(_191_);
     }
 }
