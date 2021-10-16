@@ -88,19 +88,17 @@ if (ForceHttps())
 
 app.UseOpenStoreApiErrorHandling();
 app.UseOpenStoreLocalization();
-
-app
-    .UseCors(allowAllCorsPolicy)
-    .UseStaticFiles()
-    .UseResponseCompression()
-    .UseSubApplication<OpenStore.Omnichannel.Identity.Startup>("/identity")
-    .UseRouting()
-    .UseAuthentication()
-    .UseAuthorization()
-    .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+app.UseCors(allowAllCorsPolicy);
+app.UseStaticFiles();
+app.UseResponseCompression();
+app.UseSubApplication<OpenStore.Omnichannel.Identity.Startup>("/identity");
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();    
 
 DataSeeder.SeedAsync(app.Services).Wait();
 
-app.Run();
+await app.RunAsync();
 
 bool ForceHttps() => builder.Configuration.GetValue<bool>("HttpsRedirection");

@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{64D507E4-EEA0-4F01-A7C5-A100407868E9}|Default">
+  <MonoDevelop.Ide.ItemProperties.src.OpenStore.Omnichannel.Panel PreferredExecutionTarget="/Applications/Opera.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/OpenStore.Omnichannel.Panel/App.razor">
+    <Files>
+      <File FileName="src/OpenStore.Omnichannel/Program.cs" Line="1" Column="1" />
+      <File FileName="src/OpenStore.Omnichannel/Api/PageRequestQueryModel.cs" Line="1" Column="1" />
+      <File FileName="src/OpenStore.Omnichannel.Panel/App.razor" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="OpenStore.Omnichannel" expanded="True">
+            <Node name="src" expanded="True">
+              <Node name="OpenStore.Omnichannel" expanded="True">
+                <Node name="Api" expanded="True" />
+              </Node>
+              <Node name="OpenStore.Omnichannel.Panel" expanded="True">
+                <Node name="App.razor" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="OpenStore.Omnichannel" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

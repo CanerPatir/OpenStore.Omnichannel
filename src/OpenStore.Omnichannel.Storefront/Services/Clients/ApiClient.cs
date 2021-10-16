@@ -9,9 +9,11 @@ public interface IApiClient
 
 public class ApiClient : IApiClient
 {
+    internal const string apiClientKey = "OpenStoreApiClient";
+
     public ApiClient(IHttpClientFactory clientFactory)
     {
-        var httpClient = clientFactory.CreateClient(Startup.ApiClientKey);
+        var httpClient = clientFactory.CreateClient(apiClientKey);
         Catalog = new CatalogStore(httpClient);
     }
 
