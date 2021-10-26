@@ -1,24 +1,20 @@
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
-namespace OpenStore.Omnichannel.Panel.Services
+namespace OpenStore.Omnichannel.Panel.Services;
+
+public class MediaHttpStore : HttpStore
 {
-    public class MediaHttpStore : HttpStore
+    public MediaHttpStore(HttpClient httpClient) : base(httpClient)
     {
-        public MediaHttpStore(HttpClient httpClient) : base(httpClient)
-        {
-        }
+    }
 
-        protected override string Path => "api/media";
+    protected override string Path => "api/media";
 
-        public async Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> fileUploadDtoList)
-        {
-            var response = await HttpClient.PostAsJsonAsync($"{Path}/product", fileUploadDtoList);
-            return await response.Content.ReadFromJsonAsync<List<ProductMediaDto>>();
-        }
+    public async Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> fileUploadDtoList)
+    {
+        var response = await HttpClient.PostAsJsonAsync($"{Path}/product", fileUploadDtoList);
+        return await response.Content.ReadFromJsonAsync<List<ProductMediaDto>>();
     }
 }

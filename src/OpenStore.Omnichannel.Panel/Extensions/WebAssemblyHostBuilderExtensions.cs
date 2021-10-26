@@ -1,5 +1,3 @@
-using System;
-using System.Net.Http;
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
@@ -7,11 +5,10 @@ using Blazorise.RichTextEdit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using OpenStore.Omnichannel.Panel.Services;
-using OpenStore.Omnichannel.Panel.ViewModels;
+using OpenStore.Omnichannel.Panel.ViewModels.Inventory;
+using OpenStore.Omnichannel.Panel.ViewModels.Products;
 using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
 
 namespace OpenStore.Omnichannel.Panel.Extensions
@@ -73,6 +70,7 @@ namespace OpenStore.Omnichannel.Panel.Extensions
             builder.Services.AddSingleton<ProductIndexViewModel>();
             builder.Services.AddSingleton<UpdateVariantViewModel>();
             builder.Services.AddSingleton<PreferencesViewModel>();
+            builder.Services.AddSingleton<InventoryIndexViewModel>();
 
             return builder;
         }

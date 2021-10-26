@@ -1,6 +1,109 @@
 @page "/products/inventory"
-<h3>inventory</h3>
+@using OpenStore.Omnichannel.Shared.Dto.Product
+
+@inject IStringLocalizer<Index> L
+@inject InventoryIndexViewModel ViewModel
+
+<PageTitle>OpenStore | @L["Breadcrumb.Inventory"]</PageTitle>
+
+<OsPageTitle>
+    <TitleSection>
+        <span>@L["Breadcrumb.Inventory"]</span>
+    </TitleSection>
+</OsPageTitle>
+
+<div class="mb-sm-4 mb-3 d-sm-flex">
+    <div class="mt-sm-0 mt-2">
+        <a href="#" class="text-dark text-decoration-none">
+            <Icon Name="IconName.Download" Class="fa-fw me-1 text-muted"></Icon>
+            @SharedLocalizer["Generic.Export"]
+        </a>
+    </div>
+    <div class="ms-sm-4 mt-sm-0 mt-2">
+        <a href="#" class="text-dark text-decoration-none">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Upload" Class="fa-fw me-1 text-muted"></Icon>
+            @SharedLocalizer["Generic.Import"]
+        </a>
+    </div>
+    <div class="ms-sm-4 mt-sm-0 mt-2 ">
+        <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">
+            <i class="fas fa-ellipsis-h text-muted"></i>
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div role="separator" class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+    </div>
+</div>
+
+<Card>
+    <ul class="nav nav-tabs nav-tabs-v2 px-4">
+        <li class="nav-item me-3">
+            <a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">@SharedLocalizer["Generic.All"]</a>
+        </li>
+    </ul>
+    <div class="tab-content p-4">
+        <div class="tab-pane fade show active" id="allTab">
+
+            <OsDataGrid TItem="InventoryListItemDto" FetchData="FetchData" PageSize="PageSize">
+
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Product"]" TItem="InventoryListItemDto">
+                    <RowTemplate Context="item">
+                        <div class="d-flex align-items-center">
+                            <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                @if (!string.IsNullOrWhiteSpace(item.ProductPhotoUrl))
+                                {
+                                    <img class="mw-100 mh-100" src="@item.ProductPhotoUrl" alt=""/>
+                                }
+                                else
+                                {
+                                    <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
+                                }
+                            </div>
+                            <div class="ms-3">
+                                <a href="@($"products/{item.ProductId}")">@item.ProductTitle</a>
+                            </div>
+                        </div>
+                    </RowTemplate>
+                </OsDataGridColumn>
+
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Sku"]" TItem="InventoryListItemDto">
+                    <RowTemplate Context="item">
+                        @*todo: category*@
+                    </RowTemplate>
+                </OsDataGridColumn>
+
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.WhenSoldOut"]" TItem="InventoryListItemDto">
+                    <RowTemplate Context="item">
+                        @*todo: category*@
+                    </RowTemplate>
+                </OsDataGridColumn>
+
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.AvailableQuantity"]" TItem="InventoryListItemDto">
+                    <RowTemplate Context="item">
+                        @*todo: category*@
+                    </RowTemplate>
+                </OsDataGridColumn>
+
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.EditQuantity"]" TItem="InventoryListItemDto">
+                    <RowTemplate Context="item">
+                        @*todo: category*@
+                    </RowTemplate>
+                </OsDataGridColumn>
+
+            </OsDataGrid>
+        </div>
+    </div>
+</Card>
+
 
 @code {
+        private const int PageSize = 50;
+
+    [Parameter]
+    public Func<PageRequest, Task<PagedListDto<InventoryListItemDto>>> FetchData { get; set; }
 
 }

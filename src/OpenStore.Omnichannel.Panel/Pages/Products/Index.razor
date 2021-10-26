@@ -19,16 +19,20 @@
 <div class="mb-sm-4 mb-3 d-sm-flex">
     <div class="mt-sm-0 mt-2">
         <a href="#" class="text-dark text-decoration-none">
-            <i class="fa fa-download fa-fw me-1 text-muted"></i> Export
+            <Icon Name="IconName.Download" Class="fa-fw me-1 text-muted"></Icon>
+            @SharedLocalizer["Generic.Export"]
         </a>
     </div>
     <div class="ms-sm-4 mt-sm-0 mt-2">
         <a href="#" class="text-dark text-decoration-none">
-            <i class="fa fa-upload fa-fw me-1 text-muted"></i> Import
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Upload" Class="fa-fw me-1 text-muted"></Icon>
+            @SharedLocalizer["Generic.Import"]
         </a>
     </div>
-    <div class="ms-sm-4 mt-sm-0 mt-2 dropdown-toggle">
-        <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">More Actions</a>
+    <div class="ms-sm-4 mt-sm-0 mt-2 ">
+        <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">
+            <i class="fas fa-ellipsis-h text-muted"></i>
+        </a>
         <div class="dropdown-menu">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>

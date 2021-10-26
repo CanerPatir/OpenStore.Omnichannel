@@ -1,64 +1,62 @@
-using System.Threading.Tasks;
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto.Store;
 
-namespace OpenStore.Omnichannel.Panel.ViewModels.StoreManagement
+namespace OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
+
+public class PreferencesViewModel : BaseViewModel
 {
-    public class PreferencesViewModel : BaseViewModel
+    private readonly IApiClient _apiClient;
+
+    private StorePreferencesDto _storePreferences;
+    private bool _isLoading;
+    private bool _isSaving;
+
+    public virtual StorePreferencesDto StorePreferences
     {
-        private readonly IApiClient _apiClient;
+        get => _storePreferences;
+        protected set => SetValue(ref _storePreferences, value);
+    }
 
-        private StorePreferencesDto _storePreferences;
-        private bool _isLoading;
-        private bool _isSaving;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        protected set => SetValue(ref _isLoading, value);
+    }
 
-        public virtual StorePreferencesDto StorePreferences
+    public bool IsSaving
+    {
+        get => _isSaving;
+        protected set => SetValue(ref _isSaving, value);
+    }
+
+    public PreferencesViewModel(IApiClient apiClient)
+    {
+        _apiClient = apiClient;
+    }
+
+    public async Task Retrieve()
+    {
+        IsLoading = true;
+        try
         {
-            get => _storePreferences;
-            protected set => SetValue(ref _storePreferences, value);
+            StorePreferences = await _apiClient.Store.GetStorePreferences();
         }
-
-        public bool IsLoading
+        finally
         {
-            get => _isLoading;
-            protected set => SetValue(ref _isLoading, value);
+            IsLoading = false;
         }
+    }
 
-        public bool IsSaving
+    public async Task Save()
+    {
+        IsSaving = true;
+        try
         {
-            get => _isSaving;
-            protected set => SetValue(ref _isSaving, value);
+            await _apiClient.Store.UpdateStorePreferences(StorePreferences);
         }
-
-        public PreferencesViewModel(IApiClient apiClient)
+        finally
         {
-            _apiClient = apiClient;
-        }
-
-        public async Task Retrieve()
-        {
-            IsLoading = true;
-            try
-            {
-                StorePreferences = await _apiClient.Store.GetStorePreferences();
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-        }
-
-        public async Task Save()
-        {
-            IsSaving = true;
-            try
-            {
-                await _apiClient.Store.UpdateStorePreferences(StorePreferences);
-            }
-            finally
-            {
-                IsSaving = false;
-            }
+            IsSaving = false;
         }
     }
 }

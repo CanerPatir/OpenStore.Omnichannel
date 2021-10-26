@@ -75,4 +75,13 @@
     <data name="Domain.VariantAlreadyExistsThatHasSameOptions" xml:space="preserve">
         <value>Aynı opsiyon değerlerine sahip başka bir varyant mevcut</value>
     </data>
+    <data name="Generic.Import" xml:space="preserve">
+        <value>Yükle</value>
+    </data>
+    <data name="Generic.Export" xml:space="preserve">
+        <value>İndir</value>
+    </data>
+    <data name="Generic.All" xml:space="preserve">
+        <value>Hepsi</value>
+    </data>
 </root>

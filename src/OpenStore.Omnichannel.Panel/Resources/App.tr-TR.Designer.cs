@@ -158,5 +158,23 @@ namespace OpenStore.Omnichannel.Panel.Resources {
                 return ResourceManager.GetString("Domain.VariantAlreadyExistsThatHasSameOptions", resourceCulture);
             }
         }
+        
+        internal static string Generic_Import {
+            get {
+                return ResourceManager.GetString("Generic.Import", resourceCulture);
+            }
+        }
+        
+        internal static string Generic_Export {
+            get {
+                return ResourceManager.GetString("Generic.Export", resourceCulture);
+            }
+        }
+        
+        internal static string Generic_All {
+            get {
+                return ResourceManager.GetString("Generic.All", resourceCulture);
+            }
+        }
     }
 }
