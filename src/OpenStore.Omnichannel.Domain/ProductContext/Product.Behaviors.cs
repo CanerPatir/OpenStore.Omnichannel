@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 

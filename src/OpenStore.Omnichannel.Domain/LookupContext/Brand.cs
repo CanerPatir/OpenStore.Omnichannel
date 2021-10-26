@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace OpenStore.Omnichannel.Domain.LookupContext;
 
 public class Brand : LookupEntity

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Shared.Dto.Product;
@@ -33,8 +31,6 @@ public class Variant : AuditableEntity
     public string Sku { get; protected set; }
     public string Barcode { get; protected set; }
     public bool TrackQuantity { get; protected set; }
-    public bool ContinueSellingWhenOutOfStock { get; protected set; }
-
     public virtual Inventory Inventory { get; protected set; }
 
     protected Variant()
@@ -104,6 +100,12 @@ public class Variant : AuditableEntity
 
         Inventory.Change(quantity);
     }
+    
+    public void UpdateQuantity(int quantity, bool continueSellingWhenOutOfStock)
+    {
+        UpdateQuantity(quantity);
+        Inventory.ChangeContinueSellingWhenOutOfStockStatus(continueSellingWhenOutOfStock);
+    }
 
     public void UpdatePrice(decimal price, decimal? compareAtPrice, decimal? cost)
     {
@@ -132,11 +134,12 @@ public class Variant : AuditableEntity
         Barcode = model.Barcode;
         Sku = model.Sku;
         TrackQuantity = model.TrackQuantity;
-        UpdateQuantity(model.Quantity);
-        ContinueSellingWhenOutOfStock = model.ContinueSellingWhenOutOfStock;
+        if (TrackQuantity)
+        {
+            UpdateQuantity(model.Quantity, model.ContinueSellingWhenOutOfStock);
+        }
 
-        ApplyChange(new VariantMasterDataUpdated(ProductId, Id, Price, CompareAtPrice, Cost, CalculateTaxAdditionally, Barcode, Sku, TrackQuantity,
-            ContinueSellingWhenOutOfStock));
+        ApplyChange(new VariantMasterDataUpdated(ProductId, Id, Price, CompareAtPrice, Cost, CalculateTaxAdditionally, Barcode, Sku, TrackQuantity));
     }
 
     public void UpdateOptionValues(string option1, string option2, string option3)

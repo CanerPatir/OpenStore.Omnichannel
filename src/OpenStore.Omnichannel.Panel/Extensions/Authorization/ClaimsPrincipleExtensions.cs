@@ -1,62 +1,58 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using OpenStore.Omnichannel.Panel.Extensions.Authorization;
 
 // ReSharper disable CheckNamespace
 
-namespace OpenStore.Omnichannel.Panel
+namespace OpenStore.Omnichannel.Panel;
+
+public static class ClaimsPrincipleExtensions
 {
-    public static class ClaimsPrincipleExtensions
+    public static Guid GetId(this ClaimsPrincipal claimsPrincipal)
     {
-        public static Guid GetId(this ClaimsPrincipal claimsPrincipal)
+        var id = claimsPrincipal.Claims.Single(x => x.Type == "sub");
+        return Guid.Parse(id.Value);
+    }
+
+    public static IEnumerable<string> GetRoles(this ClaimsPrincipal claimsPrincipal)
+    {
+        var userRoleClaim = claimsPrincipal.Claims.SingleOrDefault(x => x.Type == "role");
+
+        if (userRoleClaim == null)
         {
-            var id = claimsPrincipal.Claims.Single(x => x.Type == "sub");
-            return Guid.Parse(id.Value);
+            throw new UserRoleClaimNotFoundException();
         }
 
-        public static IEnumerable<string> GetRoles(this ClaimsPrincipal claimsPrincipal)
+        return GetRolesFromClaim(userRoleClaim.Value);
+    }
+
+    public static bool IsRolesEmpty(this ClaimsPrincipal claimsPrincipal)
+    {
+        try
         {
-            var userRoleClaim = claimsPrincipal.Claims.SingleOrDefault(x => x.Type == "role");
-
-            if (userRoleClaim == null)
-            {
-                throw new UserRoleClaimNotFoundException();
-            }
-
-            return GetRolesFromClaim(userRoleClaim.Value);
+            claimsPrincipal.GetRoles();
+            return false;
         }
-
-        public static bool IsRolesEmpty(this ClaimsPrincipal claimsPrincipal)
+        catch (UserRoleClaimNotFoundException)
         {
-            try
-            {
-                claimsPrincipal.GetRoles();
-                return false;
-            }
-            catch (UserRoleClaimNotFoundException)
-            {
-                return true;
-            }
+            return true;
         }
+    }
 
-        public static bool InRole(this ClaimsPrincipal claimsPrincipal, string role)
+    public static bool InRole(this ClaimsPrincipal claimsPrincipal, string role)
+    {
+        try
         {
-            try
-            {
-                var userRoles = claimsPrincipal.GetRoles();
-                return userRoles.Any(r => r.Equals(role, StringComparison.InvariantCultureIgnoreCase));
-            }
-            catch (UserRoleClaimNotFoundException)
-            {
-                return false;
-            }
+            var userRoles = claimsPrincipal.GetRoles();
+            return userRoles.Any(r => r.Equals(role, StringComparison.InvariantCultureIgnoreCase));
         }
+        catch (UserRoleClaimNotFoundException)
+        {
+            return false;
+        }
+    }
 
-        private static IEnumerable<string> GetRolesFromClaim(string userRoleValue)
-        {
-            return userRoleValue.Trim('[').Trim(']').Trim().Split(',').Select(x => x.Trim('"').Trim());
-        }
+    private static IEnumerable<string> GetRolesFromClaim(string userRoleValue)
+    {
+        return userRoleValue.Trim('[').Trim(']').Trim().Split(',').Select(x => x.Trim('"').Trim());
     }
 }

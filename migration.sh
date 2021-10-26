@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ACTIVE_CONN=$(python -c 'import sys, json; print(json.load(sys.stdin)["ActiveConnection"])' < src/OpenStore.Omnichannel/appsettings.json)
+ACTIVE_CONN=$(python -c 'import sys, json; print(json.load(sys.stdin)["Data"]["ActiveConnection"])' < src/OpenStore.Omnichannel/appsettings.json)
 echo $ACTIVE_CONN
 case $ACTIVE_CONN in
 

@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using EFCoreSecondLevelCacheInterceptor;
 using Microsoft.AspNetCore.DataProtection;
@@ -75,7 +74,9 @@ internal static class ServiceCollectionExtensions
             cfg.CreateMap<ProductMediaDto, ProductMedia>().ReverseMap();
             cfg.CreateMap<ProductDto, Product>().ReverseMap();
             cfg.CreateMap<VariantDto, Variant>().ReverseMap()
-                .ForMember(x => x.Quantity, opts => opts.MapFrom(v => v.Inventory != null ? v.Inventory.Quantity : 0));
+                .ForMember(x => x.Quantity, opts => opts.MapFrom(v => v.Inventory != null ? v.Inventory.Quantity : 0))
+                .ForMember(x => x.ContinueSellingWhenOutOfStock, opts => opts.MapFrom(v => (v.Inventory != null) && v.Inventory.ContinueSellingWhenOutOfStock))
+                ;
             cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
 
             cfg.CreateMap<StorePreferencesDto, StorePreferences>().ReverseMap();

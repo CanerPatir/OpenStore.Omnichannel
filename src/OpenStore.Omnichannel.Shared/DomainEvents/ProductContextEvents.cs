@@ -31,7 +31,7 @@ public record ProductMasterDataUpdated(
 
 public record VariantMasterDataUpdated(Guid ProductId, Guid VariantId,
     decimal Price, decimal? CompareAtPrice, decimal? Cost, bool CalculateTaxAdditionally,
-    string Barcode, string Sku, bool TrackQuantity, bool ContinueSellingWhenOutOfStock) : DomainEventBase(ProductId);
+    string Barcode, string Sku, bool TrackQuantity) : DomainEventBase(ProductId);
 
 public record VariantOptionsUpdated(Guid ProductId, Guid VariantId, string Option1, string Option2, string Option3) : DomainEventBase(ProductId);
 

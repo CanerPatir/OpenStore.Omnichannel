@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenStore.Domain;
-
 namespace OpenStore.Omnichannel.Domain.LookupContext;
 
 public class Category : LookupEntity

@@ -1,4 +1,3 @@
-using System;
 using OpenIddict.EntityFrameworkCore.Models;
 
 // ReSharper disable ClassNeverInstantiated.Global

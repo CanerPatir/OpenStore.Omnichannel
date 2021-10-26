@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using MediatR;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;

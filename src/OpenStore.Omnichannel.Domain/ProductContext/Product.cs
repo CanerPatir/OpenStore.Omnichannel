@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.LookupContext;

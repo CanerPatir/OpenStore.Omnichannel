@@ -1,4 +1,3 @@
-using System;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global

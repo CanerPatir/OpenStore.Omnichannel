@@ -1,5 +1,3 @@
-using System;
-
 namespace OpenStore.Omnichannel.Domain.LookupContext;
 
 public class CategoryMedia : MediaEntity

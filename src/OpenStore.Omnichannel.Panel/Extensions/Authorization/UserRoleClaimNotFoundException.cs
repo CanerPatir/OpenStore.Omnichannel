@@ -1,8 +1,5 @@
-using System;
+namespace OpenStore.Omnichannel.Panel.Extensions.Authorization;
 
-namespace OpenStore.Omnichannel.Panel.Extensions.Authorization
+public class UserRoleClaimNotFoundException : Exception
 {
-    public class UserRoleClaimNotFoundException : Exception
-    {
-    }
 }

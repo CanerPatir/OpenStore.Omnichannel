@@ -1,7 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using OpenStore.Domain;
-
 namespace OpenStore.Omnichannel.Domain.ChannelContext;
 
 public class SaleChannel : AuditableEntity

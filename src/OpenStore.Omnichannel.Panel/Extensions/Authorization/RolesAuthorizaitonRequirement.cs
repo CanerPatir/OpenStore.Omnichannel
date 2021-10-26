@@ -1,64 +1,59 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 // ReSharper disable All
 
-namespace OpenStore.Omnichannel.Panel
+namespace OpenStore.Omnichannel.Panel;
+
+public class MyRolesAuthorizationRequirement : AuthorizationHandler<MyRolesAuthorizationRequirement>, IAuthorizationRequirement
 {
-    public class MyRolesAuthorizationRequirement : AuthorizationHandler<MyRolesAuthorizationRequirement>, IAuthorizationRequirement
+    public MyRolesAuthorizationRequirement(IEnumerable<string> allowedRoles)
     {
-        public MyRolesAuthorizationRequirement(IEnumerable<string> allowedRoles)
+        if (allowedRoles is null)
         {
-            if (allowedRoles is null)
-            {
-                throw new ArgumentNullException(nameof(allowedRoles));
-            }
-
-            if (!allowedRoles.Any())
-            {
-                throw new InvalidOperationException(nameof(allowedRoles));
-            }
-
-            AllowedRoles = allowedRoles;
+            throw new ArgumentNullException(nameof(allowedRoles));
         }
 
-        public IEnumerable<string> AllowedRoles { get; }
-
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MyRolesAuthorizationRequirement requirement)
+        if (!allowedRoles.Any())
         {
-            if (context.User != null)
-            {
-                bool found = false;
-                if (requirement.AllowedRoles == null || !requirement.AllowedRoles.Any())
-                {
-                    // Review: What do we want to do here?  No roles requested is auto success?
-                }
-                else
-                {
-                    found = requirement.AllowedRoles.Any(r => IsInRole(context.User, r));
-                }
+            throw new InvalidOperationException(nameof(allowedRoles));
+        }
 
-                if (found)
-                {
-                    context.Succeed(requirement);
-                }
+        AllowedRoles = allowedRoles;
+    }
+
+    public IEnumerable<string> AllowedRoles { get; }
+
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MyRolesAuthorizationRequirement requirement)
+    {
+        if (context.User != null)
+        {
+            bool found = false;
+            if (requirement.AllowedRoles == null || !requirement.AllowedRoles.Any())
+            {
+                // Review: What do we want to do here?  No roles requested is auto success?
+            }
+            else
+            {
+                found = requirement.AllowedRoles.Any(r => IsInRole(context.User, r));
             }
 
-            return Task.CompletedTask;
+            if (found)
+            {
+                context.Succeed(requirement);
+            }
         }
 
-        private bool IsInRole(ClaimsPrincipal user, string role) => user.InRole(role);
+        return Task.CompletedTask;
+    }
 
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            var roles = $"User.IsInRole must be true for one of the following roles: ({string.Join("|", AllowedRoles)})";
+    private bool IsInRole(ClaimsPrincipal user, string role) => user.InRole(role);
 
-            return $"{nameof(MyRolesAuthorizationRequirement)}:{roles}";
-        }
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        var roles = $"User.IsInRole must be true for one of the following roles: ({string.Join("|", AllowedRoles)})";
+
+        return $"{nameof(MyRolesAuthorizationRequirement)}:{roles}";
     }
 }
