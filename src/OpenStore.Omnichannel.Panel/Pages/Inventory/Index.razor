@@ -1,5 +1,4 @@
 @page "/products/inventory"
-@using OpenStore.Omnichannel.Shared.Dto.Product
 
 @inject IStringLocalizer<Index> L
 @inject InventoryIndexViewModel ViewModel
@@ -48,7 +47,7 @@
     <div class="tab-content p-4">
         <div class="tab-pane fade show active" id="allTab">
 
-            <OsDataGrid TItem="InventoryListItemDto" FetchData="FetchData" PageSize="PageSize">
+            <OsDataGrid TItem="InventoryListItemDto" FetchData="ViewModel.GetAll" PageSize="PageSize">
 
                 <OsDataGridColumn CustomTitle="@L["ColumnHeader.Product"]" TItem="InventoryListItemDto">
                     <RowTemplate Context="item">
@@ -63,28 +62,44 @@
                                     <img class="mw-100 mh-100" src="assets/img/product/product-6.jpg" alt=""/>
                                 }
                             </div>
-                            <div class="ms-3">
-                                <a href="@($"products/{item.ProductId}")">@item.ProductTitle</a>
-                            </div>
+
+                            <dd>
+                                <div class="ms-3">
+                                    <a href="@($"products/{item.ProductId}")">@item.ProductTitle</a>
+                                </div>
+
+                                <div class="ms-3 text-muted">
+                                    @item.GetVariantDescription()
+                                </div>
+                            </dd>
+
                         </div>
                     </RowTemplate>
                 </OsDataGridColumn>
 
                 <OsDataGridColumn CustomTitle="@L["ColumnHeader.Sku"]" TItem="InventoryListItemDto">
                     <RowTemplate Context="item">
-                        @*todo: category*@
+                        @item.Sku
                     </RowTemplate>
                 </OsDataGridColumn>
 
                 <OsDataGridColumn CustomTitle="@L["ColumnHeader.WhenSoldOut"]" TItem="InventoryListItemDto">
                     <RowTemplate Context="item">
-                        @*todo: category*@
+                        @if (item.ContinueSellingWhenOutOfStock)
+                        {
+                            @L["ContinueSelling"]
+
+                        }
+                        else
+                        {
+                            @L["StopSelling"]
+                        }
                     </RowTemplate>
                 </OsDataGridColumn>
 
                 <OsDataGridColumn CustomTitle="@L["ColumnHeader.AvailableQuantity"]" TItem="InventoryListItemDto">
                     <RowTemplate Context="item">
-                        @*todo: category*@
+                        @item.AvailableQuantity
                     </RowTemplate>
                 </OsDataGridColumn>
 
@@ -101,9 +116,6 @@
 
 
 @code {
-        private const int PageSize = 50;
-
-    [Parameter]
-    public Func<PageRequest, Task<PagedListDto<InventoryListItemDto>>> FetchData { get; set; }
+        private const int PageSize = 10;
 
 }

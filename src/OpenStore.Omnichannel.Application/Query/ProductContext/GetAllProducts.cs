@@ -4,7 +4,6 @@ using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Application.Extensions;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Product;
 
 namespace OpenStore.Omnichannel.Application.Query.ProductContext;
@@ -56,7 +55,7 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProducts, PagedList<P
                 pageRequest.PageSize,
                 p => new ProductListItemDto(
                     p.Id,
-                    p.Medias.OrderBy(x => x.Position).FirstOrDefault()?.Url,
+                    p.FirstMedia?.Url,
                     p.Status,
                     p.Title,
                     p.Variants.Select(x => x.Inventory).Where(x => x is not null).Sum(x => x.AvailableQuantity),

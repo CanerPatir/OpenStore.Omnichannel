@@ -32,7 +32,8 @@ internal static class RepositoryQueryExtensions
 
         query = query.Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .OrderBy(x => x.Id);
+            // .OrderBy(x => x.Id)
+            ;
 
         var items = await query
             // .AsNoTracking()

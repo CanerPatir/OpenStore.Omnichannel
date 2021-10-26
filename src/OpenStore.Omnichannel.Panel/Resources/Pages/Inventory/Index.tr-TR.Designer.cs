@@ -80,5 +80,17 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Inventory {
                 return ResourceManager.GetString("ColumnHeader.EditQuantity", resourceCulture);
             }
         }
+        
+        internal static string ContinueSelling {
+            get {
+                return ResourceManager.GetString("ContinueSelling", resourceCulture);
+            }
+        }
+        
+        internal static string StopSelling {
+            get {
+                return ResourceManager.GetString("StopSelling", resourceCulture);
+            }
+        }
     }
 }

@@ -36,4 +36,10 @@
     <data name="ColumnHeader.EditQuantity" xml:space="preserve">
         <value>Adet Düzenle</value>
     </data>
+    <data name="ContinueSelling" xml:space="preserve">
+        <value>Satış devam eder</value>
+    </data>
+    <data name="StopSelling" xml:space="preserve">
+        <value>Satış durur</value>
+    </data>
 </root>

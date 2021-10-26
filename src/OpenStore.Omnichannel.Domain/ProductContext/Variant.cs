@@ -14,6 +14,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext;
 public class Variant : AuditableEntity
 {
     public Guid ProductId { get; protected set; }
+    public virtual Product Product { get; protected set; }
 
     // option
     public string Option1 { get; protected set; }

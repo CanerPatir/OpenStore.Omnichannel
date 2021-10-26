@@ -10,8 +10,5 @@ public class InventoryHttpStore : HttpStore
 
     protected override string Path => "api/inventory";
 
-    public async Task<PagedListDto<InventoryListItemDto>> GetAll(PageRequest pageRequest)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<PagedListDto<InventoryListItemDto>> GetAll(PageRequest request) => await HttpClient.GetPage<InventoryListItemDto>($"{Path}/all", request);
 }
