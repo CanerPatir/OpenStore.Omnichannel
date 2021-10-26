@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace OpenStore.Omnichannel.Shared.Request;
 
 public record UpdateVariantPricesRequest(IEnumerable<UpdateVariantPriceRequest> Variants);

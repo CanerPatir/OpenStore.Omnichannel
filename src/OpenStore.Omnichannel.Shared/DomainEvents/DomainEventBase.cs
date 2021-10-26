@@ -1,4 +1,3 @@
-using System;
 using OpenStore.Domain;
 
 // ReSharper disable once CheckNamespace

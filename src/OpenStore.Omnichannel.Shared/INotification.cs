@@ -1,6 +1,5 @@
 // ReSharper disable CheckNamespace
 
-using System;
 using System.Globalization;
 
 namespace OpenStore.Omnichannel;
