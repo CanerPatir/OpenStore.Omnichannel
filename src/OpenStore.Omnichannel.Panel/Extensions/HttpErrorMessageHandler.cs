@@ -117,22 +117,23 @@ public class HttpErrorMessageHandler : DelegatingHandler
             await SignOut();
         }
 
-        if (ex.StatusCode == HttpStatusCode.NotFound)
+        switch (ex.StatusCode)
         {
-            _dialogService.ShowWarning(_sharedLocalizer["Warning.NotFound"]);
-        }
-        else if (ex.StatusCode == HttpStatusCode.BadRequest)
-        {
-            _dialogService.ShowWarning(_sharedLocalizer[ex.GetMessageKey()]);
-        }
-        else if (ex.StatusCode == HttpStatusCode.Forbidden)
-        {
-            _dialogService.ShowWarning(_sharedLocalizer["Warning.Forbidden"]);
-        }
-        else
-        {
-            var message = ex.GetAggregatedErrorMessage();
-            _dialogService.ShowError(_sharedLocalizer[message]);
+            case HttpStatusCode.NotFound:
+                _dialogService.ShowWarning(_sharedLocalizer["Warning.NotFound"]);
+                break;
+            case HttpStatusCode.BadRequest:
+                _dialogService.ShowWarning(_sharedLocalizer[ex.GetMessageKey()]);
+                break;
+            case HttpStatusCode.Forbidden:
+                _dialogService.ShowWarning(_sharedLocalizer["Warning.Forbidden"]);
+                break;
+            default:
+            {
+                var message = ex.GetAggregatedErrorMessage();
+                _dialogService.ShowError(_sharedLocalizer[message]);
+                break;
+            }
         }
 
         throw ex;

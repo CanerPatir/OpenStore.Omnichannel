@@ -92,5 +92,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Inventory {
                 return ResourceManager.GetString("StopSelling", resourceCulture);
             }
         }
+        
+        internal static string ColumnHeader_IncomingQuantity {
+            get {
+                return ResourceManager.GetString("ColumnHeader.IncomingQuantity", resourceCulture);
+            }
+        }
     }
 }

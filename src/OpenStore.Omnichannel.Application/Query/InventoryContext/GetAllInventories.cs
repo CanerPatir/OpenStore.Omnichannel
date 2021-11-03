@@ -42,6 +42,7 @@ public class GetAllInventoriesHandler : IRequestHandler<GetAllInventories, Paged
                 pageRequest.PageNumber,
                 pageRequest.PageSize,
                 v => new InventoryListItemDto(
+                    v.Inventory.Id,
                     v.ProductId,
                     v.Product.Title,
                     v.Product.FirstMedia?.Url,

@@ -60,6 +60,16 @@ public class Inventory : Entity<Guid>, IAuditableEntity
         ApplyChange(new InventoryChanged(Id, Quantity, AvailableQuantity, ContinueSellingWhenOutOfStock));
     }
 
+    public void AddQuantity(AddInventoryQuantity command)
+    {
+        Change(AvailableQuantity + command.Quantity);
+    }
+    
+    public void SetQuantity(SetInventoryQuantity command)
+    {
+        Change(command.Quantity);
+    }
+
     public void ChangeContinueSellingWhenOutOfStockStatus(bool continueSellingWhenOutOfStock)
     {
         ContinueSellingWhenOutOfStock = continueSellingWhenOutOfStock;
@@ -67,23 +77,23 @@ public class Inventory : Entity<Guid>, IAuditableEntity
         ApplyChange(new InventoryChanged(Id, Quantity, AvailableQuantity, ContinueSellingWhenOutOfStock));
     }
 
-    public void Reserve(int pieces)
+    public void Decrease(int quantity)
     {
-        if (!ContinueSellingWhenOutOfStock && AvailableQuantity < pieces)
+        if (!ContinueSellingWhenOutOfStock && AvailableQuantity < quantity)
         {
             throw new DomainException(Msg.Domain.Inventory.OutOfStock);
         }
 
-        AvailableQuantity -= pieces;
+        AvailableQuantity -= quantity;
 
         ApplyChange(new InventoryReserved(Id, Quantity, AvailableQuantity));
     }
 
-    public void Release(int pieces)
-    {
-        var newAvailableQty = AvailableQuantity + pieces;
-        AvailableQuantity = Math.Max(Quantity, newAvailableQty);
-
-        ApplyChange(new InventoryReleased(Id, Quantity, AvailableQuantity));
-    }
+    // public void Release(int quantity)
+    // {
+    //     var newAvailableQty = AvailableQuantity + quantity;
+    //     AvailableQuantity = Math.Max(Quantity, newAvailableQty);
+    //
+    //     ApplyChange(new InventoryReleased(Id, Quantity, AvailableQuantity));
+    // }
 }

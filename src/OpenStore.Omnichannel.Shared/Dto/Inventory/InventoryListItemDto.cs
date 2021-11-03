@@ -1,6 +1,8 @@
 namespace OpenStore.Omnichannel.Shared.Dto.Inventory;
 
-public record InventoryListItemDto(Guid ProductId,
+public record InventoryListItemDto(
+    Guid InventoryId,
+    Guid ProductId,
     string ProductTitle,
     string ProductPhotoUrl,
     string Sku,

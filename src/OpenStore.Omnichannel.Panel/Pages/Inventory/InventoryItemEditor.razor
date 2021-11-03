@@ -1,0 +1,98 @@
+@inject IStringLocalizer<InventoryItemEditor> L
+@inherits AppBaseViewModelObservableComponent<InventoryIndexViewModel>
+
+<Row>
+    <Column ColumnSize="ColumnSize.Is3">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            @if (_mode == EditMode.Add)
+            {
+                <Button Color="Color.Dark" Clicked="ChangeMode">@L["Button.Add"]</Button>
+                <Button Color="Color.Light" Clicked="ChangeMode">@L["Button.Set"]</Button>
+            }
+            else
+            {
+                <Button Color="Color.Light" Clicked="ChangeMode">@L["Button.Add"]</Button>
+                <Button Color="Color.Dark" Clicked="ChangeMode">@L["Button.Set"]</Button>
+            }
+
+        </div>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is3">
+        <input type="number" value="@_quantity" @onchange="@(_e => _quantity = int.Parse(_e.Value.ToString()))" min="0" class="form-control"/>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is3">
+        <Button Color="Color.Secondary" Clicked="Save" Loading="_saving">@SharedLocalizer["Generic.Save"]</Button>
+    </Column>
+</Row>
+
+@code {
+
+    private enum EditMode
+    {
+        Set,
+        Add
+    }
+
+    EditMode _mode;
+    int _quantity;
+    bool _saving;
+
+    [EditorRequired]
+    [Parameter]
+    public InventoryListItemDto Model { get; set; }
+
+    [Parameter]
+    public EventCallback<InventoryListItemDto> ModelChanged { get; set; }
+
+    private void ChangeMode()
+    {
+        _mode = _mode == EditMode.Set ? EditMode.Add : EditMode.Set;
+    }
+
+    private async Task Save()
+    {
+        _saving = true;
+        StateHasChanged();
+        try
+        {
+            if (_mode == EditMode.Add)
+            {
+                await ViewModel.AddStock(Model, _quantity);
+                Model = new InventoryListItemDto(Model.InventoryId, 
+                    Model.ProductId, 
+                    Model.ProductTitle, 
+                    Model.ProductPhotoUrl, 
+                    Model.Sku, 
+                    Model.Option1, 
+                    Model.Option2, 
+                    Model.Option3, 
+                    Model.ContinueSellingWhenOutOfStock, 
+                    Model.AvailableQuantity + _quantity, 
+                    Model.AvailableQuantity + _quantity);
+            }
+            else
+            {
+                await ViewModel.SetStock(Model, _quantity);
+                Model = new InventoryListItemDto(Model.InventoryId, 
+                    Model.ProductId, 
+                    Model.ProductTitle, 
+                    Model.ProductPhotoUrl, 
+                    Model.Sku, 
+                    Model.Option1, 
+                    Model.Option2, 
+                    Model.Option3, 
+                    Model.ContinueSellingWhenOutOfStock, 
+                    _quantity, 
+                    _quantity);
+            }
+            await ModelChanged.InvokeAsync();
+        }
+        finally
+        {
+            _quantity = 0;
+            _saving = false;
+            StateHasChanged();
+        }
+    }
+
+}

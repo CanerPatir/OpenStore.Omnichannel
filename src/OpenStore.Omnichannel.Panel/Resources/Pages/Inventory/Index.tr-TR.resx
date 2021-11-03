@@ -42,4 +42,7 @@
     <data name="StopSelling" xml:space="preserve">
         <value>Satış durur</value>
     </data>
+    <data name="ColumnHeader.IncomingQuantity" xml:space="preserve">
+        <value>Girilen Adet</value>
+    </data>
 </root>
