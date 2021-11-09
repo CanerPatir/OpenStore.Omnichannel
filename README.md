@@ -30,6 +30,6 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 * update prevent exit if there is change
 
 ## see also 
-- open telemetry 
+- open telemetry, zipkin, jeager, promotheus, grafana 
 - aot compalation 
 - 
