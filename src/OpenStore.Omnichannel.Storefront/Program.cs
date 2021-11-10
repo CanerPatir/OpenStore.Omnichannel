@@ -69,6 +69,8 @@ services
         options.TokenValidationParameters.RoleClaimType = "role";
 
         options.AccessDeniedPath = "/";
+
+        options.SaveTokens = true;
     });
 
 var apiConfiguration = builder.Configuration.GetSection("Api").Get<ApiConfiguration>();

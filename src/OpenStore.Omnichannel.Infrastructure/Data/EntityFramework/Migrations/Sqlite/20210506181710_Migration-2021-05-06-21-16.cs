@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite;
 

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Data.EntityFramework.EntityConfiguration;
 using OpenStore.Omnichannel.Domain.ChannelContext;

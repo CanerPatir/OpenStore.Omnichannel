@@ -7,7 +7,6 @@ using OpenStore.Omnichannel.Shared.Query.Result;
 namespace OpenStore.Omnichannel.Api.Storefront;
 
 [Route("api-sf/[controller]")]
-
 public class CatalogController : BaseApiController
 {
     private readonly IMediator _mediator;

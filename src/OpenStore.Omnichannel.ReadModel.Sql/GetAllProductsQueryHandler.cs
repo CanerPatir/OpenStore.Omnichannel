@@ -15,8 +15,12 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
         _repository = repository;
     }
 
-    public async Task<AllProductsResult> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+    public async Task<AllProductsResult> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
     {
-        return null;
+        var (batchSize, firstIndex) = query;
+        
+        
+        
+        return new AllProductsResult(new []{ new ProductItemDto() });
     }
 }

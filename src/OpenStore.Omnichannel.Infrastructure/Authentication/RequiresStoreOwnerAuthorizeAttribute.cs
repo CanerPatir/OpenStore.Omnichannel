@@ -1,5 +1,3 @@
-using System;
-
 namespace OpenStore.Omnichannel.Infrastructure.Authentication;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]

@@ -20,12 +20,10 @@ public class CatalogController : Controller
 
     [HttpGet("~/search", Name = SearchRouteName)]
     public IActionResult Search([FromQuery] string term) => View();
-
-
+    
     [HttpGet("~/all", Name = AllRouteName)]
     public async Task<IActionResult> AllProducts() => View(await _allProductsViewModelFactory.Produce());
-
-
+    
     [HttpGet("~/collection/{name}", Name = CollectionRouteName)]
     public async Task<IActionResult> Collection(string name) => View(await _collectionProductsViewModelFactory.Produce());
 }

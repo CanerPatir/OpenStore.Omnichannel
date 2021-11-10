@@ -1,9 +1,5 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using OpenStore.Application.Email;
+﻿using OpenStore.Application.Email;
 using OpenStore.Infrastructure.Email.Templating;
-using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 
 namespace OpenStore.Omnichannel.Infrastructure;

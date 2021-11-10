@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using OpenStore.Omnichannel.Storefront.Models.Catalog;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
@@ -18,9 +19,8 @@ public class AllProductsViewModelFactory : IViewModelFactory<AllProductsViewMode
 
     public async Task<AllProductsViewModel> Produce(CancellationToken cancellationToken = default)
     {
-        var firstIndex = 0;
+        var firstIndex = 0; 
         var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, firstIndex);
-
         return new AllProductsViewModel(getAllProductsResult.Items.Select(x => new  ProductItemViewModel()).ToList());
     }
 }
