@@ -1,15 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using OpenStore.Omnichannel.ReadModel.Query;
-using OpenStore.Omnichannel.ReadModel.Query.Result;
+﻿using MediatR;
+using OpenStore.Omnichannel.Shared.Query;
+using OpenStore.Omnichannel.Shared.Query.Result;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql;
 
-public class GetProductDetailQueryHandler : IRequestHandler<GetProductDetailQuery, GetProductDetailResult>
+public class GetProductDetailQueryHandler : IRequestHandler<GetProductDetailQuery, ProductDetailResult>
 {
-    public Task<GetProductDetailResult> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
+    public Task<ProductDetailResult> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

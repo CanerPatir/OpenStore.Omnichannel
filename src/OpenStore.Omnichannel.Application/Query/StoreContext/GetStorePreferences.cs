@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.StoreContext;
-using OpenStore.Omnichannel.Shared.Dto.Store;
+using OpenStore.Omnichannel.Shared.Dto.Management.Store;
 
 namespace OpenStore.Omnichannel.Application.Query.StoreContext;
 

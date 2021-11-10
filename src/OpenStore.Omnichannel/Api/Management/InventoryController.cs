@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenStore.Application;
 using OpenStore.Omnichannel.Application.Query.InventoryContext;
 using OpenStore.Omnichannel.Domain.InventoryContext;
-using OpenStore.Omnichannel.Shared.Dto.Inventory;
+using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
 
 namespace OpenStore.Omnichannel.Api.Management;
 

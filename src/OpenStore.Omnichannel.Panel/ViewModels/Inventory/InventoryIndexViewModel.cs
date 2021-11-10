@@ -1,5 +1,5 @@
 using OpenStore.Omnichannel.Panel.Services;
-using OpenStore.Omnichannel.Shared.Dto.Inventory;
+using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Inventory;
 

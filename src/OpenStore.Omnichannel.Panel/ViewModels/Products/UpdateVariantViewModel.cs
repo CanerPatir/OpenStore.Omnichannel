@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto;
-using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Products;
 

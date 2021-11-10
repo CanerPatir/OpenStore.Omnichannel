@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Shared.Dto.Store;
+using OpenStore.Omnichannel.Shared.Dto.Management.Store;
 
 // ReSharper disable once CheckNamespace
 namespace OpenStore.Omnichannel.Domain.StoreContext;

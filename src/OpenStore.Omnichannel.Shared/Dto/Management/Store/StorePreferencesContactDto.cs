@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Shared.Dto.Store;
+namespace OpenStore.Omnichannel.Shared.Dto.Management.Store;
 
 public class StorePreferencesContactDto
 {

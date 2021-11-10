@@ -10,10 +10,18 @@ using OpenStore.Omnichannel.Storefront.Services.Clients;
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
-// Add services to the container.
-services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithSingletonLifetime());
 
-services.AddControllersWithViews();
+services.AddHttpContextAccessor();
+// Add services to the container.
+services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithScopedLifetime());
+
+var mvcBuilder = services.AddControllersWithViews();
+
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
+
 services.AddAntiforgery();
 services.AddResponseCompression();
 

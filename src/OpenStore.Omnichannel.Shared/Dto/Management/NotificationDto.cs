@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text.Json.Serialization;
 
-namespace OpenStore.Omnichannel.Shared.Dto;
+namespace OpenStore.Omnichannel.Shared.Dto.Management;
 
 public class NotificationDto : INotification
 {

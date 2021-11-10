@@ -1,0 +1,32 @@
+@model AllProductsViewModel
+
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-12">
+                <header class="border-bottom mb-4 pb-3">
+                    <div class="form-inline">
+                        @* <span class="mr-md-auto">32 Items found </span> *@
+                        <select class="mr-2 form-control">
+                            <option>Latest items</option>
+                            <option>Trending</option>
+                            <option>Most Popular</option>
+                            <option>Cheapest</option>
+                        </select>
+                    </div>
+                </header>
+
+                <div class="row">
+                    @foreach (var item in Model.Items)
+                    {
+                        <partial name="_ProductListItem" model="item"/>
+                    }
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Views/Catalog/AllProducts.cshtml.js"></script>
+}

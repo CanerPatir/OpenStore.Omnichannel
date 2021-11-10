@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using OpenStore.Omnichannel.Shared.Dto.Inventory;
+using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
 
 namespace OpenStore.Omnichannel.Panel.Services;
 

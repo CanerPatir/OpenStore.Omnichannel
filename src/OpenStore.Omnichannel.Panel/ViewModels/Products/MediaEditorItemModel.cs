@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Products;
 

@@ -1,6 +1,6 @@
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.InventoryContext;
-using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 // ReSharper disable ReturnTypeCanBeEnumerable.Global
 // ReSharper disable MemberCanBeProtected.Global

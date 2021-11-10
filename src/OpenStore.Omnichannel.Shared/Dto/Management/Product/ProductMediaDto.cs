@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OpenStore.Omnichannel.Shared.Dto.Product;
+namespace OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 public class ProductMediaDto
 {

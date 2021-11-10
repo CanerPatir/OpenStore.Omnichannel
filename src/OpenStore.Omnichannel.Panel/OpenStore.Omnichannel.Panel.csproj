@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+        <RunAOTCompilation>true</RunAOTCompilation>
     </PropertyGroup>
 
     <ItemGroup>

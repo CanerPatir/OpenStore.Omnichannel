@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Shared.Dto.Product;
+namespace OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 public record ProductListItemDto(Guid Id,
     string PhotoUrl,

@@ -6,8 +6,8 @@ using OpenStore.Omnichannel.Application.Command.ProductContext;
 using OpenStore.Omnichannel.Application.Query.ProductContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
-using OpenStore.Omnichannel.Shared.Dto;
-using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Request;
 
 namespace OpenStore.Omnichannel.Api.Management;

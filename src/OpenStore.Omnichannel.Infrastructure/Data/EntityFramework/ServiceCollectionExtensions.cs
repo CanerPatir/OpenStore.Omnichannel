@@ -11,8 +11,8 @@ using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Domain.StoreContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
-using OpenStore.Omnichannel.Shared.Dto.Product;
-using OpenStore.Omnichannel.Shared.Dto.Store;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management.Store;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
 

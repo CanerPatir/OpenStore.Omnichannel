@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Shared.Dto;
+using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Request;
 
 namespace OpenStore.Omnichannel.Identity.Services;

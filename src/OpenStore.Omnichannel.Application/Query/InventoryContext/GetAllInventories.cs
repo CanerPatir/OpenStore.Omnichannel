@@ -4,7 +4,7 @@ using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Application.Extensions;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.Dto.Inventory;
+using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
 
 namespace OpenStore.Omnichannel.Application.Query.InventoryContext;
 

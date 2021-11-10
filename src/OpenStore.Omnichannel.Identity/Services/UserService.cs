@@ -11,6 +11,7 @@ using OpenStore.Application.Crud;
 using OpenStore.Data.EntityFramework.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Shared.Dto;
+using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Request;
 
 namespace OpenStore.Omnichannel.Identity.Services;

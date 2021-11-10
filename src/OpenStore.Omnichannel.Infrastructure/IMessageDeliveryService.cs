@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using OpenStore.Omnichannel.Shared.Dto;
+using OpenStore.Omnichannel.Shared.Dto.Management;
 
 namespace OpenStore.Omnichannel.Infrastructure;
 

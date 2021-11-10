@@ -1,4 +1,5 @@
 @inject IStringLocalizer<InventoryItemEditor> L
+@using OpenStore.Omnichannel.Shared.Dto.Management.Inventory
 @inherits AppBaseViewModelObservableComponent<InventoryIndexViewModel>
 
 <Row>
@@ -37,7 +38,6 @@
     int _quantity;
     bool _saving;
 
-    [EditorRequired]
     [Parameter]
     public InventoryListItemDto Model { get; set; }
 

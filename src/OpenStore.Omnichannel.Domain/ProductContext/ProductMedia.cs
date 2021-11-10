@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using OpenStore.Omnichannel.Shared.Dto.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 // ReSharper disable CollectionNeverUpdated.Local
 

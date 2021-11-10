@@ -1,14 +1,13 @@
-using System;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
-using OpenStore.Omnichannel.ReadModel.Query;
-using OpenStore.Omnichannel.ReadModel.Query.Result;
+using OpenStore.Omnichannel.Shared.Query;
+using OpenStore.Omnichannel.Shared.Query.Result;
 
 namespace OpenStore.Omnichannel.Api.Storefront;
 
-[Microsoft.AspNetCore.Components.Route("api-sf/[controller]")]
+[Route("api-sf/[controller]")]
+
 public class CatalogController : BaseApiController
 {
     private readonly IMediator _mediator;
@@ -19,5 +18,11 @@ public class CatalogController : BaseApiController
     }
 
     [HttpGet("product-detail/{id:guid}")]
-    public Task<GetProductDetailResult> GetProductDetail([FromRoute] Guid id) => _mediator.Send(new GetProductDetailQuery());
+    public Task<ProductDetailResult> GetProductDetail([FromRoute] Guid id) => _mediator.Send(new GetProductDetailQuery(id));
+
+    [HttpGet("all/{batchSize:int}/{firstIndex:int}")]
+    public Task<AllProductsResult> GetAllProducts(int batchSize, int firstIndex) => _mediator.Send(new GetAllProductsQuery(batchSize, firstIndex));
+
+    [HttpGet("collection/{id:guid}/{batchSize:int}/{firstIndex:int}")]
+    public Task<CollectionProductsResult> GetCollectionProducts(Guid id, int batchSize, int firstIndex) => _mediator.Send(new GetCollectionProductsQuery(id, batchSize, firstIndex));
 }

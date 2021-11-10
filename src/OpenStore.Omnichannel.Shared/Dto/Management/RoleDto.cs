@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Shared.Dto;
+namespace OpenStore.Omnichannel.Shared.Dto.Management;
 
 public class RoleDto
 {

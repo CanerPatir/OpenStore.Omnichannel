@@ -1,5 +1,5 @@
 using MediatR;
-using OpenStore.Omnichannel.Shared.Dto.Store;
+using OpenStore.Omnichannel.Shared.Dto.Management.Store;
 
 namespace OpenStore.Omnichannel.Domain.StoreContext;
 
