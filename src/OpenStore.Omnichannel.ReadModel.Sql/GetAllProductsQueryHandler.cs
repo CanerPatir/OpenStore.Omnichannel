@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Query;
@@ -18,9 +19,12 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
     public async Task<AllProductsResult> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
     {
         var (batchSize, firstIndex) = query;
-        
-        
-        
-        return new AllProductsResult(new []{ new ProductItemDto() });
+
+        var products = await _repository.Query.Skip(firstIndex).Take(batchSize)
+            .ToListAsync(cancellationToken);
+
+        return new AllProductsResult(products.Select(x => new ProductItemDto(x.Id,
+            x.Title,
+            x.FirstMedia?.Url)).ToList());
     }
 }

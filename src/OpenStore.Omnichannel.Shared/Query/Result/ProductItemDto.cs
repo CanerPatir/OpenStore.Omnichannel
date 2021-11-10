@@ -1,3 +1,3 @@
 namespace OpenStore.Omnichannel.Shared.Query.Result;
 
-public record ProductItemDto();
+public record ProductItemDto(Guid Id, string Title, string PhotoUrl);
