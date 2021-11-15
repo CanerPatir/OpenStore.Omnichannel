@@ -14,6 +14,7 @@ var services = builder.Services;
 services.AddHttpContextAccessor();
 // Add services to the container.
 services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithScopedLifetime());
+services.Scan(x => x.FromAssemblyOf<IBffService>().AddClasses(c => c.AssignableTo<IBffService>()).AsSelf().WithScopedLifetime());
 
 var mvcBuilder = services.AddControllersWithViews();
 

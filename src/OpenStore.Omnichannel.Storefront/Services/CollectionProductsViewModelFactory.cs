@@ -22,6 +22,6 @@ public class CollectionProductsViewModelFactory : IViewModelFactory<CollectionPr
         var collectionId = Guid.Empty;
         var getCollectionProductsResult = await _apiClient.Catalog.GetCollectionProducts(collectionId, BatchSize, firstIndex);
 
-        return new CollectionProductsViewModel(getCollectionProductsResult.Items.Select(x => new  ProductItemViewModel()).ToList());
+        return new CollectionProductsViewModel(getCollectionProductsResult.Items.Select(x => new  ProductItemDto(x.Id, x.Title, x.PhotoUrl)).ToList());
     }
 }

@@ -9,21 +9,27 @@ public class CatalogController : Controller
     private const string AllRouteName = "All";
     private const string CollectionRouteName = "Collection";
 
-    private readonly AllProductsViewModelFactory _allProductsViewModelFactory;
+    private readonly ProductBffService _productBffService;
     private readonly CollectionProductsViewModelFactory _collectionProductsViewModelFactory;
 
-    public CatalogController(AllProductsViewModelFactory allProductsViewModelFactory, CollectionProductsViewModelFactory collectionProductsViewModelFactory)
+    public CatalogController(ProductBffService productBffService, CollectionProductsViewModelFactory collectionProductsViewModelFactory)
     {
-        _allProductsViewModelFactory = allProductsViewModelFactory;
+        _productBffService = productBffService;
         _collectionProductsViewModelFactory = collectionProductsViewModelFactory;
     }
 
     [HttpGet("~/search", Name = SearchRouteName)]
     public IActionResult Search([FromQuery] string term) => View();
-    
+
     [HttpGet("~/all", Name = AllRouteName)]
-    public async Task<IActionResult> AllProducts() => View(await _allProductsViewModelFactory.Produce());
+    public IActionResult AllProducts() => View();
     
+    [HttpGet("~/all-products/page")]
+    public async Task<IActionResult> AllProductsPage([FromQuery] int page) => Ok(new
+    {
+        data = await _productBffService.GetProductsPage(page)
+    });
+
     [HttpGet("~/collection/{name}", Name = CollectionRouteName)]
     public async Task<IActionResult> Collection(string name) => View(await _collectionProductsViewModelFactory.Produce());
 }

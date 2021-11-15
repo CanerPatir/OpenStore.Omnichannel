@@ -8,6 +8,9 @@
       <Content Update="appsettings.Development.json">
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
+      <Content Include="Views\Catalog\AllProducts.cshtml.js">
+        <DependentUpon>AllProducts.cshtml</DependentUpon>
+      </Content>
     </ItemGroup>
     
     <ItemGroup>
