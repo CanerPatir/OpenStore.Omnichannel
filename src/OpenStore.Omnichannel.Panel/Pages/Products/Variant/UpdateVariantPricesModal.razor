@@ -120,7 +120,7 @@
     [Parameter]
     public EventCallback ModelChanged { get; set; }
 
-    public void Show(IEnumerable<VariantDto> variants)
+    public async Task  Show(IEnumerable<VariantDto> variants)
     {
         _variants = variants.ToList();
         _updateVariantPriceModelList = _variants.Select(v => new UpdateVariantPriceModel
@@ -131,10 +131,10 @@
             VariantId = v.Id.Value,
             Title = v.Title
         }).ToList();
-        _modalRef.Show();
+        await _modalRef.Show();
     }
 
-    private void Cancel() => _modalRef.Hide();
+    private Task Cancel() => _modalRef.Hide();
 
     private async Task Save()
     {
@@ -142,7 +142,7 @@
         try
         {
             await ApiClient.Product.UpdateVariantPrices(ProductId, new UpdateVariantPricesRequest(_updateVariantPriceModelList.Select(x => (UpdateVariantPriceRequest) x)));
-            _modalRef.Hide();
+            await _modalRef.Hide();
             await UpdateLocalState();
             _variants = null;
             _updateVariantPriceModelList = null;

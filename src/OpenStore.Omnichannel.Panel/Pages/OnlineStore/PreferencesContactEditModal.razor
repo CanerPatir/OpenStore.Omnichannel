@@ -87,18 +87,18 @@
     
     private Modal _modalRef;
 
-    public void Show() => _modalRef.Show();
+    public Task Show() => _modalRef.Show();
 
     private async Task Cancel()
     {
         await ViewModel.Retrieve();
-        _modalRef.Hide();
+        await _modalRef.Hide();
     }
 
     private async Task Save()
     {
         await ViewModel.Save();
-        _modalRef.Hide();
+        await _modalRef.Hide();
     }
 
 }

@@ -79,19 +79,19 @@
     [Parameter]
     public EventCallback ModelChanged { get; set; }
 
-    public void Show()
+    public async Task Show()
     {
         _model = new VariantDto();
         _validations?.ClearAll();
 
-        _modalRef.Show();
+        await _modalRef.Show();
     }
 
-    private void Cancel() => _modalRef.Hide();
+    private Task Cancel() => _modalRef.Hide();
 
     private async Task Save()
     {
-        if (!_validations.ValidateAll())
+        if (!await _validations.ValidateAll())
         {
             return;
         }
@@ -99,7 +99,7 @@
         try
         {
             _model.Id = await ApiClient.Product.CreateVariant(Product.Id.Value, _model);
-            _modalRef.Hide();
+            await _modalRef.Hide();
             await UpdateLocalState();
     // _model = null;
         }

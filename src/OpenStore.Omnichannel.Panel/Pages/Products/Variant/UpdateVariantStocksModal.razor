@@ -92,7 +92,7 @@
     [Parameter]
     public Guid ProductId { get; set; }
 
-    public void Show(IEnumerable<VariantDto> variants)
+    public async Task  Show(IEnumerable<VariantDto> variants)
     {
         _variants = variants.ToList();
         _updateVariantStockModelList = _variants.Select(v => new UpdateVariantStockModel
@@ -102,10 +102,10 @@
             Quantity = v.Quantity,
             Title = v.Title
         }).ToList();
-        _modalRef.Show();
+        await _modalRef.Show();
     }
 
-    private void Cancel() => _modalRef.Hide();
+    private Task Cancel() => _modalRef.Hide();
 
     private async Task Save()
     {
@@ -113,7 +113,7 @@
         try
         {
             await ApiClient.Product.UpdateVariantStocks(ProductId, new UpdateVariantStocksRequest(_updateVariantStockModelList.Select(x => (UpdateVariantStockRequest) x)));
-            _modalRef.Hide();
+            await _modalRef.Hide();
             await UpdateLocalState();
             _variants = null;
             _updateVariantStockModelList = null;

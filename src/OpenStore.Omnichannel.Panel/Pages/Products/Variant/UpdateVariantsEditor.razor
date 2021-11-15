@@ -182,15 +182,15 @@ else
         }
     }
 
-    private void ShowAddVariantModal() => _updateVariantCreateModal.Show();
+    private Task ShowAddVariantModal() => _updateVariantCreateModal.Show();
 
-    private void BulkUpdatePrice() => _updateVariantPricesModal.Show(ViewModel.SelectedVariants);
+    private Task BulkUpdatePrice() => _updateVariantPricesModal.Show(ViewModel.SelectedVariants);
 
-    private void BulkUpdateStock() => _updateVariantStocksModal.Show(ViewModel.SelectedVariants);
+    private Task BulkUpdateStock() => _updateVariantStocksModal.Show(ViewModel.SelectedVariants);
 
-    private void BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(ViewModel.SelectedVariants);
+    private Task BulkUpdateBarcode() => _updateVariantBarcodesModal.Show(ViewModel.SelectedVariants);
 
-    private void BulkUpdateSku() => _updateVariantSkusModal.Show(ViewModel.SelectedVariants);
+    private Task BulkUpdateSku() => _updateVariantSkusModal.Show(ViewModel.SelectedVariants);
 
     private async Task BulkDelete()
     {

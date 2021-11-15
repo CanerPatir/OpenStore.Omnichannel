@@ -72,9 +72,9 @@
 
     private Modal _modalRef;
 
-    private void Show() => _modalRef.Show();
+    private Task Show() => _modalRef.Show();
 
-    private void Close() => _modalRef.Close(CloseReason.UserClosing);
+    private Task Close() => _modalRef.Close(CloseReason.UserClosing);
 
     private Task Remove() => RemoveClicked.InvokeAsync(Model);
 

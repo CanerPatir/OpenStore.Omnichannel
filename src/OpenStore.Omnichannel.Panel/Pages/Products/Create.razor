@@ -111,7 +111,7 @@
 
     private async Task Save()
     {
-        _formHasErrors = !_validations.ValidateAll();
+        _formHasErrors = !await _validations.ValidateAll();
         if (_formHasErrors)
         {
             return;

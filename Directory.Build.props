@@ -13,7 +13,7 @@
         <PackageLicenseUrl>https://github.com/canerpatir/OpenStore/blob/master/LICENCE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/canerpatir/OpenStore</PackageProjectUrl>
         <LangVersion>latest</LangVersion>
-        <OpenStoreBuildingBlocksVersion>1.0.1</OpenStoreBuildingBlocksVersion>
+        <OpenStoreBuildingBlocksVersion>1.0.2</OpenStoreBuildingBlocksVersion>
         <NetPackagesVersion>6.0.0</NetPackagesVersion>
         <NetExtensionsPackageVersion>6.0.0</NetExtensionsPackageVersion>
         <EfPackageVersion>6.0.0</EfPackageVersion>

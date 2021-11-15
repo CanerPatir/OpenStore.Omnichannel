@@ -208,7 +208,7 @@
     [Parameter]
     public Guid VariantId { get; set; }
 
-    private void SelectVariantImage() => _variantMediaEditor.Show();
+    private Task SelectVariantImage() => _variantMediaEditor.Show();
 
     protected override async Task OnParametersSetAsync()
     {

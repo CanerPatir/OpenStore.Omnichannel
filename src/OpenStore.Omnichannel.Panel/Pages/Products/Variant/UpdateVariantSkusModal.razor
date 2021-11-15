@@ -67,7 +67,7 @@
     [Parameter]
     public Guid ProductId { get; set; }
 
-    public void Show(IEnumerable<VariantDto> variants)
+    public async Task  Show(IEnumerable<VariantDto> variants)
     {
         _variants = variants.ToList();
         _updateVariantSkuModelList = _variants.Select(v => new UpdateVariantSkuModel
@@ -76,7 +76,7 @@
             Sku = v.Sku,
             Title = v.Title
         }).ToList();
-        _modalRef.Show();
+        await _modalRef.Show();
     }
 
     private void Cancel() => _modalRef.Hide();
@@ -87,7 +87,7 @@
         try
         {
             await ApiClient.Product.UpdateVariantSkus(ProductId, new UpdateVariantSkusRequest(_updateVariantSkuModelList.Select(x => (UpdateVariantSkuRequest) x)));
-            _modalRef.Hide();
+            await _modalRef.Hide();
             await UpdateLocalState();
             _variants = null;
             _updateVariantSkuModelList = null;

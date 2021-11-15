@@ -69,22 +69,22 @@
         ViewModel.SelectVariantMedia(item);
     }
 
-    public void Show()
+    public async Task Show()
     {
         ViewModel.InitMediaEditorItems();
-        _modalRef.Show();
+        await _modalRef.Show();
     }
     
     private async Task SaveVariantMedia()
     {
         await ViewModel.SaveVariantMedia();
-        Close();
+        await Close();
     }
 
-    private void Close()
+    private async Task Close()
     {
         ViewModel.ClearVariantMediaSelection();
-        _modalRef.Hide();
+        await _modalRef.Hide();
     }
     
 }
