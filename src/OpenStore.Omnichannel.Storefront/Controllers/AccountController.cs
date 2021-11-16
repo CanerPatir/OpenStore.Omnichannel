@@ -9,11 +9,8 @@ namespace OpenStore.Omnichannel.Storefront.Controllers;
 public class AccountController : Controller
 {
     // GET
-    public IActionResult Index()
-    {
-        return View();
-    }
+    public IActionResult Index() => View();
 
     [HttpPost]
-    public IActionResult SignOut() => SignOut(CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
+    public new IActionResult SignOut() => SignOut(CookieAuthenticationDefaults.AuthenticationScheme, OpenIdConnectDefaults.AuthenticationScheme);
 }

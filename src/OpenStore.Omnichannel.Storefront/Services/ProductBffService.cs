@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Storefront.Models.Catalog;
+using OpenStore.Omnichannel.Shared.Query.Result;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
@@ -14,9 +14,21 @@ public class ProductBffService : IBffService
         _apiClient = apiClient;
     }
 
-    public async Task<IEnumerable<ProductItemDto>> GetProductsPage(int page, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<ProductItemDto>> GetSearchProductsPage(string term, int page, CancellationToken cancellationToken = default)
     {
-        var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, page == 1 ? 0 : BatchSize * page);
-        return getAllProductsResult.Items.Select(x => new ProductItemDto(x.Id, x.Title, x.PhotoUrl)).ToList();
+        var getAllProductsResult = await _apiClient.Catalog.GetSearchProducts(term, BatchSize, page == 1 ? 0 : BatchSize * page, cancellationToken);
+        return getAllProductsResult.Items;
+    }
+
+    public async Task<IEnumerable<ProductItemDto>> GetCollectionProductsPage(Guid collectionId, int page, CancellationToken cancellationToken = default)
+    {
+        var getAllProductsResult = await _apiClient.Catalog.GetCollectionProducts(collectionId, BatchSize, page == 1 ? 0 : BatchSize * page, cancellationToken);
+        return getAllProductsResult.Items;
+    }
+
+    public async Task<IEnumerable<ProductItemDto>> GetAllProductsPage(int page, CancellationToken cancellationToken = default)
+    {
+        var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, page == 1 ? 0 : BatchSize * page, cancellationToken);
+        return getAllProductsResult.Items;
     }
 }

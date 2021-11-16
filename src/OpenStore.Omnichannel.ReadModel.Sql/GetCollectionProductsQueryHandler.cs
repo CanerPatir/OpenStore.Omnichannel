@@ -17,6 +17,7 @@ public class GetCollectionProductsQueryHandler: IRequestHandler<GetAllProductsQu
 
     public async Task<AllProductsResult> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
     {
+        await Task.Delay(10, cancellationToken);
         return null;
     }
 }

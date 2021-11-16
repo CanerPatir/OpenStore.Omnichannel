@@ -67,12 +67,9 @@
                     if (result) {
                         if (result[opts.key].length === 0) {
                             isFinished = true;
-
                             // if zero, call zeroCallback
-                            console.log(currentScrollPage + " " + opts.zeroCallback);
                             if (
-                                currentScrollPage === 1 &&
-                                typeof opts.zeroCallback === "function"
+                                currentScrollPage === 1 && typeof opts.zeroCallback === "function"
                             ) {
                                 opts.zeroCallback();
                             }

@@ -26,23 +26,6 @@ public class VariantDto
 
     [NotMapped] public bool Selected { get; set; }
 
-    [NotMapped]
-    public string Title
-    {
-        get
-        {
-            var title = Option1;
-            if (!string.IsNullOrWhiteSpace(Option2))
-            {
-                title += $" / {Option2}";
-            }
-
-            if (!string.IsNullOrWhiteSpace(Option3))
-            {
-                title += $" / {Option3}";
-            }
-
-            return title;
-        }
-    }
+    [NotMapped] public string Title => GeneralHelper.GetVariantTitle(Option1, Option2, Option3);
+    
 }

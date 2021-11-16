@@ -26,6 +26,7 @@ public class OutBoxMessageHandler : BaseOutBoxMessageHandler
         foreach (var outBoxMessagesByAggregateId in outBoxMessageBatch.Messages.GroupBy(x => x.AggregateId))
         {
             _logger.LogInformation($"{outBoxMessageBatch.Messages.Count} retrieved");
+            await Task.Delay(10, cancellationToken);
             // await _producer.ProduceMany(ServiceCollectionExtensions.OpenStoreOutboxTopic,
             //     outBoxMessagesByAggregateId.Key, 
             //     outBoxMessagesByAggregateId.ToList(),

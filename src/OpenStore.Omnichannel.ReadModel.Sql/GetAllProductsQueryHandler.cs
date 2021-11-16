@@ -25,8 +25,13 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
             .Take(batchSize)
             .ToListAsync(cancellationToken);
 
-        return new AllProductsResult(products.Select(x => new ProductItemDto(x.Id,
+        return new AllProductsResult(products.Select(x => new ProductItemDto(
+            x.Id,
             x.Title,
-            x.FirstMedia?.Url)).ToList());
+            x.FirstMedia?.Url,
+            x.Handle,
+            x.Variants.First().Price,
+            x.Variants.First().CompareAtPrice
+        )).ToList());
     }
 }

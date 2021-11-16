@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
@@ -33,6 +34,8 @@ public class Variant : AuditableEntity
     public string Barcode { get; protected set; }
     public bool TrackQuantity { get; protected set; }
     public virtual Inventory Inventory { get; protected set; }
+    
+    [NotMapped] public string Title => GeneralHelper.GetVariantTitle(Option1, Option2, Option3);
 
     protected Variant()
     {

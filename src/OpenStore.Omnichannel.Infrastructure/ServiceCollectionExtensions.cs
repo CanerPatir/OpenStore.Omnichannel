@@ -34,7 +34,7 @@ public static class ServiceCollectionExtensions
         var infrastructureAssembly = Assembly.GetExecutingAssembly();
         var applicationAssembly = typeof(CreateProductMediaHandler).Assembly;
         var projectionsAssembly = typeof(OutBoxMessageHandler).Assembly;
-        var readModelSqlAssembly = typeof(GetProductDetailQueryHandler).Assembly;
+        var readModelSqlAssembly = typeof(GetProductDetailByHandleQueryHandler).Assembly;
 
         services
             .AddProjections(

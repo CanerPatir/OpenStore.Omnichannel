@@ -6,8 +6,3 @@ namespace OpenStore.Omnichannel.Storefront.Services;
 public interface IViewModelFactory
 {
 }
-
-public interface IViewModelFactory<TViewModel> : IViewModelFactory
-{
-    Task<TViewModel> Produce(CancellationToken cancellationToken = default);
-}

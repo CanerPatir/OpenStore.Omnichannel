@@ -16,5 +16,5 @@ public class ProductMediaDto
 
     public HashSet<Guid> VariantIds { get; set; } = new();
 
-    [NotMapped] public string Url => $"{Host?.TrimEnd('/')}/{Path}";
+    [NotMapped] public string Url => GeneralHelper.GetMediaUrl(Host, Path);
 }

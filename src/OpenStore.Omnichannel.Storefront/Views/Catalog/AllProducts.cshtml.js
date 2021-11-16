@@ -1,10 +1,10 @@
 $(document).ready(() => {
     $("#products-container").infiniteTemplate({
         templateSelector: "#product-box-tmpl",
-        dataPath: "/all-products/page",
+        dataPath: "/all/page",
         loadAtStart: true,
-        // query: "",
         loaderSelector: $('#products-loading'),
+        // query: "",
         // method: "GET",
         // templateHelpers: null,
         // loadSelector: null,

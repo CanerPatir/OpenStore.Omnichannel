@@ -15,10 +15,8 @@
                 </header>
                 <div class="row" id="products-container">
                 </div>
-                <div class="row align-content-center text-center" id="products-loading">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
+                <div id="products-loading">
+                    <partial name="_LoadingIndicator"/>
                 </div>
             </main>
         </div>
@@ -29,14 +27,15 @@
 <div class="col-md-3">
       <figure class="card card-product-grid">
           <div class="img-wrap">
-              <img src="{{:photoUrl}}" alt="">
-              <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
+              <img src="{{:photoUrl}}" alt="{{:handle}}">
+              <a class="btn-overlay" href="product/{{:handle}}" target="_blank"><i class="fa fa-search-plus"></i> Ürün Detay</a>
           </div>  
           <figcaption class="info-wrap">
               <div class="fix-height">
                   <a href="#" class="title">{{:title}}</a>
                   <div class="price-wrap mt-2">
-                      <span class="price">$1280</span>
+                      <span class="price">{{:price}}</span>
+                      <span class="compare-at-price">{{:compareAtPrice}}</span>
                   </div>  
               </div>
               <a href="#" class="btn btn-block btn-primary">Add to cart</a>
@@ -46,7 +45,8 @@
 </script>
 
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.11/jsrender.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.11/jsrender.min.js"
+            asp-fallback-src="~/storefront/js/jsrender.min.js"></script>
     <environment include="Development">
         <script src="~/storefront/js/jquery.infiniteScrollWithTemplate.js"></script>
     </environment>

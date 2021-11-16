@@ -3,5 +3,5 @@ using OpenStore.Omnichannel.Shared.Query.Result;
 
 namespace OpenStore.Omnichannel.Shared.Query;
 
-public record GetProductDetailQuery(Guid ProductId) : IRequest<ProductDetailResult>;
+public record GetProductDetailByHandleQuery(string Handle) : IRequest<ProductDetailResult>;
  
