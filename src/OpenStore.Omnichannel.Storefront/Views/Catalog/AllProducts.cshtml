@@ -13,25 +13,23 @@
                         </select>
                     </div>
                 </header>
-
                 <div class="row" id="products-container">
-
-
+                </div>
+                <div class="row align-content-center text-center" id="products-loading">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
                 </div>
             </main>
         </div>
     </div>
 </section>
 
-<div id="result" style="display: none">
-    
-</div>
-
 <script id="product-box-tmpl" type="text/x-jsrender">
 <div class="col-md-3">
       <figure class="card card-product-grid">
           <div class="img-wrap">
-              <img src="~/storefront/images/items/3.jpg" alt="">
+              <img src="{{:photoUrl}}" alt="">
               <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
           </div>  
           <figcaption class="info-wrap">

@@ -14,10 +14,9 @@ public class ProductBffService : IBffService
         _apiClient = apiClient;
     }
 
-    public async Task<AllProductsPageDto> GetProductsPage(int page, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<ProductItemDto>> GetProductsPage(int page, CancellationToken cancellationToken = default)
     {
-        var firstIndex = 0; 
-        var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, firstIndex);
-        return new AllProductsPageDto(getAllProductsResult.Items.Select(x => new  ProductItemDto(x.Id, x.Title, x.PhotoUrl)).ToList());
+        var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, page == 1 ? 0 : BatchSize * page);
+        return getAllProductsResult.Items.Select(x => new ProductItemDto(x.Id, x.Title, x.PhotoUrl)).ToList();
     }
 }

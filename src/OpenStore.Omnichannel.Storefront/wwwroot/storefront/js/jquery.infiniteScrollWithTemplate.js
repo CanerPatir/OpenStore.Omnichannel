@@ -51,6 +51,14 @@
             $.ajax({
                 url: opts.dataPath + "?page=" + currentScrollPage + query + timestamp,
                 method: opts.method,
+                beforeSend: function () {
+                    if (opts.loaderSelector)
+                        $(opts.loaderSelector).show();
+                },
+                complete: function () {
+                    if (opts.loaderSelector)
+                        $(opts.loaderSelector).hide();
+                },
                 success: function (result) {
                     if (typeof result === "string") {
                         result = JSON.parse(result);
@@ -76,7 +84,7 @@
 
                                 const html = tmpl.render(item);
 
-                                $(html).appendTo($this);
+                                $(html.replace(/(\r\n|\n|\r)/gm, '')).appendTo($this);
                             });
 
                             currentScrollPage += 1;
@@ -108,5 +116,6 @@
         initialPage: 1,
         preventCache: false,
         zeroCallback: null,
+        loaderSelector: null,
     };
 })(jQuery);

@@ -20,7 +20,9 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
     {
         var (batchSize, firstIndex) = query;
 
-        var products = await _repository.Query.Skip(firstIndex).Take(batchSize)
+        var products = await _repository.Query
+            .Skip(firstIndex)
+            .Take(batchSize)
             .ToListAsync(cancellationToken);
 
         return new AllProductsResult(products.Select(x => new ProductItemDto(x.Id,
