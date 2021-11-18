@@ -9,6 +9,7 @@ public record ProductDetailResult(
     string MetaDescription,
     bool HasMultipleVariants,
     bool IsPhysicalProduct,
+    ProductDetailMediaDto FirstMedia,
     IReadOnlyCollection<ProductDetailMediaDto> Medias,
     IReadOnlyCollection<ProductDetailVariantDto> Variants
 );

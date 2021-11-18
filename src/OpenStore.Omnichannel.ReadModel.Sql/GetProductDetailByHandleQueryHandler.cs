@@ -38,6 +38,19 @@ public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDe
             product.MetaDescription,
             product.HasMultipleVariants,
             product.IsPhysicalProduct,
+            product.FirstMedia == null ? null : new ProductDetailMediaDto(
+                 (Guid)product.FirstMedia?.Id,
+                 product.FirstMedia?.Host,
+                 product.FirstMedia?.Path,
+                 product.FirstMedia?.Type,
+                 product.FirstMedia?.Title,
+                 product.FirstMedia?.Extension,
+                 product.FirstMedia?.Filename,
+                 (int)product.FirstMedia?.Position,
+                 product.FirstMedia?.Size,
+                 product.FirstMedia?.Url,
+                 product.FirstMedia?.VariantIds.ToHashSet()
+                ),
             product.Medias.Select(x => new ProductDetailMediaDto(
                 x.Id,
                 x.Host,

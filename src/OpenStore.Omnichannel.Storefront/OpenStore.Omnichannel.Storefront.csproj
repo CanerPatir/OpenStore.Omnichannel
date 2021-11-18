@@ -19,6 +19,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="$(NetPackagesVersion)" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
         <PackageReference Include="Scrutor" Version="3.3.0" />
+        <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
 
     <ItemGroup>
@@ -33,6 +34,21 @@
       <None Update="Views\Catalog\AllProducts.cshtml.js">
         <DependentUpon>AllProducts.cshtml</DependentUpon>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Views\Catalog\ProductDetail.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ProductDetail.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Views\Catalog\ProductDetail.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ProductDetail.tr-TR.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

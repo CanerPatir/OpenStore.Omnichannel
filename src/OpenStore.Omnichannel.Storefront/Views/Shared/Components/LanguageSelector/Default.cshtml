@@ -1,30 +1,46 @@
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.Extensions.Options
+
+@inject IOptions<RequestLocalizationOptions> LocOptions
+
+@{
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+}
+
 <nav class="navbar navbar-dark navbar-expand p-0 bg-primary">
-    <div class="container">
-        <ul class="navbar-nav d-none d-md-flex mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Delivery</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Payment</a>
-            </li>
-        </ul>
+    <div class="container d-flex justify-content-end">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="#" class="nav-link"> Call: +99812345678 </a>
-            </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> English </a>
-                <ul class="dropdown-menu dropdown-menu-right" style="max-width: 100px;">
-                    <li>
-                        <a class="dropdown-item" href="#">Arabic</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Russian </a>
-                    </li>
-                </ul>
+                <form id="selectLanguageForm" action="/set-language?returnUrl=@returnUrl" method="POST" class="form-horizontal" role="form">
+                    
+                    <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown"> @CultureInfo.CurrentUICulture.DisplayName </a>
+                    <ul class="dropdown-menu dropdown-menu-right" style="max-width: 100px;">
+
+                        @foreach (var item in  LocOptions.Value.SupportedUICultures.Where(x => !Equals(x, CultureInfo.CurrentUICulture)))
+                        {
+                            <li>
+                                <a class="dropdown-item" href="#" onclick="sendSelectLanguageFormData('@item.Name') ;">@item.DisplayName</a>
+                            </li>
+                        }
+
+                    </ul>
+                </form>
+                
+                <script type="text/javascript">
+                    async function sendSelectLanguageFormData(language){
+                        const form = document.getElementById('selectLanguageForm');
+                        const FD = new FormData(form);
+                        console.log(form); 
+                        FD.set('culture', language); 
+                        let response = await fetch('/set-language?returnUrl=@returnUrl', {
+                          method: 'POST',
+                          body: FD
+                        });                         
+                        if (response.redirected) {
+                            window.location.href = response.url;
+                        }
+                    }
+                </script>
             </li>
         </ul>
     </div>

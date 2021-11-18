@@ -27,6 +27,7 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 ## mini todo
 * remove Shared dependency from Domain
 * update prevent exit if there is change
+* variant count limit 
 
 ## store front todos
 * Collection

@@ -3,4 +3,9 @@
 @using OpenStore.Omnichannel.Storefront.Models.Components
 @using OpenStore.Omnichannel.Storefront.Models.Catalog
 @using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using OpenStore.Infrastructure.Localization
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject IOpenStoreLocalizer L
+@inject IViewLocalizer VL

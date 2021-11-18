@@ -1,7 +1,10 @@
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using OpenStore.Infrastructure.Localization;
 using OpenStore.Omnichannel.Storefront.Infrastructure;
 using OpenStore.Omnichannel.Storefront.Services;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
@@ -22,6 +25,28 @@ if (builder.Environment.IsDevelopment())
 {
     mvcBuilder.AddRazorRuntimeCompilation();
 }
+
+builder.Services.AddOpenStoreResxLocalization(mvcBuilder, options =>
+{
+    options.Assembly = Assembly.GetEntryAssembly();
+    options.DefaultUiCulture = new CultureInfo("tr-TR");
+    options.DefaultSupportedUiCultures = new[]
+    {
+        new CultureInfo("en-US"),
+        new CultureInfo("tr-TR")
+    };
+});
+
+// builder.Services.AddOpenStoreJsonLocalization(mvcBuilder, options =>
+// {
+//     options.DefaultUiCulture = new CultureInfo("tr-TR");
+//     options.DefaultSupportedUiCultures = new[]
+//     {
+//         new CultureInfo("en-US"),
+//         new CultureInfo("tr-TR")
+//     };
+//     options.Source = OpenStoreJsonLocalizationSource.Content;
+// });
 
 services.AddAntiforgery();
 services.AddResponseCompression();
@@ -96,8 +121,8 @@ else
     app.UseHsts();
 }
 
-app.UseResponseCompression();
 app.UseHttpsRedirection();
+app.UseOpenStoreLocalization();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
