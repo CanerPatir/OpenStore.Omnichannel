@@ -51,6 +51,7 @@ public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDe
                  product.FirstMedia?.Url,
                  product.FirstMedia?.VariantIds.ToHashSet()
                 ),
+            product.Options.Select(x => new ProductDetailOptionDto(x.Name, x.Values)).ToList(),
             product.Medias.Select(x => new ProductDetailMediaDto(
                 x.Id,
                 x.Host,

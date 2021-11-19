@@ -1,93 +1,141 @@
+@using System.Text.Json
 @model ProductDetailViewModel
+@{
+    var optionDictionary = Context.Request
+        .Query
+        .Where(x => x.Key.StartsWith("option_")).ToDictionary(x => x.Key, y => y.Value.ToString()); 
+    
+    var product = Model.ProductDetail;
+    var variant = product.Variants.Count == 1 || optionDictionary.Count == 0 ? 
+        product.Variants.First() 
+        : product
+            .Variants
+            .SingleOrDefault(v => 
+                (v.Option1 == null || optionDictionary.Values.ElementAt(0) == v.Option1)
+                && (v.Option2 == null || optionDictionary.Values.ElementAt(1) == v.Option2)
+                && (v.Option3 == null || optionDictionary.Values.ElementAt(2) == v.Option3)
+            );
+ 
+    variant ??= product.Variants.First();
+    
+    var quantity = variant.Quantity;
+    var trackQuantity = variant.TrackQuantity;
+
+    // todo: localize currency
+}
 
 <section class="section-content padding-y bg">
     <div class="container">
-        
+
         <div class="card">
             <div class="row no-gutters">
                 <aside class="col-md-6">
                     <article class="gallery-wrap">
                         <div class="img-big-wrap">
-                            @if (Model.ProductDetail.FirstMedia != null)
+                            @if (product.FirstMedia != null)
                             {
                                 <a href="#">
-                                    <img src="@Model.ProductDetail.FirstMedia.Url" alt="@Model.ProductDetail.FirstMedia.Title">
+                                    <img src="@product.FirstMedia.Url" alt="@product.FirstMedia.Title">
                                 </a>
                             }
                         </div>
                         <div class="thumbs-wrap">
 
-                            @foreach (var media in Model.ProductDetail.Medias.OrderBy(x => x.Position).Where(x => x.Id != Model.ProductDetail.FirstMedia?.Id))
+                            @foreach (var media in product.Medias.OrderBy(x => x.Position).Where(x => x.Id != product.FirstMedia?.Id))
                             {
                                 <a href="#" class="item-thumb">
                                     <img src="@media.Url" alt="@media.Title">
                                 </a>
                             }
-                       
-                        </div>  
-                    </article>  
+
+                        </div>
+                    </article>
                 </aside>
                 <main class="col-md-6 border-left">
                     <article class="content-body">
 
                         <h2 class="title">@Model.ProductDetail.Title</h2>
-                        
-
                         <div class="mb-3">
-                            <var class="price h3">@Model.ProductDetail.Variants.First().Price.ToCurrencyString()</var>
-                            <var class="price h5">@Model.ProductDetail.Variants.First().CompareAtPrice?.ToCurrencyString()</var>
-                         </div>
- 
-                        <hr>
+                            <var class="price h3">@variant.Price.ToCurrencyString()</var>
+                            @if (variant.CompareAtPrice is not null)
+                            {
+                                <del class="price h5 text-danger text-muted">@variant.CompareAtPrice?.ToCurrencyString()</del>
+                            }
+                        </div>
+
+                        @if (product.Options.Count > 0)
+                        {
+                            <hr>
+                            <div class="form-row">
+
+                                <form asp-action="ProductDetail" method="GET">
+
+                                    @foreach (var option in product.Options)
+                                    {
+                                        if (option.Values.Count == 1)
+                                        {
+                                            <input type="hidden" name="option_@option.Name" value="@option.Values.First()"/>
+                                        }
+                                        else
+                                        {
+                                            var optionValue = optionDictionary.GetValueOrDefault($"option_{option.Name}") ?? option.Values.First();
+
+                                            <div class="form-group col-md">
+                                                <label for="@option.Name">@option.Name</label>
+                                                <select class="form-control" name="option_@option.Name" onchange="this.form.submit();">
+                                                    @foreach (var value in option.Values)
+                                                    {
+                                                        if (optionValue == value)
+                                                        {
+                                                            <option value="@value" selected="selected">@value</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@value">@value</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        }
+                                    }
+                                </form>
+                            </div>
+                        }
+
+                        <hr/>
                         <div class="form-row">
-                            <div class="form-group col-md flex-grow-0">
-                                <label>Quantity</label>
-                                <div class="input-group mb-3 input-spinner">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-light" type="button" id="button-plus"> +</button>
-                                    </div>
-                                    <input type="text" class="form-control" value="1">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-light" type="button" id="button-minus">
-                                            &minus;
-                                        </button>
+                            @if (trackQuantity)
+                            {
+                                <div class="form-group col-md flex-grow-0">
+                                    <label>@VL["Label.Quantity"]</label>
+                                    <div class="input-group mb-3 input-spinner">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-light" type="button" id="button-plus"> +</button>
+                                        </div>
+                                        <input type="text" class="form-control" value="1" max="@quantity">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-light" type="button" id="button-minus">
+                                                &minus;
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>  
-                            <div class="form-group col-md">
-                                <label>Select size</label>
-                                <div class="mt-1">
-                                    <label class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" name="select_size" checked=""
-                                               class="custom-control-input">
-                                        <div class="custom-control-label">Small</div>
-                                    </label>
+                            }
 
-                                    <label class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" name="select_size" class="custom-control-input">
-                                        <div class="custom-control-label">Medium</div>
-                                    </label>
-
-                                    <label class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" name="select_size" class="custom-control-input">
-                                        <div class="custom-control-label">Large</div>
-                                    </label>
-
-                                </div>
-                            </div>  
                         </div>
                         <a href="#" class="btn  btn-outline-primary">
                             <span class="text">@VL["Button.AddToCart"]</span>
                             <i class="fas fa-shopping-cart"></i>
                         </a>
-                    </article>  
-                </main> 
-            </div>  
-        </div>  
-        
+
+                    </article>
+                </main>
+            </div>
+        </div>
+
         <br/>
         <br/>
-        
+
         <article class="card">
             <div class="card-body">
                 @* <div class="row"> *@
@@ -126,8 +174,8 @@
                 <p>
                     @Html.Raw(Model.ProductDetail.Description)
                 </p>
-            </div> 
-        </article> 
+            </div>
+        </article>
 
 
     </div>

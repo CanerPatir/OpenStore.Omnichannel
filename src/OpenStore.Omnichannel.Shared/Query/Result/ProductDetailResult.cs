@@ -10,9 +10,12 @@ public record ProductDetailResult(
     bool HasMultipleVariants,
     bool IsPhysicalProduct,
     ProductDetailMediaDto FirstMedia,
+    IReadOnlyCollection<ProductDetailOptionDto> Options,
     IReadOnlyCollection<ProductDetailMediaDto> Medias,
     IReadOnlyCollection<ProductDetailVariantDto> Variants
 );
+
+public record ProductDetailOptionDto(string Name, IReadOnlyCollection<string> Values);
 
 public record class ProductDetailMediaDto(
     Guid Id,
