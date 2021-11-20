@@ -1,20 +1,26 @@
+const cartIdStorageKey = "__cartId";
+
 class ShoppingCart {
+
     constructor() {
         this.shoppingCartClient = new ShoppingCartClient();
     }
 
+    async createCart() {
+        const cartId = await this.shoppingCartClient.createShoppingCart();
+        sessionStorage.setItem(cartIdStorageKey, cartId);
+        return cartId;
+    }
+
     async addItem(variantId, quantity) {
-        const cartIdStorageKey = "__cartId";
         let cartId = sessionStorage.getItem(cartIdStorageKey)
         if (cartId === undefined) {
-            cartId = await this.shoppingCartClient.createShoppingCart();
-            sessionStorage.setItem(cartIdStorageKey, cartId);
+            cartId = await this.createCart();
         }
         return await this.shoppingCartClient.addItemToCart(cartId, variantId, quantity);
     }
 
     async changeItemQuantity(variantId, quantity) {
-        const cartIdStorageKey = "__cartId";
         let cartId = sessionStorage.getItem(cartIdStorageKey)
 
         await this.shoppingCartClient.changeItemQuantityOfCart(cartId, variantId, quantity);
@@ -47,12 +53,6 @@ class ShoppingCartClient {
 
     async changeItemQuantityOfCart(cartId, itemId, quantity) {
         await fetch(`shoppingCart/${cartId}/items/${itemId}?quantity=${quantity}`, {
-            method: 'POST',
-        });
-    }
-
-    async bindCartToUser(cartId, userId) {
-        await fetch(`shoppingCart/${cartId}/bind-to-user//${userId}`, {
             method: 'POST',
         });
     }
