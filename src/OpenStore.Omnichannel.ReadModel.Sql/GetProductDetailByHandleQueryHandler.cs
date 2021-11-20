@@ -75,6 +75,7 @@ public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDe
                 x.TrackQuantity,
                 x.Inventory.ContinueSellingWhenOutOfStock,
                 x.Inventory.Quantity,
+                x.Inventory.AvailableQuantity,
                 x.Option1, 
                 x.Option2, 
                 x.Option3,

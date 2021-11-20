@@ -41,6 +41,7 @@ public record class ProductDetailVariantDto(
     bool TrackQuantity,
     bool ContinueSellingWhenOutOfStock,
     int Quantity,
+    int AvailableQuantity,
     string Option1,
     string Option2,
     string Option3,
