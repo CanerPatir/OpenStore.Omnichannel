@@ -31,7 +31,7 @@ services.AddCors(o => o.AddPolicy(allowAllCorsPolicy, builder =>
 
 if (builder.Environment.IsDevelopment())
 {
-    services.AddOpenStoreSwaggerForModule<CartController>(builder.Environment, "OpenStore.Omnichannel");
+    services.AddOpenStoreSwaggerForModule<ShoppingCartController>(builder.Environment, "OpenStore.Omnichannel");
 }
 
 services.AddAuthentication(options => { options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme; });

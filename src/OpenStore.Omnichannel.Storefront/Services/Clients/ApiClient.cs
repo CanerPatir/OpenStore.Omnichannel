@@ -8,7 +8,9 @@ public class ApiClient : IApiClient
     {
         var httpClient = clientFactory.CreateClient(apiClientKey);
         Catalog = new CatalogStore(httpClient);
+        ShoppingCart = new ShoppingCartStore(httpClient);
     }
 
     public CatalogStore Catalog { get; }
+    public ShoppingCartStore ShoppingCart { get; }
 }

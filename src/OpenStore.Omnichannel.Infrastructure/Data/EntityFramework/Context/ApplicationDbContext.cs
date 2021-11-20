@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenStore.Data.EntityFramework;
 using OpenStore.Data.OutBox;
 using OpenStore.Omnichannel.Domain.ChannelContext;
+using OpenStore.Omnichannel.Domain.CheckoutContext;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Domain.LookupContext;
@@ -32,6 +33,9 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
     // Channel context
     public DbSet<SaleChannel> SaleChannel { get; set; }
     public DbSet<SaleChannelProduct> SaleChannelProducts { get; set; }
+
+    // Checkout Context
+    public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
     // Lookup Context
     public DbSet<Brand> Brands { get; set; }

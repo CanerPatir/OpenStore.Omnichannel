@@ -24,6 +24,13 @@ public static class Msg
             public const string QuantityShouldBeGreaterOrEqualThenZero = nameof(Domain) + DiscriminatorChar + nameof(QuantityShouldBeGreaterOrEqualThenZero);
             public const string OutOfStock = nameof(Domain) + DiscriminatorChar + nameof(OutOfStock);
         }
+
+        public static class Checkout
+        {
+            public const string ShoppingCartItemQuantityShouldBeGreaterOrEqualThenZero = nameof(Domain) + DiscriminatorChar + nameof(ShoppingCartItemQuantityShouldBeGreaterOrEqualThenZero);
+            public const string ShoppingCartAlreadyContainsTheGivenVariant = nameof(Domain) + DiscriminatorChar + nameof(ShoppingCartAlreadyContainsTheGivenVariant);
+            public const string ShoppingCartItemNotFound = nameof(Domain) + DiscriminatorChar + nameof(ShoppingCartItemNotFound);
+        }
     }
 
     public static class Application
