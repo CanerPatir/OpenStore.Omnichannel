@@ -112,6 +112,11 @@ public class ShoppingCartBffService : IBffService
 
     private void SetCartId(Guid cartId)
     {
-        HttpContext.Response.Cookies.Append(CartCookieKey, cartId.ToString());
+        HttpContext.Response.Cookies.Append(CartCookieKey, cartId.ToString(), new CookieOptions()
+        {
+            IsEssential = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddDays(7)
+        });
     }
 }
