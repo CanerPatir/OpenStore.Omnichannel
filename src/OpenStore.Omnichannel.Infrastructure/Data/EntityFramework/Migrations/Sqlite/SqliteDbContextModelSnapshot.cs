@@ -15,7 +15,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.0-rc.2.21480.5");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
             modelBuilder.Entity("Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey", b =>
                 {
@@ -220,6 +220,45 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.HasIndex("ProductId");
 
                     b.ToTable("SaleChannelProducts");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.CheckoutContext.ShoppingCart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAuthenticated")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Items")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.IdentityContext.ApplicationAuthorization", b =>
@@ -1221,11 +1260,13 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
 
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.ProductContext.Variant", b =>
                 {
-                    b.HasOne("OpenStore.Omnichannel.Domain.ProductContext.Product", null)
+                    b.HasOne("OpenStore.Omnichannel.Domain.ProductContext.Product", "Product")
                         .WithMany("Variants")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.StoreContext.StorePreferences", b =>

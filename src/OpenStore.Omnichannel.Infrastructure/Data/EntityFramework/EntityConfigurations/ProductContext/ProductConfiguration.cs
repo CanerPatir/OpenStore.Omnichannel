@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Data.EntityFramework.EntityConfiguration;
@@ -23,10 +22,7 @@ public class ProductConfiguration : BaseEntityTypeConfiguration<Guid, Product>
         builder.Property(x => x.Weight).HasPrecision(9, 2);
 
         builder.Property(x => x.Options)
-            .HasConversion(
-                x => JsonSerializer.Serialize(x, new JsonSerializerOptions()),
-                x => JsonSerializer.Deserialize<List<ProductOption>>(x, new JsonSerializerOptions())
-            );
+            .HasJsonConversion();
 
         builder.HasMany(x => x.Medias)
             .WithOne()

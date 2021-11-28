@@ -50,6 +50,7 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FShared_002FAppHeaderBar/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FShared_002FAppNavMenu/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EStorefront_002FResources_002FViews_002FCatalog_002FProductDetail/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EStorefront_002FResources_002FViews_002FShoppingCart_002FIndex/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	
@@ -95,6 +96,9 @@
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/ShowOnlyStringResources/@EntryValue">False</s:Boolean>
+	
+	
+	
 	
 	
 	

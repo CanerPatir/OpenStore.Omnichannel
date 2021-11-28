@@ -6,6 +6,7 @@
     
     <ItemGroup>
         <PackageReference Include="OpenStore.Domain" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Shared" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
 
 </Project>

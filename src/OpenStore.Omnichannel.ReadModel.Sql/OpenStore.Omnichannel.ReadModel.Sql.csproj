@@ -8,4 +8,8 @@
         <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Management" />
+    </ItemGroup>
+
 </Project>

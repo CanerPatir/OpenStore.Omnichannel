@@ -11,7 +11,7 @@
         <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.5" />
         <PackageReference Include="Blazorise.RichTextEdit" Version="0.9.5" />
         <PackageReference Include="Blazorise.Components" Version="0.9.5" />
-        <PackageReference Include="Humanizer.Core" Version="2.11.10" />
+        <PackageReference Include="Humanizer.Core" Version="2.13.14" />
         <PackageReference Include="Majorsoft.Blazor.Components.Debounce" Version="1.5.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(NetPackagesVersion)" />

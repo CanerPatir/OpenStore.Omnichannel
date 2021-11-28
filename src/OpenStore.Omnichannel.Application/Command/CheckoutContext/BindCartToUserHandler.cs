@@ -13,7 +13,14 @@ public class BindCartToUserHandler : AsyncRequestHandler<BindCartToUser>
         _repository = repository;
     }
 
-    protected override async Task Handle(BindCartToUser request, CancellationToken cancellationToken)
+    protected override async Task Handle(BindCartToUser command, CancellationToken cancellationToken)
     {
+        var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
+        if (shoppingCart is null)
+        {
+            throw new ApplicationException(Msg.Application.CartNotExists);
+        }
+        shoppingCart.BindToUser(command);
+        await _repository.SaveChangesAsync(cancellationToken);
     }
 }

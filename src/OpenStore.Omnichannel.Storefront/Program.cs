@@ -16,7 +16,6 @@ var services = builder.Services;
 
 services.AddHttpContextAccessor();
 // Add services to the container.
-services.Scan(x => x.FromAssemblyOf<IViewModelFactory>().AddClasses(c => c.AssignableTo<IViewModelFactory>()).AsSelf().WithScopedLifetime());
 services.Scan(x => x.FromAssemblyOf<IBffService>().AddClasses(c => c.AssignableTo<IBffService>()).AsSelf().WithScopedLifetime());
 
 var mvcBuilder = services.AddControllersWithViews();
@@ -100,7 +99,7 @@ services
     });
 
 var apiConfiguration = builder.Configuration.GetSection("Api").Get<ApiConfiguration>();
-services.AddHttpClient(ApiClient.apiClientKey, client =>
+services.AddHttpClient(ApiClient.ApiClientKey, client =>
 {
     client.BaseAddress = new Uri(apiConfiguration.Url);
     client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);

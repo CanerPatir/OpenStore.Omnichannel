@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Shared.Query.Result;
+using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
 namespace OpenStore.Omnichannel.Storefront.Models.Catalog;
 

@@ -1,4 +1,5 @@
-using OpenStore.Omnichannel.Shared.Query.Result;
+using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
+using OpenStore.Omnichannel.Storefront.Models.Catalog;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
@@ -30,5 +31,11 @@ public class ProductBffService : IBffService
     {
         var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, page == 1 ? 0 : BatchSize * page, cancellationToken);
         return getAllProductsResult.Items;
+    }
+    
+    public async Task<ProductDetailViewModel> GetProductDetailViewModel(string handle, CancellationToken cancellationToken)
+    {
+        var productDetailResult = await _apiClient.Catalog.GetProductDetail(handle, cancellationToken);
+        return new ProductDetailViewModel(productDetailResult);
     }
 }

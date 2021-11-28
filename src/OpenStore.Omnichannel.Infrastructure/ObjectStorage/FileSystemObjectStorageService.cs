@@ -37,7 +37,7 @@ public class FileSystemObjectStorageService : IObjectStorageService
         await fs.WriteAsync(content.AsMemory(0, content.Length));
 
         Debug.Assert(_httpContextAccessor.HttpContext != null, "_httpContextAccessor.HttpContext != null");
-        return ($"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}", $"/{RootDir}/{fileName}");
+        return ($"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host.ToString()}", $"/{RootDir}/{fileName}");
     }
 
     public Task Delete(string host, string path)

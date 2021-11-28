@@ -98,9 +98,7 @@ public partial class Product
         {
             throw new DomainException(Msg.Domain.Product.VariantAlreadyExistsThatHasSameOptions);
         }
-
-        _options = _options.Select(x => x).ToList();
-
+        
         if (model.Option1 is not null)
         {
             _options[0].Values.Add(model.Option1);
@@ -372,7 +370,6 @@ public partial class Product
             throw new DomainException(Msg.Domain.Product.VariantAlreadyExistsThatHasSameOptions);
         }
 
-        _options = _options.Select(x => x).ToList();
         var optionValueChangeExists = false;
 
         if (!string.Equals(variant.Option1, model.Option1, StringComparison.InvariantCultureIgnoreCase))

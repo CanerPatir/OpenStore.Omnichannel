@@ -64,6 +64,6 @@
         private const int PageSize = 50;
 
     [Parameter]
-    public Func<PageRequest, Task<PagedListDto<ProductListItemDto>>> FetchData { get; set; }
+    public Func<PageRequest, Task<PagedList<ProductListItemDto>>> FetchData { get; set; }
 
 }

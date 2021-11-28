@@ -176,7 +176,7 @@
     public EventCallback<IEnumerable<TItem>> SelectedItemsChanged { get; set; }
 
     [Parameter]
-    public Func<PageRequest, Task<PagedListDto<TItem>>> FetchData { get; set; }
+    public Func<PageRequest, Task<PagedList<TItem>>> FetchData { get; set; }
 
     [Parameter]
     public int PageNumber { get; set; } = 1;
@@ -254,7 +254,7 @@
                 var pageMetadata = new PageRequest(PageNumber, PageSize, SortColumn?.GetColumnPropertyName(), _filterTerm, SortDirection);
                 var pagedResult = await FetchData(pageMetadata);
                 await Task.Delay(1000);
-                PageCount = pagedResult.PageMeta.TotalPages;
+                PageCount = pagedResult.PageMeta.TotalPages.Value;
                 PageNumber = pagedResult.PageMeta.CurrentPage;
                 Items = pagedResult.Items;
                 _pagedItems = pagedResult.Items.Select(x => new DataGridEnvelope<TItem>(x));

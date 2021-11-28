@@ -17,7 +17,7 @@ public class ShoppingCartController : BaseApiController
     }
 
     [HttpPost]
-    public Task<Guid> CreateShoppingCart() => _mediator.Send(new CreateShoppingCart(User.Identity?.IsAuthenticated == true ? User.GetId() : null), CancellationToken);
+    public Task<Guid> CreateOrGetShoppingCart() => _mediator.Send(new CreateShoppingCart(User.Identity?.IsAuthenticated == true ? User.GetId() : null), CancellationToken);
 
     [HttpPost("{id:guid}/items")]
     public Task<Guid> AddItemToCart(Guid id, [FromQuery] Guid variantId, [FromQuery] int quantity) => _mediator.Send(new AddItemToCart(id, variantId, quantity), CancellationToken);

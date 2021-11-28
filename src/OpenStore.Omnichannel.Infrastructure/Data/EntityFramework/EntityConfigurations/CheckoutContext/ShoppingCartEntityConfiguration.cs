@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Data.EntityFramework.EntityConfiguration;
 using OpenStore.Omnichannel.Domain.CheckoutContext;
@@ -15,9 +14,6 @@ public class ShoppingCartEntityConfiguration : BaseEntityTypeConfiguration<Guid,
         builder.Property(x => x.Items).HasField("_items");
 
         builder.Property(x => x.Items)
-            .HasConversion(
-                x => JsonSerializer.Serialize(x, new JsonSerializerOptions()),
-                x => JsonSerializer.Deserialize<List<ShoppingCartItem>>(x, new JsonSerializerOptions())
-            );
+            .HasJsonConversion();
     }
 }

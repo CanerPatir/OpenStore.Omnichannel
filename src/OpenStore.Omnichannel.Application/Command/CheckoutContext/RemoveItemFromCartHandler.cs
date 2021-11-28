@@ -13,7 +13,17 @@ public class RemoveItemFromCartHandler : AsyncRequestHandler<RemoveItemFromCart>
         _repository = repository;
     }
 
-    protected override async Task Handle(RemoveItemFromCart request, CancellationToken cancellationToken)
+    protected override async Task Handle(RemoveItemFromCart command, CancellationToken cancellationToken)
     {
+        var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
+        if (shoppingCart is null)
+        {
+            throw new ApplicationException(Msg.Application.CartNotExists);
+        }
+        if (shoppingCart.RemoveItem(command) == 0)
+        {
+            return;
+        }
+        await _repository.SaveChangesAsync(cancellationToken);
     }
 }

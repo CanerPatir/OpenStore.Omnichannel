@@ -40,6 +40,7 @@ public static class Msg
         public const string PaymentError = nameof(Application) + DiscriminatorChar + nameof(PaymentError);
         public const string PasswordChangeError = nameof(Application) + DiscriminatorChar + nameof(PasswordChangeError);
         public const string InvalidLoginAttempt = nameof(Application) + DiscriminatorChar + nameof(InvalidLoginAttempt);
+        public const string CartNotExists = nameof(Application) + DiscriminatorChar + nameof(CartNotExists);
     }
 
     public static class Validation

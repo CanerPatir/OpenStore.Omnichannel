@@ -1,3 +1,5 @@
+// ReSharper disable CheckNamespace
+
 namespace OpenStore.Omnichannel;
 
 public static class GeneralHelper

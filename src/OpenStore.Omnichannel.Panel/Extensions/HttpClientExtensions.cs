@@ -1,6 +1,7 @@
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.WebUtilities;
 using OpenStore.Omnichannel;
+using OpenStore.Shared;
 
 // ReSharper disable CheckNamespace
 
@@ -8,7 +9,7 @@ namespace System.Net.Http;
 
 public static class HttpClientExtensions
 {
-    public static async Task<PagedListDto<T>> GetPage<T>(this HttpClient httpClient, string path, PageRequest request)
+    public static async Task<PagedList<T>> GetPage<T>(this HttpClient httpClient, string path, PageRequest request)
     {
         var query = new Dictionary<string, string>
         {
@@ -26,6 +27,6 @@ public static class HttpClientExtensions
             query.Add("FilterTerm", request.FilterTerm);
         }
 
-        return await httpClient.GetFromJsonAsync<PagedListDto<T>>(QueryHelpers.AddQueryString(path, query));
+        return await httpClient.GetFromJsonAsync<PagedList<T>>(QueryHelpers.AddQueryString(path, query));
     }
 }

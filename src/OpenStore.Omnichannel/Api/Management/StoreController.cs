@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
-using OpenStore.Omnichannel.Application.Query.StoreContext;
 using OpenStore.Omnichannel.Domain.StoreContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Shared.Dto.Management.Store;
+using OpenStore.Omnichannel.Shared.Query.Management.StoreContext;
 
 namespace OpenStore.Omnichannel.Api.Management;
 

@@ -2,11 +2,11 @@ namespace OpenStore.Omnichannel.Storefront.Services.Clients;
 
 public class ApiClient : IApiClient
 {
-    internal const string apiClientKey = "OpenStoreApiClient";
+    internal const string ApiClientKey = "OpenStoreApiClient";
 
     public ApiClient(IHttpClientFactory clientFactory)
     {
-        var httpClient = clientFactory.CreateClient(apiClientKey);
+        var httpClient = clientFactory.CreateClient(ApiClientKey);
         Catalog = new CatalogStore(httpClient);
         ShoppingCart = new ShoppingCartStore(httpClient);
     }

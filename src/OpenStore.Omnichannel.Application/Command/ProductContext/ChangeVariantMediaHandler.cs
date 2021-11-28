@@ -1,6 +1,5 @@
 using MediatR;
 using OpenStore.Application.Crud;
-using OpenStore.Omnichannel.Application.Extensions;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;

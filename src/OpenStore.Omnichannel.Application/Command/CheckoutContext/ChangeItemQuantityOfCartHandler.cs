@@ -13,7 +13,14 @@ public class ChangeItemQuantityOfCartHandler : AsyncRequestHandler<ChangeItemQua
         _repository = repository;
     }
 
-    protected override async Task Handle(ChangeItemQuantityOfCart request, CancellationToken cancellationToken)
+    protected override async Task Handle(ChangeItemQuantityOfCart command, CancellationToken cancellationToken)
     {
+        var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
+        if (shoppingCart is null)
+        {
+            throw new ApplicationException(Msg.Application.CartNotExists);
+        }
+        shoppingCart.ChangeItemQuantity(command);
+        await _repository.SaveChangesAsync(cancellationToken);
     }
 }

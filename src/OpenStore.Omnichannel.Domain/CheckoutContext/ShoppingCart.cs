@@ -1,5 +1,8 @@
 using OpenStore.Domain;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 namespace OpenStore.Omnichannel.Domain.CheckoutContext;
 
 public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity
@@ -13,7 +16,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity
 
     public Guid? UserId { get; protected set; }
     public bool IsAuthenticated { get; protected set; }
-    
+
     public virtual IReadOnlyCollection<ShoppingCartItem> Items => _items;
 
     public static ShoppingCart Create(CreateShoppingCart command) =>
@@ -26,17 +29,17 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity
     public Guid AddItem(AddItemToCart command)
     {
         var (_, variantId, quantity) = command;
-        
+
         if (_items.Any(x => x.VariantId == variantId)) throw new DomainException(Msg.Domain.Checkout.ShoppingCartAlreadyContainsTheGivenVariant);
 
         var item = ShoppingCartItem.Create(variantId, quantity);
         _items.Add(item);
         return item.Id;
     }
-    
-    public void RemoveItem(RemoveItemFromCart command)
+
+    public int RemoveItem(RemoveItemFromCart command)
     {
-        _items.RemoveWhere(x => x.Id == command.CartItemId);
+        return _items.RemoveWhere(x => x.Id == command.CartItemId);
     }
 
     public void ChangeItemQuantity(ChangeItemQuantityOfCart command)
@@ -48,7 +51,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity
         {
             throw new DomainException(Msg.Domain.Checkout.ShoppingCartItemNotFound);
         }
-        
+
         item.ChangeQuantity(quantity);
     }
 

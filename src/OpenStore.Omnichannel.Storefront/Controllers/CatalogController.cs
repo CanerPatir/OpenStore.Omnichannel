@@ -11,12 +11,10 @@ public class CatalogController : Controller
     private const string ProductDetailRouteName = "ProductDetail";
 
     private readonly ProductBffService _productBffService;
-    private readonly ProductDetailViewModelFactory _productDetailViewModelFactory;
 
-    public CatalogController(ProductBffService productBffService, ProductDetailViewModelFactory productDetailViewModelFactory)
+    public CatalogController(ProductBffService productBffService)
     {
         _productBffService = productBffService;
-        _productDetailViewModelFactory = productDetailViewModelFactory;
     }
 
     [HttpGet("~/search", Name = SearchRouteName)]
@@ -29,7 +27,7 @@ public class CatalogController : Controller
     public IActionResult AllProducts() => View();
 
     [HttpGet("~/product/{handle}", Name = ProductDetailRouteName)]
-    public async Task<IActionResult> ProductDetail(string handle) => View(await _productDetailViewModelFactory.Produce(handle, HttpContext.RequestAborted));
+    public async Task<IActionResult> ProductDetail(string handle) => View(await _productBffService.GetProductDetailViewModel(handle, HttpContext.RequestAborted));
 
     #region AjaxRequests
 

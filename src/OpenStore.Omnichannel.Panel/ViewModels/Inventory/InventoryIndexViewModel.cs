@@ -1,5 +1,6 @@
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
+using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Inventory;
 
@@ -19,7 +20,7 @@ public class InventoryIndexViewModel : BaseViewModel
         private set => SetValue(ref _saving, value);
     }
 
-    public async Task<PagedListDto<InventoryListItemDto>> GetAll(PageRequest pageRequest) => await _apiClient.Inventory.GetAll(pageRequest);
+    public async Task<PagedList<InventoryListItemDto>> GetAll(PageRequest pageRequest) => await _apiClient.Inventory.GetAll(pageRequest);
 
     public async Task SetStock(InventoryListItemDto item, int quantity)
     {

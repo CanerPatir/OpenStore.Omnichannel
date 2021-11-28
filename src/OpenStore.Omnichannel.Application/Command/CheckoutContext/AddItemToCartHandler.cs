@@ -13,8 +13,17 @@ public class AddItemToCartHandler : IRequestHandler<AddItemToCart, Guid>
         _repository = repository;
     }
 
-    public async Task<Guid> Handle(AddItemToCart request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(AddItemToCart command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
+        if (shoppingCart is null)
+        {
+            throw new ApplicationException(Msg.Application.CartNotExists);
+        }
+
+        var itemId = shoppingCart.AddItem(command);
+        await _repository.SaveChangesAsync(cancellationToken);
+
+        return itemId;
     }
 }
