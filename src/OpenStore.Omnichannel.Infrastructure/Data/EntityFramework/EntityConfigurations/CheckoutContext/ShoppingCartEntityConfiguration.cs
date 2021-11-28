@@ -9,6 +9,7 @@ public class ShoppingCartEntityConfiguration : BaseEntityTypeConfiguration<Guid,
     public override void Configure(EntityTypeBuilder<ShoppingCart> builder)
     {
         base.Configure(builder);
+        builder.Property(x => x.UserId).IsRequired(false);
         builder.HasIndex(x => x.UserId).IsUnique();
 
         builder.Property(x => x.Items).HasField("_items");

@@ -1,7 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a77ccadb_002D95c7_002D486f_002D870c_002D3b2d9b7a5579/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Book a room" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::44DE1DDB-D77A-4036-852A-7480E01C24A1::net5.0::OpenStore.Omnichannel.Panel.UIAutomation.Features.BookRoomFeature.BookARoom&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::DFE913DE-D625-4F15-833A-50D15C52487D::net6.0::OpenSore.Omnichannel.Shared.Tests.SlugHelperTest.Test&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	

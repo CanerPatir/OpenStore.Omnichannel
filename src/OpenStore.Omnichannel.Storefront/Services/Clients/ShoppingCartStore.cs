@@ -20,6 +20,7 @@ public class ShoppingCartStore : HttpStore
         }
 
         var resp = await HttpClient.PostAsync(path, null, cancellationToken);
+        resp.EnsureSuccessStatusCode();
         return await resp.Content.ReadFromJsonAsync<Guid>(cancellationToken: cancellationToken);
      }
 
@@ -44,7 +45,8 @@ public class ShoppingCartStore : HttpStore
     public async Task<Guid> AddItemToCart(Guid cartId, Guid variantId, int quantity, CancellationToken cancellationToken = default)
     {
         var resp = await HttpClient.PostAsync($"{Path}/{cartId}/items?variantId={variantId}&quantity={quantity}", null, cancellationToken);
-        return await resp.Content.ReadFromJsonAsync<Guid>(cancellationToken: cancellationToken));
+        resp.EnsureSuccessStatusCode();
+        return await resp.Content.ReadFromJsonAsync<Guid>(cancellationToken: cancellationToken);
     }
 
     public Task RemoveItemFromCart(Guid cartId, Guid itemId, CancellationToken cancellationToken = default)

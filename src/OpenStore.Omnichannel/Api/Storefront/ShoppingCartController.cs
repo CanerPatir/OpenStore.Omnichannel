@@ -23,7 +23,7 @@ public class ShoppingCartController : BaseApiController
     [HttpPost("{id:guid}/items")]
     public Task<Guid> AddItemToCart(Guid id, [FromQuery] Guid variantId, [FromQuery] int quantity) => _mediator.Send(new AddItemToCart(id, variantId, quantity), CancellationToken);
 
-    [HttpPost("{id:guid}")]
+    [HttpGet("{id:guid}")]
     public Task<ShoppingCartResult> GetCart(Guid id) => _mediator.Send(new GetShoppingCartQuery(id), CancellationToken);
 
     [HttpDelete("{id:guid}/items/{itemId:guid}")]

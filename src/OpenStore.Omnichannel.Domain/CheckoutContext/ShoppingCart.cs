@@ -7,7 +7,7 @@ namespace OpenStore.Omnichannel.Domain.CheckoutContext;
 
 public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity
 {
-    private readonly HashSet<ShoppingCartItem> _items = new();
+    private readonly List<ShoppingCartItem> _items = new();
 
     protected ShoppingCart()
     {
@@ -39,7 +39,7 @@ public class ShoppingCart : AggregateRoot<Guid>, IAuditableEntity
 
     public int RemoveItem(RemoveItemFromCart command)
     {
-        return _items.RemoveWhere(x => x.Id == command.CartItemId);
+        return _items.RemoveAll(x => x.Id == command.CartItemId);
     }
 
     public void ChangeItemQuantity(ChangeItemQuantityOfCart command)
