@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using System.Text;
+using OpenIddict.Abstractions;
 using OpenStore.Omnichannel.Storefront.Models.ShoppingCart;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
@@ -6,7 +8,7 @@ namespace OpenStore.Omnichannel.Storefront.Services;
 
 public class ShoppingCartBffService : IBffService
 {
-    private const string CartSessionKey = "CartSessionKey";
+    private const string CartCookieKey = "CartCookieKey";
     private readonly IApiClient _apiClient;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -16,57 +18,100 @@ public class ShoppingCartBffService : IBffService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<Guid> CreateShoppingCart(CancellationToken cancellationToken = default)
+    private HttpContext HttpContext => _httpContextAccessor.HttpContext;
+    private ClaimsPrincipal User => HttpContext?.User;
+
+    private Guid GetUserId()
     {
-        return await _apiClient.ShoppingCart.CreateShoppingCart(cancellationToken);
+        var idClaim = User?.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Subject)?.Value;
+
+        return Guid.TryParse(idClaim, out var id) ? id : default;
     }
 
-    public Task<Guid> AddItemToCart(Guid cartId, Guid variantId, int quantity, CancellationToken cancellationToken = default)
+    public async Task CreateShoppingCartIfNotExists(CancellationToken cancellationToken = default)
     {
+        if (TryGetCartId(out var cartId))
+        {
+            var cartExists = await _apiClient.ShoppingCart.CheckCartExists(cartId, cancellationToken);
+            if (cartExists)
+            {
+                return;
+            }
+        }
+
+        cartId = await _apiClient.ShoppingCart.CreateShoppingCart(GetUserId(), cancellationToken);
+        SetCartId(cartId);
+    }
+
+    public Task<Guid> AddItemToCart(Guid variantId, int quantity, CancellationToken cancellationToken = default)
+    {
+        var cartId = GetCartId();
+
         return _apiClient.ShoppingCart.AddItemToCart(cartId, variantId, quantity, cancellationToken);
     }
 
-    public Task RemoveItemFromCart(Guid cartId, Guid itemId, CancellationToken cancellationToken = default)
+    public Task RemoveItemFromCart(Guid itemId, CancellationToken cancellationToken = default)
     {
+        var cartId = GetCartId();
+
         return _apiClient.ShoppingCart.RemoveItemFromCart(cartId, itemId, cancellationToken);
     }
 
-    public Task ChangeItemQuantityOfCart(Guid cartId, Guid itemId, int quantity, CancellationToken cancellationToken = default)
+    public Task ChangeItemQuantityOfCart(Guid itemId, int quantity, CancellationToken cancellationToken = default)
     {
+        var cartId = GetCartId();
         return _apiClient.ShoppingCart.ChangeItemQuantityOfCart(cartId, itemId, quantity, cancellationToken);
     }
 
-    public Task BindCartToUser(Guid cartId, Guid userId, CancellationToken cancellationToken = default)
+    private Task BindCartToUser(Guid userId, CancellationToken cancellationToken = default)
     {
+        var cartId = GetCartId();
+
         return _apiClient.ShoppingCart.BindCartToUser(cartId, userId, cancellationToken);
     }
-    
+
     public async Task<ShoppingCartViewModel> GetShoppingCartViewModel(CancellationToken cancellationToken = default)
     {
-         
-        // var shoppingCart = await _apiClient.ShoppingCart.GetCart(cartId, cancellationToken);
-        // return new ShoppingCartViewModel(shoppingCart);
+        var cartId = GetCartId();
 
-        return null;
+        var shoppingCart = await _apiClient.ShoppingCart.GetCart(cartId, cancellationToken);
+        return new ShoppingCartViewModel(shoppingCart);
     }
 
-    private Guid? GetCartId()
+    private bool TryGetCartId(out Guid cartId)
     {
+        cartId = Guid.Empty;
         if (_httpContextAccessor.HttpContext is null)
         {
-            return null;
+            return false;
         }
 
-        if (!_httpContextAccessor.HttpContext.Session.TryGetValue(CartSessionKey, out var sessionValue))
+        if (!HttpContext.Request.Cookies.TryGetValue(CartCookieKey, out var sessionValue))
         {
-            return null;
+            return false;
         }
-        
-        if (!Guid.TryParse(Encoding.UTF8.GetString(sessionValue), out var cartId))
+
+        if (!Guid.TryParse(sessionValue, out var _cartId))
         {
-            return null;
+            return false;
         }
-        
-        return cartId;
+
+        cartId = _cartId;
+        return true;
+    }
+
+    private Guid GetCartId()
+    {
+        if (TryGetCartId(out var cartId))
+        {
+            return cartId;
+        }
+
+        throw new ApplicationException(Msg.Application.CartNotCreatedYet);
+    }
+
+    private void SetCartId(Guid cartId)
+    {
+        HttpContext.Response.Cookies.Append(CartCookieKey, cartId.ToString());
     }
 }

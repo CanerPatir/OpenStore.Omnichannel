@@ -12,9 +12,9 @@ public class FlyoutShoppingCart : ViewComponent
         _shoppingCartBffService = shoppingCartBffService;
     }
 
-    public Task<IViewComponentResult> InvokeAsync()
+    public async Task<IViewComponentResult> InvokeAsync()
     {
-        _shoppingCartBffService.CreateShoppingCart();
-        return Task.FromResult((IViewComponentResult)View());
+        await _shoppingCartBffService.CreateShoppingCartIfNotExists();
+        return View();
     }
 }

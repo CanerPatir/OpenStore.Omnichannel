@@ -41,6 +41,7 @@ public static class Msg
         public const string PasswordChangeError = nameof(Application) + DiscriminatorChar + nameof(PasswordChangeError);
         public const string InvalidLoginAttempt = nameof(Application) + DiscriminatorChar + nameof(InvalidLoginAttempt);
         public const string CartNotExists = nameof(Application) + DiscriminatorChar + nameof(CartNotExists);
+        public const string CartNotCreatedYet = nameof(Application) + DiscriminatorChar + nameof(CartNotCreatedYet);
     }
 
     public static class Validation

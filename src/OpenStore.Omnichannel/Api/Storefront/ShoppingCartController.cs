@@ -2,7 +2,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Domain.CheckoutContext;
-using OpenStore.Omnichannel.Infrastructure.Authentication;
+using OpenStore.Omnichannel.Shared.Query.Storefront;
+using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
 namespace OpenStore.Omnichannel.Api.Storefront;
 
@@ -17,10 +18,13 @@ public class ShoppingCartController : BaseApiController
     }
 
     [HttpPost]
-    public Task<Guid> CreateOrGetShoppingCart() => _mediator.Send(new CreateShoppingCart(User.Identity?.IsAuthenticated == true ? User.GetId() : null), CancellationToken);
+    public Task<Guid> CreateOrGetShoppingCart([FromQuery] Guid? userId) => _mediator.Send(new CreateShoppingCart(userId), CancellationToken);
 
     [HttpPost("{id:guid}/items")]
     public Task<Guid> AddItemToCart(Guid id, [FromQuery] Guid variantId, [FromQuery] int quantity) => _mediator.Send(new AddItemToCart(id, variantId, quantity), CancellationToken);
+
+    [HttpPost("{id:guid}")]
+    public Task<ShoppingCartResult> GetCart(Guid id) => _mediator.Send(new GetShoppingCartQuery(id), CancellationToken);
 
     [HttpDelete("{id:guid}/items/{itemId:guid}")]
     public Task RemoveItemFromCart(Guid id, Guid itemId) => _mediator.Send(new RemoveItemFromCart(id, itemId), CancellationToken);

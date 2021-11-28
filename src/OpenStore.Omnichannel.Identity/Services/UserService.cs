@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OpenIddict.Core;
@@ -10,7 +5,6 @@ using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Data.EntityFramework.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
-using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Request;
 
@@ -91,7 +85,7 @@ public class UserService : EntityFrameworkCrudService<ApplicationUser, Applicati
         var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
         if (!result.Succeeded)
         {
-            throw new OpenStore.Application.Exceptions.ApplicationException(string.Join(",", Msg.Application.PasswordChangeError, result.Errors.Select(x => x.Description)));
+            throw new ApplicationException(string.Join(",", Msg.Application.PasswordChangeError, result.Errors.Select(x => x.Description)));
         }
     }
 }

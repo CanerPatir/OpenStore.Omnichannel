@@ -1,11 +1,8 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Validation.AspNetCore;
 using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Domain.IdentityContext;
-using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 
 namespace OpenStore.Omnichannel.Identity.Controllers.Api;
