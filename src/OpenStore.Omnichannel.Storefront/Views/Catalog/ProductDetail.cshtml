@@ -20,7 +20,6 @@
     var quantity = variant.Quantity;
     var trackQuantity = variant.TrackQuantity;
     var stockAvailable = variant.AvailableQuantity > 0;
-    // todo: localize currency
 }
 
 <section class="section-content padding-y bg">
@@ -55,10 +54,10 @@
 
                         <h2 class="title">@Model.ProductDetail.Title</h2>
                         <div class="mb-3">
-                            <var class="price h3">@variant.Price.ToCurrencyString()</var>
+                            <var class="price h3">@variant.Price.ToCurrencyStringNoSign()</var>
                             @if (variant.CompareAtPrice is not null)
                             {
-                                <del class="price h5 text-danger text-muted">@variant.CompareAtPrice?.ToCurrencyString()</del>
+                                <del class="price h5 text-danger text-muted">@variant.CompareAtPrice?.ToCurrencyStringNoSign()</del>
                             }
                         </div>
 
@@ -106,12 +105,12 @@
                             @if (trackQuantity && stockAvailable)
                             {
                                 <div class="form-group col-md flex-grow-0">
-                                    <label>@VL["Label.Quantity"]</label>
+                                    <label>@L["ProductDetail.Label.Quantity"]</label>
                                     <div class="input-group mb-3 input-spinner">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-light" type="button" id="button-plus"> +</button>
                                         </div>
-                                        <input type="text" class="form-control" value="1" max="@quantity">
+                                        <input type="text" id="quantity-input" class="form-control" value="1" max="@quantity">
                                         <div class="input-group-append">
                                             <button class="btn btn-light" type="button" id="button-minus">
                                                 &minus;
@@ -124,8 +123,8 @@
                         
                         @if (stockAvailable)
                         {
-                            <a href="#" class="btn  btn-outline-primary">
-                                <span class="text">@VL["Button.AddToCart"]</span>
+                            <a href="javascript:void(0)" data-variant-id="@variant.Id" class="btn btn-outline-primary add-to-cart-btn">
+                                <span class="text">@VL["General.Button.AddToCart"]</span>
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                         }
@@ -188,3 +187,19 @@
 
     </div>
 </section>
+
+<script type="module">
+    const shoppingCart = new ShoppingCart();
+    const elements = document.getElementsByClassName("add-to-cart-btn");
+    for (let element of elements) {
+        const variantId = element.getAttribute("data-variant-id");
+        element.addEventListener("click",function(e){
+            const quantityInput = document.getElementById('quantity-input');
+            let qty = 0;
+            if (quantityInput){
+                qty = quantityInput.value;
+            }
+            shoppingCart.addItem(variantId, qty);
+        }, false);
+    }
+</script>

@@ -7,7 +7,7 @@ namespace OpenStore.Omnichannel.Domain.ProductContext;
 
 public class ProductMedia : MediaEntity
 {
-    private readonly HashSet<Guid> _variantIds = new();
+    private readonly List<Guid> _variantIds = new();
 
     public Guid? ProductId { get; set; }
 
@@ -67,11 +67,19 @@ public class ProductMedia : MediaEntity
 
     public void RemoveVariant(Variant variant)
     {
+        if (_variantIds.All(x => x != variant.Id))
+        {
+            return;
+        }
         _variantIds.Remove(variant.Id);
     }
 
     public void AddVariant(Variant variant)
     {
+        if (_variantIds.Any(x => x == variant.Id))
+        {
+            return;
+        }
         _variantIds.Add(variant.Id);
     }
 }

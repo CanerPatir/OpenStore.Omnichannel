@@ -3,6 +3,7 @@ using OpenStore.Omnichannel.Storefront.Services;
 
 namespace OpenStore.Omnichannel.Storefront.Controllers;
 
+[Route("[controller]")]
 public class CheckoutController : Controller
 {
     private const string ShoppingCartRouteName = "Cart";

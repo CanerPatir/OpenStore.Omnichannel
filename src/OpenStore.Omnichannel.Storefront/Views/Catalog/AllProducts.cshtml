@@ -25,22 +25,22 @@
 
 <script id="product-box-tmpl" type="text/x-jsrender">
 <div class="col-md-3">
+    <a href="product/{{:handle}}" target="_blank">
       <figure class="card card-product-grid">
           <div class="img-wrap">
               <img src="{{:photoUrl}}" alt="{{:handle}}">
-              <a class="btn-overlay" href="product/{{:handle}}" target="_blank"><i class="fa fa-search-plus"></i> Ürün Detay</a>
           </div>  
           <figcaption class="info-wrap">
               <div class="fix-height">
-                  <a href="#" class="title">{{:title}}</a>
+                  <a href="product/{{:handle}}" class="title">{{:title}}</a>
                   <div class="price-wrap mt-2">
                       <span class="price">{{:price}}</span>
                       <span class="compare-at-price">{{:compareAtPrice}}</span>
                   </div>  
               </div>
-              <a href="#" class="btn btn-block btn-primary">Add to cart</a>
           </figcaption>
       </figure>
+    </a>
 </div>  
 </script>
 

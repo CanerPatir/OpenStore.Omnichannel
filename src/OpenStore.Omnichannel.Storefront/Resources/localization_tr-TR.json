@@ -1,4 +1,7 @@
 {
+  "General.Button.AddToCart": "Sepete Ekle",
+  "ProductDetail.Label.Quantity": "Adet",
+  "ProductList.Button.GoToDetail": "Ürün Detay",
   "ShoppingCart.Title": "Sepetiniz",
   "ShoppingCart.Button.MakePurchase": "Sepeti Onayla",
   "ShoppingCart.Button.RemoveItem": "Sil",
