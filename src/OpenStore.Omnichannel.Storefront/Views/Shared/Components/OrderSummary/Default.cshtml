@@ -1,0 +1,44 @@
+@model OrderSummaryViewModel
+
+@if (Model is not null)
+{
+    <div class="card">
+        <div class="card-body">
+            @if (Model.Discount.HasValue)
+            {
+                <dl class="dlist-align">
+                    <dt>@L["OrderSummary.Total"]</dt>
+                    <dd class="text-right"> @Model.Total.ToCurrencyStringNoSign()</dd>
+                </dl>
+                <dl class="dlist-align">
+                    <dt>
+                        @L["OrderSummary.Discount"]
+                        @if (Model.DiscountPercentage is > 0)
+                        {
+                            <small>(@Model.DiscountPercentage.Value.ToString("P1"))</small>
+                        }
+                    </dt>
+                    <dd class="text-right">
+                        @Model.Discount.Value.ToCurrencyStringNoSign()
+                    </dd>
+                </dl>
+            }
+            <dl class="dlist-align">
+                <dt>@L["OrderSummary.SubTotal"]</dt>
+                <dd class="text-right h5">
+                    <strong>@Model.Subtotal.ToCurrencyStringNoSign()</strong>
+                </dd>
+            </dl>
+            <hr>
+
+            <a asp-controller="Checkout" asp-action="Payment" class="btn btn-primary btn-block mb-3">
+                @L["ShoppingCart.Button.MakePurchase"]
+            </a>
+
+            <p class="text-center mb-3">
+                <img src="~/storefront/images/misc/payments.png" alt="cards" height="26">
+            </p>
+
+        </div>
+    </div>
+}

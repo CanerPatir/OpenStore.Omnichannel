@@ -1,10 +1,10 @@
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using OpenStore.Infrastructure.Localization;
+using OpenStore.Infrastructure.Localization.Json;
 using OpenStore.Omnichannel.Storefront.Infrastructure;
 using OpenStore.Omnichannel.Storefront.Services;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
@@ -25,9 +25,9 @@ if (builder.Environment.IsDevelopment())
     mvcBuilder.AddRazorRuntimeCompilation();
 }
 
-builder.Services.AddOpenStoreResxLocalization(mvcBuilder, options =>
+builder.Services.AddOpenStoreJsonLocalization(mvcBuilder, options =>
 {
-    options.Assembly = Assembly.GetEntryAssembly();
+    options.Source = OpenStoreJsonLocalizationSource.Content;
     options.DefaultUiCulture = new CultureInfo("tr-TR");
     options.DefaultSupportedUiCultures = new[]
     {

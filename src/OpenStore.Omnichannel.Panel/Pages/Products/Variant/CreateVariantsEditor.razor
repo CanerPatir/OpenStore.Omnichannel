@@ -5,100 +5,99 @@
 
 <Card Margin="Margin.Is3.FromBottom">
     <ListGroup>
-               <ListGroupItem>
-                    <h5 class="mt-2 mb-2">
-                        @L["Title"]
-                    </h5>
-                    <Field>
-                        <FieldBody>
-                            <Check TValue="bool" Checked="@Model.HasMultipleVariants" CheckedChanged="HasMultipleVariantsChanged">@L["HasMultipleVariants"]</Check>
-                        </FieldBody>
-                    </Field>
-                </ListGroupItem>
-                @if (Model.HasMultipleVariants)
-                {
-                    <ListGroupItem>
-                        <CreateVariantOptionEditor Model="@Model" OptionsChanged="OptionsChanged"/>
-                    </ListGroupItem>
-                    if (Model.Variants.Any())
+        <ListGroupItem>
+            <h5 class="mt-2 mb-2">
+                @L["Title"]
+            </h5>
+            <Field>
+                <FieldBody>
+                    <Check TValue="bool" Checked="@Model.HasMultipleVariants" CheckedChanged="HasMultipleVariantsChanged">@L["HasMultipleVariants"]</Check>
+                </FieldBody>
+            </Field>
+        </ListGroupItem>
+
+
+        @if (Model.HasMultipleVariants)
+        {
+            <ListGroupItem>
+                <CreateVariantOptionEditor Model="@Model" OptionsChanged="OptionsChanged"/>
+            </ListGroupItem>
+            if (Model.Variants.Any())
+            {
+                <ListGroupItem>
+                    <h6 class="mt-2 mb-2">@L["Header.VariantsPreview"]</h6>
+                    @if (Model.Variants.Any())
                     {
-                        <ListGroupItem>
-                            <h6 class="mt-2 mb-2">@L["Header.VariantsPreview"]</h6>
-        
-                            @if (Model.Variants.Any())
-                            {
-                                <Row>
-                                    <Column ColumnSize="ColumnSize.Is4">
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        @L["Input.VariantBarcode"]
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        @L["Input.Price"] (@NumberFormatInfo.GetInstance(CultureInfo.CurrentUICulture).CurrencySymbol)
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        @L["Input.ComparePrice"] (@NumberFormatInfo.GetInstance(CultureInfo.CurrentUICulture).CurrencySymbol)
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        @L["Input.Stock"]
-                                    </Column>
-                                </Row>
-                                <hr class="mb-2 mt-2">
-                            }
-        
-                            @foreach (var variant in Model.Variants)
-                            {
-                                <Row>
-                                    <Column ColumnSize="ColumnSize.Is4">
-                                        @variant.Title
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        <TextEdit @bind-Text="@variant.Barcode" Size="Size.Small" Placeholder="@(L["Input.VariantBarcode"])"/>
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        <NumericEdit TValue="decimal"
-                                                     @bind-Value="@variant.Price"
-                                                     Decimals="2"
-                                                     Size="Size.Small"
-                                                     Placeholder="@(L["Input.Price"])"/>
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        <NumericEdit TValue="decimal?"
-                                                     @bind-Value="@variant.CompareAtPrice"
-                                                     Decimals="2"
-                                                     Size="Size.Small" />
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is2">
-                                        <InputNumber @bind-Value="@variant.Quantity"
-                                                     min="0" 
-                                                     class="form-control form-control-sm"
-                                                     DisplayName="@L["Input.Stock"]"/>
-                                    </Column>
-                                </Row>
-                                
-        
-                                if (Model.Variants.Last() != variant)
-                                {
-                                    <hr class="mb-2 mt-2">
-                                }
-                            }
-                        </ListGroupItem>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is4">
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                @L["Input.VariantBarcode"]
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                @L["Input.Price"] (@NumberFormatInfo.GetInstance(CultureInfo.CurrentUICulture).CurrencySymbol)
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                @L["Input.ComparePrice"] (@NumberFormatInfo.GetInstance(CultureInfo.CurrentUICulture).CurrencySymbol)
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                @L["Input.Stock"]
+                            </Column>
+                        </Row>
+                        <hr class="mb-2 mt-2">
                     }
-                }
-                
-                @ChildContent
+                    
+                    @foreach (var variant in Model.Variants)
+                    {
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is4">
+                                @variant.Title
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                <TextEdit @bind-Text="@variant.Barcode" Size="Size.Small" Placeholder="@(L["Input.VariantBarcode"])"/>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                <NumericEdit TValue="decimal"
+                                             @bind-Value="@variant.Price"
+                                             Decimals="2"
+                                             Size="Size.Small"
+                                             Placeholder="@(L["Input.Price"])"/>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                <NumericEdit TValue="decimal?"
+                                             @bind-Value="@variant.CompareAtPrice"
+                                             Decimals="2"
+                                             Size="Size.Small" />
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is2">
+                                <InputNumber @bind-Value="@variant.Quantity"
+                                             min="0" 
+                                             class="form-control form-control-sm"
+                                             DisplayName="@L["Input.Stock"]"/>
+                            </Column>
+                        </Row>
+                        
+                        @if (Model.Variants.Last() != variant)
+                        {
+                            <hr class="mb-2 mt-2">
+                        }
+                    }             
+                </ListGroupItem>
+            }
+        }
+
+        @ChildContent
     </ListGroup>
 </Card>
 
-
 @code {
-    
+
     [Parameter]
     public ProductDto Model { get; set; }
 
     [Parameter]
     public EventCallback<ProductDto> ModelChanged { get; set; }
-    
+
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 

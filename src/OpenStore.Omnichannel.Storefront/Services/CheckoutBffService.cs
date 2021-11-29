@@ -1,17 +1,17 @@
 using System.Security.Claims;
 using OpenIddict.Abstractions;
-using OpenStore.Omnichannel.Storefront.Models.ShoppingCart;
+using OpenStore.Omnichannel.Storefront.Models.Checkout;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 
-public class ShoppingCartBffService : IBffService
+public class CheckoutBffService : IBffService
 {
     private const string CartCookieKey = "CartCookieKey";
     private readonly IApiClient _apiClient;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public ShoppingCartBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor)
+    public CheckoutBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor)
     {
         _apiClient = apiClient;
         _httpContextAccessor = httpContextAccessor;
@@ -25,14 +25,14 @@ public class ShoppingCartBffService : IBffService
     {
         if (TryGetCartId(out var cartId))
         {
-            var cartExists = await _apiClient.ShoppingCart.CheckCartExists(cartId, cancellationToken);
+            var cartExists = await _apiClient.Checkout.CheckCartExists(cartId, cancellationToken);
             if (cartExists)
             {
                 return;
             }
         }
 
-        cartId = await _apiClient.ShoppingCart.CreateShoppingCart(GetUserId(), cancellationToken);
+        cartId = await _apiClient.Checkout.CreateShoppingCart(GetUserId(), cancellationToken);
         SetCartId(cartId);
     }
 
@@ -40,20 +40,20 @@ public class ShoppingCartBffService : IBffService
     {
         var cartId = GetCartId();
 
-        return _apiClient.ShoppingCart.AddItemToCart(cartId, variantId, quantity, cancellationToken);
+        return _apiClient.Checkout.AddItemToCart(cartId, variantId, quantity, cancellationToken);
     }
 
     public Task RemoveItemFromCart(Guid itemId, CancellationToken cancellationToken = default)
     {
         var cartId = GetCartId();
 
-        return _apiClient.ShoppingCart.RemoveItemFromCart(cartId, itemId, cancellationToken);
+        return _apiClient.Checkout.RemoveItemFromCart(cartId, itemId, cancellationToken);
     }
 
     public Task ChangeItemQuantityOfCart(Guid itemId, int quantity, CancellationToken cancellationToken = default)
     {
         var cartId = GetCartId();
-        return _apiClient.ShoppingCart.ChangeItemQuantityOfCart(cartId, itemId, quantity, cancellationToken);
+        return _apiClient.Checkout.ChangeItemQuantityOfCart(cartId, itemId, quantity, cancellationToken);
     }
 
     private async Task BindCartToUser(CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ public class ShoppingCartBffService : IBffService
             return;
         }     
         var cartId = GetCartId();
-        await _apiClient.ShoppingCart.BindCartToUser(cartId, userId.Value, cancellationToken);
+        await _apiClient.Checkout.BindCartToUser(cartId, userId.Value, cancellationToken);
     }
 
     public async Task<ShoppingCartViewModel> GetShoppingCartViewModel(CancellationToken cancellationToken = default)
@@ -74,13 +74,18 @@ public class ShoppingCartBffService : IBffService
             return null;
         }
 
-        var shoppingCart = await _apiClient.ShoppingCart.GetCart(cartId, cancellationToken);
+        var shoppingCart = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
         if (shoppingCart is null)
         {
             return null;
         }
         
         return new ShoppingCartViewModel(shoppingCart);
+    }
+    
+    public async Task<OrderSummaryViewModel> GetOrderSummary(CancellationToken cancellationToken)
+    {
+        return new OrderSummaryViewModel(0, 0, 0, 0);
     }
 
     private Guid? GetUserId()
@@ -136,4 +141,5 @@ public class ShoppingCartBffService : IBffService
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
     }
+
 }

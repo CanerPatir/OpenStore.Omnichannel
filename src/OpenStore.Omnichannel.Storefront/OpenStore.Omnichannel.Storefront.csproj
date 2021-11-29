@@ -37,10 +37,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Views\Catalog\ProductDetail.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>ProductDetail.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
       <EmbeddedResource Update="Resources\Views\ShoppingCart\Index.tr-TR.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
@@ -48,11 +44,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Resources\Views\Catalog\ProductDetail.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>ProductDetail.tr-TR.resx</DependentUpon>
-      </Compile>
       <Compile Update="Resources\Views\ShoppingCart\Index.tr-TR.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>

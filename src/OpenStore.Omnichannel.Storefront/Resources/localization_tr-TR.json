@@ -1,0 +1,10 @@
+{
+  "ShoppingCart.Title": "Sepetiniz",
+  "ShoppingCart.Button.MakePurchase": "Sepeti Onayla",
+  "ShoppingCart.Button.RemoveItem": "Sil",
+  "ShoppingCart.Button.ContinueShopping": "Alışverişe Devam Et",
+  "ShoppingCart.Warning.EmptyCart": "Sepetinizde ürün bulunmamaktadır !",
+  "OrderSummary.Total": "Sepet Tutarı",
+  "OrderSummary.Discount": "İndirim",
+  "OrderSummary.Subtotal": "Toplam"
+}

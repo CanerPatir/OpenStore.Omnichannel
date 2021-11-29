@@ -50,7 +50,7 @@
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                             <ProductContentEditor @ref="_contentEditor"/>
                             <MediaEditor Model="@ViewModel.Product"/>
-                            <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@(p => StateHasChanged())"/>
+                            <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@(() => StateHasChanged())"/>
                             @if (!ViewModel.Product.HasMultipleVariants)
                             {
                                 <PricingEditor Model="@ViewModel.Product.Variants.First()"/>

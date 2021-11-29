@@ -5,16 +5,16 @@ namespace OpenStore.Omnichannel.Storefront.Components;
 
 public class FlyoutShoppingCart : ViewComponent
 {
-    private readonly ShoppingCartBffService _shoppingCartBffService;
+    private readonly CheckoutBffService _checkoutBffService;
 
-    public FlyoutShoppingCart(ShoppingCartBffService shoppingCartBffService)
+    public FlyoutShoppingCart(CheckoutBffService checkoutBffService)
     {
-        _shoppingCartBffService = shoppingCartBffService;
+        _checkoutBffService = checkoutBffService;
     }
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
-        await _shoppingCartBffService.CreateShoppingCartIfNotExists();
+        await _checkoutBffService.CreateShoppingCartIfNotExists();
         return View();
     }
 }

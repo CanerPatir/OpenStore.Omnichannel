@@ -1,7 +1,7 @@
 class ShoppingCartClient {
 
     async addItemToCart(variantId, quantity) {
-        const response = await fetch(`shoppingCart/items?variantId=${variantId}&quantity=${quantity}`, {
+        const response = await fetch(`checkout/shoppingCart/items?variantId=${variantId}&quantity=${quantity}`, {
             method: 'POST',
         })
 
@@ -13,14 +13,14 @@ class ShoppingCartClient {
     }
 
     async removeItemFromCart(itemId) {
-        const response = await fetch(`shoppingCart/items/${itemId}`, {
+        const response = await fetch(`checkout/shoppingCart/items/${itemId}`, {
             method: 'DELETE',
         });
         return response.ok;
     }
 
     async changeItemQuantityOfCart(itemId, quantity) {
-        const response = await fetch(`shoppingCart/items/${itemId}?quantity=${quantity}`, {
+        const response = await fetch(`checkout/shoppingCart/items/${itemId}?quantity=${quantity}`, {
             method: 'POST',
         });
         return response.ok;
