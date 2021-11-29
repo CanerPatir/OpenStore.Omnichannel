@@ -1,5 +1,11 @@
 namespace OpenStore.Omnichannel.Storefront.Services.Clients;
 
+public interface IApiClient
+{
+    CatalogClient Catalog { get; }
+    ShoppingCartClient ShoppingCart { get; }
+}
+
 public class ApiClient : IApiClient
 {
     internal const string ApiClientKey = "OpenStoreApiClient";
@@ -7,10 +13,10 @@ public class ApiClient : IApiClient
     public ApiClient(IHttpClientFactory clientFactory)
     {
         var httpClient = clientFactory.CreateClient(ApiClientKey);
-        Catalog = new CatalogStore(httpClient);
-        ShoppingCart = new ShoppingCartStore(httpClient);
+        Catalog = new CatalogClient(httpClient);
+        ShoppingCart = new ShoppingCartClient(httpClient);
     }
 
-    public CatalogStore Catalog { get; }
-    public ShoppingCartStore ShoppingCart { get; }
+    public CatalogClient Catalog { get; }
+    public ShoppingCartClient ShoppingCart { get; }
 }

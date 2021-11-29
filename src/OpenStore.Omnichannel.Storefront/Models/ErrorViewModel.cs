@@ -1,5 +1,3 @@
-using System;
-
 namespace OpenStore.Omnichannel.Storefront.Models;
 
 public class ErrorViewModel

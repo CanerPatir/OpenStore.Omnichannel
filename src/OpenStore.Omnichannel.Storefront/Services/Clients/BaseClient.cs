@@ -1,10 +1,8 @@
-using System.Net.Http;
-
 namespace OpenStore.Omnichannel.Storefront.Services.Clients;
 
-public abstract class HttpStore
+public abstract class BaseClient
 {
-    protected HttpStore(HttpClient httpClient)
+    protected BaseClient(HttpClient httpClient)
     {
         HttpClient = httpClient;
     }

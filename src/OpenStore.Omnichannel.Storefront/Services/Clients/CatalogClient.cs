@@ -2,9 +2,9 @@ using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
 namespace OpenStore.Omnichannel.Storefront.Services.Clients;
 
-public class CatalogStore : HttpStore
+public class CatalogClient : BaseClient
 {
-    public CatalogStore(HttpClient httpClient) : base(httpClient)
+    public CatalogClient(HttpClient httpClient) : base(httpClient)
     {
     }
 

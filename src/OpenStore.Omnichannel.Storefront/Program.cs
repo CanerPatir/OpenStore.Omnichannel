@@ -103,7 +103,7 @@ services.AddHttpClient(ApiClient.ApiClientKey, client =>
 {
     client.BaseAddress = new Uri(apiConfiguration.Url);
     client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);
-});
+}).AddPolicyHandler(RetryPolicy.GetApiRetryPolicy());
 
 services.AddSingleton<IApiClient, ApiClient>();
 

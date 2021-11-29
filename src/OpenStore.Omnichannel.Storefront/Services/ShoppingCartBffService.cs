@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using System.Text;
 using OpenIddict.Abstractions;
 using OpenStore.Omnichannel.Storefront.Models.ShoppingCart;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
@@ -19,15 +18,9 @@ public class ShoppingCartBffService : IBffService
     }
 
     private HttpContext HttpContext => _httpContextAccessor.HttpContext;
+    
     private ClaimsPrincipal User => HttpContext?.User;
-
-    private Guid GetUserId()
-    {
-        var idClaim = User?.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Subject)?.Value;
-
-        return Guid.TryParse(idClaim, out var id) ? id : default;
-    }
-
+    
     public async Task CreateShoppingCartIfNotExists(CancellationToken cancellationToken = default)
     {
         if (TryGetCartId(out var cartId))
@@ -63,19 +56,43 @@ public class ShoppingCartBffService : IBffService
         return _apiClient.ShoppingCart.ChangeItemQuantityOfCart(cartId, itemId, quantity, cancellationToken);
     }
 
-    private Task BindCartToUser(Guid userId, CancellationToken cancellationToken = default)
+    private async Task BindCartToUser(CancellationToken cancellationToken = default)
     {
+        var userId = GetUserId();
+        if (userId is null)
+        {
+            return;
+        }     
         var cartId = GetCartId();
-
-        return _apiClient.ShoppingCart.BindCartToUser(cartId, userId, cancellationToken);
+        await _apiClient.ShoppingCart.BindCartToUser(cartId, userId.Value, cancellationToken);
     }
 
     public async Task<ShoppingCartViewModel> GetShoppingCartViewModel(CancellationToken cancellationToken = default)
     {
-        var cartId = GetCartId();
+        if (!TryGetCartId(out var cartId))
+        {
+            return null;
+        }
 
         var shoppingCart = await _apiClient.ShoppingCart.GetCart(cartId, cancellationToken);
+        if (shoppingCart is null)
+        {
+            return null;
+        }
+        
         return new ShoppingCartViewModel(shoppingCart);
+    }
+
+    private Guid? GetUserId()
+    {
+        if (User?.Identity?.IsAuthenticated == false)
+        {
+            return default;
+        }
+        
+        var idClaim = User?.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Subject)?.Value;
+
+        return Guid.TryParse(idClaim, out var id) ? id : default;
     }
 
     private bool TryGetCartId(out Guid cartId)
@@ -112,7 +129,7 @@ public class ShoppingCartBffService : IBffService
 
     private void SetCartId(Guid cartId)
     {
-        HttpContext.Response.Cookies.Append(CartCookieKey, cartId.ToString(), new CookieOptions()
+        HttpContext.Response.Cookies.Append(CartCookieKey, cartId.ToString(), new CookieOptions
         {
             IsEssential = true,
             SameSite = SameSiteMode.Strict,

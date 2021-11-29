@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace OpenStore.Omnichannel.Storefront.Infrastructure;
 
 public class IdentityConfiguration
