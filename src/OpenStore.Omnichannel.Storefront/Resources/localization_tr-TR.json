@@ -1,7 +1,11 @@
 {
   "General.Button.AddToCart": "Sepete Ekle",
+  "SearchBox.Placeholder": "Aradığınız ürün, kategori veya markayı yazınız",
   "ProductDetail.Label.Quantity": "Adet",
   "ProductList.Button.GoToDetail": "Ürün Detay",
+  "ProductList.Button.AddToCart": "Sepete Ekle",
+  "ProductList.Title": "Tüm Ürünler",
+  "ProductList.Search.TitleSuffix": " Modelleri, Fiyatları",
   "ShoppingCart.Title": "Sepetiniz",
   "ShoppingCart.Button.MakePurchase": "Sepeti Onayla",
   "ShoppingCart.Button.RemoveItem": "Sil",

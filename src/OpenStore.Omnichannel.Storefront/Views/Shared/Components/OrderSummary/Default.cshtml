@@ -1,6 +1,6 @@
 @model OrderSummaryViewModel
 
-@if (Model is not null)
+@if (Model is not null && Model.AnyItem)
 {
     <div class="card">
         <div class="card-body">
@@ -29,10 +29,12 @@
                     <strong>@Model.Subtotal.ToCurrencyStringNoSign()</strong>
                 </dd>
             </dl>
+            
             <hr>
             <a asp-controller="Checkout" asp-action="Payment" class="btn btn-primary btn-block mb-3">
                 @L["ShoppingCart.Button.MakePurchase"]
             </a>
+            
             <p class="text-center mb-3">
                 <img src="~/storefront/images/misc/payments.png" alt="cards" height="26">
             </p>

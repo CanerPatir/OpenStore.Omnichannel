@@ -67,7 +67,7 @@ public class CheckoutBffService : IBffService
         var cartId = GetCartId();
         await _apiClient.Checkout.BindCartToUser(cartId, userId.Value, cancellationToken);
     }
-    
+
     public async Task<ShoppingCartViewModel> GetShoppingCartViewModel(CancellationToken cancellationToken = default)
     {
         if (!TryGetCartId(out var cartId))
@@ -95,13 +95,19 @@ public class CheckoutBffService : IBffService
 
         return new FlyoutShoppingCartViewModel(itemCount);
     }
-    
+
     public async Task<OrderSummaryViewModel> GetOrderSummary(CancellationToken cancellationToken)
     {
         var shoppingCartViewModel = await GetShoppingCartViewModel(cancellationToken);
 
         var total = shoppingCartViewModel?.ShoppingCart?.Items.Sum(x => x.Price * x.Quantity) ?? 0;
-        return new OrderSummaryViewModel(total, null, null, total);
+        return new OrderSummaryViewModel(
+            shoppingCartViewModel?.ShoppingCart?.Items.Any() == true
+            , total,
+            null,
+            null,
+            total
+        );
     }
 
     private async Task<bool> CheckCartExists(Guid cartId, CancellationToken cancellationToken = default)
@@ -118,7 +124,7 @@ public class CheckoutBffService : IBffService
         {
             return (ShoppingCartResult)cacheResult;
         }
-        
+
         var shoppingCartResult = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
         if (shoppingCartResult is null)
         {
@@ -126,7 +132,7 @@ public class CheckoutBffService : IBffService
         }
 
         HttpContextCache[cacheKey] = shoppingCartResult;
-        
+
         return shoppingCartResult;
     }
 

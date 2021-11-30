@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
+using OpenStore.Omnichannel.Storefront.Models.Catalog;
 using OpenStore.Omnichannel.Storefront.Services;
 
 namespace OpenStore.Omnichannel.Storefront.Controllers;
 
 public class CatalogController : Controller
 {
-    private const string SearchRouteName = "Search";
+    private const string SearchRouteNameEn = "Search";
+    private const string SearchRouteNameTr = "arama";
     private const string AllRouteName = "All";
     private const string CollectionRouteName = "Collection";
     private const string ProductDetailRouteName = "ProductDetail";
@@ -17,8 +19,9 @@ public class CatalogController : Controller
         _productBffService = productBffService;
     }
 
-    [HttpGet("~/search", Name = SearchRouteName)]
-    public IActionResult Search([FromQuery] string term) => View();
+    [HttpGet("~/search", Name = SearchRouteNameEn)]
+    [HttpGet("~/arama", Name = SearchRouteNameTr)]
+    public IActionResult Search([FromQuery] string term) => View(new SearchViewModel(term));
 
     [HttpGet("~/collection", Name = CollectionRouteName)]
     public IActionResult Collection([FromQuery] string name, [FromQuery] Guid id) => View();
