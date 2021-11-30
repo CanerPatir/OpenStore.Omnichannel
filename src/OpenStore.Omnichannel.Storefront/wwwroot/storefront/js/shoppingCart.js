@@ -33,16 +33,34 @@ class ShoppingCart {
         this.shoppingCartClient = new ShoppingCartClient();
     }
 
+    _updateBadge() {
+        const cartBadge = $('#flyout-cart-notify-badge');
+        cartBadge.text(parseInt(cartBadge.text()) + 1);
+        cartBadge.delay(100).fadeOut().fadeIn('slow');
+    }
+
     async addItem(variantId, quantity) {
-        return await this.shoppingCartClient.addItemToCart(variantId, quantity);
+        const result = await this.shoppingCartClient.addItemToCart(variantId, quantity);
+        if (result !== false) {
+            this._updateBadge();
+        }
+        return result;
     }
 
     async changeItemQuantity(itemId, quantity) {
-        return await this.shoppingCartClient.changeItemQuantityOfCart(itemId, quantity);
+        const result = await this.shoppingCartClient.changeItemQuantityOfCart(itemId, quantity);
+        if (result !== false) {
+            this._updateBadge();
+        }
+        return result;
     }
 
     async removeItem(variantId, itemId) {
-        return await this.shoppingCartClient.removeItemFromCart(itemId);
+        const result =  await this.shoppingCartClient.removeItemFromCart(itemId);
+        if (result !== false) {
+            this._updateBadge();
+        }
+        return result;
     }
 }
 

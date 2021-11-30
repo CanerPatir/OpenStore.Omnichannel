@@ -12,9 +12,10 @@ public class FlyoutShoppingCart : ViewComponent
         _checkoutBffService = checkoutBffService;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync()
+    public async Task<IViewComponentResult> InvokeAsync(CancellationToken cancellationToken = default)
     {
-        await _checkoutBffService.CreateShoppingCartIfNotExists();
-        return View();
+        await _checkoutBffService.CreateShoppingCartIfNotExists(cancellationToken);
+        var viewModel = await _checkoutBffService.GetFlyoutShoppingCartViewModel(cancellationToken);
+        return View(viewModel);
     }
 }

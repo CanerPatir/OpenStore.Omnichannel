@@ -1,4 +1,6 @@
+@model FlyoutShoppingCartViewModel
+
 <a asp-controller="Checkout" asp-action="ShoppingCart" class="icon icon-sm rounded-circle border">
     <i class="fa fa-shopping-cart"></i>
 </a>
-<span class="badge badge-pill badge-danger notify">0</span>
+<span id="flyout-cart-notify-badge" class="badge badge-pill badge-danger notify">@Model.ItemCount</span>

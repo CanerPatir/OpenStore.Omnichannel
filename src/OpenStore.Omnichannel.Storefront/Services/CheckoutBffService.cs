@@ -18,9 +18,9 @@ public class CheckoutBffService : IBffService
     }
 
     private HttpContext HttpContext => _httpContextAccessor.HttpContext;
-    
+
     private ClaimsPrincipal User => HttpContext?.User;
-    
+
     public async Task CreateShoppingCartIfNotExists(CancellationToken cancellationToken = default)
     {
         if (TryGetCartId(out var cartId))
@@ -62,7 +62,8 @@ public class CheckoutBffService : IBffService
         if (userId is null)
         {
             return;
-        }     
+        }
+
         var cartId = GetCartId();
         await _apiClient.Checkout.BindCartToUser(cartId, userId.Value, cancellationToken);
     }
@@ -79,12 +80,28 @@ public class CheckoutBffService : IBffService
         {
             return null;
         }
-        
+
         return new ShoppingCartViewModel(shoppingCart);
     }
-    
+
+    public async Task<FlyoutShoppingCartViewModel> GetFlyoutShoppingCartViewModel(CancellationToken cancellationToken = default)
+    {
+        var itemCount = 0;
+        if (TryGetCartId(out var cartId))
+        {
+            var shoppingCart = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
+            if (shoppingCart is not null)
+            {
+                itemCount = shoppingCart.Items.Sum(x => x.Quantity);
+            }
+        }
+        
+        return new FlyoutShoppingCartViewModel(itemCount);
+    }
+
     public async Task<OrderSummaryViewModel> GetOrderSummary(CancellationToken cancellationToken)
     {
+        // todo: order summary
         return new OrderSummaryViewModel(0, 0, 0, 0);
     }
 
@@ -94,7 +111,7 @@ public class CheckoutBffService : IBffService
         {
             return default;
         }
-        
+
         var idClaim = User?.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Subject)?.Value;
 
         return Guid.TryParse(idClaim, out var id) ? id : default;
@@ -141,5 +158,4 @@ public class CheckoutBffService : IBffService
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
     }
-
 }
