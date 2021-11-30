@@ -31,19 +31,6 @@ public class CheckoutClient
         return await resp.Content.ReadFromJsonAsync<Guid>(cancellationToken: cancellationToken);
     }
 
-    public async Task<bool> CheckCartExists(Guid cartId, CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            var shoppingCart = await GetCart(cartId, cancellationToken);
-            return shoppingCart is not null;
-        }
-        catch (HttpRequestException e) when (e.StatusCode == HttpStatusCode.NotFound)
-        {
-            return false;
-        }
-    }
-
     public async Task<Guid> AddItemToCart(Guid cartId, Guid variantId, int quantity, CancellationToken cancellationToken = default)
     {
         var resp = await HttpClient.PostAsync($"{ShoppingCartPath}/{cartId}/items?variantId={variantId}&quantity={quantity}", null, cancellationToken);

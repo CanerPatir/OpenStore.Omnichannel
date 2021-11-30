@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using OpenIddict.Abstractions;
+using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 using OpenStore.Omnichannel.Storefront.Models.Checkout;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
@@ -18,14 +19,14 @@ public class CheckoutBffService : IBffService
     }
 
     private HttpContext HttpContext => _httpContextAccessor.HttpContext;
-
+    private IDictionary<object, object> HttpContextCache => HttpContext.Items;
     private ClaimsPrincipal User => HttpContext?.User;
 
     public async Task CreateShoppingCartIfNotExists(CancellationToken cancellationToken = default)
     {
         if (TryGetCartId(out var cartId))
         {
-            var cartExists = await _apiClient.Checkout.CheckCartExists(cartId, cancellationToken);
+            var cartExists = await CheckCartExists(cartId, cancellationToken);
             if (cartExists)
             {
                 return;
@@ -46,7 +47,6 @@ public class CheckoutBffService : IBffService
     public Task RemoveItemFromCart(Guid itemId, CancellationToken cancellationToken = default)
     {
         var cartId = GetCartId();
-
         return _apiClient.Checkout.RemoveItemFromCart(cartId, itemId, cancellationToken);
     }
 
@@ -67,7 +67,7 @@ public class CheckoutBffService : IBffService
         var cartId = GetCartId();
         await _apiClient.Checkout.BindCartToUser(cartId, userId.Value, cancellationToken);
     }
-
+    
     public async Task<ShoppingCartViewModel> GetShoppingCartViewModel(CancellationToken cancellationToken = default)
     {
         if (!TryGetCartId(out var cartId))
@@ -75,7 +75,7 @@ public class CheckoutBffService : IBffService
             return null;
         }
 
-        var shoppingCart = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
+        var shoppingCart = await GetCartInternal(cartId, cancellationToken);
         if (shoppingCart is null)
         {
             return null;
@@ -87,22 +87,47 @@ public class CheckoutBffService : IBffService
     public async Task<FlyoutShoppingCartViewModel> GetFlyoutShoppingCartViewModel(CancellationToken cancellationToken = default)
     {
         var itemCount = 0;
-        if (TryGetCartId(out var cartId))
+        var shoppingCartViewModel = await GetShoppingCartViewModel(cancellationToken);
+        if (shoppingCartViewModel is not null)
         {
-            var shoppingCart = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
-            if (shoppingCart is not null)
-            {
-                itemCount = shoppingCart.Items.Count;
-            }
+            itemCount = shoppingCartViewModel.ShoppingCart.Items.Count;
         }
-        
+
         return new FlyoutShoppingCartViewModel(itemCount);
     }
-
+    
     public async Task<OrderSummaryViewModel> GetOrderSummary(CancellationToken cancellationToken)
     {
-        // todo: order summary
-        return new OrderSummaryViewModel(0, 0, 0, 0);
+        var shoppingCartViewModel = await GetShoppingCartViewModel(cancellationToken);
+
+        var total = shoppingCartViewModel?.ShoppingCart?.Items.Sum(x => x.Price * x.Quantity) ?? 0;
+        return new OrderSummaryViewModel(total, null, null, total);
+    }
+
+    private async Task<bool> CheckCartExists(Guid cartId, CancellationToken cancellationToken = default)
+    {
+        var shoppingCart = await GetCartInternal(cartId, cancellationToken);
+        return shoppingCart is not null;
+    }
+
+    private async Task<ShoppingCartResult> GetCartInternal(Guid cartId, CancellationToken cancellationToken)
+    {
+        // todo: remove this shit caching
+        const string cacheKey = "shoppingCartViewModel";
+        if (HttpContextCache.TryGetValue(cacheKey, out var cacheResult))
+        {
+            return (ShoppingCartResult)cacheResult;
+        }
+        
+        var shoppingCartResult = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
+        if (shoppingCartResult is null)
+        {
+            return null;
+        }
+
+        HttpContextCache[cacheKey] = shoppingCartResult;
+        
+        return shoppingCartResult;
     }
 
     private Guid? GetUserId()

@@ -15,28 +15,20 @@
                 </div>
                 <div class="col-lg-4 col-sm-6 col-12">
                     <div class="widgets-wrap float-md-right">
-                        <div class="widget-header mr-3">
-                            @await Component.InvokeAsync("FlyoutShoppingCart")
+                        <div class="widget-header icontext"> 
+                            <a asp-controller="Account" asp-action="Index" class="icon icon-sm rounded-circle border">
+                                <i class="fa fa-user"></i>
+                            </a>
                         </div>
+                        
                         <div class="widget-header mr-3">
                             @await Component.InvokeAsync("FlyoutWishlist")
                         </div>
 
-                        <div class="widget-header icontext">
-                            <a asp-controller="Account" asp-action="Index" class="icon icon-sm rounded-circle border">
-                                <i class="fa fa-user"></i>
-                            </a>
-                            @if (!User.Identity.IsAuthenticated)
-                            {
-                                <div class="text">
-                                    <span class="text-muted">Welcome!</span>
-                                    <div>
-                                        <a href="/login">Sf.Signin</a> |
-                                        <a href="/signup">Sf.Register</a>
-                                    </div>
-                                </div>
-                            }
+                        <div class="widget-header mr-3">
+                            @await Component.InvokeAsync("FlyoutShoppingCart")
                         </div>
+                        
                     </div>
                 </div>
             </div>

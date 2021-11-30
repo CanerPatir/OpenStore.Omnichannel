@@ -18,7 +18,7 @@ public class CheckoutController : BaseApiController
     }
 
     #region Shopping Cart
-    
+
     [HttpPost("shopping-cart/")]
     public Task<Guid> CreateOrGetShoppingCart([FromQuery] Guid? userId) => _mediator.Send(new CreateShoppingCart(userId), CancellationToken);
 
@@ -33,15 +33,9 @@ public class CheckoutController : BaseApiController
 
     [HttpPost("shopping-cart/{id:guid}/items/{itemId:guid}")]
     public Task ChangeItemQuantityOfCart(Guid id, Guid itemId, [FromQuery] int quantity) => _mediator.Send(new ChangeItemQuantityOfCart(id, itemId, quantity), CancellationToken);
-    
+
     [HttpPost("shopping-cart/{id:guid}/bind-to-user/{userId:guid}")]
     public Task BindCartToUser(Guid id, Guid userId) => _mediator.Send(new BindCartToUser(id, userId), CancellationToken);
-    
-    #endregion
-
-    #region Order summary
-    
 
     #endregion
-    
 }
