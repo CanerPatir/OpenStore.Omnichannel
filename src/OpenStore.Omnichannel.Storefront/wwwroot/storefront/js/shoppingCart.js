@@ -33,32 +33,28 @@ class ShoppingCart {
         this.shoppingCartClient = new ShoppingCartClient();
     }
 
-    _updateBadge() {
+    _updateBadge(val) {
         const cartBadge = $('#flyout-cart-notify-badge');
-        cartBadge.text(parseInt(cartBadge.text()) + 1);
+        cartBadge.text(parseInt(cartBadge.text()) + val);
         cartBadge.delay(100).fadeOut().fadeIn('slow');
     }
 
     async addItem(variantId, quantity) {
         const result = await this.shoppingCartClient.addItemToCart(variantId, quantity);
         if (result !== false) {
-            this._updateBadge();
+            this._updateBadge(1);
         }
         return result;
     }
 
     async changeItemQuantity(itemId, quantity) {
-        const result = await this.shoppingCartClient.changeItemQuantityOfCart(itemId, quantity);
-        if (result !== false) {
-            this._updateBadge();
-        }
-        return result;
+        return await this.shoppingCartClient.changeItemQuantityOfCart(itemId, quantity);
     }
 
-    async removeItem(variantId, itemId) {
+    async removeItem(itemId) {
         const result =  await this.shoppingCartClient.removeItemFromCart(itemId);
         if (result !== false) {
-            this._updateBadge();
+            this._updateBadge(-1);
         }
         return result;
     }

@@ -7,6 +7,9 @@
   "ShoppingCart.Button.RemoveItem": "Sil",
   "ShoppingCart.Button.ContinueShopping": "Alışverişe Devam Et",
   "ShoppingCart.Warning.EmptyCart": "Sepetinizde ürün bulunmamaktadır !",
+  "ShoppingCart.Column.Product": "Ürün",
+  "ShoppingCart.Column.Quantity": "Adet",
+  "ShoppingCart.Column.Price": "Fiyat",
   "OrderSummary.Total": "Sepet Tutarı",
   "OrderSummary.Discount": "İndirim",
   "OrderSummary.Subtotal": "Toplam"

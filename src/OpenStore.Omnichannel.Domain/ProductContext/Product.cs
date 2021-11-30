@@ -61,4 +61,8 @@ public partial class Product : AggregateRoot<Guid>, IAuditableEntity, ISoftDelet
     protected Product()
     {
     }
+
+    public IEnumerable<ProductMedia> GetVariantMedias(Guid variantId) => Medias.Where(x => x.VariantIds.Contains(variantId));
+    public ProductMedia GetVariantMedia(Guid variantId) => GetVariantMedias(variantId).FirstOrDefault();
+    public ProductMedia GetVariantMediaOrDefault(Guid variantId) => GetVariantMedias(variantId).FirstOrDefault() ?? FirstMedia;
 }

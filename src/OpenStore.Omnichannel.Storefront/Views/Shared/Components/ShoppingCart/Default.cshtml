@@ -18,39 +18,50 @@ else
         <table class="table table-borderless table-shopping-cart">
             <thead class="text-muted">
             <tr class="small text-uppercase">
-                <th scope="col">Product</th>
-                <th scope="col" width="120">Quantity</th>
-                <th scope="col" width="120">Price</th>
+                <th scope="col">@L["ShoppingCart.Column.Product"]</th>
+                <th scope="col" width="120">@L["ShoppingCart.Column.Quantity"]</th>
+                <th scope="col" width="120">@L["ShoppingCart.Column.Price"]</th>
                 <th scope="col" class="text-right" width="200"> </th>
             </tr>
             </thead>
             <tbody>
             @foreach (var item in Model.ShoppingCart.Items)
             {
-                <tr>
+                <tr class="cart-item" id="cart-item-@item.Id">
                     <td>
                         <figure class="itemside">
                             <div class="aside">
-                                <img src="~/storefront/images/items/1.jpg" alt="" class="img-sm">
+                                <img src="@item.PhotoUrl" alt="@item.ProductTitle" class="img-sm">
                             </div>
                             <figcaption class="info">
-                                <a href="#" class="title text-dark">Some name of item goes here nice</a>
-                                <p class="text-muted small">Size: XL, Color: blue, <br> Brand: Gucci</p>
+                                <a asp-controller="Catalog" asp-action="ProductDetail" asp-route-handle="@item.Handle" target="_blank" class="title text-dark">@item.ProductTitle</a>
+                                <p class="text-muted small">@item.VariantTitle</p>
                             </figcaption>
                         </figure>
                     </td>
                     <td>
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
+                        <form asp-controller="Checkout" asp-action="UpdateShoppingCartItemQuantity" method="post">
+                            <input type="hidden" name="cartId" value="@Model.ShoppingCart.Id"/>
+                            <input type="hidden" name="cartItemId" value="@item.Id"/>
+                            <select name="quantity" class="form-control" onchange="this.form.submit()">
+                                @for (var i = 1; i <= item.AvailableQuantity; i++)
+                                {
+                                    if (i == item.Quantity)
+                                    {
+                                        <option value="@i" selected="selected">@i</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                            </select>
+                        </form> 
                     </td>
                     <td>
                         <div class="price-wrap">
-                            <var class="price">$1156.00</var>
-                            <small class="text-muted"> $315.20 each </small>
+                            <var class="price">@((item.Price * item.Quantity).ToCurrencyStringNoSign())</var>
+                            <small class="text-muted"> @item.Price.ToCurrencyStringNoSign() each </small>
                         </div>
                     </td>
                     <td class="text-right">
@@ -58,7 +69,7 @@ else
                         @*    data-toggle="tooltip"> *@
                         @*     <i class="fa fa-heart"></i> *@
                         @* </a> *@
-                        <a href="" class="btn btn-light"> @L["ShoppingCart.Button.RemoveItem"]</a>
+                        <a href="javascript:void(0)" data-item-id="@item.Id" class="btn btn-light remove-cart-item-btn"> @L["ShoppingCart.Button.RemoveItem"]</a>
                     </td>
                 </tr>
             }
@@ -76,4 +87,23 @@ else
             </a>
         </div>
     </div>
+
+    <script type="module">
+        const shoppingCart = new ShoppingCart();
+        const elements = document.getElementsByClassName('remove-cart-item-btn');
+         for (let element of elements) {
+                const itemId = element.getAttribute("data-item-id");
+                element.addEventListener("click",function(e){
+                    if (shoppingCart.removeItem(itemId) !== false){
+                        const $target = $('#cart-item-' + itemId);
+                        $target.hide('slow', function(){ 
+                            $target.remove();
+                            if ($('.cart-item').length === 0){
+                                location.reload();
+                            }
+                        });
+                    }                    
+                }, false);
+        }
+    </script>
 }

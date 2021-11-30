@@ -18,6 +18,13 @@ public class CheckoutController : Controller
 
     [HttpGet("~/cart", Name = ShoppingCartRouteName)]
     public IActionResult ShoppingCart() => View();
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateShoppingCartItemQuantity([FromForm] Guid cartId, [FromForm] Guid cartItemId, [FromForm] int quantity)
+    {
+        await _checkoutBffService.ChangeItemQuantityOfCart(cartItemId, quantity, HttpContext.RequestAborted);
+        return RedirectToAction(nameof(ShoppingCart));
+    }
     
     [HttpGet("~/payment", Name = PaymentRouteName)]
     public IActionResult Payment() => View();

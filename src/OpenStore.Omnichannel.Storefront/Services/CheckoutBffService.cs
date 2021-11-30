@@ -92,7 +92,7 @@ public class CheckoutBffService : IBffService
             var shoppingCart = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
             if (shoppingCart is not null)
             {
-                itemCount = shoppingCart.Items.Sum(x => x.Quantity);
+                itemCount = shoppingCart.Items.Count;
             }
         }
         
