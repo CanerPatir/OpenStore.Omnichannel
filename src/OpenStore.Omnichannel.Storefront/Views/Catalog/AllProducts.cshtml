@@ -22,27 +22,7 @@
         </div>
     </div>
 </section>
-
-<script id="product-box-tmpl" type="text/x-jsrender">
-<div class="col-md-3">
-    <a href="product/{{:handle}}" target="_blank">
-      <figure class="card card-product-grid">
-          <div class="img-wrap">
-              <img src="{{:photoUrl}}" alt="{{:handle}}">
-          </div>  
-          <figcaption class="info-wrap">
-              <div class="fix-height">
-                  <a href="product/{{:handle}}" class="title">{{:title}}</a>
-                  <div class="price-wrap mt-2">
-                      <span class="price">{{:price}}</span>
-                      <span class="compare-at-price">{{:compareAtPrice}}</span>
-                  </div>  
-              </div>
-          </figcaption>
-      </figure>
-    </a>
-</div>  
-</script>
+<partial name="_ProductBoxTemplate"/>
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.11/jsrender.min.js"

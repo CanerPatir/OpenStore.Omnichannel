@@ -8,9 +8,7 @@
       <Content Update="appsettings.Development.json">
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
-      <Content Include="Views\Catalog\AllProducts.cshtml.js">
-        <DependentUpon>AllProducts.cshtml</DependentUpon>
-      </Content>
+      <Content Include="Views\Catalog\AllProducts.cshtml.js" /> 
     </ItemGroup>
     
     <ItemGroup>
@@ -28,12 +26,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="Views\Catalog\AllProducts.cshtml.js">
-        <DependentUpon>AllProducts.cshtml</DependentUpon>
-      </None>
     </ItemGroup>
 
     <ItemGroup>
