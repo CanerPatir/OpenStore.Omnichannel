@@ -13,7 +13,6 @@ using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
 using OpenStore.Omnichannel.Infrastructure.ObjectStorage;
 using OpenStore.Omnichannel.Projections;
-using OpenStore.Omnichannel.ReadModel.Sql;
 using OpenStore.Omnichannel.ReadModel.Sql.Storefront;
 
 namespace OpenStore.Omnichannel.Infrastructure;

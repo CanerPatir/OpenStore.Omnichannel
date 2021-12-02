@@ -11,8 +11,8 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    [Migration("20211202191954_Migration-2021-12-02-22-19")]
-    partial class Migration202112022219
+    [Migration("20211202200323_Migration-2021-12-02-23-03")]
+    partial class Migration202112022303
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -970,26 +970,6 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("ProductCollectionId", "ProductId");
 

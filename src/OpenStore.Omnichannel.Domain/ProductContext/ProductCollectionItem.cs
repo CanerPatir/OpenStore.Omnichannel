@@ -8,7 +8,7 @@
 
 namespace OpenStore.Omnichannel.Domain.ProductContext;
 
-public class ProductCollectionItem : AuditableEntity
+public class ProductCollectionItem
 {
     public Guid ProductCollectionId { get; protected set; }
     public virtual ProductCollection ProductCollection { get; protected set; }
