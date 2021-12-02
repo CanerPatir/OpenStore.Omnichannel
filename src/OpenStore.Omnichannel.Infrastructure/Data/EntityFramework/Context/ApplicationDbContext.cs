@@ -26,6 +26,7 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
     // Product context
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductMedia> ProductMedias { get; set; }
+    public DbSet<ProductCollection> ProductCollections { get; set; }
 
     // Inventory context
     public DbSet<Inventory> Inventories { get; set; }

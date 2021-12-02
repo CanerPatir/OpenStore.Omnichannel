@@ -46,3 +46,11 @@ public record DeleteVariants(Guid ProductId, IEnumerable<Guid> VariantIds) : IRe
 public record MakeProductAsMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options, IEnumerable<VariantDto> Variants) : IRequest<IEnumerable<Guid>>;
 
 public record ChangeVariantMedia(Guid ProductId, Guid VariantId, Guid MediaId) : IRequest;
+
+// Product Collection
+
+public record CreateProductCollection(string Name, string Description) : IRequest<Guid>;
+
+public record UpdateProductCollection(Guid ProductCollectionId, string Name, string Description) : IRequest;
+
+public record AddProductToCollection(Guid ProductCollectionId, Guid ProductId) : IRequest;

@@ -64,3 +64,11 @@ public record ProductTurnedIntoSingleVariantProduct(Guid ProductId) : DomainEven
 public record ProductMadeMultiVariant(Guid ProductId, IEnumerable<ProductOptionDto> Options) : DomainEventBase(ProductId);
 
 public record VariantMediaChanged(Guid ProductId, Guid VariantId, Guid MediaId) : DomainEventBase(ProductId);
+
+// Product Collection
+
+public record ProductCollectionCreated(Guid ProductCollectionId, string Name, string Description) : DomainEventBase(ProductCollectionId);
+
+public record ProductCollectionUpdated(Guid ProductCollectionId, string Name, string Description) : DomainEventBase(ProductCollectionId);
+
+public record ProductAddedToCollection(Guid ProductCollectionId, Guid ProductId) : DomainEventBase(ProductCollectionId);

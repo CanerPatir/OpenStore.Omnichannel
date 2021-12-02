@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.ReadModel.Sql", "src\OpenStore.Omnichannel.ReadModel.Sql\OpenStore.Omnichannel.ReadModel.Sql.csproj", "{536ED82C-24F5-4E75-A9EB-5631E27C4585}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{B8FB0371-2B4A-4CC9-AB23-99BFF2338A76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,7 @@ Global
 		{536ED82C-24F5-4E75-A9EB-5631E27C4585} = {5DBF8790-5DF0-47EB-A73A-E3C730C80F26}
 		{5DBF8790-5DF0-47EB-A73A-E3C730C80F26} = {3013B3D8-6676-47BC-8396-276111A475A6}
 		{BEFA76BE-3AC8-41AB-9819-C910F1FB9A5A} = {73CDCE53-8C9B-4D33-AE02-BC18C01AE54F}
+		{B8FB0371-2B4A-4CC9-AB23-99BFF2338A76} = {73CDCE53-8C9B-4D33-AE02-BC18C01AE54F}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{64D507E4-EEA0-4F01-A7C5-A100407868E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
