@@ -1,5 +1,7 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
+using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
@@ -15,8 +17,12 @@ public class CreateProductCollectionHandler : IRequestHandler<CreateProductColle
 
     public async Task<Guid> Handle(CreateProductCollection command, CancellationToken cancellationToken)
     {
+        if (await _repository.Query.AnyAsync(x => x.Handle == command.Model.Handle, cancellationToken))
+        {
+            throw new DomainException(Msg.Domain.ProductCollection.ProductCollectionHandleAlreadyExists);
+        }
+        
         var productCollection = ProductCollection.Create(command);
-
         await _repository.InsertAsync(productCollection, cancellationToken);
         await _repository.SaveChangesAsync(cancellationToken);
 

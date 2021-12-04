@@ -20,12 +20,11 @@ public class ProductCreateViewModel : ProductViewModelBase
         private set => SetValue(ref _saving, value);
     }
 
-    public async Task Create(string description)
+    public async Task Create()
     {
         Saving = true;
         try
         {
-            Product.Description = description;
             var productId = await ApiClient.Product.CreateProduct(Product);
             _navigationManager.NavigateTo($"products/{productId}");
         }

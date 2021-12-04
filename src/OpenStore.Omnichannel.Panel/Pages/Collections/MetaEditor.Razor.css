@@ -1,0 +1,30 @@
+
+.se-title {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    font-size: 1.1rem;
+    color: #1a0dab;
+}
+
+.se-title,
+.se-link {
+    word-wrap: break-word;
+    margin-bottom: .2rem;
+    overflow-wrap: break-word;
+}
+
+.se-link {
+    color: #006621;
+}
+
+.se-link,
+.se-desc {
+    font-size: .8rem;
+}
+
+.se-desc {
+    word-wrap: break-word;
+    color: #545454;
+    overflow-wrap: break-word;
+} 
+

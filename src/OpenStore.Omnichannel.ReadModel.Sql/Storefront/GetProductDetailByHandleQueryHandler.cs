@@ -22,6 +22,7 @@ public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDe
             .Include(x => x.Variants)
                 .ThenInclude(x => x.Inventory)
             .Include(x => x.Medias)
+            .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Handle == request.Handle, cancellationToken);
 
         if (product is null)

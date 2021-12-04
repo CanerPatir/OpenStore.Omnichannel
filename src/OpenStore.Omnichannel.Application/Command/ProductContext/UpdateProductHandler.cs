@@ -17,10 +17,10 @@ public class UpdateProductHandler : IRequestHandler<UpdateProduct>
 
     public async Task<Unit> Handle(UpdateProduct command, CancellationToken cancellationToken)
     {
-        var product = await _repository.GetAsync(command.Id, cancellationToken);
+        var product = await _repository.GetAsync(command.ProductId, cancellationToken);
         if (product.Handle != command.Model.Handle)
         {
-            if (await _repository.Query.AnyAsync(x => x.Handle == command.Model.Handle && x.Id != command.Id, cancellationToken))
+            if (await _repository.Query.AnyAsync(x => x.Handle == command.Model.Handle && x.Id != command.ProductId, cancellationToken))
             {
                 throw new DomainException(Msg.Domain.Product.ProductHandleAlreadyExists);
             }

@@ -9,7 +9,7 @@ public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : IRequest<
 
 public record CreateProduct(ProductDto Model) : IRequest<Guid>;
 
-public record UpdateProduct(Guid Id, ProductDto Model) : IRequest;
+public record UpdateProduct(Guid ProductId, ProductDto Model) : IRequest;
 
 public record UpdateProductVariant(Guid ProductId, Guid VariantId, VariantDto Model) : IRequest;
 
@@ -49,8 +49,8 @@ public record ChangeVariantMedia(Guid ProductId, Guid VariantId, Guid MediaId) :
 
 // Product Collection
 
-public record CreateProductCollection(string Name, string Description) : IRequest<Guid>;
+public record CreateProductCollection(ProductCollectionDto Model) : IRequest<Guid>;
 
-public record UpdateProductCollection(Guid ProductCollectionId, string Name, string Description) : IRequest;
+public record UpdateProductCollection(Guid ProductCollectionId, ProductCollectionDto Model) : IRequest;
 
 public record AddProductToCollection(Guid ProductCollectionId, Guid ProductId) : IRequest;

@@ -42,14 +42,8 @@
                     </Row>
                     <Row>
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-
-                            <ListGroup Margin="Margin.Is3.FromBottom">
-                                <CollectionContentEditor/>
-                            </ListGroup>
-                            <ListGroup Margin="Margin.Is3.FromBottom">
-                                
-                            </ListGroup>
-
+                            <CollectionContentEditor/>
+                            <MetaEditor/>
                         </Column>
 
                         <Column ColumnSize="ColumnSize.Is4.OnDesktop">
@@ -100,7 +94,7 @@
         {
             return;
         }
-        
+
         await ViewModel.Create();
     }
 

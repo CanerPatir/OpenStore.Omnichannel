@@ -21,8 +21,11 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
         var (batchSize, firstIndex) = query;
 
         var products = await _repository.Query
+            .Include(x => x.Variants)
+            .Include(x => x.Medias)
             .Skip(firstIndex)
             .Take(batchSize)
+            .AsNoTracking()
             .ToListAsync(cancellationToken);
 
         return new AllProductsResult(products.Select(x => new ProductItemDto(

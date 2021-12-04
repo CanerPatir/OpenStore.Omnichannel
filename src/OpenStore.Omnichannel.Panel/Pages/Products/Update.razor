@@ -145,8 +145,7 @@
             return;
         }
 
-        var description = await _contentEditor.GetDescriptionHtml();
-        await ViewModel.Update(description);
+        await ViewModel.Update();
     }
 
     private async Task Archive()

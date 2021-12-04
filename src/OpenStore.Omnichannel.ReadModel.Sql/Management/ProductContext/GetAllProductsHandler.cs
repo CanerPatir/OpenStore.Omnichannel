@@ -49,6 +49,7 @@ public class GetAllProductsHandler : IRequestHandler<GetAllProducts, PagedList<P
         }
 
         return q
+            .AsNoTracking()
             .GetPaged(
                 pageRequest.PageNumber,
                 pageRequest.PageSize,

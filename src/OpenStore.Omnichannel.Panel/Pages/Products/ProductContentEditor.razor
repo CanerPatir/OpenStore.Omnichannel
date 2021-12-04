@@ -20,10 +20,10 @@
             <FieldBody>
                 <RichTextEdit
                     @ref="_richTextEditRef"
-
                     Theme="RichTextEditTheme.Snow"
                     PlaceHolder="@L["Form.DescriptionPlaceholder"]"
                     SubmitOnEnter="false"
+                    OnContentChanged="OnContentChanged"
                     ToolbarPosition="Placement.Top">
                     <Toolbar>
                         <RichTextEditToolbarGroup >
@@ -62,12 +62,14 @@
     public ProductViewModelBase ViewModel { get; set; }
 
     private RichTextEdit _richTextEditRef;
-
-    public ValueTask<string> GetDescriptionHtml() => _richTextEditRef.GetHtmlAsync();
-
+ 
     private async Task KeyUp()
     {
-        ViewModel.ChangeProductMeta(await _richTextEditRef.GetTextAsync());
+        ViewModel.ChangeProductMeta(await _richTextEditRef.GetHtmlAsync(), await _richTextEditRef.GetTextAsync());
     }
 
+    private async Task OnContentChanged()
+    {
+        ViewModel.ChangeProductMeta(await _richTextEditRef.GetHtmlAsync(), await _richTextEditRef.GetTextAsync());
+    }
 }

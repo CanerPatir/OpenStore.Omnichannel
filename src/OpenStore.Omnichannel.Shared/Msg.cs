@@ -22,6 +22,8 @@ public static class Msg
         public static class ProductCollection
         {
             public const string CollectionNameIsRequired = nameof(Domain) + _ + nameof(CollectionNameIsRequired);
+            public const string CollectionHandleIsRequired = nameof(Domain) + _ + nameof(CollectionHandleIsRequired);
+            public const string ProductCollectionHandleAlreadyExists = nameof(Domain) + _ + nameof(ProductCollectionHandleAlreadyExists);
         }
 
         public static class Inventory

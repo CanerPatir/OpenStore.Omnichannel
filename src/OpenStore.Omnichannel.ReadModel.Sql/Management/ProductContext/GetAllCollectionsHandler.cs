@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
@@ -27,6 +28,7 @@ public class GetAllCollectionsHandler : IRequestHandler<GetAllCollections, Paged
         }
 
         return q
+            .AsNoTracking()
             .GetPaged(
                 pageRequest.PageNumber,
                 pageRequest.PageSize,

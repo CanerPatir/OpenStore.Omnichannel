@@ -21,7 +21,7 @@ public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery,
 
     public async Task<ShoppingCartResult> Handle(GetShoppingCartQuery query, CancellationToken cancellationToken)
     {
-        var shoppingCart = await _repository.GetAsync(query.CartId, cancellationToken);
+        var shoppingCart = await _repository.Query.AsNoTracking().SingleOrDefaultAsync(x => x.Id == query.CartId, cancellationToken);
 
         var getVariantsTasks = shoppingCart
             .Items
@@ -29,6 +29,8 @@ public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery,
                 async x => await _variantRepository.Query
                     .Include(v => v.Inventory)
                     .Include(v => v.Product)
+                        .ThenInclude(p => p.Medias)
+                    .AsNoTracking()
                     .SingleOrDefaultAsync(v => v.Id == x.VariantId, cancellationToken)
             );
 

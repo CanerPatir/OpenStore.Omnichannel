@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Shared;
 
@@ -15,11 +16,11 @@ public class CollectionHttpStore : HttpStore
 
     public async Task<Guid> Create(ProductCollectionDto model)
     {
-        return Guid.Empty;
+        var response = await HttpClient.PostAsJsonAsync(Path, model);
+        return await response.Content.ReadFromJsonAsync<Guid>();
     }
-    
-    public async Task<ProductCollectionDto> Get(Guid id)
-    {
-        return new ProductCollectionDto();
-    }
+
+    public Task<ProductCollectionDto> Get(Guid id) => HttpClient.GetFromJsonAsync<ProductCollectionDto>($"{Path}/{id}");
+
+    public Task Update(Guid id, ProductCollectionDto model) => HttpClient.PutAsJsonAsync($"{Path}/{id}", model);
 }

@@ -30,12 +30,11 @@ public class ProductUpdateViewModel : ProductViewModelBase
         Product = await ApiClient.Product.Get(id);
     }
 
-    public async Task Update(string description)
+    public async Task Update()
     {
         Saving = true;
         try
         {
-            Product.Description = description;
             await ApiClient.Product.UpdateProduct(ProductId, Product);
         }
         finally

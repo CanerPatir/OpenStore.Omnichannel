@@ -23,7 +23,9 @@ public class GetAllInventoriesHandler : IRequestHandler<GetAllInventories, Paged
 
         IQueryable<Variant> q = _repository.Query
             .Include(x => x.Inventory)
-            .Include(x => x.Product);
+            .Include(x => x.Product)
+                .ThenInclude(x => x.Medias) 
+            ;
 
         if (!string.IsNullOrWhiteSpace(pageRequest.FilterTerm))
         {
@@ -36,6 +38,7 @@ public class GetAllInventoriesHandler : IRequestHandler<GetAllInventories, Paged
         q = q.OrderBy(x => x.ProductId);
 
         return q
+            .AsNoTracking()
             .GetPaged(
                 pageRequest.PageNumber,
                 pageRequest.PageSize,

@@ -67,8 +67,8 @@ public record VariantMediaChanged(Guid ProductId, Guid VariantId, Guid MediaId) 
 
 // Product Collection
 
-public record ProductCollectionCreated(Guid ProductCollectionId, string Name, string Description) : DomainEventBase(ProductCollectionId);
+public record ProductCollectionCreated(Guid ProductCollectionId, ProductCollectionDto Model) : DomainEventBase(ProductCollectionId);
 
-public record ProductCollectionUpdated(Guid ProductCollectionId, string Name, string Description) : DomainEventBase(ProductCollectionId);
+public record ProductCollectionUpdated(Guid ProductCollectionId, ProductCollectionDto Model) : DomainEventBase(ProductCollectionId);
 
 public record ProductAddedToCollection(Guid ProductCollectionId, Guid ProductId) : DomainEventBase(ProductCollectionId);

@@ -23,6 +23,7 @@
 
                     Theme="RichTextEditTheme.Snow"
                     PlaceHolder="@L["Form.DescriptionPlaceholder"]"
+                    ContentChanged="@OnContentChanged"
                     SubmitOnEnter="false"
                     ToolbarPosition="Placement.Top">
                     <Toolbar>
@@ -62,12 +63,15 @@
     public CollectionViewModelBase ViewModel { get; set; }
 
     private RichTextEdit _richTextEditRef;
-
-    public ValueTask<string> GetDescriptionHtml() => _richTextEditRef.GetHtmlAsync();
-
+    
     private async Task KeyUp()
     {
-        ViewModel.ChangeCollectionMeta(await _richTextEditRef.GetHtmlAsync());
+        ViewModel.ChangeCollectionMeta(await _richTextEditRef.GetHtmlAsync(), await _richTextEditRef.GetTextAsync());
+    }
+
+    private async Task OnContentChanged()
+    {
+        ViewModel.ChangeCollectionMeta(await _richTextEditRef.GetHtmlAsync(), await _richTextEditRef.GetTextAsync());
     }
 
 }

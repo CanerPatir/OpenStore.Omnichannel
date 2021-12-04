@@ -78,6 +78,7 @@ internal static class ServiceCollectionExtensions
                 .ForMember(x => x.ContinueSellingWhenOutOfStock, opts => opts.MapFrom(v => (v.Inventory != null) && v.Inventory.ContinueSellingWhenOutOfStock))
                 ;
             cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
+            cfg.CreateMap<ProductCollectionDto, ProductCollection>().ReverseMap();
 
             cfg.CreateMap<StorePreferencesDto, StorePreferences>().ReverseMap();
             cfg.CreateMap<StorePreferencesContactDto, StorePreferencesContact>().ReverseMap();

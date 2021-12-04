@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
@@ -40,6 +41,6 @@ public class ProductDto
     public IEnumerable<ProductMediaDto> Medias { get; set; } = new List<ProductMediaDto>();
     public List<ProductOptionDto> Options { get; set; } = new();
 
-    [NotMapped] public bool IsEdit => Id.HasValue && Id != default;
-    [NotMapped] public bool IsCreate => !IsEdit;
+    [JsonIgnore] [NotMapped] public bool IsEdit => Id.HasValue && Id != default;
+    [JsonIgnore] [NotMapped] public bool IsCreate => !IsEdit;
 }

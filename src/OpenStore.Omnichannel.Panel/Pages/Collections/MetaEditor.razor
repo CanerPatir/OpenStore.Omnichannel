@@ -1,0 +1,54 @@
+@inject IStringLocalizer<MetaEditor> L
+
+<ListGroup Margin="Margin.Is3.FromBottom">
+    <ListGroupItem>
+        <h5 class="mt-2 mb-2">
+            @L["Title"]
+        </h5>
+        <div>
+            <p class="se-title">
+                @ViewModel.Collection.MetaTitle
+            </p>
+            <div class="se-link">
+                https://your-site.open-store.com/products/@ViewModel.Collection.Handle
+            </div>
+            <div class="se-desc">
+                @ViewModel.Collection.MetaDescription
+            </div>
+        </div>
+    </ListGroupItem>
+    <ListGroupItem>
+
+        <Field Margin="Margin.Is3.FromBottom">
+            <FieldLabel>@L["Form.MetaTitle"]</FieldLabel>
+            <FieldBody>
+                <TextEdit @bind-Text="@ViewModel.Collection.MetaTitle"/>
+            </FieldBody>
+        </Field>
+        <Field Margin="Margin.Is3.FromBottom">
+            <FieldLabel>@L["Form.MetaDescription"]</FieldLabel>
+            <FieldBody>
+                <MemoEdit @bind-Text="@ViewModel.Collection.MetaDescription" Rows="5"/>
+            </FieldBody>
+        </Field>
+        <Field Margin="Margin.Is3.FromBottom">
+            <FieldLabel>@L["Form.Handle"]</FieldLabel>
+            <FieldBody>
+                <Addons>
+                    <Addon AddonType="AddonType.Start">
+                        <AddonLabel Style="border-bottom-right-radius: 0; border-top-right-radius: 0">https://your-site.open-store.com/collections/</AddonLabel>
+                    </Addon>
+                    <Addon AddonType="AddonType.Body">
+                        <TextEdit @bind-Text="@ViewModel.Collection.Handle"/>
+                    </Addon>
+                </Addons>
+            </FieldBody>
+        </Field>
+    </ListGroupItem>
+</ListGroup>
+
+@code {
+
+    [CascadingParameter]
+    public CollectionViewModelBase ViewModel { get; set; }
+}

@@ -18,10 +18,13 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="NewCollection" xml:space="preserve">
-        <value>&lt;Yeni Koleksiyon&gt;</value>
+    <data name="Form.Title" xml:space="preserve">
+        <value>Başlık</value>
     </data>
-    <data name="Alert.ValidationError" xml:space="preserve">
-        <value>Koleksiyon oluşturken eksik bilgi girdiniz</value>
+    <data name="Form.Description" xml:space="preserve">
+        <value>Açıklama</value>
+    </data>
+    <data name="Form.DescriptionPlaceholder" xml:space="preserve">
+        <value>Koleksiyon açıklamasını buraya giriniz...</value>
     </data>
 </root>

@@ -64,14 +64,17 @@ public abstract class ProductViewModelBase : BaseViewModel
         }
     }
 
-    public void ChangeProductMeta(string description)
+    public void ChangeProductMeta(string html, string description)
     {
+        Product.Description = html;
+
         if (Product.IsCreate)
         {
             Product.Handle = new SlugHelper().GenerateSlug(Product.Title);
             Product.MetaTitle = Product.Title;
             Product.MetaDescription = description;
         }
+
 
         OnPropertyChanged();
     }
