@@ -2,10 +2,8 @@
 @using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement
 @using System.ComponentModel
 
+@inherits AppBaseViewModelObservableComponent<PreferencesViewModel>
 @inject IStringLocalizer<Preferences> L
-@inject PreferencesViewModel ViewModel
-
-@implements IDisposable
 
 <Container>
     <Row class="justify-content-center">
@@ -161,24 +159,7 @@
 
     private PreferencesContactEditModal _preferencesContactEditModal;
     private PreferencesGeneralEditModal _preferencesGeneralEditModal;
-
-    protected override void OnInitialized()
-    {
-        ViewModel.PropertyChanged += OnPropertyChangedHandler;
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await ViewModel.Retrieve();
-    }
-
-    private void OnPropertyChangedHandler(object sender, PropertyChangedEventArgs e) => StateHasChanged();
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= OnPropertyChangedHandler;
-    }
-
+ 
     private void ShowEditModal(string modalName)
     {
         switch (modalName)

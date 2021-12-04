@@ -6,7 +6,7 @@
 
 @inject IStringLocalizer<Create> L
 @inherits AppBaseViewModelObservableComponent<ProductCreateViewModel>
- 
+
 
 <CascadingValue Value="ViewModel">
     <Container>
@@ -69,7 +69,7 @@
                         </Column>
                     </Row>
                 </Validations>
-                <hr class="mb-4">
+                <hr class="mb-4"/>
                 <Row>
                     <div class="d-flex align-items-center mb-4">
                         <div class="ms-auto">
@@ -100,7 +100,7 @@
         base.OnInitialized();
         ViewModel.Init();
     }
-    
+
     private async Task Save()
     {
         _formHasErrors = !await _validations.ValidateAll();
@@ -111,5 +111,5 @@
 
         await ViewModel.Create();
     }
-    
+
 }

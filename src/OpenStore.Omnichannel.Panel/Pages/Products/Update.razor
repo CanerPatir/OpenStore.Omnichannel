@@ -4,121 +4,119 @@
 @using OpenStore.Omnichannel.Panel.Pages.Products.Variant
 @using System.ComponentModel
 
-@implements IDisposable
 @inherits AppBaseViewModelObservableComponent<ProductUpdateViewModel>
 @inject IStringLocalizer<Update> L
 
 
 <CascadingValue Value="ViewModel">
-<Container>
-<Row class="justify-content-center">
-<Column ColumnSize="ColumnSize.Is8.OnDesktop">
+    <Container>
+        <Row class="justify-content-center">
 
-    @if (ViewModel.IsNull)
+            <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+
+                @if (ViewModel.IsNull)
+                {
+                    <OsSpinner/>
+                }
+                else
+                {
+                    <OsPageTitle RootHref="products">
+                        <TitleSection>
+                            <span>@ViewModel.Product.Title</span>
+                        </TitleSection>
+                        <ButtonsSection>
+                            <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
+                                @if (!ViewModel.Saving)
+                                {
+                                    <Icon Name="IconName.Save" Class="me-1"></Icon>
+                                }
+                                @SharedLocalizer["Generic.Save"]
+                            </Button>
+                        </ButtonsSection>
+                    </OsPageTitle>
+
+                    <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Product">
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is12">
+                                <Alert Color="Color.Danger" Visible="@_formHasErrors">
+                                    <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
+                                        @L["Alert.ValidationErrors"]
+                                    </Heading>
+                                    <Blazorise.ValidationSummary Margin="Margin.Is0"/>
+                                </Alert>
+                            </Column>
+                        </Row>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                                <ProductContentEditor @ref="_contentEditor"/>
+                                <MediaEditor Model="@ViewModel.Product"/>
+
+                                <UpdateVariantsEditor/>
+                                @if (!ViewModel.Product.HasMultipleVariants)
+                                {
+                                    <PricingEditor Model="@ViewModel.Product.Variants.First()"/>
+                                    <InventoryEditor Model="@ViewModel.Product.Variants.First()"/>
+                                }
+                                <ShippingEditor/>
+                                <MetaEditor/>
+                            </Column>
+
+                            <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+                                <ListGroup Margin="Margin.Is3.FromBottom">
+                                    <StatusEditor/>
+                                    <ListGroupItem>
+                                        <h5>
+                                            @L["CardTitle.Channels"]
+                                        </h5>
+                                        Channels
+                                    </ListGroupItem>
+                                </ListGroup>
+
+                                <ListGroup Margin="Margin.Is3.FromBottom">
+                                    <ListGroupItem>
+                                        <h5>
+                                            @L["CardTitle.Collections"]
+                                        </h5>
+                                        collections
+                                    </ListGroupItem>
+                                    <TagsEditor/>
+                                </ListGroup>
+                            </Column>
+                        </Row>
+                    </Validations>
+                    <hr class="mb-4"/>
+                    <Row>
+                        <div class="d-flex align-items-center mb-4">
+
+                            @if (ViewModel.Product.Status != ProductStatus.Archived)
+                            {
+                                <div>
+                                    <Button Loading="ViewModel.Archiving" Clicked="Archive" Color="Color.Secondary">
+                                        @if (!ViewModel.Archiving)
+                                        {
+                                            <Icon Name="IconName.Archive" Class="me-1"></Icon>
+                                        }
+                                        @L["Button.Archive"]
+                                    </Button>
+                                </div>
+                            }
+
+                            <div class="ms-auto">
+                                <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
+                                    @if (!ViewModel.Saving)
                                     {
-                                        <OsSpinner/>
+                                        <Icon Name="IconName.Save" Class="me-1"></Icon>
                                     }
-                                    else
-                                    {
-        <OsPageTitle RootHref="products">
-            <TitleSection>
-                <span>@ViewModel.Product.Title</span>
-            </TitleSection>
-            <ButtonsSection>
-                <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
-                    @if (!ViewModel.Saving)
-                    {
-                        <Icon Name="IconName.Save" Class="me-1"></Icon>
-                    }
-                    @SharedLocalizer["Generic.Save"]
-                </Button>
-            </ButtonsSection>
-        </OsPageTitle>
+                                    @SharedLocalizer["Generic.Save"]
+                                </Button>
+                            </div>
 
-        <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Product">
-            <Row>
-                <Column ColumnSize="ColumnSize.Is12">
-                    <Alert Color="Color.Danger" Visible="@_formHasErrors">
-                        <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
-                            @L["Alert.ValidationErrors"]
-                        </Heading>
-                        <Blazorise.ValidationSummary Margin="Margin.Is0"/>
-                    </Alert>
-                </Column>
-            </Row>
-            <Row>
-                <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                    <ProductContentEditor @ref="_contentEditor"/>
-                    <MediaEditor Model="@ViewModel.Product"/>
-
-                    <UpdateVariantsEditor/>
-                    @if (!ViewModel.Product.HasMultipleVariants)
-                    {
-                        <PricingEditor Model="@ViewModel.Product.Variants.First()"/>
-                        <InventoryEditor Model="@ViewModel.Product.Variants.First()"/>
-                    }
-                    <ShippingEditor/>
-                    <MetaEditor/>
-                </Column>
-
-                <Column ColumnSize="ColumnSize.Is4.OnDesktop">
-                    <ListGroup Margin="Margin.Is3.FromBottom">
-                        <StatusEditor/>
-                        <ListGroupItem>
-                            <h5>
-                                @L["CardTitle.Channels"]
-                            </h5>
-                            Channels
-                        </ListGroupItem>
-                    </ListGroup>
-
-                    <ListGroup Margin="Margin.Is3.FromBottom">
-                        <ListGroupItem>
-                            <h5>
-                                @L["CardTitle.Collections"]
-                            </h5>
-                            collections
-                        </ListGroupItem>
-                        <TagsEditor/>
-                    </ListGroup>
-                </Column>
-            </Row>
-        </Validations>
-    
-    <hr class="mb-4">
-    <Row>
-        <div class="d-flex align-items-center mb-4">
-
-            @if (ViewModel.Product.Status != ProductStatus.Archived)
-            {
-                <div>
-                    <Button Loading="ViewModel.Archiving" Clicked="Archive" Color="Color.Secondary">
-                        @if (!ViewModel.Archiving)
-                        {
-                            <Icon Name="IconName.Archive" Class="me-1"></Icon>
-                        }
-                        @L["Button.Archive"]
-                    </Button>
-                </div>
-            }
-
-            <div class="ms-auto">
-                <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
-                    @if (!ViewModel.Saving)
-                    {
-                        <Icon Name="IconName.Save" Class="me-1"></Icon>
-                    }
-                    @SharedLocalizer["Generic.Save"]
-                </Button>
-            </div>
-
-        </div>
-    </Row>
-    }
-</Column>
+                        </div>
+                    </Row>
+                }
+            </Column>
         </Row>
     </Container>
-
 </CascadingValue>
 
 
@@ -131,7 +129,7 @@
 
     private Validations _validations;
     private ProductContentEditor _contentEditor;
-    
+
     protected override async Task OnParametersSetAsync()
     {
         await ViewModel.Retrieve(Id);
@@ -139,7 +137,7 @@
 
     private async Task Save()
     {
-        _formHasErrors = ! await _validations.ValidateAll();
+        _formHasErrors = !await _validations.ValidateAll();
         if (_formHasErrors)
         {
             return;

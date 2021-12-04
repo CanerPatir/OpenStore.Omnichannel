@@ -1,10 +1,8 @@
 @using OpenStore.Omnichannel.Shared.Dto
 @using System.ComponentModel
 
-@implements IDisposable
-
+@inherits AppBaseViewModelObservableComponent<UpdateVariantViewModel>
 @inject IStringLocalizer<VariantMediaEditor> L
-@inject UpdateVariantViewModel ViewModel
 
 <Modal @ref="_modalRef">
     <ModalContent Centered="true">
@@ -53,12 +51,6 @@
         const long MaxAllowed = 2048000L;
 
     private Modal _modalRef;
-    
-    protected override void OnInitialized() => ViewModel.PropertyChanged += OnPropertyChanged;
-
-    public void Dispose() => ViewModel.PropertyChanged -= OnPropertyChanged;
-
-    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
 
     private Task OnInputFileChange(InputFileChangeEventArgs e) => ViewModel.UploadNewMedia(e.File, MaxAllowed);
 

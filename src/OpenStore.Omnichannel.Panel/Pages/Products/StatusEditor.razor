@@ -1,6 +1,5 @@
 @using System.ComponentModel
 @inject IStringLocalizer<StatusEditor> L
-@implements IDisposable
 
 <ListGroupItem>
     <h5>
@@ -61,17 +60,5 @@
 
     [CascadingParameter]
     public ProductViewModelBase ViewModel { get; set; }
-
-    protected override void OnInitialized()
-    {
-        ViewModel.PropertyChanged += OnPropertyChanged;
-    }
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= OnPropertyChanged;
-    }
-
-    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
 
 }

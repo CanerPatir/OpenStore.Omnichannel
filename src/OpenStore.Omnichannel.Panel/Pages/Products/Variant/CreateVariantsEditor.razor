@@ -44,9 +44,10 @@
                                 @L["Input.Stock"]
                             </Column>
                         </Row>
-                        <hr class="mb-2 mt-2">
+
+                        <hr class="mb-2 mt-2"/>
                     }
-                    
+
                     @foreach (var variant in Model.Variants)
                     {
                         <Row>
@@ -67,21 +68,21 @@
                                 <NumericEdit TValue="decimal?"
                                              @bind-Value="@variant.CompareAtPrice"
                                              Decimals="2"
-                                             Size="Size.Small" />
+                                             Size="Size.Small"/>
                             </Column>
                             <Column ColumnSize="ColumnSize.Is2">
                                 <InputNumber @bind-Value="@variant.Quantity"
-                                             min="0" 
+                                             min="0"
                                              class="form-control form-control-sm"
                                              DisplayName="@L["Input.Stock"]"/>
                             </Column>
                         </Row>
-                        
+
                         @if (Model.Variants.Last() != variant)
                         {
-                            <hr class="mb-2 mt-2">
+                            <hr class="mb-2 mt-2"/>
                         }
-                    }             
+                    }
                 </ListGroupItem>
             }
         }

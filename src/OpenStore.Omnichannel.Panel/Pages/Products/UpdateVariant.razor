@@ -3,8 +3,6 @@
 @using Humanizer
 @using System.ComponentModel
 
-@implements IDisposable
-
 @inherits AppBaseViewModelObservableComponent<UpdateVariantViewModel>
 @inject IStringLocalizer<UpdateVariant> L
 
@@ -165,8 +163,7 @@
                         </Column>
                     </Row>
                 </Validations>
-
-                <hr class="mb-4">
+                <hr class="mb-4"/>
                 <Row>
                     <div class="d-flex align-items-center mb-4">
                         <div>
@@ -201,7 +198,7 @@
 @code {
     private Validations _validations;
     private VariantMediaEditor _variantMediaEditor;
-    
+
     [Parameter]
     public Guid ProductId { get; set; }
 
@@ -240,5 +237,5 @@
         }
         Navigation.NavigateTo($"products/{ViewModel.ProductId}/variants/{variant.Id.Value}");
     }
-    
+
 }
