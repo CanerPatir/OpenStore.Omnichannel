@@ -62,5 +62,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Collections {
                 return ResourceManager.GetString("Button.Remove", resourceCulture);
             }
         }
+        
+        internal static string Button_Delete {
+            get {
+                return ResourceManager.GetString("Button.Delete", resourceCulture);
+            }
+        }
     }
 }

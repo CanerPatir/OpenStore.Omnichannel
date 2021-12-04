@@ -35,6 +35,9 @@ public class CollectionsController : BaseApiController
     [HttpPut("{id:guid}")]
     public Task UpdateProductCollection(Guid id, ProductCollectionDto model) => _mediator.Send(new UpdateProductCollection(id, model), CancellationToken);
     
+    [HttpDelete("{id:guid}")]
+    public Task DeleteProductCollection(Guid id) => _mediator.Send(new DeleteProductCollection(id), CancellationToken);
+    
     [HttpPost("{id:guid}/change-image")]
     public Task<ProductCollectionMediaDto> ChangeImage(Guid id, FileUploadDto model) => _mediator.Send(new ChangeProductCollectionImage(id, model), CancellationToken);
     

@@ -24,6 +24,12 @@ public class CollectionHttpStore : HttpStore
     public Task<ProductCollectionDto> Get(Guid id) => HttpClient.GetFromJsonAsync<ProductCollectionDto>($"{Path}/{id}");
 
     public Task Update(Guid id, ProductCollectionDto model) => HttpClient.PutAsJsonAsync($"{Path}/{id}", model);
+    
+    public async Task Delete(Guid id)
+    {
+        var response = await HttpClient.DeleteAsync($"{Path}/{id}");
+        response.EnsureSuccessStatusCode();
+    }
 
     public async Task<ProductCollectionMediaDto> UpdateImage(Guid id, FileUploadDto dto)
     {

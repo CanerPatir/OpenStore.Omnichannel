@@ -27,4 +27,7 @@
     <data name="Button.Remove" xml:space="preserve">
         <value>Sil</value>
     </data>
+    <data name="Button.Delete" xml:space="preserve">
+        <value>Koleksiyonu Sil</value>
+    </data>
 </root>
