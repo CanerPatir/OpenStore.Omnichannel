@@ -6,6 +6,7 @@ public interface IApiClient
     MediaHttpStore Media { get; }
     StoreHttpStore Store { get; }
     InventoryHttpStore Inventory { get; }
+    CollectionHttpStore Collection { get; }
     Task<bool> Ping();
 }
 
@@ -16,8 +17,8 @@ public class ApiClient : IApiClient
     public ProductHttpStore Product { get; }
     public MediaHttpStore Media { get; }
     public StoreHttpStore Store { get; }
-        
     public InventoryHttpStore Inventory { get; }
+    public CollectionHttpStore Collection { get; }
 
     public ApiClient(HttpClient httpClient)
     {
@@ -26,6 +27,7 @@ public class ApiClient : IApiClient
         Media = new MediaHttpStore(httpClient);
         Store = new StoreHttpStore(httpClient);
         Inventory = new InventoryHttpStore(httpClient);
+        Collection = new CollectionHttpStore(httpClient);
     }
 
     public async Task<bool> Ping()

@@ -5,8 +5,8 @@
 
 @implements IDisposable
 
+@inherits AppBaseViewModelObservableComponent<UpdateVariantViewModel>
 @inject IStringLocalizer<UpdateVariant> L
-@inject UpdateVariantViewModel ViewModel
 
 <Container>
     <Row class="justify-content-center">
@@ -213,18 +213,6 @@
     protected override async Task OnParametersSetAsync()
     {
         await ViewModel.Retrieve(ProductId, VariantId);
-    }
-
-    protected override void OnInitialized()
-    {
-        ViewModel.PropertyChanged += OnPropertyChanged;
-    }
-
-    private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) => StateHasChanged();
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= OnPropertyChanged;
     }
 
     private Task Save() => ViewModel.Save();

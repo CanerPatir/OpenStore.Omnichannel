@@ -1,0 +1,73 @@
+@inject IStringLocalizer<CollectionContentEditor> L
+
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        <Validation MessageLocalizer="Localize">
+            <Field Margin="Margin.Is3.FromBottom">
+                <FieldLabel>@L["Form.Title"]</FieldLabel>
+                <FieldBody>
+                    <TextEdit @bind-Text="@ViewModel.Collection.Title" KeyUp="KeyUp" MaxLength="80">
+                        <Feedback>
+                            <ValidationError/>
+                        </Feedback>
+                    </TextEdit>
+                </FieldBody>
+            </Field>
+        </Validation>
+
+        <Field>
+            <FieldLabel>@L["Form.Description"]</FieldLabel>
+            <FieldBody>
+                <RichTextEdit
+                    @ref="_richTextEditRef"
+
+                    Theme="RichTextEditTheme.Snow"
+                    PlaceHolder="@L["Form.DescriptionPlaceholder"]"
+                    SubmitOnEnter="false"
+                    ToolbarPosition="Placement.Top">
+                    <Toolbar>
+                        <RichTextEditToolbarGroup >
+                            <RichTextEditToolbarButton Action="RichTextEditAction.Bold"/>
+                            <RichTextEditToolbarButton Action="RichTextEditAction.Italic"/>
+                            <RichTextEditToolbarSelect Action="RichTextEditAction.Size">
+                                <RichTextEditToolbarSelectItem Value="small"/>
+                                <RichTextEditToolbarSelectItem Selected="true"/>
+                                <RichTextEditToolbarSelectItem Value="large"/>
+                                <RichTextEditToolbarSelectItem Value="huge">Very Big</RichTextEditToolbarSelectItem>
+                            </RichTextEditToolbarSelect>
+                            <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="ordered"/>
+                            <RichTextEditToolbarButton Action="RichTextEditAction.List" Value="bullet"/>
+                        </RichTextEditToolbarGroup>
+                        <!-- Custom toolbar content -->
+                        @* <RichTextEditToolbarGroup Float="Float.Right"> *@
+                        @* *@
+                        @*     <Button Clicked="@(o => { })"> *@
+                        @*         <Icon Name="IconName.Save"/> *@
+                        @*     </Button> *@
+                        @* </RichTextEditToolbarGroup> *@
+                    </Toolbar>
+                    <Editor>
+                        @((MarkupString) ViewModel.Collection.Description)
+                    </Editor>
+                </RichTextEdit>
+            </FieldBody>
+        </Field>
+    </CardBody>
+</Card>
+
+
+@code {
+
+    [CascadingParameter]
+    public CollectionViewModelBase ViewModel { get; set; }
+
+    private RichTextEdit _richTextEditRef;
+
+    public ValueTask<string> GetDescriptionHtml() => _richTextEditRef.GetHtmlAsync();
+
+    private async Task KeyUp()
+    {
+        ViewModel.ChangeCollectionMeta(await _richTextEditRef.GetHtmlAsync());
+    }
+
+}

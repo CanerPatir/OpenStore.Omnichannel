@@ -9,6 +9,6 @@ public class ProductCollectionConfiguration : BaseEntityTypeConfiguration<Guid, 
     public override void Configure(EntityTypeBuilder<ProductCollection> builder)
     {
         base.Configure(builder);
- 
+        builder.OwnsOne(p => p.Media);
     }
 }

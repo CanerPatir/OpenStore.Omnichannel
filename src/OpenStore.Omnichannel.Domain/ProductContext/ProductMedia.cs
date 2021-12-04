@@ -13,8 +13,6 @@ public class ProductMedia : MediaEntity
 
     public IReadOnlyCollection<Guid> VariantIds => _variantIds;
 
-    [NotMapped] public string Url => GeneralHelper.GetMediaUrl(Host, Path);
-
     protected ProductMedia()
     {
     }

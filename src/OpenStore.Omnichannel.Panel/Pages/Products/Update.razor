@@ -5,9 +5,9 @@
 @using System.ComponentModel
 
 @implements IDisposable
-
+@inherits AppBaseViewModelObservableComponent<ProductUpdateViewModel>
 @inject IStringLocalizer<Update> L
-@inject ProductUpdateViewModel ViewModel
+
 
 <CascadingValue Value="ViewModel">
 <Container>
@@ -131,22 +131,10 @@
 
     private Validations _validations;
     private ProductContentEditor _contentEditor;
-
-    protected override void OnInitialized()
-    {
-        ViewModel.PropertyChanged += OnPropertyChangedHandler;
-    }
-
+    
     protected override async Task OnParametersSetAsync()
     {
         await ViewModel.Retrieve(Id);
-    }
-
-    private void OnPropertyChangedHandler(object sender, PropertyChangedEventArgs e) => StateHasChanged();
-
-    public void Dispose()
-    {
-        ViewModel.PropertyChanged -= OnPropertyChangedHandler;
     }
 
     private async Task Save()

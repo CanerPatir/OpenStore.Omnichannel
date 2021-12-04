@@ -1,6 +1,55 @@
 @page "/products/collections"
-<h3>collections</h3>
+@using OpenStore.Omnichannel.Panel.ViewModels.Collections
+
+@inject IStringLocalizer<Index> L
+@inject CollectionIndexViewModel ViewModel
+
+<OsPageTitle>
+    <TitleSection>
+        <span>@L["Breadcrumb.CollectionList"]</span>
+    </TitleSection>
+    <ButtonsSection>
+        <NavLink href="products/collections/add" class="btn btn-primary">
+            <Icon Name="IconName.PlusCircle" Class="fa-fw me-1"/>@L["AddCollection"]
+        </NavLink>
+    </ButtonsSection>
+</OsPageTitle>
+
+<Card>
+    <ul class="nav nav-tabs nav-tabs-v2 px-4">
+        <li class="nav-item me-3">
+            <a href="#default-tab" class="nav-link active px-2" data-bs-toggle="tab">@L["ProductListTab.All"]</a>
+        </li>
+    </ul>
+    <div class="tab-content p-4">
+        <div class="tab-pane fade show active" id="default-tab">
+            <OsDataGrid TItem="CollectionListItemDto" FetchData="ViewModel.GetAll" PageSize="PageSize">
+                <OsDataGridColumn CustomTitle="@L["ColumnHeader.Title"]" TItem="CollectionListItemDto">
+                    <RowTemplate Context="item">
+                        <div class="d-flex align-items-center">
+                            <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                @if (!string.IsNullOrWhiteSpace(item.PhotoUrl))
+                                {
+                                    <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
+                                }
+                                else
+                                {
+                                    <img class="mw-100 mh-100" src="assets/img/product-image-placeholder.png" alt=""/>
+                                }
+                            </div>
+                            <div class="ms-3">
+                                <a href="@($"products/collections/{item.Id}")">@item.Title</a>
+                            </div>
+                        </div>
+                    </RowTemplate>
+                </OsDataGridColumn>
+            </OsDataGrid>
+        </div>
+    </div>
+</Card>
+
 
 @code {
+        private const int PageSize = 50;
 
 }

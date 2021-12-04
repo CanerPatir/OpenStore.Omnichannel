@@ -1,26 +1,21 @@
-@page "/products/add"
-
-@using OpenStore.Omnichannel.Panel.Pages.Products.Media
-@using OpenStore.Omnichannel.Panel.Pages.Products.Variant
-@using System.ComponentModel
+@page "/products/collections/add"
 
 @inject IStringLocalizer<Create> L
-@inherits AppBaseViewModelObservableComponent<ProductCreateViewModel>
- 
+@inherits AppBaseViewModelObservableComponent<CollectionCreateViewModel>
 
 <CascadingValue Value="ViewModel">
     <Container>
         <Row class="justify-content-center">
             <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                <OsPageTitle RootHref="products">
+                <OsPageTitle RootHref="products/collections">
                     <TitleSection>
-                        @if (string.IsNullOrWhiteSpace(ViewModel.Product.Title))
+                        @if (string.IsNullOrWhiteSpace(ViewModel.Collection.Title))
                         {
-                            <span>@L["NewProduct"]</span>
+                            <span>@L["NewCollection"]</span>
                         }
                         else
                         {
-                            <span>@ViewModel.Product.Title</span>
+                            <span>@ViewModel.Collection.Title</span>
                         }
                     </TitleSection>
                     <ButtonsSection>
@@ -29,12 +24,12 @@
                             {
                                 <Icon Name="IconName.Save" Class="me-1"></Icon>
                             }
-                            @L["Button.Save"]
+                            @SharedLocalizer["Generic.Save"]
                         </Button>
                     </ButtonsSection>
                 </OsPageTitle>
 
-                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Product">
+                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Collection">
                     <Row>
                         <Column ColumnSize="ColumnSize.Is12">
                             <Alert Color="Color.Danger" Visible="@_formHasErrors">
@@ -47,24 +42,19 @@
                     </Row>
                     <Row>
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                            <ProductContentEditor @ref="_contentEditor"/>
-                            <MediaEditor Model="@ViewModel.Product"/>
-                            <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@(() => StateHasChanged())"/>
-                            @if (!ViewModel.Product.HasMultipleVariants)
-                            {
-                                <PricingEditor Model="@ViewModel.Product.Variants.First()"/>
-                                <InventoryEditor Model="@ViewModel.Product.Variants.First()"/>
-                            }
-                            <ShippingEditor/>
-                            <MetaEditor/>
+
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <CollectionContentEditor/>
+                            </ListGroup>
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                
+                            </ListGroup>
+
                         </Column>
 
                         <Column ColumnSize="ColumnSize.Is4.OnDesktop">
                             <ListGroup Margin="Margin.Is3.FromBottom">
-                                <StatusEditor/>
-                            </ListGroup>
-                            <ListGroup Margin="Margin.Is3.FromBottom">
-                                <TagsEditor/>
+                                asdfasdfadf
                             </ListGroup>
                         </Column>
                     </Row>
@@ -78,7 +68,7 @@
                                 {
                                     <Icon Name="IconName.Save" Class="me-1"></Icon>
                                 }
-                                @L["Button.Save"]
+                                @L["Generic.Save"]
                             </Button>
                         </div>
                     </div>
@@ -88,19 +78,21 @@
     </Container>
 </CascadingValue>
 
-
 @code {
-    // private readonly ProductDto _product = new();
     private Validations _validations;
-    private ProductContentEditor _contentEditor;
+
     private bool _formHasErrors;
+
+    [Parameter]
+    public Guid Id { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
         ViewModel.Init();
     }
-    
+
     private async Task Save()
     {
         _formHasErrors = !await _validations.ValidateAll();
@@ -108,8 +100,8 @@
         {
             return;
         }
-
-        await ViewModel.Create(await _contentEditor.GetDescriptionHtml());
+        
+        await ViewModel.Create();
     }
-    
+
 }

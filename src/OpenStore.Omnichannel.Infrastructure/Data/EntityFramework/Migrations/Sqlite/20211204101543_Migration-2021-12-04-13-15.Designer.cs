@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 
@@ -10,9 +11,10 @@ using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211204101543_Migration-2021-12-04-13-15")]
+    partial class Migration202112041315
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.0");

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Localization;
 using OpenStore.Omnichannel.Panel.Services;
+using OpenStore.Omnichannel.Panel.ViewModels.Collections;
 using OpenStore.Omnichannel.Panel.ViewModels.Inventory;
 using OpenStore.Omnichannel.Panel.ViewModels.Products;
 using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
@@ -71,6 +72,9 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<UpdateVariantViewModel>();
         builder.Services.AddSingleton<PreferencesViewModel>();
         builder.Services.AddSingleton<InventoryIndexViewModel>();
+        builder.Services.AddSingleton<CollectionIndexViewModel>();
+        builder.Services.AddSingleton<CollectionCreateViewModel>();
+        builder.Services.AddSingleton<CollectionUpdateViewModel>();
 
         return builder;
     }

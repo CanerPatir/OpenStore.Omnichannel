@@ -9,10 +9,12 @@ public class ProductCollection : AuditableEntity
 {
     private readonly HashSet<ProductCollectionItem> _productItems = new();
 
-    public string Name { get; protected set; }
+    public string Title { get; protected set; }
     public string Description { get; protected set; }
 
     public virtual IReadOnlyCollection<ProductCollectionItem> ProductItems => _productItems;
+
+    public virtual ProductCollectionMedia Media { get; protected set; }
 
     protected ProductCollection()
     {
@@ -29,7 +31,7 @@ public class ProductCollection : AuditableEntity
         var productCollection = new ProductCollection
         {
             Id = Guid.NewGuid(),
-            Name = name,
+            Title = name,
             Description = description
         };
         productCollection.ApplyChange(new ProductCollectionCreated(productCollection.Id, name, description));
@@ -39,7 +41,7 @@ public class ProductCollection : AuditableEntity
     public void Update(UpdateProductCollection command)
     {
         var (_, name, description) = command;
-        Name = name;
+        Title = name;
         Description = description;
         
         ApplyChange(new ProductCollectionUpdated(Id, name, description));
