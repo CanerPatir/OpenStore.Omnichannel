@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{AB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BEFA76BE-3AC8-41AB-9819-C910F1FB9A5A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{3013B3D8-6676-47BC-8396-276111A475A6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3013B3D8-6676-47BC-8396-276111A475A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Application", "src\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj", "{4167F2F8-4FEC-4BBF-8890-25DEBF044792}"
 EndProject

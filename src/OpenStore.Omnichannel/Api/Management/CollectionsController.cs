@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
+using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Query.Management.ProductContext;
 using OpenStore.Shared;
@@ -33,4 +34,11 @@ public class CollectionsController : BaseApiController
     
     [HttpPut("{id:guid}")]
     public Task UpdateProductCollection(Guid id, ProductCollectionDto model) => _mediator.Send(new UpdateProductCollection(id, model), CancellationToken);
+    
+    [HttpPost("{id:guid}/change-image")]
+    public Task<ProductCollectionMediaDto> ChangeImage(Guid id, FileUploadDto model) => _mediator.Send(new ChangeProductCollectionImage(id, model), CancellationToken);
+    
+    [HttpPost("{id:guid}/remove-image")]
+    public Task RemoveImage(Guid id) => _mediator.Send(new RemoveProductCollectionImage(id), CancellationToken);
+
 }

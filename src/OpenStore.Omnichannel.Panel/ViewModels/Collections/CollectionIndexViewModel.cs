@@ -12,7 +12,6 @@ public class CollectionIndexViewModel : BaseViewModel
     {
         _apiClient = apiClient;
     }
-    
-    public async Task<PagedList<CollectionListItemDto>> GetAll(PageRequest pageRequest) => await _apiClient.Collection.GetAll(pageRequest);
 
+    public async Task<PagedList<CollectionListItemDto>> GetAll(PageRequest pageRequest) => await _apiClient.Collection.GetAll(pageRequest);
 }

@@ -71,4 +71,8 @@ public record ProductCollectionCreated(Guid ProductCollectionId, ProductCollecti
 
 public record ProductCollectionUpdated(Guid ProductCollectionId, ProductCollectionDto Model) : DomainEventBase(ProductCollectionId);
 
+public record ProductCollectionImageChanged(Guid ProductCollectionId, ProductCollectionMediaDto Media) : DomainEventBase(ProductCollectionId);
+
+public record ProductCollectionImageRemoved(Guid ProductCollectionId) : DomainEventBase(ProductCollectionId);
+
 public record ProductAddedToCollection(Guid ProductCollectionId, Guid ProductId) : DomainEventBase(ProductCollectionId);

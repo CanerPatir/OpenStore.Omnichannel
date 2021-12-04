@@ -45,12 +45,7 @@
                             <CollectionContentEditor/>
                             <MetaEditor/>
                         </Column>
-
-                        <Column ColumnSize="ColumnSize.Is4.OnDesktop">
-                            <ListGroup Margin="Margin.Is3.FromBottom">
-                                asdfasdfadf
-                            </ListGroup>
-                        </Column>
+                        
                     </Row>
                 </Validations>
                 <hr class="mb-4"/>
@@ -62,7 +57,7 @@
                                 {
                                     <Icon Name="IconName.Save" Class="me-1"></Icon>
                                 }
-                                @L["Generic.Save"]
+                                @SharedLocalizer["Generic.Save"]
                             </Button>
                         </div>
                     </div>
@@ -76,9 +71,6 @@
     private Validations _validations;
 
     private bool _formHasErrors;
-
-    [Parameter]
-    public Guid Id { get; set; }
 
     protected override void OnInitialized()
     {

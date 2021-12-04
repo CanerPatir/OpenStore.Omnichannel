@@ -8,8 +8,6 @@ using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public record AssignProductMedia(Guid Id, IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<ProductMediaDto>>;
-
 public class AssignProductMediaHandler : IRequestHandler<AssignProductMedia, IEnumerable<ProductMediaDto>>
 {
     private readonly IMediator _mediator;

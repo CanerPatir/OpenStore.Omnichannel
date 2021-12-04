@@ -79,6 +79,7 @@ internal static class ServiceCollectionExtensions
                 ;
             cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
             cfg.CreateMap<ProductCollectionDto, ProductCollection>().ReverseMap();
+            cfg.CreateMap<ProductCollectionMedia, ProductCollectionMediaDto>();
 
             cfg.CreateMap<StorePreferencesDto, StorePreferences>().ReverseMap();
             cfg.CreateMap<StorePreferencesContactDto, StorePreferencesContact>().ReverseMap();

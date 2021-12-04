@@ -19,6 +19,8 @@ public abstract class CollectionViewModelBase : BaseViewModel
         protected set => SetValue(ref _collection, value);
     }
 
+    public bool IsNull => Collection is null;
+
     public void ChangeCollectionMeta(string html, string description)
     {
         Collection.Description = html;
@@ -29,7 +31,7 @@ public abstract class CollectionViewModelBase : BaseViewModel
             Collection.MetaTitle = Collection.Title;
             Collection.MetaDescription = description;
         }
- 
+
         OnPropertyChanged();
     }
 }

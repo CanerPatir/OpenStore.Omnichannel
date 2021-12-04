@@ -1,4 +1,5 @@
 using OpenStore.Domain;
+using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -30,7 +31,7 @@ public class ProductCollection : AuditableEntity
         {
             throw new DomainException(Msg.Domain.ProductCollection.CollectionNameIsRequired);
         }
-        
+
         if (string.IsNullOrWhiteSpace(model.Handle))
         {
             throw new DomainException(Msg.Domain.ProductCollection.CollectionHandleIsRequired);
@@ -72,5 +73,31 @@ public class ProductCollection : AuditableEntity
         _productItems.Add(ProductCollectionItem.Create(Id, productId));
 
         ApplyChange(new ProductAddedToCollection(Id, productId));
+    }
+
+    public ProductCollectionMediaDto ChangeImage(ChangeProductCollectionImage command, string host, string path)
+    {
+        var (_, (fileName, type, size, position, _)) = command;
+        Media = ProductCollectionMedia.Create(host, path, type, Path.GetExtension(fileName), fileName, fileName, position, size);
+
+        var productCollectionMediaDto = new ProductCollectionMediaDto(
+            Media.Host,
+            Media.Path,
+            Media.Type,
+            Media.Extension,
+            Media.Filename,
+            Media.Title,
+            Media.Position,
+            Media.Size
+        );
+        ApplyChange(new ProductCollectionImageChanged(Id, productCollectionMediaDto));
+        
+        return productCollectionMediaDto;
+    }
+
+    public void RemoveImage()
+    {
+        Media = null;
+        ApplyChange(new ProductCollectionImageRemoved(Id));
     }
 }

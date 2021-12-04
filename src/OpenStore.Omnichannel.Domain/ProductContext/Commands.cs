@@ -1,11 +1,12 @@
 using MediatR;
-using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Domain.ProductContext;
 
 public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<(ProductMediaDto dto, ProductMedia model)>>;
+
+public record AssignProductMedia(Guid Id, IEnumerable<FileUploadDto> Uploads) : IRequest<IEnumerable<ProductMediaDto>>;
 
 public record CreateProduct(ProductDto Model) : IRequest<Guid>;
 
@@ -52,5 +53,9 @@ public record ChangeVariantMedia(Guid ProductId, Guid VariantId, Guid MediaId) :
 public record CreateProductCollection(ProductCollectionDto Model) : IRequest<Guid>;
 
 public record UpdateProductCollection(Guid ProductCollectionId, ProductCollectionDto Model) : IRequest;
+
+public record ChangeProductCollectionImage(Guid ProductCollectionId, FileUploadDto Model) : IRequest<ProductCollectionMediaDto>;
+
+public record RemoveProductCollectionImage(Guid ProductCollectionId) : IRequest;
 
 public record AddProductToCollection(Guid ProductCollectionId, Guid ProductId) : IRequest;

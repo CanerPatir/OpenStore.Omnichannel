@@ -47,7 +47,7 @@
                     </Row>
                     <Row>
                         <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                            <ProductContentEditor @ref="_contentEditor"/>
+                            <ProductContentEditor/>
                             <MediaEditor Model="@ViewModel.Product"/>
                             <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@(() => StateHasChanged())"/>
                             @if (!ViewModel.Product.HasMultipleVariants)
@@ -92,7 +92,6 @@
 @code {
     // private readonly ProductDto _product = new();
     private Validations _validations;
-    private ProductContentEditor _contentEditor;
     private bool _formHasErrors;
 
     protected override void OnInitialized()

@@ -20,6 +20,8 @@ public class ProductCollectionDto
     public string MetaTitle { get; set; }
     public string MetaDescription { get; set; }
 
+    public ProductCollectionMediaDto Media { get; set; }
+
     [JsonIgnore] [NotMapped] public bool IsEdit => Id.HasValue && Id != default;
     [JsonIgnore] [NotMapped] public bool IsCreate => !IsEdit;
 }

@@ -44,5 +44,23 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Collections {
                 resourceCulture = value;
             }
         }
+        
+        internal static string Header_CollectionImage {
+            get {
+                return ResourceManager.GetString("Header.CollectionImage", resourceCulture);
+            }
+        }
+        
+        internal static string DropArea_DropTitle {
+            get {
+                return ResourceManager.GetString("DropArea.DropTitle", resourceCulture);
+            }
+        }
+        
+        internal static string Button_Remove {
+            get {
+                return ResourceManager.GetString("Button.Remove", resourceCulture);
+            }
+        }
     }
 }

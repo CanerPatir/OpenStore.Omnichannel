@@ -48,7 +48,7 @@
                         </Row>
                         <Row>
                             <Column ColumnSize="ColumnSize.Is8.OnDesktop">
-                                <ProductContentEditor @ref="_contentEditor"/>
+                                <ProductContentEditor />
                                 <MediaEditor Model="@ViewModel.Product"/>
 
                                 <UpdateVariantsEditor/>
@@ -128,7 +128,6 @@
     private bool _formHasErrors;
 
     private Validations _validations;
-    private ProductContentEditor _contentEditor;
 
     protected override async Task OnParametersSetAsync()
     {

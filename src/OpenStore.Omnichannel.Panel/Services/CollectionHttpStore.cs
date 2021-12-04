@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Shared;
 
@@ -23,4 +24,16 @@ public class CollectionHttpStore : HttpStore
     public Task<ProductCollectionDto> Get(Guid id) => HttpClient.GetFromJsonAsync<ProductCollectionDto>($"{Path}/{id}");
 
     public Task Update(Guid id, ProductCollectionDto model) => HttpClient.PutAsJsonAsync($"{Path}/{id}", model);
+
+    public async Task<ProductCollectionMediaDto> UpdateImage(Guid id, FileUploadDto dto)
+    {
+        var response = await HttpClient.PostAsJsonAsync($"{Path}/{id}/change-image", dto);
+        return await response.Content.ReadFromJsonAsync<ProductCollectionMediaDto>();
+    }
+
+    public async Task RemoveImage(Guid id)
+    {
+        var response = await HttpClient.PostAsync($"{Path}/{id}/remove-image", null);
+        response.EnsureSuccessStatusCode();
+    }
 }

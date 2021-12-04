@@ -1,0 +1,63 @@
+@inherits AppBaseViewModelObservableComponent<CollectionUpdateViewModel>
+@inject IStringLocalizer<Update> L
+
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        <div class="d-flex">
+            <h5>
+                @L["Header.CollectionImage"]
+            </h5>
+            @if (ViewModel.HasImage)
+            {
+                <div style="margin-left: auto">
+                    <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">
+                        <i class="fas fa-ellipsis-h text-muted"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        @* <a class="dropdown-item" href="#">Change</a> *@
+                        <a class="dropdown-item text-danger" @onclick="@(() => ViewModel.RemoveImage())">@L["Button.Remove"]</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (ViewModel.HasImage)
+        {
+            <img class="mw-100 mh-100 mt-3" src="@ViewModel.Collection.Media.Url" alt=""/>
+        }
+        else
+        {
+            <div class="drop-area @_dropClass mt-3">
+                <label class="custom-file-upload">
+                    <InputFile OnChange="OnInputFileChange"
+                               @ondragenter="HandleDragEnter"
+                               @ondragleave="HandleDragLeave"
+                               accept="image/png,image/gif,image/jpeg,image/webp"/>
+                    <span>@L["DropArea.DropTitle"]</span>
+                </label>
+
+            </div>
+        }
+    </CardBody>
+</Card>
+
+@code {
+        const long MaxAllowed = 2048000L;
+    private string _dropClass = string.Empty;
+
+    private void HandleDragEnter() => _dropClass = "drop-area-drug";
+    private void HandleDragLeave() => _dropClass = string.Empty;
+
+    async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        _dropClass = string.Empty;
+
+        var file = e.File;
+        var bytes = new byte[file.Size];
+        await using var openReadStream = file.OpenReadStream(MaxAllowed);
+        await openReadStream.ReadAsync(bytes);
+        var dto = new FileUploadDto(file.Name, file.ContentType, file.Size, 0, bytes);
+
+        await ViewModel.UpdateImage(dto);
+    } 
+}

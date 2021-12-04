@@ -20,7 +20,7 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FCollections_002FCreate/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FCollections_002FIndex/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FCollections_002FMetaEditor/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FCollections_002FUpdate/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FCollections_002FUpdate/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=src_002FOpenStore_002EOmnichannel_002EPanel_002FResources_002FPages_002FIndex/@EntryIndexedValue">False</s:Boolean>

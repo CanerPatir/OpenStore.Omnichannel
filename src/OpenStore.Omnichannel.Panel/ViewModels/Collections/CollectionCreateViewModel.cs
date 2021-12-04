@@ -6,7 +6,6 @@ namespace OpenStore.Omnichannel.Panel.ViewModels.Collections;
 
 public class CollectionCreateViewModel : CollectionViewModelBase
 {
-  
     private readonly IApiClient _apiClient;
     private readonly NavigationManager _navigationManager;
 
@@ -15,7 +14,7 @@ public class CollectionCreateViewModel : CollectionViewModelBase
         _apiClient = apiClient;
         _navigationManager = navigationManager;
     }
- 
+
     public void Init()
     {
         Collection = new ProductCollectionDto();
