@@ -75,7 +75,7 @@
             </div>
             <div class="menu-divider"></div>
             <div class="menu-header">@L["Menu.Channels"]</div>
-            
+
             <div class="menu-item has-sub">
                 <a href="#" class="menu-link">
                     <span class="menu-icon">
@@ -87,11 +87,31 @@
                     </span>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item @GetLiClassContains("store-management")">
+                    <div class="menu-item @GetLiClassContains("store-management/theme")">
+                        <NavLink href="store-management/theme" class="menu-link">
+                            <span class="menu-text">@L["Menu.OnlineStore.Theme"]</span>
+                        </NavLink>
+                    </div>
+                    <div class="menu-item @GetLiClassContains("store-management/blog-posts")">
+                        <NavLink href="store-management/blog-posts" class="menu-link">
+                            <span class="menu-text">@L["Menu.OnlineStore.BlogPosts"]</span>
+                        </NavLink>
+                    </div>
+                    <div class="menu-item @GetLiClassContains("store-management/pages")">
+                        <NavLink href="store-management/pages" class="menu-link">
+                            <span class="menu-text">@L["Menu.OnlineStore.Pages"]</span>
+                        </NavLink>
+                    </div>
+                    <div class="menu-item @GetLiClassContains("store-management/navigation")">
+                        <NavLink href="store-management/navigation" class="menu-link">
+                            <span class="menu-text">@L["Menu.OnlineStore.Navigation"]</span>
+                        </NavLink>
+                    </div>
+                    <div class="menu-item @GetLiClassContains("store-management/preferences")">
                         <NavLink href="store-management/preferences" class="menu-link">
                             <span class="menu-text">@L["Menu.OnlineStore.Preferences"]</span>
                         </NavLink>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <div class="menu-item">

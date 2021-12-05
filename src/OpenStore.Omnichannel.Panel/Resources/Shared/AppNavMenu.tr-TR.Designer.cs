@@ -128,5 +128,29 @@ namespace OpenStore.Omnichannel.Panel.Resources.Shared {
                 return ResourceManager.GetString("Menu.OnlineStore.Preferences", resourceCulture);
             }
         }
+        
+        internal static string Menu_OnlineStore_Theme {
+            get {
+                return ResourceManager.GetString("Menu.OnlineStore.Theme", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_OnlineStore_BlogPosts {
+            get {
+                return ResourceManager.GetString("Menu.OnlineStore.BlogPosts", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_OnlineStore_Pages {
+            get {
+                return ResourceManager.GetString("Menu.OnlineStore.Pages", resourceCulture);
+            }
+        }
+        
+        internal static string Menu_OnlineStore_Navigation {
+            get {
+                return ResourceManager.GetString("Menu.OnlineStore.Navigation", resourceCulture);
+            }
+        }
     }
 }

@@ -60,4 +60,16 @@
     <data name="Menu.OnlineStore.Preferences" xml:space="preserve">
         <value>Ayarlar</value>
     </data>
+    <data name="Menu.OnlineStore.Theme" xml:space="preserve">
+        <value>Tema Yönetimi</value>
+    </data>
+    <data name="Menu.OnlineStore.BlogPosts" xml:space="preserve">
+        <value>Blog Yazıları</value>
+    </data>
+    <data name="Menu.OnlineStore.Pages" xml:space="preserve">
+        <value>Sayfa Yönetimi</value>
+    </data>
+    <data name="Menu.OnlineStore.Navigation" xml:space="preserve">
+        <value>Menü Yönetimi</value>
+    </data>
 </root>

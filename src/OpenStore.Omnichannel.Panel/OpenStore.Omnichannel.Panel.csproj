@@ -111,10 +111,6 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>VariantMediaEditor.tr-TR.Designer.cs</LastGenOutput>
         </EmbeddedResource>
-        <EmbeddedResource Update="Resources\Pages\OnlineStore\Preferences.tr-TR.resx">
-          <Generator>ResXFileCodeGenerator</Generator>
-          <LastGenOutput>Preferences.tr-TR.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
         <EmbeddedResource Update="Resources\Pages\Inventory\Index.tr-TR.resx">
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
@@ -142,6 +138,10 @@
         <EmbeddedResource Update="Resources\Pages\Collections\CollectionContentEditor.tr-TR.resx">
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>CollectionContentEditor.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\OnlineStore\Preferences\Index.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
 
@@ -251,11 +251,6 @@
           <AutoGen>True</AutoGen>
           <DependentUpon>VariantMediaEditor.tr-TR.resx</DependentUpon>
         </Compile>
-        <Compile Update="Resources\Pages\OnlineStore\Preferences.tr-TR.Designer.cs">
-          <DesignTime>True</DesignTime>
-          <AutoGen>True</AutoGen>
-          <DependentUpon>Preferences.tr-TR.resx</DependentUpon>
-        </Compile>
         <Compile Update="Resources\Pages\Inventory\Index.tr-TR.Designer.cs">
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
@@ -290,6 +285,11 @@
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>CollectionContentEditor.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\OnlineStore\Preferences\Index.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Index.tr-TR.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 
