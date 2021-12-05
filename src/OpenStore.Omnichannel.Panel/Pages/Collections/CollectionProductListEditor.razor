@@ -8,9 +8,7 @@
         </h5>
         <Row Margin="Margin.Is3.FromTop">
             <Field ColumnSize="ColumnSize.Is6" Margin="Margin.Is3.FromBottom">
-                <FieldBody >
-                    <TextEdit TextChanged="ViewModel.SearchInItems" Placeholder="@L["CollectionProductListEditor.SearchBox.Placeholder"]"/>
-                </FieldBody>
+                <OsSearchBox Placeholder="@L["CollectionProductListEditor.SearchBox.Placeholder"]" OnValueChanged="ViewModel.SearchInItems"/>
             </Field>
 
             <Column ColumnSize="ColumnSize.Is3">
@@ -54,16 +52,7 @@
                     <Check TValue="bool" Class="form-check-input" @bind-Checked="@item.Selected"/>
                 </div>
                 <div class="ms-3 d-flex w-100 align-items-center">
-                    <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
-                        @if (string.IsNullOrWhiteSpace(item.PhotoUrl))
-                        {
-                            <img class="mw-100 mh-100" src="assets/img/product-image-placeholder.png" alt=""/>
-                        }
-                        else
-                        {
-                            <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
-                        }
-                    </div>
+                    <OsProductThumb Src="@item.PhotoUrl"/>
                     <div class="ms-3">
                         <h6 class="m-0">
                             @item.Title

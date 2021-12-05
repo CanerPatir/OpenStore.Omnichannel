@@ -1,0 +1,15 @@
+<div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+    @if (string.IsNullOrWhiteSpace(Src))
+    {
+        <img class="mw-100 mh-100" src="assets/img/product-image-placeholder.png" alt=""/>
+    }
+    else
+    {
+        <img class="mw-100 mh-100" src="@Src" alt=""/>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Src { get; set; }
+}

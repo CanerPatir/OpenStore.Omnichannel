@@ -53,17 +53,7 @@
                 <OsDataGridColumn CustomTitle="@L["ColumnHeader.Product"]" TItem="InventoryListItemDto">
                     <RowTemplate Context="item">
                         <div class="d-flex align-items-center">
-                            <div class="width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
-                                @if (!string.IsNullOrWhiteSpace(item.ProductPhotoUrl))
-                                {
-                                    <img class="mw-100 mh-100" src="@item.ProductPhotoUrl" alt=""/>
-                                }
-                                else
-                                {
-                                    <img class="mw-100 mh-100" src="assets/img/product-image-placeholder.png" alt=""/>
-                                }
-                            </div>
-
+                            <OsProductThumb Src="@item.ProductPhotoUrl"/>
                             <dd>
                                 <div class="ms-3">
                                     <a href="@($"products/{item.ProductId}")">@item.ProductTitle</a>

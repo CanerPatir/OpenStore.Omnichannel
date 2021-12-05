@@ -62,10 +62,9 @@ public class ProductCollection : AuditableEntity
         ApplyChange(new ProductCollectionUpdated(Id, model));
     }
 
-    public void AddProduct(AddProductToCollection command)
+    public void AddProduct(Guid productId)
     {
-        var (_, productId) = command;
-        if (_productItems.Any(x => x.ProductId == productId))
+         if (_productItems.Any(x => x.ProductId == productId))
         {
             return;
         }

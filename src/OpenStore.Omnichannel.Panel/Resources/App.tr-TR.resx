@@ -84,4 +84,7 @@
     <data name="Generic.All" xml:space="preserve">
         <value>Hepsi</value>
     </data>
+    <data name="Generic.Close" xml:space="preserve">
+        <value>Kapat</value>
+    </data>
 </root>

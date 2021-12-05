@@ -1,0 +1,40 @@
+@inject IStringLocalizer<ComponentLocalization> L
+
+<div class="flex-fill position-relative">
+    <div class="input-group">
+        <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 pe-0" style="z-index: 1020;">
+            @if (Loading)
+            {
+                <div class="spinner-border" style="width: 1rem; height: 1rem;" role="status">
+                    <span class="sr-only"></span>
+                </div>
+            }
+            else
+            {
+                <i class="fa fa-search opacity-5"></i>
+            }
+        </div>
+
+        <DebounceInput class="form-control ps-35px" 
+                       placeholder="@(Placeholder ?? L["DataGrid.SearchPlaceholder"])"
+                       DebounceTime="500" 
+                       Value="@Value"
+                       OnValueChanged="@OnValueChanged"/>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public bool Loading { get; set; }
+
+    [Parameter]
+    public string Placeholder { get; set; }   
+    
+    [Parameter]
+    public string Value { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnValueChanged { get; set; }
+
+}

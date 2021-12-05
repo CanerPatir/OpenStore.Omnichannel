@@ -32,14 +32,21 @@ public class CollectionsController : BaseApiController
     [HttpGet("{id:guid}")]
     public Task<ProductCollectionDto> GetProductCollection(Guid id) => _mediator.Send(new GetProductCollectionForUpdate(id), CancellationToken);
     
-    [HttpGet("{id:guid}/items")]
-    public Task<IEnumerable<ProductCollectionItemDto>> GetProductCollectionItems(Guid id) => _mediator.Send(new GetProductCollectionItems(id), CancellationToken);
-    
     [HttpPut("{id:guid}")]
     public Task UpdateProductCollection(Guid id, ProductCollectionDto model) => _mediator.Send(new UpdateProductCollection(id, model), CancellationToken);
     
     [HttpDelete("{id:guid}")]
     public Task DeleteProductCollection(Guid id) => _mediator.Send(new DeleteProductCollection(id), CancellationToken);
+    
+    [HttpGet("{id:guid}/items")]
+    public Task<IEnumerable<ProductCollectionItemDto>> GetProductCollectionItems(Guid id) => _mediator.Send(new GetProductCollectionItems(id), CancellationToken);
+    
+    [HttpGet("{id:guid}/eligible-items")]
+    public Task<IEnumerable<ProductCollectionItemDto>> GetProductCollectionEligibleItems(Guid id, [FromQuery] string term) 
+        => _mediator.Send(new GetProductCollectionEligibleItems(id, term), CancellationToken);
+
+    [HttpPost("{id:guid}/items")]
+    public Task AddItemsToCollection(Guid id, IEnumerable<Guid> productIds) => _mediator.Send(new AddItemsToCollection(id, productIds), CancellationToken);
     
     [HttpDelete("{id:guid}/items/{productId:guid}")]
     public Task RemoveProductCollectionItem(Guid id, Guid productId) => _mediator.Send(new RemoveProductCollectionItem(id, productId), CancellationToken);

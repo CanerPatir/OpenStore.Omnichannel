@@ -104,5 +104,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Collections {
                 return ResourceManager.GetString("AddProductToCollectionModal.Title", resourceCulture);
             }
         }
+        
+        internal static string CollectionProductListEditor_SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("CollectionProductListEditor.SearchPlaceholder", resourceCulture);
+            }
+        }
     }
 }

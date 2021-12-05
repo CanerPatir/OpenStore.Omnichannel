@@ -62,4 +62,4 @@ public record DeleteProductCollection(Guid ProductCollectionId) : IRequest;
 
 public record RemoveProductCollectionItem(Guid ProductCollectionId, Guid ProductId) : IRequest;
 
-public record AddProductToCollection(Guid ProductCollectionId, Guid ProductId) : IRequest;
+public record AddItemsToCollection(Guid ProductCollectionId, IEnumerable<Guid> ProductIds) : IRequest;

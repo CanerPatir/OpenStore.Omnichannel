@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
@@ -22,11 +23,15 @@ public class CollectionHttpStore : HttpStore
     }
 
     public Task<ProductCollectionDto> Get(Guid id) => HttpClient.GetFromJsonAsync<ProductCollectionDto>($"{Path}/{id}");
-   
-    public async Task<IEnumerable<ProductCollectionItemDto>> GetItems(Guid id) => await HttpClient.GetFromJsonAsync<List<ProductCollectionItemDto>>($"{Path}/{id}/items");
+
+    public async Task<IEnumerable<ProductCollectionItemDto>> GetItems(Guid id)
+        => await HttpClient.GetFromJsonAsync<List<ProductCollectionItemDto>>($"{Path}/{id}/items");
+
+    public async Task<IEnumerable<ProductCollectionItemDto>> SearchForEligibleItems(Guid id, string term)
+        => await HttpClient.GetFromJsonAsync<List<ProductCollectionItemDto>>($"{Path}/{id}/eligible-items?term={term}");
 
     public Task Update(Guid id, ProductCollectionDto model) => HttpClient.PutAsJsonAsync($"{Path}/{id}", model);
-    
+
     public async Task Delete(Guid id)
     {
         var response = await HttpClient.DeleteAsync($"{Path}/{id}");
@@ -50,4 +55,6 @@ public class CollectionHttpStore : HttpStore
         var response = await HttpClient.DeleteAsync($"{Path}/{id}/items/{productId}");
         response.EnsureSuccessStatusCode();
     }
+
+    public Task AddItemsToCollection(Guid id, IEnumerable<Guid> productIds) => HttpClient.PostAsJsonAsync($"{Path}/{id}/items", productIds);
 }

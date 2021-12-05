@@ -48,4 +48,7 @@
     <data name="AddProductToCollectionModal.Title" xml:space="preserve">
         <value>Ürün Ekle</value>
     </data>
+    <data name="CollectionProductListEditor.SearchPlaceholder" xml:space="preserve">
+        <value>Eklemek isteğinizi ürünün ismi ya da anahtar kelimelerini giriniz...</value>
+    </data>
 </root>
