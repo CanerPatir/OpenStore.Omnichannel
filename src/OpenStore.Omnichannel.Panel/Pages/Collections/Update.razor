@@ -58,7 +58,7 @@
                     <Row>
                         <div class="d-flex align-items-center mb-4">
                             <div>
-                                <Button Loading="ViewModel.Deleting" Clicked="ViewModel.Delete" Color="Color.Danger">
+                                <Button Loading="ViewModel.Deleting" Clicked="Delete" Color="Color.Danger">
                                     @if (!ViewModel.Deleting)
                                     {
                                         <Icon Name="IconName.Delete" Class="me-1"></Icon>
@@ -108,6 +108,14 @@
         }
 
         await ViewModel.Update();
+    }
+
+    private async Task Delete()
+    {
+        if (Confirm(SharedLocalizer["GenericDeleteConfirm"]))
+        {
+            await ViewModel.Delete();
+        }
     }
 
 }

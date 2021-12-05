@@ -100,4 +100,11 @@ public class ProductCollection : AuditableEntity
         Media = null;
         ApplyChange(new ProductCollectionImageRemoved(Id));
     }
+
+    public void RemoveItem(RemoveProductCollectionItem command)
+    {
+        _productItems.RemoveWhere(x => x.ProductId == command.ProductId);
+        
+        ApplyChange(new ProductCollectionItemRemoved(Id, command.ProductId));
+    }
 }

@@ -68,5 +68,41 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Collections {
                 return ResourceManager.GetString("Button.Delete", resourceCulture);
             }
         }
+        
+        internal static string ListGroupItem_ShowingXVariants {
+            get {
+                return ResourceManager.GetString("ListGroupItem.ShowingXVariants", resourceCulture);
+            }
+        }
+        
+        internal static string Dropdown_BulkOperation {
+            get {
+                return ResourceManager.GetString("Dropdown.BulkOperation", resourceCulture);
+            }
+        }
+        
+        internal static string CollectionProductListEditor_Button_Browse {
+            get {
+                return ResourceManager.GetString("CollectionProductListEditor.Button.Browse", resourceCulture);
+            }
+        }
+        
+        internal static string CollectionProductListEditor_Title {
+            get {
+                return ResourceManager.GetString("CollectionProductListEditor.Title", resourceCulture);
+            }
+        }
+        
+        internal static string CollectionProductListEditor_SearchBox_Placeholder {
+            get {
+                return ResourceManager.GetString("CollectionProductListEditor.SearchBox.Placeholder", resourceCulture);
+            }
+        }
+        
+        internal static string AddProductToCollectionModal_Title {
+            get {
+                return ResourceManager.GetString("AddProductToCollectionModal.Title", resourceCulture);
+            }
+        }
     }
 }

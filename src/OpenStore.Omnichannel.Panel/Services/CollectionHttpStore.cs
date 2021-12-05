@@ -22,6 +22,8 @@ public class CollectionHttpStore : HttpStore
     }
 
     public Task<ProductCollectionDto> Get(Guid id) => HttpClient.GetFromJsonAsync<ProductCollectionDto>($"{Path}/{id}");
+   
+    public async Task<IEnumerable<ProductCollectionItemDto>> GetItems(Guid id) => await HttpClient.GetFromJsonAsync<List<ProductCollectionItemDto>>($"{Path}/{id}/items");
 
     public Task Update(Guid id, ProductCollectionDto model) => HttpClient.PutAsJsonAsync($"{Path}/{id}", model);
     
@@ -40,6 +42,12 @@ public class CollectionHttpStore : HttpStore
     public async Task RemoveImage(Guid id)
     {
         var response = await HttpClient.PostAsync($"{Path}/{id}/remove-image", null);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task RemoveItem(Guid id, Guid productId)
+    {
+        var response = await HttpClient.DeleteAsync($"{Path}/{id}/items/{productId}");
         response.EnsureSuccessStatusCode();
     }
 }

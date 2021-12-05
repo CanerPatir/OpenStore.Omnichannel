@@ -1,0 +1,70 @@
+@inherits AppBaseViewModelObservableComponent<CollectionUpdateViewModel>
+@inject IStringLocalizer<Update> L
+
+<Modal @ref="_modalRef">
+    <ModalContent Centered="true">
+        <ModalHeader Style="border: none">
+            <ModalTitle>@L["AddProductToCollectionModal.Title"]</ModalTitle>
+        </ModalHeader>
+        <ModalBody Class="overflow-auto" Style="max-height: 500px; padding: 0">
+            <ListGroup Style="border-radius: 0">
+                <ListGroupItem>
+                    <TextEdit TextChanged="Search"/>
+                </ListGroupItem>
+
+                @foreach (var item in ViewModel.FilteredCollectionItems)
+                {
+                    <ListGroupItem  Style="color: unset; border-radius: 0">
+                        <div class="d-flex align-items-center">
+                
+                            <div class="width-10 align-middle">
+                                <Check TValue="bool" Class="form-check-input" @bind-Checked="@item.Selected"/>
+                            </div>
+                            <div class="ms-3 d-flex w-100 align-items-center">
+                                <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                    @if (string.IsNullOrWhiteSpace(item.PhotoUrl))
+                                    {
+                                        <img class="mw-100 mh-100" src="assets/img/product-image-placeholder.png" alt=""/>
+                                    }
+                                    else
+                                    {
+                                        <img class="mw-100 mh-100" src="@item.PhotoUrl" alt=""/>
+                                    }
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="m-0">
+                                        @item.Title
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </ListGroupItem>
+                }
+
+            </ListGroup>
+
+        </ModalBody>
+        <ModalFooter Style="border: none">
+            <Button Color="Color.Light" Clicked="_modalRef.Hide">@SharedLocalizer["Generic.Cancel"]</Button>
+            <Button Color="Color.Success" Clicked="Save">
+                @SharedLocalizer["Generic.Save"]
+            </Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    Modal _modalRef;
+
+    public void Show() => _modalRef.Show();
+
+    public async Task Save()
+    {
+    }
+
+    private Task Search(string arg)
+    {
+        throw new NotImplementedException();
+    }
+
+}

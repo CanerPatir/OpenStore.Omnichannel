@@ -58,6 +58,8 @@ public record ChangeProductCollectionImage(Guid ProductCollectionId, FileUploadD
 
 public record RemoveProductCollectionImage(Guid ProductCollectionId) : IRequest;
 
-public record AddProductToCollection(Guid ProductCollectionId, Guid ProductId) : IRequest;
-
 public record DeleteProductCollection(Guid ProductCollectionId) : IRequest;
+
+public record RemoveProductCollectionItem(Guid ProductCollectionId, Guid ProductId) : IRequest;
+
+public record AddProductToCollection(Guid ProductCollectionId, Guid ProductId) : IRequest;

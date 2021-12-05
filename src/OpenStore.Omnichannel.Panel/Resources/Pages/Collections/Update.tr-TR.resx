@@ -30,4 +30,22 @@
     <data name="Button.Delete" xml:space="preserve">
         <value>Koleksiyonu Sil</value>
     </data>
+    <data name="ListGroupItem.ShowingXVariants" xml:space="preserve">
+        <value>{0} adet ürün gösteriliyor</value>
+    </data>
+    <data name="Dropdown.BulkOperation" xml:space="preserve">
+        <value>İşlemler</value>
+    </data>
+    <data name="CollectionProductListEditor.Button.Browse" xml:space="preserve">
+        <value>Ürün Ekle</value>
+    </data>
+    <data name="CollectionProductListEditor.Title" xml:space="preserve">
+        <value>Ürünler</value>
+    </data>
+    <data name="CollectionProductListEditor.SearchBox.Placeholder" xml:space="preserve">
+        <value>Koleksiyon ürünlerinde ara...</value>
+    </data>
+    <data name="AddProductToCollectionModal.Title" xml:space="preserve">
+        <value>Ürün Ekle</value>
+    </data>
 </root>
