@@ -3,13 +3,6 @@
     <PropertyGroup>
         
     </PropertyGroup>
-
-    <ItemGroup>
-      <Content Update="appsettings.Development.json">
-        <DependentUpon>appsettings.json</DependentUpon>
-      </Content>
-      <Content Include="Views\Catalog\AllProducts.cshtml.js" /> 
-    </ItemGroup>
     
     <ItemGroup>
         <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
@@ -41,6 +34,19 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Index.tr-TR.resx</DependentUpon>
       </Compile>
+    </ItemGroup> 
+
+    <ItemGroup>
+        <Content Update="appsettings.Development.json">
+            <DependentUpon>appsettings.json</DependentUpon>
+        </Content>
+        <Content Include="Views\Catalog\AllProducts.cshtml.js">
+            <DependentUpon>AllProducts.cshtml</DependentUpon>
+        </Content>
+        <Content Update="Views\Home\Index.cshtml.js">
+            <DependentUpon>Index.cshtml</DependentUpon>
+        </Content>
+        <Content Include="Views\Home\Index.cshtml.js" />
     </ItemGroup>
 
 </Project>

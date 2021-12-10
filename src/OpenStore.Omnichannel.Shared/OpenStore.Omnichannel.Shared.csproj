@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        
+        <Description>Base types that is shared between prensentation and application layer</Description>
     </PropertyGroup>
     
     <ItemGroup>
