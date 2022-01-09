@@ -21,7 +21,7 @@ public class MakeProductAsMultiVariantHandler : IRequestHandler<MakeProductAsMul
 
         if (!product.HasMultipleVariants)
         {
-            _variantRepository.Remove(product.Variants.First());
+            await _variantRepository.Remove(product.Variants.First());
         }
 
         var variants = product.MakeMultiVariant(command);

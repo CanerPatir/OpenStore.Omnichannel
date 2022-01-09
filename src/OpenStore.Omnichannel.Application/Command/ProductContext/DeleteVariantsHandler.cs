@@ -23,7 +23,7 @@ public class DeleteVariantsHandler : IRequestHandler<DeleteVariants>
         var deleteVariants = product.DeleteVariants(command);
         foreach (var deleteVariant in deleteVariants)
         {
-            _variantRepository.Remove(deleteVariant);
+            await _variantRepository.Remove(deleteVariant);
         }
 
         await _repository.SaveChangesAsync(cancellationToken);

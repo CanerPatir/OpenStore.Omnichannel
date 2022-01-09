@@ -27,7 +27,7 @@ public class DeleteProductMediaHandler : IRequestHandler<DeleteProductMedia>
         product.DeleteMedia(command);
 
         var productMedia = await _productMediaRepository.GetAsync(command.ProductMediaId, cancellationToken);
-        _productMediaRepository.Remove(productMedia);
+        await _productMediaRepository.Remove(productMedia);
 
         await _productMediaRepository.SaveChangesAsync(cancellationToken);
 
