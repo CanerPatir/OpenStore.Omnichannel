@@ -44,7 +44,9 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
     public DbSet<Category> Categories { get; set; }
     public DbSet<CategoryMedia> CategoryMedias { get; set; }
     public DbSet<CategoryProduct> CategoryProducts { get; set; }
+    
     public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
+    public DbSet<ApplicationUserAddress> ApplicationUserAddresses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

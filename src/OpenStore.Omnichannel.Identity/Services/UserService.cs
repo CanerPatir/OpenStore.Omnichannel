@@ -5,6 +5,7 @@ using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Data.EntityFramework.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
+using OpenStore.Omnichannel.Shared.Dto.Identity;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Request;
 
@@ -15,6 +16,7 @@ public class UserService : EntityFrameworkCrudService<ApplicationUser, Applicati
     private readonly OpenIddictTokenManager<ApplicationToken> _tokenManager;
     private readonly OpenIddictAuthorizationManager<ApplicationAuthorization> _authorizationManager;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ICrudRepository<ApplicationUser> _repository;
 
     public UserService(
         OpenIddictTokenManager<ApplicationToken> tokenManager,
@@ -26,6 +28,7 @@ public class UserService : EntityFrameworkCrudService<ApplicationUser, Applicati
         _tokenManager = tokenManager;
         _authorizationManager = authorizationManager;
         _userManager = userManager;
+        _repository = repository;
     }
 
     public async Task AddToRole(Guid userId, string role, CancellationToken cancellationToken = default)
@@ -87,5 +90,44 @@ public class UserService : EntityFrameworkCrudService<ApplicationUser, Applicati
         {
             throw new ApplicationException(string.Join(",", Msg.Application.PasswordChangeError, result.Errors.Select(x => x.Description)));
         }
+    }
+
+    public async Task<IEnumerable<ApplicationUserAddressDto>> GetAddresses(Guid userId, CancellationToken cancellationToken)
+    {
+        var applicationUser = await _repository.GetAsync(userId, cancellationToken);
+        return applicationUser
+            .Addresses
+            .Select(x => new ApplicationUserAddressDto(
+                x.Id
+                , x.Firstname
+                , x.Surname
+                , x.PhoneNumber
+                , x.City
+                , x.Town
+                , x.District
+                , x.AddressDescription
+                , x.PostCode
+                , x.AddressName));
+    }
+
+    public async Task AddAddress(Guid userId, ApplicationUserAddressDto model, CancellationToken cancellationToken)
+    {
+        var applicationUser = await _repository.GetAsync(userId, cancellationToken);
+        applicationUser
+            .Addresses
+            .Add(new ApplicationUserAddress
+            {
+                Firstname = model.Firstname,
+                Surname = model.Surname,
+                PhoneNumber = model.PhoneNumber,
+                City = model.City,
+                District = model.District,
+                Town = model.Town,
+                AddressDescription = model.AddressDescription,
+                AddressName = model.AddressName,
+                PostCode = model.PostCode
+            });
+
+        await _repository.SaveChangesAsync(cancellationToken);
     }
 }

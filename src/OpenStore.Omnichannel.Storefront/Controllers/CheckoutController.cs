@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Omnichannel.Storefront.Services;
 
@@ -9,10 +10,12 @@ public class CheckoutController : Controller
     private const string ShoppingCartRouteName = "Cart";
     
     private readonly CheckoutBffService _checkoutBffService;
+    private readonly UserBffService _userBffService;
 
-    public CheckoutController(CheckoutBffService checkoutBffService)
+    public CheckoutController(CheckoutBffService checkoutBffService, UserBffService userBffService)
     {
         _checkoutBffService = checkoutBffService;
+        _userBffService = userBffService;
     }
 
     [HttpGet("~/cart", Name = ShoppingCartRouteName)]
@@ -25,15 +28,23 @@ public class CheckoutController : Controller
         return RedirectToAction(nameof(ShoppingCart));
     }
     
+    [Authorize]
+    [HttpGet("~/checkout", Name = nameof(Checkout))]
+    public async Task<IActionResult> Checkout()
+    {
+        var myAddresses = await _userBffService.GetMyAddresses(HttpContext.RequestAborted);
+        return View();
+    }
+    
+    [Authorize]
     [HttpGet("~/payment", Name = nameof(Payment))]
     public IActionResult Payment() => View();
-
-    [HttpGet("~/checkout", Name = nameof(Checkout))]
-    public IActionResult Checkout() => View();
     
+    [Authorize]
     [HttpGet("~/confirm", Name = nameof(Confirm))]
     public IActionResult Confirm() => View();
 
+    [Authorize]
     [HttpPost("~/continue", Name = nameof(Continue))]
     public async Task<IActionResult> Continue()
     {
@@ -43,7 +54,9 @@ public class CheckoutController : Controller
         {
             return RedirectToRoute(nameof(Payment));
    
-        } else if (page == nameof(Payment))
+        }
+        
+        if (page == nameof(Payment))
         {
             return RedirectToRoute(nameof(Confirm));
         }

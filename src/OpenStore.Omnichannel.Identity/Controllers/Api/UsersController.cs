@@ -5,6 +5,7 @@ using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Identity.Services;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
+using OpenStore.Omnichannel.Shared.Dto.Identity;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Request;
 
@@ -22,11 +23,11 @@ public class UsersController : BaseCrudApiController<ApplicationUser, Guid, Appl
     }
 
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme, Roles = ApplicationRoles.Administrator)]
-    [HttpPost("{id}/revoke")]
+    [HttpPost("{id:guid}/revoke")]
     public async Task RevokeUserToken(Guid id) => await _userService.RevokeUserToken(id, CancellationToken);
 
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme, Roles = ApplicationRoles.Administrator)]
-    [HttpGet("{id}/roles")]
+    [HttpGet("{id:guid}/roles")]
     public Task<IEnumerable<string>> GetUserRoles(Guid id) => _userService.GetUserRoles(id, CancellationToken);
 
     [HttpPost("change-password")]
@@ -35,4 +36,10 @@ public class UsersController : BaseCrudApiController<ApplicationUser, Guid, Appl
         ThrowIfModelInvalid();
         return _userService.ChangePassword(User.GetId(), model, CancellationToken);
     }
+
+    [HttpGet("my-addresses")]
+    public Task<IEnumerable<ApplicationUserAddressDto>> Addresses() => _userService.GetAddresses(User.GetId(), CancellationToken);
+
+    [HttpPost("my-addresses")]
+    public Task  Addresses(ApplicationUserAddressDto model) => _userService.AddAddress(User.GetId(), model, CancellationToken);
 }

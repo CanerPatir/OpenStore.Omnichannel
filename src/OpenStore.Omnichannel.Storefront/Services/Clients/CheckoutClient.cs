@@ -69,8 +69,5 @@ public class CheckoutClient
     }
 
     #endregion
-
-    #region Order Summary
-
-    #endregion
+ 
 }

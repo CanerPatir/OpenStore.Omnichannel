@@ -4,13 +4,13 @@ using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 
-public class ProductBffService : IBffService
+public class ProductBffService : BffService
 {
     private const int BatchSize = 50;
 
     private readonly IApiClient _apiClient;
 
-    public ProductBffService(IApiClient apiClient)
+    public ProductBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _apiClient = apiClient;
     }

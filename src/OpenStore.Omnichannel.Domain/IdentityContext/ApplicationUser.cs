@@ -26,4 +26,6 @@ public class ApplicationUser : IdentityUser<Guid>, IEntity, IAuditableEntity
     public string CreatedBy { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public string UpdatedBy { get; set; }
+
+    public virtual List<ApplicationUserAddress> Addresses { get; set; } = new();
 }

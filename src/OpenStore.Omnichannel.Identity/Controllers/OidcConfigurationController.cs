@@ -8,6 +8,7 @@ using OpenStore.Omnichannel.Domain.IdentityContext;
 
 namespace OpenStore.Omnichannel.Identity.Controllers;
 
+[ApiExplorerSettings(IgnoreApi = true)]
 public class OidcConfigurationController : Controller
 {
     private readonly OpenIddictApplicationManager<ApplicationClient> _applicationManager;

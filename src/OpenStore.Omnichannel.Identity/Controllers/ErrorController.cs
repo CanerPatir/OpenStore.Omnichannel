@@ -5,6 +5,7 @@ using OpenStore.Omnichannel.Identity.ViewModels.Shared;
 
 namespace OpenStore.Omnichannel.Identity.Controllers;
 
+[ApiExplorerSettings(IgnoreApi = true)]
 public class ErrorController : Controller
 {
     [HttpGet, HttpPost, Route("~/error")]

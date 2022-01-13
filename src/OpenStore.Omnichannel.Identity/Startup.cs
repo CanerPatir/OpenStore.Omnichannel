@@ -18,7 +18,9 @@ using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Mapping.AutoMapper;
 using OpenStore.Infrastructure.Web.ErrorHandling;
 using OpenStore.Infrastructure.Web.Modularization;
+using OpenStore.Infrastructure.Web.Swagger;
 using OpenStore.Omnichannel.Domain.IdentityContext;
+using OpenStore.Omnichannel.Identity.Controllers.Api;
 using OpenStore.Omnichannel.Infrastructure;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 using Quartz;
@@ -83,7 +85,10 @@ public class Startup : ModuleStartup
             options.UseInMemoryStore();
         });
         services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
-
+        if (Environment.IsDevelopment())
+        {
+            services.AddOpenStoreSwaggerForModule<UsersController>(Environment, "identity");
+        }
         services.AddOpenIddict()
 
             // Register the OpenIddict core components.
@@ -224,6 +229,11 @@ public class Startup : ModuleStartup
         app.UseCors(AllowAllCorsPolicy);
         app.UseOpenStoreLocalization();
 
+        if (Environment.IsDevelopment())
+        {
+            app.UseOpenStoreSwaggerForModule("identity", "identity");
+        }
+        
         app
             .UseStaticFiles(new StaticFileOptions
             {

@@ -1,5 +1,6 @@
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
+using OpenStore.Omnichannel.Shared.Dto.Identity;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Request;
 
@@ -12,4 +13,6 @@ public interface IUserService : ICrudService<ApplicationUser, ApplicationUserDto
     Task<IEnumerable<string>> GetUserRoles(Guid id, CancellationToken cancellationToken = default);
     Task RevokeUserToken(Guid userId, CancellationToken cancellationToken = default);
     Task ChangePassword(Guid userId, ChangePasswordRequest model, CancellationToken cancellationToken);
+    Task<IEnumerable<ApplicationUserAddressDto>> GetAddresses(Guid userId, CancellationToken cancellationToken);
+    Task AddAddress(Guid userId, ApplicationUserAddressDto model, CancellationToken cancellationToken);
 }

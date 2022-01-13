@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using OpenIddict.Abstractions;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 using OpenStore.Omnichannel.Storefront.Models.Checkout;
@@ -6,21 +5,17 @@ using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 
-public class CheckoutBffService : IBffService
+public class CheckoutBffService : BffService
 {
     private const string CartCookieKey = "CartCookieKey";
     private readonly IApiClient _apiClient;
-    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public CheckoutBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor)
+    public CheckoutBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _apiClient = apiClient;
-        _httpContextAccessor = httpContextAccessor;
-    }
+     }
 
-    private HttpContext HttpContext => _httpContextAccessor.HttpContext;
-    private IDictionary<object, object> HttpContextCache => HttpContext.Items;
-    private ClaimsPrincipal User => HttpContext?.User;
+
 
     public async Task CreateShoppingCartIfNotExists(CancellationToken cancellationToken = default)
     {
@@ -151,7 +146,7 @@ public class CheckoutBffService : IBffService
     private bool TryGetCartId(out Guid cartId)
     {
         cartId = Guid.Empty;
-        if (_httpContextAccessor.HttpContext is null)
+        if (HttpContext is null)
         {
             return false;
         }

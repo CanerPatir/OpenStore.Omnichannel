@@ -16,6 +16,7 @@ using OpenStore.Omnichannel.Infrastructure.Authentication;
 
 namespace OpenStore.Omnichannel.Identity.Controllers;
 
+[ApiExplorerSettings(IgnoreApi = true)]
 public class AuthorizationController : Controller
 {
     private readonly OpenIddictApplicationManager<ApplicationClient> _applicationManager;

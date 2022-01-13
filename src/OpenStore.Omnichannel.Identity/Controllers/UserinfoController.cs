@@ -7,6 +7,7 @@ using OpenStore.Omnichannel.Domain.IdentityContext;
 
 namespace OpenStore.Omnichannel.Identity.Controllers;
 
+[ApiExplorerSettings(IgnoreApi = true)]
 public class UserinfoController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
