@@ -7,8 +7,7 @@ namespace OpenStore.Omnichannel.Storefront.Controllers;
 public class CheckoutController : Controller
 {
     private const string ShoppingCartRouteName = "Cart";
-    private const string PaymentRouteName = "Payment";
-
+    
     private readonly CheckoutBffService _checkoutBffService;
 
     public CheckoutController(CheckoutBffService checkoutBffService)
@@ -26,8 +25,31 @@ public class CheckoutController : Controller
         return RedirectToAction(nameof(ShoppingCart));
     }
     
-    [HttpGet("~/payment", Name = PaymentRouteName)]
+    [HttpGet("~/payment", Name = nameof(Payment))]
     public IActionResult Payment() => View();
+
+    [HttpGet("~/checkout", Name = nameof(Checkout))]
+    public IActionResult Checkout() => View();
+    
+    [HttpGet("~/confirm", Name = nameof(Confirm))]
+    public IActionResult Confirm() => View();
+
+    [HttpPost("~/continue", Name = nameof(Continue))]
+    public async Task<IActionResult> Continue()
+    {
+        var page = Request.Form["page"].ToString();
+
+        if (page == nameof(Checkout))
+        {
+            return RedirectToRoute(nameof(Payment));
+   
+        } else if (page == nameof(Payment))
+        {
+            return RedirectToRoute(nameof(Confirm));
+        }
+
+        return BadRequest();
+    }
 
     #region AjaxRequests
 

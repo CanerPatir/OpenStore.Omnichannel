@@ -16,5 +16,9 @@
   "ShoppingCart.Column.Price": "Fiyat",
   "OrderSummary.Total": "Sepet Tutarı",
   "OrderSummary.Discount": "İndirim",
-  "OrderSummary.Subtotal": "Toplam"
+  "OrderSummary.Subtotal": "Toplam",
+  "Checkout.Step.Address": "Teslimat Adresi",
+  "Checkout.Step.Payment": "Ödeme",
+  "Checkout.Step.Confirm": "Onay",
+  "Checkout.Button.SaveAndContinue": "Kaydet ve Devam Et"
 }

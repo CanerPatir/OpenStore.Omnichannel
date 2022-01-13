@@ -1,0 +1,65 @@
+@{
+    Layout = "_CheckoutLayout";
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <h4 class="card-title mb-4">Delivery info</h4>
+        <div class="form-group">
+            <label class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
+                <span class="custom-control-label"> Standart Delivery <br>Free </span>
+            </label>
+            <label class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" type="radio" name="gender" value="option2">
+                <span class="custom-control-label"> Express Delivery <br> $31 </span>
+            </label>
+        </div>
+
+        <div class="form-row">
+            <div class="col form-group">
+                <label>First name</label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+            <div class="col form-group">
+                <label>Last name</label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="">
+            </div>
+            <div class="col form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Country</label>
+                <select id="inputState" class="form-control">
+                    <option> Choose...</option>
+                    <option>Uzbekistan</option>
+                    <option>Russia</option>
+                    <option selected="">United States</option>
+                    <option>India</option>
+                    <option>Afganistan</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label>City</label>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Adress</label>
+            <textarea class="form-control" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"> Continue </button>
+        </div>
+    </div>
+</div>

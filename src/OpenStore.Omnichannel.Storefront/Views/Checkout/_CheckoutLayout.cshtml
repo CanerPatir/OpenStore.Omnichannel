@@ -1,0 +1,80 @@
+@using OpenStore.Omnichannel.Storefront.Controllers
+@{
+    Layout = "_Layout";
+
+    string GetCurrentRouteName()
+    {
+        return ViewContext.ActionDescriptor.AttributeRouteInfo!.Name;
+    }
+
+    var isCheckoutPage = GetCurrentRouteName() == nameof(CheckoutController.Checkout);
+    var isPaymentPage = GetCurrentRouteName() == nameof(CheckoutController.Payment);
+    var isConfirmPage = GetCurrentRouteName() == nameof(CheckoutController.Confirm);
+}
+<section class="section-content padding-y">
+    <div class="container">
+        <form asp-controller="Checkout" asp-action="Continue" method="post">
+            <input type="hidden" name="page" value="@GetCurrentRouteName()"/>
+            <div class="row">
+                <div class="col-md-9">
+                    <article class="card">
+                        <div class="card-body">
+                            <div class="tracking-wrap">
+                                <div class="step @(isCheckoutPage || isPaymentPage || isConfirmPage ? "active" : string.Empty)">
+                                    <span class="icon">
+                                        <i class="fa fa-truck"></i>
+                                    </span>
+                                    <span class="text">@L["Checkout.Step.Address"]</span>
+                                </div>
+
+                                <div class="step @(isPaymentPage || isConfirmPage ? "active" : string.Empty)">
+                                    <span class="icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </span>
+                                    <span class="text">@L["Checkout.Step.Payment"]</span>
+                                </div>
+
+                                <div class="step @(isConfirmPage ? "active" : string.Empty)">
+                                    <span class="icon">
+                                        <i class="fa fa-check"></i>
+                                    </span>
+                                    <span class="text">@L["Checkout.Step.Confirm"]</span>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <aside class="col-md-3">
+                    @if (isConfirmPage is false)
+                    {
+                        <button type="submit" class="btn btn-primary btn-block mb-3">
+                            @L["Checkout.Button.SaveAndContinue"]
+                        </button>
+                    }
+
+                    @await Component.InvokeAsync("OrderSummary",
+                        new
+                        {
+                            dontShowPurchaseButton = true
+                        })
+
+                    @if (isConfirmPage is false)
+                    {
+                        <button type="submit" class="btn btn-primary btn-block mt-3">
+                            @L["Checkout.Button.SaveAndContinue"]
+                        </button>
+                    }
+                </aside>
+            </div>
+        </form>
+
+    </div>
+</section>

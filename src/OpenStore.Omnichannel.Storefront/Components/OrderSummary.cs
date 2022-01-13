@@ -13,10 +13,10 @@ public class OrderSummary : ViewComponent
         _checkoutBffService = checkoutBffService;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync(OrderSummaryViewModel model, CancellationToken cancellationToken = default)
+    public async Task<IViewComponentResult> InvokeAsync(OrderSummaryViewModel model, bool dontShowPurchaseButton, CancellationToken cancellationToken = default)
     {
         model ??= await _checkoutBffService.GetOrderSummary(cancellationToken);
-
+        ViewBag.DontShowPurchaseButton = dontShowPurchaseButton;
         return View(model);
     }
 }
