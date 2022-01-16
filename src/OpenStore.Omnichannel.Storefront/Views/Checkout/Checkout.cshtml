@@ -2,6 +2,8 @@
 @model IEnumerable<AddressViewModel>
 @{
     Layout = "_CheckoutLayout";
+
+    ViewBag.disableContinue = !Model.Any();
 }
 
 <style>

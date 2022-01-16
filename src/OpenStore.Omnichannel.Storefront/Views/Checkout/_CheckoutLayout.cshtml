@@ -10,6 +10,8 @@
     var isCheckoutPage = GetCurrentRouteName() == nameof(CheckoutController.Checkout);
     var isPaymentPage = GetCurrentRouteName() == nameof(CheckoutController.Payment);
     var isConfirmPage = GetCurrentRouteName() == nameof(CheckoutController.Confirm);
+
+    var disableContinue = ViewBag.disableContinue ?? false;
 }
 <section class="section-content padding-y">
     <div class="container">
@@ -53,7 +55,7 @@
             <aside class="col-md-3">
                 @if (isConfirmPage is false)
                 {
-                    <button type="submit" class="btn btn-primary btn-block mb-3" form="checkoutProgressStepFrom">
+                    <button type="submit" class="btn btn-primary btn-block mb-3" disabled="@disableContinue" form="checkoutProgressStepFrom">
                         @L["Checkout.Button.SaveAndContinue"]
                     </button>
                 }
@@ -66,7 +68,7 @@
 
                 @if (isConfirmPage is false)
                 {
-                    <button type="submit" class="btn btn-primary btn-block mt-3" form="checkoutProgressStepFrom">
+                    <button type="submit" class="btn btn-primary btn-block mt-3 " disabled="@disableContinue" form="checkoutProgressStepFrom">
                         @L["Checkout.Button.SaveAndContinue"]
                     </button>
                 }
