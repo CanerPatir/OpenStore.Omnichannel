@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication;
-using OpenIddict.Abstractions;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 

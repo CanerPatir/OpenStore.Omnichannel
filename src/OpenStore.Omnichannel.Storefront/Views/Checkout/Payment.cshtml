@@ -1,7 +1,11 @@
 @{
     Layout = "_CheckoutLayout";
 }
+<form id="checkoutProgressStepFrom" asp-controller="Checkout" asp-action="Continue" method="post">
 
+    <input type="hidden" name="page" value="Payment"/>
+
+</form>
 <div class="card">
     <div class="card-body">
         <h4 class="card-title mb-4">Payment info</h4>

@@ -1,65 +1,93 @@
+@using System.Linq
+@model IEnumerable<AddressViewModel>
 @{
     Layout = "_CheckoutLayout";
 }
-<div class="card mb-4">
-    <div class="card-body">
-        <h4 class="card-title mb-4">Delivery info</h4>
-        <div class="form-group">
-            <label class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" checked="" type="radio" name="gender" value="option1">
-                <span class="custom-control-label"> Standart Delivery <br>Free </span>
-            </label>
-            <label class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" type="radio" name="gender" value="option2">
-                <span class="custom-control-label"> Express Delivery <br> $31 </span>
-            </label>
+
+<style>
+    .address-box{
+        background-color: #fafafa;
+        cursor: pointer;
+        height: 110px;
+    }
+    
+    .address-box:hover{
+        background-color: white;
+    }
+    
+    .address-box > .vertical-center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      text-align: center;
+      width: 100%;
+    }
+    
+    .address-box-container{}
+    
+    .address-box-container > .address-box-header{
+         width: 100%;
+         height: 24px;
+         margin-bottom: 0.25rem !important;
+     }
+    
+</style>
+<form id="checkoutProgressStepFrom" asp-controller="Checkout" asp-action="Continue" method="post">
+    <input type="hidden" name="page" value="Checkout"/>
+
+    @if (ViewBag.addAddressFailed == true)
+    {
+        <div class="alert alert-danger">@L["Checkout.Alert.AddAddressErrorMessage"]</div>
+    }
+
+    <div class="row">
+        <div class="address-box-container col-md-6 p-3">
+            <div class="address-box-header"></div>
+            <div class="card address-box" data-toggle="modal" data-target="#addAddressModal">
+                <div class="card-body vertical-center">
+                    <i class="fa fa-plus text-primary"></i>
+                    <br/>
+                    @L["Checkout.Label.AddNewAddress"]
+                </div>
+            </div>
         </div>
 
-        <div class="form-row">
-            <div class="col form-group">
-                <label>First name</label>
-                <input type="text" class="form-control" placeholder="">
-            </div>
-            <div class="col form-group">
-                <label>Last name</label>
-                <input type="text" class="form-control" placeholder="">
-            </div>
-        </div>
+        @foreach (var applicationUserAddressDto in Model)
+        {
+            var addressId = applicationUserAddressDto.Id;
+            var formId = applicationUserAddressDto.Id;
 
-        <div class="form-row">
-            <div class="col form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" placeholder="">
+            <div class="address-box-container col-md-6 p-3">
+                <div class="address-box-header d-flex">
+                    <div class="form-check">
+                        @if (Model.FirstOrDefault()?.Id == applicationUserAddressDto.Id)
+                        {
+                            <input class="form-check-input" type="radio" name="selectedAddress" id="flexRadioDefault@(addressId)" value="@addressId" checked="checked">
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="radio" name="selectedAddress" id="flexRadioDefault@(addressId)" value="@addressId" >
+                        }
+                        @applicationUserAddressDto.AddressName
+                    </div>
+                    <div class="ml-auto">
+                        <a style="text-decoration: underline; font-size: 9pt; cursor: pointer" data-toggle="modal" data-target="#@formId">Düzenle</a>
+                    </div>
+                </div>
+                <label class="form-check-label" style="width: 100%" for="flexRadioDefault@(addressId)">
+                    <div class="card address-box">
+                        <div class="card-body vertical-center">@applicationUserAddressDto.AddressName</div>
+                    </div>
+                </label>
             </div>
-            <div class="col form-group">
-                <label>Phone</label>
-                <input type="text" class="form-control" placeholder="">
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Country</label>
-                <select id="inputState" class="form-control">
-                    <option> Choose...</option>
-                    <option>Uzbekistan</option>
-                    <option>Russia</option>
-                    <option selected="">United States</option>
-                    <option>India</option>
-                    <option>Afganistan</option>
-                </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label>City</label>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Adress</label>
-            <textarea class="form-control" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Continue </button>
-        </div>
+        }
     </div>
-</div>
+</form>
+
+<partial name="__CheckoutAddOrUpdateAddressFormModal" model="null"/>
+@foreach (var applicationUserAddressDto in Model)
+{
+    <partial name="__CheckoutAddOrUpdateAddressFormModal" model="applicationUserAddressDto"/>
+}

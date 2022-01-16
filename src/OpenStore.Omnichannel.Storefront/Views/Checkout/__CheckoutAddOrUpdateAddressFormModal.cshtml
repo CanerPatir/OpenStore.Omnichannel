@@ -1,0 +1,81 @@
+@using OpenStore.Omnichannel.Storefront.Controllers
+@model AddressViewModel
+@{
+    var isUpdate = Model != null;
+    var formId = isUpdate ? Model.Id.ToString() : "addAddressModal";
+}
+
+<div class="modal fade" id="@formId" tabindex="-1" role="dialog" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAddressModalLabel">@L["Checkout.ModalTitle.AddAddress"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              
+                <form id="form@(formId)" asp-controller="Checkout" asp-action="@(isUpdate ? nameof(CheckoutController.UpdateAddress) : nameof(CheckoutController.AddAddress) )" method="post">
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>@L["Checkout.Input.Firstname"]</label>
+                            <input asp-for="Firstname" class="form-control">
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="col form-group">
+                            <label>@L["Checkout.Input.Surname"]</label>
+                            <input asp-for="Surname" class="form-control">
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="col form-group">
+                            <label>@L["Checkout.Input.PhoneNumber"]</label>
+                            <input asp-for="PhoneNumber" class="form-control">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="col form-group">
+                            <label>@L["Checkout.Input.City"]</label>
+                            <input asp-for="City" class="form-control">
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>@L["Checkout.Input.Town"]</label>
+                            <input asp-for="Town" class="form-control">
+                            <span asp-validation-for="Town" class="text-danger"></span>
+                        </div>
+
+                        <div class="col form-group">
+                            <label>@L["Checkout.Input.District"]</label>
+                            <input asp-for="District" class="form-control">
+                            <span asp-validation-for="District" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>@L["Checkout.Input.AddressDescription"]</label>
+                        <textarea asp-for="AddressDescription" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="AddressDescription" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>@L["Checkout.Input.AddressName"]</label>
+                        <input asp-for="AddressName" class="form-control">
+                        <span asp-validation-for="AddressName" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@L["General.Button.Close"]</button>
+                <button type="submit" class="btn btn-primary" form="form@(formId)">@L["General.Button.Save"]</button>
+            </div>
+        </div>
+    </div>
+</div>

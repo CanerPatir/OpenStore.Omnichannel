@@ -1,4 +1,7 @@
 {
+  "General.Validation.Required": "Bu alan zorunlu",
+  "General.Button.Close":"Kapat",
+  "General.Button.Save":"Kaydet",
   "General.Button.AddToCart": "Sepete Ekle",
   "SearchBox.Placeholder": "Aradığınız ürün, kategori veya markayı yazınız",
   "ProductDetail.Label.Quantity": "Adet",
@@ -20,5 +23,16 @@
   "Checkout.Step.Address": "Teslimat Adresi",
   "Checkout.Step.Payment": "Ödeme",
   "Checkout.Step.Confirm": "Onay",
-  "Checkout.Button.SaveAndContinue": "Kaydet ve Devam Et"
+  "Checkout.Button.SaveAndContinue": "Kaydet ve Devam Et",
+  "Checkout.Label.AddNewAddress": "Yeni Adres Ekle",
+  "Checkout.Alert.AddAddressErrorMessage": "Address bilgileri hatalı. Lütfen kontrol edip tekrar deneyin",
+  "Checkout.ModalTitle.AddAddress": "Adres Ekle",
+  "Checkout.Input.Firstname": "İsim*",
+  "Checkout.Input.Surname": "Soyisim*",
+  "Checkout.Input.PhoneNumber": "Telefon*",
+  "Checkout.Input.City": "İl*",
+  "Checkout.Input.Town": "İlçe*",
+  "Checkout.Input.District": "Mahalle*",
+  "Checkout.Input.AddressDescription": "Adres*",
+  "Checkout.Input.AddressName": "Adres Başlığı*"
 }
