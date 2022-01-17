@@ -103,7 +103,10 @@ services.AddHttpClient(ApiClient.ApiClientKey, client =>
 {
     client.BaseAddress = new Uri(apiConfiguration.Url);
     client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);
-}).AddPolicyHandler(RetryPolicy.GetApiRetryPolicy());
+})
+    .AddPolicyHandler(RetryPolicy.GetApiRetryPolicy())
+    .AddHttpMessageHandler(sp => new AuthenticateHttpClientHandler(sp.GetRequiredService<IHttpContextAccessor>()))
+    ;
 
 services.AddSingleton<IApiClient, ApiClient>();
 

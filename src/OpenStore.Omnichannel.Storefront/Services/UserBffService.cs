@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication;
+using OpenIddict.Abstractions;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
 using OpenStore.Omnichannel.Storefront.Services.Clients;
 
@@ -15,11 +16,13 @@ public class UserBffService : BffService
 
     public async Task<IEnumerable<ApplicationUserAddressDto>> GetMyAddresses(CancellationToken cancellationToken = default)
     {
-        string accessToken = await HttpContext.GetTokenAsync("access_token");
-        string idToken = await HttpContext.GetTokenAsync("id_token");
-        return await _apiClient.User.GetMyAddresses(accessToken, cancellationToken);
+        return await _apiClient.User.GetMyAddresses(cancellationToken);
     }
 
     public Task AddAddressToMe(ApplicationUserAddressDto model, CancellationToken cancellationToken = default)
         => _apiClient.User.AddAddressToMe(model, cancellationToken);
+
+    public  Task UpdateAddress(ApplicationUserAddressDto model, CancellationToken cancellationToken)
+        => _apiClient.User.UpdateAddress(model, cancellationToken);
+
 }

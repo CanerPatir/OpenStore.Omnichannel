@@ -44,32 +44,26 @@ public class CheckoutController : Controller
     }
 
     [Authorize]
-    [HttpGet("~/payment", Name = nameof(Payment))]
-    public IActionResult Payment() => View();
-
-    [Authorize]
-    [HttpGet("~/confirm", Name = nameof(Confirm))]
-    public IActionResult Confirm() => View();
-
-    [Authorize]
-    [HttpPost("~/continue", Name = nameof(Continue))]
-    public async Task<IActionResult> Continue()
+    [HttpPost("~/payment", Name = nameof(Payment))]
+    public async Task<IActionResult> Payment()
     {
-        var page = Request.Form["page"].ToString();
-
-        if (page == nameof(Checkout))
+        var selectedAddressIdStr = Request.Form["selectedAddress"].ToString();
+        if (string.IsNullOrWhiteSpace(selectedAddressIdStr) || !Guid.TryParse(selectedAddressIdStr, out var selectedAddressId))
         {
-            return RedirectToRoute(nameof(Payment));
+            return BadRequest();
         }
 
-        if (page == nameof(Payment))
-        {
-            return RedirectToRoute(nameof(Confirm));
-        }
-
-        return BadRequest();
+        // await _checkoutBffService.CreatePreOrder(selectedAddressId);
+        return View();
     }
 
+    [Authorize]
+    [HttpPost("~/confirm", Name = nameof(Confirm))]
+    public IActionResult Confirm()
+    {
+        return View();
+    }
+ 
     [Authorize]
     [HttpPost("~/add-address", Name = nameof(AddAddress))]
     public async Task<IActionResult> AddAddress([FromForm] AddressViewModel model)
@@ -90,8 +84,8 @@ public class CheckoutController : Controller
             , model.PostCode
             , model.AddressName), HttpContext.RequestAborted);
         return RedirectToRoute(nameof(Checkout));
-    } 
-    
+    }
+
     [Authorize]
     [HttpPost("~/update-address", Name = nameof(UpdateAddress))]
     public async Task<IActionResult> UpdateAddress([FromForm] AddressViewModel model)
@@ -101,7 +95,7 @@ public class CheckoutController : Controller
             return RedirectToRoute(nameof(Checkout), new { addAddressFailed = true });
         }
 
-        await _userBffService.AddAddressToMe(new ApplicationUserAddressDto(model.Id
+        await _userBffService.UpdateAddress(new ApplicationUserAddressDto(model.Id
             , model.Firstname
             , model.Surname
             , model.PhoneNumber

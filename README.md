@@ -28,6 +28,8 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 * remove Shared dependency from Domain
 * update prevent exit if there is change
 * variant count limit 
+* Add Address limit
+* storefront token expire on api call
 
 ## store front todos
 * Collection

@@ -15,4 +15,5 @@ public interface IUserService : ICrudService<ApplicationUser, ApplicationUserDto
     Task ChangePassword(Guid userId, ChangePasswordRequest model, CancellationToken cancellationToken);
     Task<IEnumerable<ApplicationUserAddressDto>> GetAddresses(Guid userId, CancellationToken cancellationToken);
     Task AddAddress(Guid userId, ApplicationUserAddressDto model, CancellationToken cancellationToken);
+    Task UpdateAddress(Guid userId, ApplicationUserAddressDto model, CancellationToken cancellationToken);
 }

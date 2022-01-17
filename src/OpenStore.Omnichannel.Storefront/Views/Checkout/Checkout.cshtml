@@ -36,9 +36,7 @@
      }
     
 </style>
-<form id="checkoutProgressStepFrom" asp-controller="Checkout" asp-action="Continue" method="post">
-    <input type="hidden" name="page" value="Checkout"/>
-
+<form id="checkoutProgressStepFrom" asp-controller="Checkout" asp-action="Payment" method="post">
     @if (ViewBag.addAddressFailed == true)
     {
         <div class="alert alert-danger">@L["Checkout.Alert.AddAddressErrorMessage"]</div>
@@ -47,7 +45,7 @@
     <div class="row">
         <div class="address-box-container col-md-6 p-3">
             <div class="address-box-header"></div>
-            <div class="card address-box" data-toggle="modal" data-target="#addAddressModal">
+            <div class="card address-box" data-toggle="modal" data-target="#modalAddAddress">
                 <div class="card-body vertical-center">
                     <i class="fa fa-plus text-primary"></i>
                     <br/>
@@ -75,12 +73,12 @@
                         @applicationUserAddressDto.AddressName
                     </div>
                     <div class="ml-auto">
-                        <a style="text-decoration: underline; font-size: 9pt; cursor: pointer" data-toggle="modal" data-target="#@formId">Düzenle</a>
+                        <a style="text-decoration: underline; font-size: 9pt; cursor: pointer" data-toggle="modal" data-target="#modal@(formId)">Düzenle</a>
                     </div>
                 </div>
                 <label class="form-check-label" style="width: 100%" for="flexRadioDefault@(addressId)">
                     <div class="card address-box">
-                        <div class="card-body vertical-center">@applicationUserAddressDto.AddressName</div>
+                        <div class="card-body vertical-center">@applicationUserAddressDto.AddressDescription</div>
                     </div>
                 </label>
             </div>

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenIddict.Core;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
+using OpenStore.Application.Exceptions;
 using OpenStore.Data.EntityFramework.Crud;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
@@ -112,7 +113,10 @@ public class UserService : EntityFrameworkCrudService<ApplicationUser, Applicati
 
     public async Task AddAddress(Guid userId, ApplicationUserAddressDto model, CancellationToken cancellationToken)
     {
-        var applicationUser = await _repository.GetAsync(userId, cancellationToken);
+        var applicationUser = await _repository
+            .Query
+            .Include(x => x.Addresses)
+            .FirstOrDefaultAsync(x => x.Id == userId, cancellationToken);
         applicationUser
             .Addresses
             .Add(new ApplicationUserAddress
@@ -127,6 +131,35 @@ public class UserService : EntityFrameworkCrudService<ApplicationUser, Applicati
                 AddressName = model.AddressName,
                 PostCode = model.PostCode
             });
+
+        await _repository.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task UpdateAddress(Guid userId, ApplicationUserAddressDto model, CancellationToken cancellationToken)
+    {
+        var applicationUser = await _repository
+            .Query
+            .Include(x => x.Addresses)
+            .FirstOrDefaultAsync(x => x.Id == userId, cancellationToken);
+
+        var address = applicationUser
+            .Addresses
+            .FirstOrDefault(x => x.Id == model.Id);
+
+        if (address is null)
+        {
+            throw new ResourceNotFoundException(Msg.ResourceNotFound);
+        }
+
+        address.Firstname = model.Firstname;
+        address.Surname = model.Surname;
+        address.PhoneNumber = model.PhoneNumber;
+        address.City = model.City;
+        address.District = model.District;
+        address.Town = model.Town;
+        address.AddressDescription = model.AddressDescription;
+        address.AddressName = model.AddressName;
+        address.PostCode = model.PostCode;
 
         await _repository.SaveChangesAsync(cancellationToken);
     }

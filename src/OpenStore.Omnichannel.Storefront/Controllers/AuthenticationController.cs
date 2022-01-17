@@ -9,7 +9,7 @@ namespace OpenStore.Omnichannel.Storefront.Controllers;
 public class AuthenticationController : Controller
 {
     [HttpGet("~/login")]
-    public ActionResult LogIn() => Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectDefaults.AuthenticationScheme);
+    public ActionResult LogIn([FromQuery] string redirectUri) => Challenge(new AuthenticationProperties { RedirectUri = redirectUri ?? "/" }, OpenIdConnectDefaults.AuthenticationScheme);
 
     [Authorize]
     [HttpGet("~/logout"), HttpPost("~/logout")]

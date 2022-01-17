@@ -41,5 +41,8 @@ public class UsersController : BaseCrudApiController<ApplicationUser, Guid, Appl
     public Task<IEnumerable<ApplicationUserAddressDto>> Addresses() => _userService.GetAddresses(User.GetId(), CancellationToken);
 
     [HttpPost("my-addresses")]
-    public Task  Addresses(ApplicationUserAddressDto model) => _userService.AddAddress(User.GetId(), model, CancellationToken);
+    public Task AddAddress(ApplicationUserAddressDto model) => _userService.AddAddress(User.GetId(), model, CancellationToken);
+
+    [HttpPut("my-addresses")]
+    public Task UpdateAddresses(ApplicationUserAddressDto model) => _userService.UpdateAddress(User.GetId(), model, CancellationToken);
 }
