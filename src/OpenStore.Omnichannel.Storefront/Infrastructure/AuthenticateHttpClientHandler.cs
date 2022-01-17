@@ -45,7 +45,7 @@ public class AuthenticateHttpClientHandler : DelegatingHandler
 
     private static async Task<string> RenewToken(HttpContext httpContext)
     {
-        httpContext.Response.Redirect("/login?redirectUri=/checkout");
+        httpContext.Response.Redirect("/login"); // todo: fix it with refresh token 
         await httpContext.Response.CompleteAsync();
         return null;
         

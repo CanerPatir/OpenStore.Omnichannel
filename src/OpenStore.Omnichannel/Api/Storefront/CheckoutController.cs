@@ -38,4 +38,11 @@ public class CheckoutController : BaseApiController
     public Task BindCartToUser(Guid id, Guid userId) => _mediator.Send(new BindCartToUser(id, userId), CancellationToken);
 
     #endregion
+
+    #region Checkout
+
+    [HttpPost("create-preorder")]
+    public Task CreatePreorder() => _mediator.Send(null, CancellationToken);
+
+    #endregion
 }
