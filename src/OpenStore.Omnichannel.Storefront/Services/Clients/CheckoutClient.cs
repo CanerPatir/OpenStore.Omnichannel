@@ -50,12 +50,6 @@ public class CheckoutClient
         response.EnsureSuccessStatusCode();
     }
 
-    public async Task BindCartToUser(Guid cartId, Guid userId, CancellationToken cancellationToken = default)
-    {
-        var response = await HttpClient.PostAsync($"{ShoppingCartPath}/{cartId}/bind-to-user/{userId}", null, cancellationToken);
-        response.EnsureSuccessStatusCode();
-    }
-
     public async Task<ShoppingCartResult> GetCart(Guid cartId, CancellationToken cancellationToken = default)
     {
         try

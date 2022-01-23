@@ -3,12 +3,16 @@
   "General.Button.Close":"Kapat",
   "General.Button.Save":"Kaydet",
   "General.Button.AddToCart": "Sepete Ekle",
+  
   "SearchBox.Placeholder": "Aradığınız ürün, kategori veya markayı yazınız",
+  
   "ProductDetail.Label.Quantity": "Adet",
+  
   "ProductList.Button.GoToDetail": "Ürün Detay",
   "ProductList.Button.AddToCart": "Sepete Ekle",
   "ProductList.Title": "Tüm Ürünler",
   "ProductList.Search.TitleSuffix": " Modelleri, Fiyatları",
+  
   "ShoppingCart.Title": "Sepetiniz",
   "ShoppingCart.Button.MakePurchase": "Sepeti Onayla",
   "ShoppingCart.Button.RemoveItem": "Sil",
@@ -17,9 +21,11 @@
   "ShoppingCart.Column.Product": "Ürün",
   "ShoppingCart.Column.Quantity": "Adet",
   "ShoppingCart.Column.Price": "Fiyat",
+  
   "OrderSummary.Total": "Sepet Tutarı",
   "OrderSummary.Discount": "İndirim",
   "OrderSummary.Subtotal": "Toplam",
+  
   "Checkout.Step.Address": "Teslimat Adresi",
   "Checkout.Step.Payment": "Ödeme",
   "Checkout.Step.Confirm": "Onay",
@@ -34,5 +40,10 @@
   "Checkout.Input.Town": "İlçe*",
   "Checkout.Input.District": "Mahalle*",
   "Checkout.Input.AddressDescription": "Adres*",
-  "Checkout.Input.AddressName": "Adres Başlığı*"
+  "Checkout.Input.AddressName": "Adres Başlığı*",
+  "Checkout.Warning.EmptyCart": "Sepetinizde herhangi bir ürün bulunmamakta",
+  "Checkout.Button.ContinueShopping": "Alışverişe Devam Et",
+  "Checkout.Button.GoBackFirstStep": "Alışverişi Tamamla",
+  "Checkout.Error.Header": "Sipariş oluşturulurken beklenmeyen bir hata oluştu !",
+  "Checkout.Error.SelectedAddressEmpty": "Adres seçimi olmadan siparişinizi oluşturamıyorum."
 }

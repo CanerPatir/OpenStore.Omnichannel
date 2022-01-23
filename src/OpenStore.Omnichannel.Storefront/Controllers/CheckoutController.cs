@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OpenStore.Infrastructure.Localization;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
 using OpenStore.Omnichannel.Storefront.Models.Checkout;
 using OpenStore.Omnichannel.Storefront.Services;
@@ -13,11 +14,13 @@ public class CheckoutController : Controller
 
     private readonly CheckoutBffService _checkoutBffService;
     private readonly UserBffService _userBffService;
+    private readonly IOpenStoreLocalizer _l;
 
-    public CheckoutController(CheckoutBffService checkoutBffService, UserBffService userBffService)
+    public CheckoutController(CheckoutBffService checkoutBffService, UserBffService userBffService, IOpenStoreLocalizer openStoreLocalizer)
     {
         _checkoutBffService = checkoutBffService;
         _userBffService = userBffService;
+        _l = openStoreLocalizer;
     }
 
     #region CheckoutProgress
@@ -27,6 +30,11 @@ public class CheckoutController : Controller
     public async Task<IActionResult> Checkout(bool? addAddressFailed)
     {
         ViewBag.addAddressFailed = addAddressFailed ?? false;
+        var shoppingCartViewModel = await _checkoutBffService.GetShoppingCartViewModel(HttpContext.RequestAborted);
+        if (!shoppingCartViewModel.ShoppingCart.Items.Any())
+        {
+            return View("CheckoutEmpty");
+        }
         var myAddresses = await _userBffService.GetMyAddresses(HttpContext.RequestAborted);
         return View(myAddresses.Select(x => new AddressViewModel
         {
@@ -50,10 +58,11 @@ public class CheckoutController : Controller
         var selectedAddressIdStr = Request.Form["selectedAddress"].ToString();
         if (string.IsNullOrWhiteSpace(selectedAddressIdStr) || !Guid.TryParse(selectedAddressIdStr, out var selectedAddressId))
         {
-            return BadRequest();
+            return View("CheckoutError", _l["Checkout.Error.SelectedAddressEmpty"]?.ToString());
         }
 
-        // await _checkoutBffService.CreatePreOrder(selectedAddressId);
+        await _checkoutBffService.CreatePreOrder(selectedAddressId);
+        
         return View();
     }
 

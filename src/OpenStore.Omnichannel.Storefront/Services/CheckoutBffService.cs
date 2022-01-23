@@ -13,9 +13,7 @@ public class CheckoutBffService : BffService
     public CheckoutBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _apiClient = apiClient;
-     }
-
-
+    }
 
     public async Task CreateShoppingCartIfNotExists(CancellationToken cancellationToken = default)
     {
@@ -49,18 +47,6 @@ public class CheckoutBffService : BffService
     {
         var cartId = GetCartId();
         return _apiClient.Checkout.ChangeItemQuantityOfCart(cartId, itemId, quantity, cancellationToken);
-    }
-
-    private async Task BindCartToUser(CancellationToken cancellationToken = default)
-    {
-        var userId = GetUserId();
-        if (userId is null)
-        {
-            return;
-        }
-
-        var cartId = GetCartId();
-        await _apiClient.Checkout.BindCartToUser(cartId, userId.Value, cancellationToken);
     }
 
     public async Task<ShoppingCartViewModel> GetShoppingCartViewModel(CancellationToken cancellationToken = default)
@@ -183,5 +169,9 @@ public class CheckoutBffService : BffService
             SameSite = SameSiteMode.Strict,
             Expires = DateTimeOffset.UtcNow.AddDays(7)
         });
+    }
+
+    public async Task<Create> CreatePreOrder(Guid selectedAddressId)
+    {
     }
 }

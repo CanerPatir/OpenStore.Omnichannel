@@ -1,0 +1,24 @@
+@model string
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4"> @L["Checkout.Error.Header"]</h4>
+
+                @if (Model is not  null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        <p class="icontext">
+                            <i class="icon text-success fa fa-truck"></i>
+                            @Model
+                        </p>
+                    </div>
+                }
+       
+                <a asp-controller="Checkout" asp-action="Checkout" class="btn btn-light">
+                    <i class="fa fa-chevron-left"></i> @L["Checkout.Button.GoBackFirstStep"]
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
