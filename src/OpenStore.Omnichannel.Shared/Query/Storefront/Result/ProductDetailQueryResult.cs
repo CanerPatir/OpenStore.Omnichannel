@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
-public record ProductDetailResult(
+public record ProductDetailQueryResult(
     string Handle,
     Guid Id,
     string Title,

@@ -1,13 +1,13 @@
-using MediatR;
+using OpenStore.Omnichannel.Shared.Command;
 
 namespace OpenStore.Omnichannel.Domain.CheckoutContext;
 
-public record CreateShoppingCart(Guid? UserId) : IRequest<Guid>;
+public record CreateShoppingCart(Guid? UserId) : ICommand<Guid>;
 
-public record AddItemToCart(Guid CartId, Guid VariantId, int Quantity) : IRequest<Guid>;
+public record AddItemToCart(Guid CartId, Guid VariantId, int Quantity) : ICommand<Guid>;
 
-public record RemoveItemFromCart(Guid CartId, Guid CartItemId) : IRequest;
+public record RemoveItemFromCart(Guid CartId, Guid CartItemId) : ICommand;
 
-public record ChangeItemQuantityOfCart(Guid CartId, Guid CartItemId, int Quantity) : IRequest;
+public record ChangeItemQuantityOfCart(Guid CartId, Guid CartItemId, int Quantity) : ICommand;
 
-public record BindCartToUser(Guid CartId, Guid UserId) : IRequest;
+public record BindCartToUser(Guid CartId, Guid UserId) : ICommand;

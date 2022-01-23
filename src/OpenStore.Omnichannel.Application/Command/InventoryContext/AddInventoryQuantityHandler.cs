@@ -1,10 +1,9 @@
-using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 
 namespace OpenStore.Omnichannel.Application.Command.InventoryContext;
 
-public class AddInventoryQuantityHandler : AsyncRequestHandler<AddInventoryQuantity>
+public class AddInventoryQuantityHandler : CommandHandler<AddInventoryQuantity>
 {
     private readonly ICrudRepository<Inventory> _repository;
 
@@ -12,11 +11,11 @@ public class AddInventoryQuantityHandler : AsyncRequestHandler<AddInventoryQuant
     {
         _repository = repository;
     }
-    
+
     protected override async Task Handle(AddInventoryQuantity command, CancellationToken cancellationToken)
-    {       
+    {
         var inventory = await _repository.GetAsync(command.Id, cancellationToken);
-        
+
         inventory.AddQuantity(command);
 
         await _repository.SaveChangesAsync(cancellationToken);

@@ -1,10 +1,9 @@
-using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.CheckoutContext;
 
 namespace OpenStore.Omnichannel.Application.Command.CheckoutContext;
 
-public class ChangeItemQuantityOfCartHandler : AsyncRequestHandler<ChangeItemQuantityOfCart>
+public class ChangeItemQuantityOfCartHandler : CommandHandler<ChangeItemQuantityOfCart>
 {
     private readonly ICrudRepository<ShoppingCart> _repository;
 

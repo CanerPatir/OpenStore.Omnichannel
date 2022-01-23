@@ -50,11 +50,11 @@ public class CheckoutClient
         response.EnsureSuccessStatusCode();
     }
 
-    public async Task<ShoppingCartResult> GetCart(Guid cartId, CancellationToken cancellationToken = default)
+    public async Task<ShoppingCartQueryResult> GetCart(Guid cartId, CancellationToken cancellationToken = default)
     {
         try
         {
-            return await HttpClient.GetFromJsonAsync<ShoppingCartResult>($"{ShoppingCartPath}/{cartId}", cancellationToken);
+            return await HttpClient.GetFromJsonAsync<ShoppingCartQueryResult>($"{ShoppingCartPath}/{cartId}", cancellationToken);
         }
         catch (HttpRequestException e) when (e.StatusCode == HttpStatusCode.NotFound)
         {

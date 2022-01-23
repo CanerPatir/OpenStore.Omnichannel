@@ -12,7 +12,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Domain.StoreContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
-using OpenStore.Omnichannel.Shared.Dto.Management.Store;
+using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework;
 
@@ -81,7 +81,7 @@ internal static class ServiceCollectionExtensions
             cfg.CreateMap<ProductCollectionDto, ProductCollection>().ReverseMap();
             cfg.CreateMap<ProductCollectionMedia, ProductCollectionMediaDto>();
 
-            cfg.CreateMap<StorePreferencesDto, StorePreferences>().ReverseMap();
+            cfg.CreateMap<StorePreferencesQueryResult, StorePreferences>().ReverseMap();
             cfg.CreateMap<StorePreferencesContactDto, StorePreferencesContact>().ReverseMap();
         });
         return services;

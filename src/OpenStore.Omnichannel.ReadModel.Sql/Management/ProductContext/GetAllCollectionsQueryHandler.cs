@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
@@ -8,16 +7,16 @@ using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Management.ProductContext;
 
-public class GetAllCollectionsHandler : IRequestHandler<GetAllCollections, PagedList<CollectionListItemDto>>
+public class GetAllCollectionsQueryHandler : IQueryHandler<GetAllCollectionsQuery, PagedList<CollectionListItemDto>>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
 
-    public GetAllCollectionsHandler(ICrudRepository<ProductCollection> repository)
+    public GetAllCollectionsQueryHandler(ICrudRepository<ProductCollection> repository)
     {
         _repository = repository;
     }
     
-    public Task<PagedList<CollectionListItemDto>> Handle(GetAllCollections query, CancellationToken cancellationToken)
+    public Task<PagedList<CollectionListItemDto>> Handle(GetAllCollectionsQuery query, CancellationToken cancellationToken)
     {
         var pageRequest = query.PageRequest;
         var q = _repository.Query;

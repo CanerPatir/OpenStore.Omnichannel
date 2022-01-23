@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
+namespace OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
 
 public record InventoryListItemDto(
     Guid InventoryId,

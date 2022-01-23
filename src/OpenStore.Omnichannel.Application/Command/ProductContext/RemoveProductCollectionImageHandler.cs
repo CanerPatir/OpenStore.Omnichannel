@@ -1,10 +1,9 @@
-using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class RemoveProductCollectionImageHandler : AsyncRequestHandler<RemoveProductCollectionImage>
+public class RemoveProductCollectionImageHandler : CommandHandler<RemoveProductCollectionImage>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
     private readonly IObjectStorageService _objectStorageService;

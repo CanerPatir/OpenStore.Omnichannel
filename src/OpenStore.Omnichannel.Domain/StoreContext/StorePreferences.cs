@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Shared.Dto.Management.Store;
+using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.Domain.StoreContext;
 
@@ -12,7 +12,7 @@ public class StorePreferences : AuditableEntity
         Contact = new StorePreferencesContact();
     }
 
-    public void Update(StorePreferencesDto model)
+    public void Update(StorePreferencesQueryResult model)
     {
         Name = model.Name;
         Contact = new StorePreferencesContact

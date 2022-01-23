@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Application.Exceptions;
@@ -6,7 +5,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class RemoveProductCollectionItemHandler : AsyncRequestHandler<RemoveProductCollectionItem>
+public class RemoveProductCollectionItemHandler : CommandHandler<RemoveProductCollectionItem>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
 

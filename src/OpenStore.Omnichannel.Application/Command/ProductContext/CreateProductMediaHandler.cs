@@ -1,4 +1,3 @@
-using MediatR;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
@@ -6,7 +5,7 @@ using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class CreateProductMediaHandler : IRequestHandler<CreateProductMedia, IEnumerable<(ProductMediaDto, ProductMedia)>>
+public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEnumerable<(ProductMediaDto, ProductMedia)>>
 {
     private readonly ICrudRepository<ProductMedia> _repository;
     private readonly IOpenStoreObjectMapper _mapper;

@@ -1,10 +1,9 @@
-using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class MakeProductAsMultiVariantHandler : IRequestHandler<MakeProductAsMultiVariant, IEnumerable<Guid>>
+public class MakeProductAsMultiVariantHandler : ICommandHandler<MakeProductAsMultiVariant, IEnumerable<Guid>>
 {
     private readonly ICrudRepository<Product> _repository;
     private readonly ICrudRepository<Variant> _variantRepository;

@@ -1,23 +1,22 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext;
+using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
 using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Management.InventoryContext;
 
-public class GetAllInventoriesHandler : IRequestHandler<GetAllInventories, PagedList<InventoryListItemDto>>
+public class GetAllInventoriesQueryHandler : IQueryHandler<GetAllInventoriesQuery, PagedList<InventoryListItemDto>>
 {
     private readonly ICrudRepository<Variant> _repository;
 
-    public GetAllInventoriesHandler(ICrudRepository<Variant> repository)
+    public GetAllInventoriesQueryHandler(ICrudRepository<Variant> repository)
     {
         _repository = repository;
     }
 
-    public Task<PagedList<InventoryListItemDto>> Handle(GetAllInventories request, CancellationToken cancellationToken)
+    public Task<PagedList<InventoryListItemDto>> Handle(GetAllInventoriesQuery request, CancellationToken cancellationToken)
     {
         var pageRequest = request.PageRequest;
 

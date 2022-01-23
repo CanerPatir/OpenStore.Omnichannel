@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using OpenStore.Omnichannel.Shared.Dto.Management.Store;
+using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.Panel.Services;
 
@@ -11,7 +11,7 @@ public class StoreHttpStore : HttpStore
 
     protected override string Path => "api/store";
 
-    public Task<StorePreferencesDto> GetStorePreferences() => HttpClient.GetFromJsonAsync<StorePreferencesDto>($"{Path}/preferences");
+    public Task<StorePreferencesQueryResult> GetStorePreferences() => HttpClient.GetFromJsonAsync<StorePreferencesQueryResult>($"{Path}/preferences");
 
-    public Task UpdateStorePreferences(StorePreferencesDto model) => HttpClient.PutAsJsonAsync($"{Path}/preferences", model);
+    public Task UpdateStorePreferences(StorePreferencesQueryResult model) => HttpClient.PutAsJsonAsync($"{Path}/preferences", model);
 }

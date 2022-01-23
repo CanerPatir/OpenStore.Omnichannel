@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Query.Storefront;
@@ -7,7 +6,7 @@ using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Storefront;
 
-public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDetailByHandleQuery, ProductDetailResult>
+public class GetProductDetailByHandleQueryHandler : IQueryHandler<GetProductDetailByHandleQuery, ProductDetailQueryResult>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -16,7 +15,7 @@ public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDe
         _repository = repository;
     }
 
-    public async Task<ProductDetailResult> Handle(GetProductDetailByHandleQuery request, CancellationToken cancellationToken)
+    public async Task<ProductDetailQueryResult> Handle(GetProductDetailByHandleQuery request, CancellationToken cancellationToken)
     {
         var product = await _repository.Query
             .Include(x => x.Variants)
@@ -30,7 +29,7 @@ public class GetProductDetailByHandleQueryHandler : IRequestHandler<GetProductDe
             return null;
         }
 
-        return new ProductDetailResult(
+        return new ProductDetailQueryResult(
             product.Handle,
             product.Id,
             product.Title,

@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace OpenStore.Omnichannel.Domain;
 
 public interface IMediaEntity

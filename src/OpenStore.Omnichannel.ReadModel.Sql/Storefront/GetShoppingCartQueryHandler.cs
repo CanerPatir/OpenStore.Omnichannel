@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.CheckoutContext;
@@ -8,7 +7,7 @@ using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Storefront;
 
-public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery, ShoppingCartResult>
+public class GetShoppingCartQueryHandler : IQueryHandler<GetShoppingCartQuery, ShoppingCartQueryResult>
 {
     private readonly ICrudRepository<ShoppingCart> _repository;
     private readonly ICrudRepository<Variant> _variantRepository;
@@ -19,7 +18,7 @@ public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery,
         _variantRepository = variantRepository;
     }
 
-    public async Task<ShoppingCartResult> Handle(GetShoppingCartQuery query, CancellationToken cancellationToken)
+    public async Task<ShoppingCartQueryResult> Handle(GetShoppingCartQuery query, CancellationToken cancellationToken)
     {
         var shoppingCart = await _repository.Query.AsNoTracking().SingleOrDefaultAsync(x => x.Id == query.CartId, cancellationToken);
 
@@ -36,7 +35,7 @@ public class GetShoppingCartQueryHandler : IRequestHandler<GetShoppingCartQuery,
 
         var variants = await Task.WhenAll(getVariantsTasks);
 
-        return new ShoppingCartResult(
+        return new ShoppingCartQueryResult(
             shoppingCart.Id,
             shoppingCart.IsAuthenticated,
             shoppingCart.Items.Select(x =>

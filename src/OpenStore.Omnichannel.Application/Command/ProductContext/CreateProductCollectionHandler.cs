@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Domain;
@@ -6,7 +5,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class CreateProductCollectionHandler : IRequestHandler<CreateProductCollection, Guid>
+public class CreateProductCollectionHandler : ICommandHandler<CreateProductCollection, Guid>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
 

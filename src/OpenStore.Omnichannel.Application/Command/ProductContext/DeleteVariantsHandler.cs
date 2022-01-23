@@ -1,11 +1,10 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class DeleteVariantsHandler : IRequestHandler<DeleteVariants>
+public class DeleteVariantsHandler : CommandHandler<DeleteVariants>
 {
     private readonly ICrudRepository<Product> _repository;
     private readonly ICrudRepository<Variant> _variantRepository;
@@ -16,7 +15,7 @@ public class DeleteVariantsHandler : IRequestHandler<DeleteVariants>
         _variantRepository = variantRepository;
     }
 
-    public async Task<Unit> Handle(DeleteVariants command, CancellationToken cancellationToken)
+    protected override async Task Handle(DeleteVariants command, CancellationToken cancellationToken)
     {
         var (productId, variantIds) = command;
         var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == productId, cancellationToken);
@@ -27,7 +26,5 @@ public class DeleteVariantsHandler : IRequestHandler<DeleteVariants>
         }
 
         await _repository.SaveChangesAsync(cancellationToken);
-
-        return Unit.Value;
     }
 }

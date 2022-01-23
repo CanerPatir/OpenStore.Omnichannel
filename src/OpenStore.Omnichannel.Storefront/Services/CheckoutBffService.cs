@@ -97,13 +97,13 @@ public class CheckoutBffService : BffService
         return shoppingCart is not null;
     }
 
-    private async Task<ShoppingCartResult> GetCartInternal(Guid cartId, CancellationToken cancellationToken)
+    private async Task<ShoppingCartQueryResult> GetCartInternal(Guid cartId, CancellationToken cancellationToken)
     {
         // todo: remove this shit caching
         const string cacheKey = "shoppingCartViewModel";
         if (HttpContextCache.TryGetValue(cacheKey, out var cacheResult))
         {
-            return (ShoppingCartResult)cacheResult;
+            return (ShoppingCartQueryResult)cacheResult;
         }
 
         var shoppingCartResult = await _apiClient.Checkout.GetCart(cartId, cancellationToken);
@@ -171,7 +171,7 @@ public class CheckoutBffService : BffService
         });
     }
 
-    public async Task<Create> CreatePreOrder(Guid selectedAddressId)
+    public async Task CreatePreOrder(Guid selectedAddressId)
     {
     }
 }

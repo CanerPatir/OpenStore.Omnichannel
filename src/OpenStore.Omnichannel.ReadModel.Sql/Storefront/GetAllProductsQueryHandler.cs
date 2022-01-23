@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
@@ -7,7 +6,7 @@ using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Storefront;
 
-public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, AllProductsResult>
+public class GetAllProductsQueryHandler : IQueryHandler<GetAllProductsQuery, AllProductsQueryResult>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -16,7 +15,7 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
         _repository = repository;
     }
 
-    public async Task<AllProductsResult> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
+    public async Task<AllProductsQueryResult> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
     {
         var (batchSize, firstIndex) = query;
 
@@ -28,7 +27,7 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, A
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new AllProductsResult(products.Select(x => new ProductItemDto(
+        return new AllProductsQueryResult(products.Select(x => new ProductItemDto(
             x.Id,
             x.Title,
             x.FirstMedia?.Url,

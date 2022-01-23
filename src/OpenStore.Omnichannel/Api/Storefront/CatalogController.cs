@@ -18,12 +18,12 @@ public class CatalogController : BaseApiController
     }
 
     [HttpGet("product/{handle}")]
-    public Task<ProductDetailResult> GetProductDetail(string handle) => _mediator.Send(new GetProductDetailByHandleQuery(handle), CancellationToken);
+    public Task<ProductDetailQueryResult> GetProductDetail(string handle) => _mediator.Send(new GetProductDetailByHandleQuery(handle), CancellationToken);
 
     [HttpGet("all/{batchSize:int}/{firstIndex:int}")]
-    public Task<AllProductsResult> GetAllProducts(int batchSize, int firstIndex) => _mediator.Send(new GetAllProductsQuery(batchSize, firstIndex), CancellationToken);
+    public Task<AllProductsQueryResult> GetAllProducts(int batchSize, int firstIndex) => _mediator.Send(new GetAllProductsQuery(batchSize, firstIndex), CancellationToken);
 
     [HttpGet("collection/{id:guid}/{batchSize:int}/{firstIndex:int}")]
-    public Task<CollectionProductsResult> GetCollectionProducts(Guid id, int batchSize, int firstIndex) =>
+    public Task<CollectionProductsQueryResult> GetCollectionProducts(Guid id, int batchSize, int firstIndex) =>
         _mediator.Send(new GetCollectionProductsQuery(id, batchSize, firstIndex), CancellationToken);
 }

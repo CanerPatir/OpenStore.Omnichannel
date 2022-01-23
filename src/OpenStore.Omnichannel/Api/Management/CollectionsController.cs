@@ -23,14 +23,14 @@ public class CollectionsController : BaseApiController
     
     [HttpGet]
     public Task<PagedList<CollectionListItemDto>> GetAllProductCollections([FromQuery] PageRequestQueryModel pageRequest)
-        => _mediator.Send(new GetAllCollections(pageRequest), CancellationToken);
+        => _mediator.Send(new GetAllCollectionsQuery(pageRequest), CancellationToken);
     
     [HttpPost]
     public Task<Guid> Create(ProductCollectionDto model)
         => _mediator.Send(new CreateProductCollection(model), CancellationToken);
     
     [HttpGet("{id:guid}")]
-    public Task<ProductCollectionDto> GetProductCollection(Guid id) => _mediator.Send(new GetProductCollectionForUpdate(id), CancellationToken);
+    public Task<ProductCollectionDto> GetProductCollection(Guid id) => _mediator.Send(new GetProductCollectionForUpdateQuery(id), CancellationToken);
     
     [HttpPut("{id:guid}")]
     public Task UpdateProductCollection(Guid id, ProductCollectionDto model) => _mediator.Send(new UpdateProductCollection(id, model), CancellationToken);
@@ -39,11 +39,11 @@ public class CollectionsController : BaseApiController
     public Task DeleteProductCollection(Guid id) => _mediator.Send(new DeleteProductCollection(id), CancellationToken);
     
     [HttpGet("{id:guid}/items")]
-    public Task<IEnumerable<ProductCollectionItemDto>> GetProductCollectionItems(Guid id) => _mediator.Send(new GetProductCollectionItems(id), CancellationToken);
+    public Task<IEnumerable<ProductCollectionItemDto>> GetProductCollectionItems(Guid id) => _mediator.Send(new GetProductCollectionItemsQuery(id), CancellationToken);
     
     [HttpGet("{id:guid}/eligible-items")]
     public Task<IEnumerable<ProductCollectionItemDto>> GetProductCollectionEligibleItems(Guid id, [FromQuery] string term) 
-        => _mediator.Send(new GetProductCollectionEligibleItems(id, term), CancellationToken);
+        => _mediator.Send(new GetProductCollectionEligibleItemsQuery(id, term), CancellationToken);
 
     [HttpPost("{id:guid}/items")]
     public Task AddItemsToCollection(Guid id, IEnumerable<Guid> productIds) => _mediator.Send(new AddItemsToCollection(id, productIds), CancellationToken);

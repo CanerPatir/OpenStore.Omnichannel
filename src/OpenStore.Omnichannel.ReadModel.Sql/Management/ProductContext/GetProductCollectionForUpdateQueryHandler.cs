@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
@@ -9,18 +8,18 @@ using OpenStore.Omnichannel.Shared.Query.Management.ProductContext;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Management.ProductContext;
 
-public class GetProductCollectionForUpdateHandler : IRequestHandler<GetProductCollectionForUpdate, ProductCollectionDto>
+public class GetProductCollectionForUpdateQueryHandler : IQueryHandler<GetProductCollectionForUpdateQuery, ProductCollectionDto>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
     private readonly IOpenStoreObjectMapper _mapper;
 
-    public GetProductCollectionForUpdateHandler(ICrudRepository<ProductCollection> repository, IOpenStoreObjectMapper mapper)
+    public GetProductCollectionForUpdateQueryHandler(ICrudRepository<ProductCollection> repository, IOpenStoreObjectMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
     }
 
-    public async Task<ProductCollectionDto> Handle(GetProductCollectionForUpdate request, CancellationToken cancellationToken)
+    public async Task<ProductCollectionDto> Handle(GetProductCollectionForUpdateQuery request, CancellationToken cancellationToken)
     {
         var product = await _repository.Query
             .AsNoTracking()

@@ -2,13 +2,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
-using OpenStore.Omnichannel.Shared.Dto;
-using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class AssignProductMediaHandler : IRequestHandler<AssignProductMedia, IEnumerable<ProductMediaDto>>
+public class AssignProductMediaHandler : ICommandHandler<AssignProductMedia, IEnumerable<ProductMediaDto>>
 {
     private readonly IMediator _mediator;
     private readonly ICrudRepository<Product> _repository;

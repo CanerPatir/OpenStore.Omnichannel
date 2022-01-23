@@ -39,23 +39,23 @@ public class ProductsController : BaseApiController
     public Task DeleteProduct(Guid id) => _mediator.Send(new DeleteProduct(id), CancellationToken);
 
     [HttpGet("{id:guid}")]
-    public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdate(id), CancellationToken);
+    public Task<ProductDto> GetProduct(Guid id) => _mediator.Send(new GetProductForUpdateQuery(id), CancellationToken);
 
     [HttpGet("all")]
     public Task<PagedList<ProductListItemDto>> GetAllProducts([FromQuery] PageRequestQueryModel pageRequest)
-        => _mediator.Send(new GetAllProducts(pageRequest, null), CancellationToken);
+        => _mediator.Send(new GetAllProductsQuery(pageRequest, null), CancellationToken);
 
     [HttpGet("active")]
     public Task<PagedList<ProductListItemDto>> GetActiveProducts([FromQuery] PageRequestQueryModel pageRequest)
-        => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Active), CancellationToken);
+        => _mediator.Send(new GetAllProductsQuery(pageRequest, ProductStatus.Active), CancellationToken);
 
     [HttpGet("draft")]
     public Task<PagedList<ProductListItemDto>> GetDraftProducts([FromQuery] PageRequestQueryModel pageRequest)
-        => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Draft), CancellationToken);
+        => _mediator.Send(new GetAllProductsQuery(pageRequest, ProductStatus.Draft), CancellationToken);
 
     [HttpGet("archived")]
     public Task<PagedList<ProductListItemDto>> GetArchivedProducts([FromQuery] PageRequestQueryModel pageRequest)
-        => _mediator.Send(new GetAllProducts(pageRequest, ProductStatus.Archived), CancellationToken);
+        => _mediator.Send(new GetAllProductsQuery(pageRequest, ProductStatus.Archived), CancellationToken);
 
     [HttpPost("{id:guid}/assign-media")]
     public Task<IEnumerable<ProductMediaDto>> AssignProductMedia(Guid id, IEnumerable<FileUploadDto> model) =>

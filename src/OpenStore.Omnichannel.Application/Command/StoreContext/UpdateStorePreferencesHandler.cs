@@ -1,11 +1,10 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.StoreContext;
 
 namespace OpenStore.Omnichannel.Application.Command.StoreContext;
 
-public class UpdateStorePreferencesHandler : IRequestHandler<UpdateStorePreferences>
+public class UpdateStorePreferencesHandler : CommandHandler<UpdateStorePreferences>
 {
     private readonly ICrudRepository<StorePreferences> _repository;
 
@@ -14,14 +13,12 @@ public class UpdateStorePreferencesHandler : IRequestHandler<UpdateStorePreferen
         _repository = repository;
     }
 
-    public async Task<Unit> Handle(UpdateStorePreferences request, CancellationToken cancellationToken)
+    protected override async Task Handle(UpdateStorePreferences request, CancellationToken cancellationToken)
     {
         var storePreferences = await _repository.Query.FirstOrDefaultAsync(cancellationToken);
 
         storePreferences.Update(request.Model);
         await _repository.UpdateAsync(storePreferences, cancellationToken);
         await _repository.SaveChangesAsync(cancellationToken);
-
-        return Unit.Value;
     }
 }

@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Domain;
@@ -6,7 +5,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class UpdateProductCollectionHandler : IRequestHandler<UpdateProductCollection>
+public class UpdateProductCollectionHandler : CommandHandler<UpdateProductCollection>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
 
@@ -15,7 +14,7 @@ public class UpdateProductCollectionHandler : IRequestHandler<UpdateProductColle
         _repository = repository;
     }
 
-    public async Task<Unit> Handle(UpdateProductCollection command, CancellationToken cancellationToken)
+    protected override async Task Handle(UpdateProductCollection command, CancellationToken cancellationToken)
     {
         var productCollection = await _repository.GetAsync(command.ProductCollectionId, cancellationToken);
         if (productCollection.Handle != command.Model.Handle)
@@ -28,7 +27,5 @@ public class UpdateProductCollectionHandler : IRequestHandler<UpdateProductColle
         productCollection.Update(command);
 
         await _repository.SaveChangesAsync(cancellationToken);
-
-        return Unit.Value;
     }
 }

@@ -1,12 +1,10 @@
-using MediatR;
-using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class ChangeProductCollectionImageHandler : IRequestHandler<ChangeProductCollectionImage, ProductCollectionMediaDto>
+public class ChangeProductCollectionImageHandler : ICommandHandler<ChangeProductCollectionImage, ProductCollectionMediaDto>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
     private readonly IObjectStorageService _objectStorageService;

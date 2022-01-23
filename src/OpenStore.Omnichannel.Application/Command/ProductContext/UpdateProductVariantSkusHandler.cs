@@ -1,11 +1,10 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class UpdateProductVariantSkusHandler : IRequestHandler<UpdateProductVariantSkus>
+public class UpdateProductVariantSkusHandler : CommandHandler<UpdateProductVariantSkus>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -14,11 +13,10 @@ public class UpdateProductVariantSkusHandler : IRequestHandler<UpdateProductVari
         _repository = repository;
     }
 
-    public async Task<Unit> Handle(UpdateProductVariantSkus command, CancellationToken cancellationToken)
+    protected override async Task Handle(UpdateProductVariantSkus command, CancellationToken cancellationToken)
     {
         var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == command.ProductId, cancellationToken);
         product.UpdateVariantSkus(command);
         await _repository.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
     }
 }

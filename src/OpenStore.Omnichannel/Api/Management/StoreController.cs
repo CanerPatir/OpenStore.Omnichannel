@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Domain.StoreContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
-using OpenStore.Omnichannel.Shared.Dto.Management.Store;
 using OpenStore.Omnichannel.Shared.Query.Management.StoreContext;
+using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.Api.Management;
 
@@ -20,8 +20,8 @@ public class StoreController : BaseApiController
     }
 
     [HttpGet("preferences")]
-    public Task<StorePreferencesDto> GetStorePreferences() => _mediator.Send(new GetStorePreferences(), CancellationToken);
+    public Task<StorePreferencesQueryResult> GetStorePreferences() => _mediator.Send(new GetStorePreferencesQuery(), CancellationToken);
 
     [HttpPut("preferences")]
-    public Task UpdateStorePreferences(StorePreferencesDto model) => _mediator.Send(new UpdateStorePreferences(model), CancellationToken);
+    public Task UpdateStorePreferences(StorePreferencesQueryResult model) => _mediator.Send(new UpdateStorePreferences(model), CancellationToken);
 }

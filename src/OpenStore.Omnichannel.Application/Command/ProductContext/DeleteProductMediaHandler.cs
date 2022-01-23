@@ -1,10 +1,9 @@
-using MediatR;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class DeleteProductMediaHandler : IRequestHandler<DeleteProductMedia>
+public class DeleteProductMediaHandler : CommandHandler<DeleteProductMedia>
 {
     private readonly ICrudRepository<Product> _repository;
     private readonly ICrudRepository<ProductMedia> _productMediaRepository;
@@ -21,7 +20,7 @@ public class DeleteProductMediaHandler : IRequestHandler<DeleteProductMedia>
         _objectStorageService = objectStorageService;
     }
 
-    public async Task<Unit> Handle(DeleteProductMedia command, CancellationToken cancellationToken)
+    protected override async Task Handle(DeleteProductMedia command, CancellationToken cancellationToken)
     {
         var product = await _repository.GetAsync(command.Id, cancellationToken);
         product.DeleteMedia(command);
@@ -34,7 +33,5 @@ public class DeleteProductMediaHandler : IRequestHandler<DeleteProductMedia>
 #pragma warning disable 4014
         _objectStorageService.Delete(productMedia.Host, productMedia.Path);
 #pragma warning restore 4014
-
-        return Unit.Value;
     }
 }

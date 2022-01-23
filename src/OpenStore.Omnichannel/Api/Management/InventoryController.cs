@@ -3,8 +3,8 @@ using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Omnichannel.Domain.InventoryContext;
-using OpenStore.Omnichannel.Shared.Dto.Management.Inventory;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext;
+using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
 using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.Api.Management;
@@ -22,7 +22,7 @@ public class InventoryController : BaseApiController
 
     [HttpGet("all")]
     public Task<PagedList<InventoryListItemDto>> GetAllProducts([FromQuery] PageRequestQueryModel pageRequest)
-        => _mediator.Send(new GetAllInventories(pageRequest), CancellationToken);
+        => _mediator.Send(new GetAllInventoriesQuery(pageRequest), CancellationToken);
 
     [HttpPost("{id:guid}/add-stock/{quantity:int}")]
     public Task AddStock(Guid id, int quantity) => _mediator.Send(new AddInventoryQuantity(id, quantity), CancellationToken);

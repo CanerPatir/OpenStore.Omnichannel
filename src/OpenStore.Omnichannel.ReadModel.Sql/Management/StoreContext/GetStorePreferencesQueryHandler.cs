@@ -1,25 +1,24 @@
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.StoreContext;
-using OpenStore.Omnichannel.Shared.Dto.Management.Store;
 using OpenStore.Omnichannel.Shared.Query.Management.StoreContext;
+using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.ReadModel.Sql.Management.StoreContext;
 
-public class GetStorePreferencesHandler : IRequestHandler<GetStorePreferences, StorePreferencesDto>
+public class GetStorePreferencesQueryHandler : IQueryHandler<GetStorePreferencesQuery, StorePreferencesQueryResult>
 {
     private readonly ICrudRepository<StorePreferences> _repository;
     private readonly IOpenStoreObjectMapper _mapper;
 
-    public GetStorePreferencesHandler(ICrudRepository<StorePreferences> repository, IOpenStoreObjectMapper mapper)
+    public GetStorePreferencesQueryHandler(ICrudRepository<StorePreferences> repository, IOpenStoreObjectMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
     }
 
-    public async Task<StorePreferencesDto> Handle(GetStorePreferences request, CancellationToken cancellationToken)
+    public async Task<StorePreferencesQueryResult> Handle(GetStorePreferencesQuery request, CancellationToken cancellationToken)
     {
         var storePreferences = await _repository.Query.FirstOrDefaultAsync(cancellationToken);
         if (storePreferences is null)
@@ -29,6 +28,6 @@ public class GetStorePreferencesHandler : IRequestHandler<GetStorePreferences, S
             await _repository.SaveChangesAsync(cancellationToken);
         }
 
-        return _mapper.Map<StorePreferencesDto>(storePreferences);
+        return _mapper.Map<StorePreferencesQueryResult>(storePreferences);
     }
 }
