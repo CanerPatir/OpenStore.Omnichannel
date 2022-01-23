@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 

@@ -1,5 +1,6 @@
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.CheckoutContext;
+using OpenStore.Omnichannel.Shared.Command.CheckoutContext;
 
 namespace OpenStore.Omnichannel.Application.Command.CheckoutContext;
 

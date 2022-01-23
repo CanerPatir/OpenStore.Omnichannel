@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
-using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
@@ -20,9 +20,6 @@ public class MediaController : BaseApiController
     }
 
     [HttpPost("product")]
-    public async Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> model)
-    {
-        var result = await _mediator.Send(new CreateProductMedia(model), CancellationToken);
-        return result.Select(x => x.dto);
-    }
+    public async Task<IEnumerable<ProductMediaDto>> UploadProductMedia(IEnumerable<FileUploadDto> model) 
+        => await _mediator.Send(new CreateProductMedia(model), CancellationToken);
 }

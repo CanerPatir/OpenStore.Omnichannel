@@ -1,9 +1,7 @@
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
 using OpenStore.Data.OutBox;
 using OpenStore.Infrastructure.Messaging;
-using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.DomainEvents.ProductContext;
 
 namespace OpenStore.Omnichannel.Projections;
 

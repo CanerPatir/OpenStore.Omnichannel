@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Request;
+using OpenStore.Omnichannel.Shared.Request.ProductContext;
 using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.Panel.Services;

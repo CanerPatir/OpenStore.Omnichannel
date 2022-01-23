@@ -1,6 +1,4 @@
-using OpenStore.Omnichannel.Shared.Command;
-
-namespace OpenStore.Omnichannel.Domain.InventoryContext;
+namespace OpenStore.Omnichannel.Shared.Command.InventoryContext;
 
 public record SetInventoryQuantity(Guid Id, int Quantity) : ICommand;
 

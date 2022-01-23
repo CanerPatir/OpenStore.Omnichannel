@@ -1,5 +1,7 @@
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.Command.InventoryContext;
+using OpenStore.Omnichannel.Shared.DomainEvents.InventoryContext;
 
 namespace OpenStore.Omnichannel.Domain.InventoryContext;
 

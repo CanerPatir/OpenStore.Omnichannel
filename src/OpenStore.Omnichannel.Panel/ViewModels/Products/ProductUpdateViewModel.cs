@@ -1,6 +1,7 @@
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Request;
+using OpenStore.Omnichannel.Shared.Request.ProductContext;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Products;
 

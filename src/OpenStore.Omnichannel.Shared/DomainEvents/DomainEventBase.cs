@@ -1,6 +1,9 @@
 using OpenStore.Domain;
 
-// ReSharper disable once CheckNamespace
-namespace OpenStore.Omnichannel.Domain;
+namespace OpenStore.Omnichannel.Shared.DomainEvents;
 
+/// <summary>
+/// Represents Open Store domain events
+/// </summary>
+/// <param name="EntityId">Aggregate id</param>
 public abstract record DomainEventBase(Guid EntityId) : DomainEvent(EntityId.ToString());

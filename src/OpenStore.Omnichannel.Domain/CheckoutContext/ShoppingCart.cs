@@ -1,4 +1,5 @@
 using OpenStore.Domain;
+using OpenStore.Omnichannel.Shared.Command.CheckoutContext;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global

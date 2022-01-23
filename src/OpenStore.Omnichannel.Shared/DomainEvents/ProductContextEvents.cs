@@ -1,7 +1,7 @@
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 // ReSharper disable once CheckNamespace
-namespace OpenStore.Omnichannel.Domain.ProductContext;
+namespace OpenStore.Omnichannel.Shared.DomainEvents.ProductContext;
 
 public record ProductMediaCreated(
     Guid ProductMediaId,

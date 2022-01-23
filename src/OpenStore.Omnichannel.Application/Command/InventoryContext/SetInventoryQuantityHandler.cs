@@ -1,5 +1,6 @@
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.InventoryContext;
+using OpenStore.Omnichannel.Shared.Command.InventoryContext;
 
 namespace OpenStore.Omnichannel.Application.Command.InventoryContext;
 

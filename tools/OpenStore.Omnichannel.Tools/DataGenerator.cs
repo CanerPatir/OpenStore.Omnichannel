@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Tools;

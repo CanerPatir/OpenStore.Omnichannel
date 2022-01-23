@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
@@ -10,11 +11,15 @@ public class AssignProductMediaHandler : ICommandHandler<AssignProductMedia, IEn
 {
     private readonly IMediator _mediator;
     private readonly ICrudRepository<Product> _repository;
+    private readonly ICrudRepository<ProductMedia> _productMediaRepository;
 
-    public AssignProductMediaHandler(IMediator mediator, ICrudRepository<Product> repository)
+    public AssignProductMediaHandler(IMediator mediator
+        , ICrudRepository<Product> repository
+        , ICrudRepository<ProductMedia> productMediaRepository)
     {
         _mediator = mediator;
         _repository = repository;
+        _productMediaRepository = productMediaRepository;
     }
 
     public async Task<IEnumerable<ProductMediaDto>> Handle(AssignProductMedia command, CancellationToken cancellationToken)
@@ -25,12 +30,13 @@ public class AssignProductMediaHandler : ICommandHandler<AssignProductMedia, IEn
             .Include(x => x.Medias)
             .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
-        foreach (var (dto, productMedia) in list)
+        foreach (var dto in list)
         {
+            var productMedia = await _productMediaRepository.GetAsync(dto.Id, cancellationToken);
             product.AssignAttachedMedia(productMedia, dto);
         }
 
         await _repository.SaveChangesAsync(cancellationToken);
-        return list.Select(x => x.dto);
+        return list;
     }
 }

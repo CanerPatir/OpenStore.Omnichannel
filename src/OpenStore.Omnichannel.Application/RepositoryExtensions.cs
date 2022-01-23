@@ -4,7 +4,7 @@ using OpenStore.Domain;
 
 namespace OpenStore.Omnichannel.Application;
 
-internal static class RepositoryQueryExtensions
+internal static class RepositoryExtensions
 {
     public static async Task<T> GetRequired<T>(this ICrudRepository<T> repository, Guid id, CancellationToken cancellationToken = default)
         where T : class, IEntity

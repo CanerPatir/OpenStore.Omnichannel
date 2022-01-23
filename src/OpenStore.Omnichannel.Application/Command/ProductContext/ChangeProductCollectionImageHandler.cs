@@ -1,5 +1,6 @@
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;

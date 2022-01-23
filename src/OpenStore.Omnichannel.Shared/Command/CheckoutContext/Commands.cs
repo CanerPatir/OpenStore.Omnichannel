@@ -1,6 +1,4 @@
-using OpenStore.Omnichannel.Shared.Command;
-
-namespace OpenStore.Omnichannel.Domain.CheckoutContext;
+namespace OpenStore.Omnichannel.Shared.Command.CheckoutContext;
 
 public record CreateShoppingCart(Guid? UserId) : ICommand<Guid>;
 

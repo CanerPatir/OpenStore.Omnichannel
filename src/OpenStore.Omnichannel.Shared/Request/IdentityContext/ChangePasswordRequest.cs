@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OpenStore.Omnichannel.Shared.Request;
+namespace OpenStore.Omnichannel.Shared.Request.IdentityContext;
 
 public class ChangePasswordRequest
 {

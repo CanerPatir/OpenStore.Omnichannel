@@ -3,6 +3,7 @@ using OpenStore.Infrastructure.Web;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Omnichannel.Domain.InventoryContext;
+using OpenStore.Omnichannel.Shared.Command.InventoryContext;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
 using OpenStore.Shared;

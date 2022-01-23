@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using OpenStore.Domain;
 using OpenStore.Omnichannel.Domain.InventoryContext;
+using OpenStore.Omnichannel.Shared.DomainEvents.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 // ReSharper disable ReturnTypeCanBeEnumerable.Global

@@ -1,11 +1,5 @@
-using System;
-using Confluent.Kafka;
-using Confluent.Kafka.Admin;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OpenStore.Data.OutBox;
-using OpenStore.Data.Search.ElasticSearch;
-using OpenStore.Infrastructure.Messaging.Kafka;
 
 namespace OpenStore.Omnichannel.Projections;
 

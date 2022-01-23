@@ -1,9 +1,9 @@
-using MediatR;
-using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.DomainEvents;
+using OpenStore.Omnichannel.Shared.DomainEvents.ProductContext;
 
 namespace OpenStore.Omnichannel.Projections.EventHandlers;
 
-public class ProductCreatedHandler : NotificationHandler<ProductCreated>
+public class ProductCreatedHandler : DomainEventHandler<ProductCreated>
 {
     protected override void Handle(ProductCreated notification)
     {

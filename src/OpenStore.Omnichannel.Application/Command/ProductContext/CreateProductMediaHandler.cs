@@ -1,11 +1,12 @@
 using OpenStore.Application;
 using OpenStore.Application.Crud;
 using OpenStore.Omnichannel.Domain.ProductContext;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEnumerable<(ProductMediaDto, ProductMedia)>>
+public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEnumerable<ProductMediaDto>>
 {
     private readonly ICrudRepository<ProductMedia> _repository;
     private readonly IOpenStoreObjectMapper _mapper;
@@ -22,7 +23,7 @@ public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEn
         _objectStorageService = objectStorageService;
     }
 
-    public async Task<IEnumerable<(ProductMediaDto, ProductMedia)>> Handle(CreateProductMedia command, CancellationToken cancellationToken)
+    public async Task<IEnumerable<ProductMediaDto>> Handle(CreateProductMedia command, CancellationToken cancellationToken)
     {
         var mediasTasks = command.Uploads.Select(async x =>
         {
@@ -39,7 +40,7 @@ public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEn
 
         await _repository.SaveChangesAsync(cancellationToken);
 
-        return medias.Select(x => (_mapper.Map<ProductMediaDto>(x), x));
+        return medias.Select(x => _mapper.Map<ProductMediaDto>(x));
     }
 
     private static string FileNameStrategy(string fileName) =>

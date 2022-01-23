@@ -1,10 +1,9 @@
-using OpenStore.Omnichannel.Shared.Command;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
-namespace OpenStore.Omnichannel.Domain.ProductContext;
+namespace OpenStore.Omnichannel.Shared.Command.ProductContext;
 
-public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : ICommand<IEnumerable<(ProductMediaDto dto, ProductMedia model)>>;
+public record CreateProductMedia(IEnumerable<FileUploadDto> Uploads) : ICommand<IEnumerable<ProductMediaDto>>;
 
 public record AssignProductMedia(Guid Id, IEnumerable<FileUploadDto> Uploads) : ICommand<IEnumerable<ProductMediaDto>>;
 

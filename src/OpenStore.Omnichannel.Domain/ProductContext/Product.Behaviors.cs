@@ -1,4 +1,6 @@
 using OpenStore.Domain;
+using OpenStore.Omnichannel.Shared.Command.ProductContext;
+using OpenStore.Omnichannel.Shared.DomainEvents.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 namespace OpenStore.Omnichannel.Domain.ProductContext;

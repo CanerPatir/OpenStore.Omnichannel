@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
-using OpenStore.Omnichannel.Shared.Query;
 using OpenStore.Omnichannel.Shared.Query.Storefront;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 

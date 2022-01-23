@@ -1,3 +1,4 @@
+using OpenStore.Omnichannel.Shared.DomainEvents.StoreContext;
 using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.Domain.StoreContext;

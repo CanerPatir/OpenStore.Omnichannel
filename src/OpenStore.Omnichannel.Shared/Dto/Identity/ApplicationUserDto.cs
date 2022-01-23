@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OpenStore.Omnichannel.Shared.Dto.Management;
+namespace OpenStore.Omnichannel.Shared.Dto.Identity;
 
 public class ApplicationUserDto
 {

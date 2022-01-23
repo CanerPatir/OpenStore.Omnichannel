@@ -1,3 +1,4 @@
+using OpenStore.Omnichannel.Shared.DomainEvents.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
 // ReSharper disable CollectionNeverUpdated.Local

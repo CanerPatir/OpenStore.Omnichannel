@@ -1,6 +1,5 @@
-using OpenStore.Omnichannel.Shared.Command;
 using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
-namespace OpenStore.Omnichannel.Domain.StoreContext;
+namespace OpenStore.Omnichannel.Shared.Command.StoreContext;
 
 public record UpdateStorePreferences(StorePreferencesQueryResult Model) : ICommand;

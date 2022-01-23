@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Shared.Request;
+namespace OpenStore.Omnichannel.Shared.Request.ProductContext;
 
 public record UpdateVariantStocksRequest(IEnumerable<UpdateVariantStockRequest> Variants);
 
