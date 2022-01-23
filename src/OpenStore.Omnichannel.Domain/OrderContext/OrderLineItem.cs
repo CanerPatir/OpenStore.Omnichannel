@@ -4,8 +4,11 @@ public class OrderLineItem : AuditableEntity
 {
     public Guid ProductId { get; protected set; }
     public Guid VariantId { get; protected set; }
-    
+
+    public OrderLineItemStatus Status { get; protected set; }
+
     public string Sku { get; protected set; }
+    public string Barcode { get; protected set; }
     public string Name { get; protected set; }
     public int Grams { get; protected set; }
     public string Title { get; protected set; }
@@ -20,5 +23,4 @@ public class OrderLineItem : AuditableEntity
     public Refund Refund { get; protected set; }
     public Shipping Shipping { get; protected set; }
     public List<TaxLine> TaxLines { get; protected set; }
- }
- 
+}

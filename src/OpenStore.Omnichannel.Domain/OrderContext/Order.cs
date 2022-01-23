@@ -21,7 +21,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     public PriceInfo TotalTax { get; protected set; }
     public List<DiscountCode> DiscountCodes { get; protected set; }
     public List<OrderLineItem> LineItems { get; protected set; }
-    public List<OrderHistoryItem> HistoryItems { get; protected set; }
+    public List<OrderTimelineItem> Timeline { get; protected set; }
     public string Notes { get; protected set; }
 
     #region auditable members

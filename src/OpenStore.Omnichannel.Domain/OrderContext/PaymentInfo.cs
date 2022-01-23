@@ -7,5 +7,4 @@ public class PaymentInfo
     public string CvvResultCode { get; set; }
     public string CreditCardNumber { get; set; }
     public string CreditCardCompany { get; set; }
-    
 }
