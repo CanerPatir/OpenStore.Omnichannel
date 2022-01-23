@@ -57,3 +57,8 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 - QueryHandler -> handler of any type of query. Either goes write model or read model. Can be used to supply inversion of dependency. 
 - ViewModel (MVC - StoreFront) -> Minimum required data to render MVC view. Should be immutable
 - ViewModel (MVVM - Panel) -> 
+
+
+## Inspiration
+- https://www.akinon.com/
+- 
