@@ -1,10 +1,11 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public enum PaymentStatus
+public enum FinancialStatus
 {
+    Pending,
     Paid,
     Voided,
-    Pending,
     Refunded,
-    PartiallyRefunded
+    PartiallyRefunded,
+    InvoiceSent
 }

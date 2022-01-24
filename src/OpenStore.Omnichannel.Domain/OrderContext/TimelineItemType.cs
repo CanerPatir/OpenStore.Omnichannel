@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public enum OrderTimelineItemType
+public enum TimelineItemType
 {
     Log,
     Comment

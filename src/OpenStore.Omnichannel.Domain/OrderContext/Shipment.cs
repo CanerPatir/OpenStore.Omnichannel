@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public class Shipping
+public class Shipment
 {
     public string Title { get; set; }
     public string Source { get; set; }

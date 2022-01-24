@@ -1,8 +1,13 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public class Fulfillment
+public class Fulfillment : AuditableEntity
 {
-    public DateTime CreatedAt { get; set; }
-    public DateTime UpdatedAt { get; set; }
+    public Guid OrderId { get; protected set; }
+    public virtual Order Order { get; protected set; }
 
+    public virtual List<FulfillmentItem> FulfillmentItems { get; protected set; }
+
+    public string TrackingNumber { get; protected set; }
+    public string CarrierIdentifier { get; protected set; }
+    public FulfillmentStatus Status { get; protected set; }
 }
