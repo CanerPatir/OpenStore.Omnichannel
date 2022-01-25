@@ -9,6 +9,7 @@ using OpenStore.Omnichannel.Domain.CheckoutContext;
 using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Domain.LookupContext;
+using OpenStore.Omnichannel.Domain.OrderContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
@@ -44,9 +45,12 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
     public DbSet<Category> Categories { get; set; }
     public DbSet<CategoryMedia> CategoryMedias { get; set; }
     public DbSet<CategoryProduct> CategoryProducts { get; set; }
-    
+
     public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
     public DbSet<ApplicationUserAddress> UserAddresses { get; set; }
+
+    // Oms Context
+    public DbSet<Order> Orders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

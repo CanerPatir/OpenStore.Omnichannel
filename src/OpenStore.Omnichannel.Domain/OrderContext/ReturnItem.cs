@@ -1,5 +1,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable CollectionNeverUpdated.Local
+// ReSharper disable ReturnTypeCanBeEnumerable.Global
+
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
 public class ReturnItem : AuditableEntity

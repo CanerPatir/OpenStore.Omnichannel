@@ -38,6 +38,11 @@ public static class Msg
             public const string ShoppingCartAlreadyContainsTheGivenVariant = nameof(Domain) + _ + nameof(ShoppingCartAlreadyContainsTheGivenVariant);
             public const string ShoppingCartItemNotFound = nameof(Domain) + _ + nameof(ShoppingCartItemNotFound);
         }
+        
+        public static class Order
+        {
+            public const string TrackingInfoAlreadyExits = nameof(Domain) + _ + nameof(TrackingInfoAlreadyExits);
+        }
     }
 
     public static class Application

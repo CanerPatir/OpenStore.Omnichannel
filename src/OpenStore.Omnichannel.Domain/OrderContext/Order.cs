@@ -1,6 +1,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using OpenStore.Domain;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable CollectionNeverUpdated.Local
+// ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable ReturnTypeCanBeEnumerable.Global
 // ReSharper disable MemberCanBeProtected.Global
 
@@ -15,7 +18,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     private readonly HashSet<Fulfillment> _fulfillments = new();
     private readonly HashSet<OrderLineItem> _lineItems = new();
 
-    public string Number { get; protected set; }
+    public int Number { get; protected set; }
     public FinancialStatus FinancialStatus { get; protected set; }
     public DateTime ProcessedAt { get; protected set; }
     public DateTime ClosedAt { get; protected set; }
@@ -46,7 +49,6 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     [NotMapped] public bool IsReturnInProgress => Returns.Any(x => x.Status == ReturnStatus.InProgress);
     [NotMapped] public bool IsReturned => Returns.All(x => x.Status == ReturnStatus.Returned);
     [NotMapped] public bool IsPartiallyReturned => false;
-    [NotMapped] public bool Is => false;
 
     #region auditable members
 
@@ -62,10 +64,40 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     public bool SoftDeleted { get; set; }
 
     #endregion
+
+    public void Refund()
+    {
+        
+        AppendTimelineItems();
+    }
+    
+    public void ReturnItems()
+    {
+        
+        AppendTimelineItems();
+    }
+    
+    public void UpdateMasterData()
+    {
+        
+        AppendTimelineItems();
+    }
+    
+    public void AddComment()
+    {
+        
+        AppendTimelineItems();
+    }
+
+
+    private void AppendTimelineItems()
+    {
+        
+    }
 }
 
 /*
- public enum OrderStatus
+public enum OrderStatus
 {
     Created,
     Paid,
@@ -78,5 +110,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     
     PartiallyFulfilled,
     Fulfilled
+    
+    OnHold , any fulfillment on hold
 }
  */
