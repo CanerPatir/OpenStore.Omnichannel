@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using OpenStore.Domain;
+using OpenStore.Omnichannel.Shared.Command.OrderContext;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable CollectionNeverUpdated.Local
@@ -65,10 +66,15 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
 
     #endregion
 
-    public void Fulfill()
+    public Guid Fulfill(Fulfill command)
     {
-        
+        // lineItems, quantities
+        var (_, trackingNumber, carrierIdentifier, lineItemQuantities) = command;
+        var fulfillment = Fulfillment.Create(trackingNumber, carrierIdentifier, lineItemQuantities);
+        _fulfillments.Add(fulfillment);     
         AppendTimelineItems();
+
+        return fulfillment.Id
     }
 
     public void Refund()

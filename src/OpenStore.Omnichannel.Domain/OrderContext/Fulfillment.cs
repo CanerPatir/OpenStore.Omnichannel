@@ -21,12 +21,23 @@ public class Fulfillment : AuditableEntity
     public string TrackingNumber { get; protected set; }
     public string CarrierIdentifier { get; protected set; }
     public virtual IReadOnlyCollection<FulfillmentItem> FulfillmentItems => _fulfillmentItems;
-
-    public void Fulfill(string trackingNumber, string carrierIdentifier)
+    
+    public static Fulfillment Create(string trackingNumber, string carrierIdentifier, IDictionary<Guid, int> lineItemQuantities)
     {
-        TrackingNumber = trackingNumber;
-        CarrierIdentifier = carrierIdentifier;
-        Status = FulfillmentStatus.Fulfilled;
+        var fulfillment = new Fulfillment()
+        {
+            Id = Guid.NewGuid(),
+            TrackingNumber = trackingNumber,
+            CarrierIdentifier = carrierIdentifier,
+            Status = FulfillmentStatus.Fulfilled,
+        };
+
+        foreach (var (lineItemId, quantity) in lineItemQuantities)
+        {
+            fulfillment._fulfillmentItems.Add(FulfillmentItem.Create(fulfillment.Id, lineItemId, quantity));
+        }
+
+        return fulfillment;
     }
 
     public void AddTracking(string trackingNumber, string carrierIdentifier)

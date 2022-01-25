@@ -8,9 +8,5 @@
         <PackageReference Include="OpenStore.Domain" Version="$(OpenStoreBuildingBlocksVersion)" />
         <PackageReference Include="OpenStore.Shared" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Command\OrderContext" />
-    </ItemGroup>
 
 </Project>
