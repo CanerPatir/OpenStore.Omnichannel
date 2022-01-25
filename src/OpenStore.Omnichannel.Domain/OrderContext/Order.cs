@@ -65,6 +65,12 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
 
     #endregion
 
+    public void Fulfill()
+    {
+        
+        AppendTimelineItems();
+    }
+
     public void Refund()
     {
         
@@ -88,8 +94,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
         
         AppendTimelineItems();
     }
-
-
+    
     private void AppendTimelineItems()
     {
         
@@ -100,7 +105,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
 public enum OrderStatus
 {
     Created,
-    Paid,
+    Paid, // payment success but fulfillment empty
     Cancelled,
     ReturnInProgress,
     Returned,
