@@ -80,11 +80,11 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
         var order = new Order()
         {
             Id = new Guid(),
-            Customer = new CustomerInfo(),
-            ClientDetails = new ClientInfo(),
-
-            BillingAddress = new AddressInfo(),
-            ShippingAddress = new AddressInfo(),
+            // Customer = new CustomerInfo(),
+            // ClientDetails = new ClientInfo(),
+            //
+            // BillingAddress = new AddressInfo(),
+            // ShippingAddress = new AddressInfo(),
             FinancialStatus = FinancialStatus.Pending,
             IsPreorder = true
         };
@@ -110,10 +110,10 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
             ));
         }
 
-        order.TotalPrice = new PriceInfo();
-        order.TotalTax = new PriceInfo();
+        // order.TotalPrice = new PriceInfo();
+        // order.TotalTax = new PriceInfo();
 
-        order.ApplyChange(new OrderCreated(order.Id));
+        order.ApplyChange(new PreorderCreated(order.Id));
         order.AppendTimelineItems();
 
         return order;

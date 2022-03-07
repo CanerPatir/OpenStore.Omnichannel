@@ -22,7 +22,7 @@ public static class WebAssemblyHostBuilderExtensions
     {
         builder.Services.AddLocalization(opts => opts.ResourcesPath = "Resources");
         builder.Services
-            .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
+            .AddBlazorise(options => { options.Immediate = true; })
             .AddBootstrapProviders()
             .AddFontAwesomeIcons()
             .AddBlazoriseRichTextEdit(options => { options.DynamicallyLoadReferences = true; })

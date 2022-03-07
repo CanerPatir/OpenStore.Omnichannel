@@ -8,7 +8,7 @@
     <CreateVariantsEditor Model="@ViewModel.Product" ModelChanged="@CreateNewVariantsModelChanged">
         @if (ViewModel.Product.HasMultipleVariants && _createNewVariantsModelChanged && ViewModel.Product.Variants.Any())
         {
-            <Button Clicked="SaveNewVariants" Margin="Margin.IsAuto.FromLeft" Color="Color.Primary">@L["Button.SaveNewVariants"]</Button>
+            <Button Clicked="SaveNewVariants" Margin="Margin.IsAuto.FromStart" Color="Color.Primary">@L["Button.SaveNewVariants"]</Button>
         }
     </CreateVariantsEditor>
 }

@@ -13,10 +13,10 @@
         <PackageLicenseUrl>https://github.com/canerpatir/OpenStore/blob/master/LICENCE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/canerpatir/OpenStore</PackageProjectUrl>
         <LangVersion>latest</LangVersion>
-        <OpenStoreBuildingBlocksVersion>1.0.13</OpenStoreBuildingBlocksVersion>
-        <NetPackagesVersion>6.0.1</NetPackagesVersion>
+        <OpenStoreBuildingBlocksVersion>1.0.14</OpenStoreBuildingBlocksVersion>
+        <NetPackagesVersion>6.0.2</NetPackagesVersion>
         <NetExtensionsPackageVersion>6.0.0</NetExtensionsPackageVersion>
-        <EfPackageVersion>6.0.1</EfPackageVersion>
+        <EfPackageVersion>6.0.2</EfPackageVersion>
         <OpenIddictVersion>3.1.1</OpenIddictVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <!--     <Nullable>enable</Nullable>-->

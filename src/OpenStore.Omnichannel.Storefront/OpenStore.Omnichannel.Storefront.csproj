@@ -9,7 +9,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="$(NetPackagesVersion)" />
         <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
-        <PackageReference Include="Scrutor" Version="3.3.0" />
+        <PackageReference Include="Scrutor" Version="4.1.0" />
         <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
 

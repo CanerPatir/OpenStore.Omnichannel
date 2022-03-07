@@ -1,3 +1,4 @@
+// ReSharper disable CheckNamespace
 namespace OpenStore.Omnichannel.Shared.DomainEvents.InventoryContext;
 
 public record InventoryCreated(Guid InventoryId, Guid VariantId, int Quantity, bool ContinueSellingWhenOutOfStock) : DomainEventBase(InventoryId);
