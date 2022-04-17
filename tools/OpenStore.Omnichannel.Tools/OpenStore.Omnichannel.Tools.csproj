@@ -6,9 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="34.0.1" />
+        <PackageReference Include="Bogus" Version="34.0.2" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-        <PackageReference Include="Sylvan.Data.Csv" Version="1.1.12" />
+        <PackageReference Include="Sylvan.Data.Csv" Version="1.1.13" />
     </ItemGroup>
 
     <ItemGroup>
