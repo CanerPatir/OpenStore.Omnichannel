@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <VersionPrefix>0.0.1</VersionPrefix>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Authors>Caner Patir</Authors>
@@ -13,10 +13,10 @@
         <PackageLicenseUrl>https://github.com/canerpatir/OpenStore/blob/master/LICENCE</PackageLicenseUrl>
         <PackageProjectUrl>https://github.com/canerpatir/OpenStore</PackageProjectUrl>
         <LangVersion>latest</LangVersion>
-        <OpenStoreBuildingBlocksVersion>1.0.16</OpenStoreBuildingBlocksVersion>
-        <NetPackagesVersion>6.0.9</NetPackagesVersion>
-        <NetExtensionsPackageVersion>6.0.0</NetExtensionsPackageVersion>
-        <EfPackageVersion>6.0.9</EfPackageVersion>
+        <OpenStoreBuildingBlocksVersion>1.1.1</OpenStoreBuildingBlocksVersion>
+        <NetPackagesVersion>7.0.0-rc.1.22427.2</NetPackagesVersion>
+        <NetExtensionsPackageVersion>7.0.0-rc.1.22426.10</NetExtensionsPackageVersion>
+        <EfPackageVersion>7.0.0-rc.1.22426.7</EfPackageVersion>
         <OpenIddictVersion>3.1.1</OpenIddictVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <!--     <Nullable>enable</Nullable>-->
