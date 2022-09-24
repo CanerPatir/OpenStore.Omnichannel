@@ -43,7 +43,7 @@ else
 
                 <ListGroupItem Padding="Padding.Is3">
                     <div class="d-flex align-items-center" style="min-height: 36px">
-                        <div class="width-10 align-middle">
+                        <div class="w-10px  align-middle">
                             <Check TValue="bool" Class="form-check-input" CheckedChanged="SelectedAll"/>
                         </div>
                         <div class="ms-3">
@@ -80,11 +80,11 @@ else
                 {
                     <ListGroupItem Class="list-group-item-action" Style="cursor:pointer; color: unset">
                         <div class="d-flex align-items-center">
-                            <div class="width-10 align-middle">
+                            <div class="w-10px  align-middle">
                                 <Check TValue="bool" Class="form-check-input" @bind-Checked="@variant.Selected"/>
                             </div>
                             <div class="ms-3 d-flex w-100 align-items-center" @onclick="@(_ => GoVariantDetail(variant))">
-                                <div class=" width-60 height-60 bg-gray-100 d-flex align-items-center justify-content-center">
+                                <div class=" w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
                                     <img class="mw-100 mh-100" src="@GetVariantImage(variant)" alt=""/>
                                 </div>
                                 <div class="ms-3">
