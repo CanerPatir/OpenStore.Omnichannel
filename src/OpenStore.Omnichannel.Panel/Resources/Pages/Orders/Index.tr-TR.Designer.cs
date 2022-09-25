@@ -44,5 +44,17 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Orders {
                 resourceCulture = value;
             }
         }
+        
+        internal static string CreateOrder {
+            get {
+                return ResourceManager.GetString("CreateOrder", resourceCulture);
+            }
+        }
+        
+        internal static string Breadcrumb_OrdersList {
+            get {
+                return ResourceManager.GetString("Breadcrumb.OrdersList", resourceCulture);
+            }
+        }
     }
 }

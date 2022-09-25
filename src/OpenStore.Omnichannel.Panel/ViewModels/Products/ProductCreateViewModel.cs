@@ -25,7 +25,7 @@ public class ProductCreateViewModel : ProductViewModelBase
         Saving = true;
         try
         {
-            var productId = await ApiClient.Product.CreateProduct(Product);
+            var productId = await ApiClient.Product.Create(Product);
             _navigationManager.NavigateTo($"products/{productId}");
         }
         finally

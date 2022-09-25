@@ -1,5 +1,12 @@
-<h3>OrderTimeline</h3>
+<Card Margin="Margin.Is3.FromBottom">
+    <CardBody>
+        timeline
+    </CardBody>
+</Card>
 
 @code {
-    
+
+    [CascadingParameter]
+    public OrderViewModelBase ViewModel { get; set; }
+
 }

@@ -36,7 +36,7 @@ public class ProductUpdateViewModel : ProductViewModelBase
         Saving = true;
         try
         {
-            await ApiClient.Product.UpdateProduct(ProductId, Product);
+            await ApiClient.Product.Update(ProductId, Product);
         }
         finally
         {

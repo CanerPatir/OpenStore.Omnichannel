@@ -11,7 +11,6 @@ public class OrderConfiguration : BaseEntityTypeConfiguration<Guid, Order>
     {
         base.Configure(builder);
         builder.HasIndex(x => x.Number).IsUnique();
-        
         builder.Property(x => x.Number).ValueGeneratedOnAdd();
         
         builder.Property(x => x.Tags).HasField("_tags");

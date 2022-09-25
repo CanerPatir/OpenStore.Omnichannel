@@ -1,6 +1,9 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public class OrderTimelineDescriptions
+ 
+internal static class OrderTimelineDescriptions
 {
     
+    public const string Empty = ""; 
+    public const string OrderUpdated = nameof(OrderUpdated); 
 }

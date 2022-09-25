@@ -19,6 +19,13 @@
 ## shopify demo
 http://akeneo-shopify.webkul.com/demo.html
 
+
+development store -> https://caner-development-store.myshopify.com/admin
+
+test store -> https://canertest-5831.myshopify.com/admin
+
+shopify1234
+
 https://github.com/shopifypartners/product-csvs
 
 ## others
@@ -62,3 +69,4 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 ## Inspiration
 - https://www.akinon.com/
 - https://www.vuestorefront.io
+- https://ikas.com/

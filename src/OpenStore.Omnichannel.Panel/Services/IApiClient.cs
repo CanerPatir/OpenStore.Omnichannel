@@ -7,6 +7,7 @@ public interface IApiClient
     StoreHttpStore Store { get; }
     InventoryHttpStore Inventory { get; }
     CollectionHttpStore Collection { get; }
+    OrderHttpStore Order { get; }
     Task<bool> Ping();
 }
 
@@ -19,6 +20,7 @@ public class ApiClient : IApiClient
     public StoreHttpStore Store { get; }
     public InventoryHttpStore Inventory { get; }
     public CollectionHttpStore Collection { get; }
+    public OrderHttpStore Order { get; }
 
     public ApiClient(HttpClient httpClient)
     {
@@ -28,6 +30,7 @@ public class ApiClient : IApiClient
         Store = new StoreHttpStore(httpClient);
         Inventory = new InventoryHttpStore(httpClient);
         Collection = new CollectionHttpStore(httpClient);
+        Order = new OrderHttpStore(httpClient);
     }
 
     public async Task<bool> Ping()

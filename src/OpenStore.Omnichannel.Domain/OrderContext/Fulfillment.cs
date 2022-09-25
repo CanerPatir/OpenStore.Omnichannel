@@ -1,4 +1,5 @@
 using OpenStore.Domain;
+using OpenStore.Omnichannel.Shared.Enums;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable ClassNeverInstantiated.Global
@@ -16,7 +17,7 @@ public class Fulfillment : AuditableEntity
     public virtual Order Order { get; protected set; }
 
     public AddressInfo ShippingAddress { get; protected set; }
-    public FulfillmentStatus Status { get; protected set; }
+    public OrderFulfillmentStatus Status { get; protected set; }
     public bool ShippingRequired { get; set; }
     public string TrackingNumber { get; protected set; }
     public string CarrierIdentifier { get; protected set; }
@@ -29,7 +30,7 @@ public class Fulfillment : AuditableEntity
             Id = Guid.NewGuid(),
             TrackingNumber = trackingNumber,
             CarrierIdentifier = carrierIdentifier,
-            Status = FulfillmentStatus.Fulfilled,
+            Status = OrderFulfillmentStatus.Fulfilled,
         };
 
         foreach (var (lineItemId, quantity) in lineItemQuantities)
@@ -49,24 +50,24 @@ public class Fulfillment : AuditableEntity
 
         TrackingNumber = trackingNumber;
         CarrierIdentifier = carrierIdentifier;
-        Status = FulfillmentStatus.TrackingInfoAdded;
+        Status = OrderFulfillmentStatus.TrackingInfoAdded;
     }
 
     public void Cancel()
     {
-        Status = FulfillmentStatus.Unfulfilled;
+        Status = OrderFulfillmentStatus.Unfulfilled;
         ResetTrackingInfo();
     }
 
     public void Hold()
     {
-        Status = FulfillmentStatus.OnHold;
+        Status = OrderFulfillmentStatus.OnHold;
         ResetTrackingInfo();
     }
 
     public void Release()
     {
-        Status = FulfillmentStatus.Unfulfilled;
+        Status = OrderFulfillmentStatus.Unfulfilled;
         ResetTrackingInfo();
     }
 

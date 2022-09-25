@@ -1,6 +1,105 @@
-@page "/Create"
-<h3>Create</h3>
+@page "/orders/add"
+@inherits AppBaseViewModelObservableComponent<OrderCreateViewModel>
+@inject IStringLocalizer<Create> L
+
+<CascadingValue Value="ViewModel">
+    <Container>
+        <Row class="justify-content-center">
+            <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                <OsPageTitle RootHref="orders">
+                    <TitleSection>
+                        <span>@L["NewOrder"]</span>
+                    </TitleSection>
+                    <ButtonsSection>
+                        <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
+                            @if (!ViewModel.Saving)
+                            {
+                                <Icon Name="IconName.Save" Class="me-1"></Icon>
+                            }
+                            @L["Button.Save"]
+                        </Button>
+                    </ButtonsSection>
+                </OsPageTitle>
+
+                <Validations @ref="_validations" Mode="ValidationMode.Manual" Model="ViewModel.Order">
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is12">
+                            <Alert Color="Color.Danger" Visible="@_formHasErrors">
+                                <Heading Size="HeadingSize.Is6" TextColor="TextColor.Danger">
+                                    @L["Alert.ValidationErrors"]
+                                </Heading>
+                                <Blazorise.ValidationSummary Margin="Margin.Is0"/>
+                            </Alert>
+                        </Column>
+                    </Row>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is8.OnDesktop">
+                            <Card Margin="Margin.Is3.FromBottom">
+                                <CardHeader>@L["CardHeader.Products"]</CardHeader>
+                                <CardBody>
+                                    UnFulfilled
+                                </CardBody>
+                            </Card>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is4.OnDesktop">
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <ListGroupItem>
+                                    <h5>
+                                        @L["CustomerInfo"]
+                                    </h5>
+
+                                </ListGroupItem>
+                            </ListGroup>
+                            <NotesEditor/>
+
+                            <ListGroup Margin="Margin.Is3.FromBottom">
+                                <ListGroupItem>
+                                    <h5>
+                                        @L["Tags"]
+                                    </h5>
+                                </ListGroupItem>
+                            </ListGroup>
+                        </Column>
+                    </Row>
+                </Validations>
+                <hr class="mb-4"/>
+                <Row>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="ms-auto">
+                            <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
+                                @if (!ViewModel.Saving)
+                                {
+                                    <Icon Name="IconName.Save" Class="me-1"></Icon>
+                                }
+                                @L["Button.Save"]
+                            </Button>
+                        </div>
+                    </div>
+                </Row>
+            </Column>
+        </Row>
+    </Container>
+</CascadingValue>
 
 @code {
-    
+    private Validations _validations;
+    private bool _formHasErrors;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ViewModel.Init();
+    }
+
+    private async Task Save()
+    {
+        _formHasErrors = !await _validations.ValidateAll();
+        if (_formHasErrors)
+        {
+            return;
+        }
+
+        await ViewModel.Create();
+    }
+
 }

@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Domain.OrderContext;
+namespace OpenStore.Omnichannel.Shared.Enums;
 
 public enum OrderReturnStatus
 {

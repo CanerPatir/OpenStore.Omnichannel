@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Components;
 using OpenStore.Omnichannel.Panel.Services;
-using OpenStore.Omnichannel.Shared.Dto.Management.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management.Order;
 
-namespace OpenStore.Omnichannel.Panel.ViewModels.Products;
+namespace OpenStore.Omnichannel.Panel.ViewModels.Orders;
 
-public class ProductCreateViewModel : ProductViewModelBase
+public class OrderCreateViewModel : OrderViewModelBase
 {
     private readonly NavigationManager _navigationManager;
     private bool _saving;
 
-    public ProductCreateViewModel(IApiClient apiClient, NavigationManager navigationManager) : base(apiClient)
+    public OrderCreateViewModel(IApiClient apiClient, NavigationManager navigationManager) : base(apiClient)
     {
         _navigationManager = navigationManager;
     }
@@ -25,8 +25,8 @@ public class ProductCreateViewModel : ProductViewModelBase
         Saving = true;
         try
         {
-            var productId = await ApiClient.Product.CreateProduct(Product);
-            _navigationManager.NavigateTo($"products/{productId}");
+            var orderId = await ApiClient.Order.Create(Order);
+            _navigationManager.NavigateTo($"orders/{orderId}");
         }
         finally
         {
@@ -36,6 +36,6 @@ public class ProductCreateViewModel : ProductViewModelBase
 
     public void Init()
     {
-        Product = new ProductDto();
+        Order = new OrderDto();
     }
 }

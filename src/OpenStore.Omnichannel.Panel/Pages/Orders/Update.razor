@@ -1,5 +1,5 @@
-@page "/orders/add"
-@inherits AppBaseViewModelObservableComponent<OrderCreateViewModel>
+@page "/products/{Id:guid}"
+@inherits AppBaseViewModelObservableComponent<OrderUpdateViewModel>
 @inject IStringLocalizer<Create> L
 
 <CascadingValue Value="ViewModel">
@@ -8,14 +8,7 @@
             <Column ColumnSize="ColumnSize.Is8.OnDesktop">
                 <OsPageTitle RootHref="orders">
                     <TitleSection>
-                        @if (!ViewModel.Order.Id.HasValue)
-                        {
-                            <span>@L["NewOrder"]</span>
-                        }
-                        else
-                        {
-                            <span>#@ViewModel.Order.Number</span>
-                        }
+                        <span>#@ViewModel.Order.Number</span>
                     </TitleSection>
                     <ButtonsSection>
                         <Button Loading="ViewModel.Saving" Clicked="Save" Color="Color.Success">
@@ -105,13 +98,17 @@
 </CascadingValue>
 
 @code {
-    private Validations _validations;
+
+    [Parameter]
+    public Guid Id { get; set; }
+
     private bool _formHasErrors;
 
-    protected override void OnInitialized()
+    private Validations _validations;
+
+    protected override async Task OnParametersSetAsync()
     {
-        base.OnInitialized();
-        ViewModel.Init();
+        await ViewModel.Retrieve(Id);
     }
 
     private async Task Save()
@@ -122,7 +119,7 @@
             return;
         }
 
-        await ViewModel.Create();
+        await ViewModel.Update();
     }
 
 }

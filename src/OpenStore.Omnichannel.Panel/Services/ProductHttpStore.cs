@@ -15,13 +15,13 @@ public class ProductHttpStore : HttpStore
     {
     }
 
-    public async Task<Guid> CreateProduct(ProductDto model)
+    public async Task<Guid> Create(ProductDto model)
     {
         var response = await HttpClient.PostAsJsonAsync($"{Path}", model);
         return await response.Content.ReadFromJsonAsync<Guid>();
     }
 
-    public Task UpdateProduct(Guid productId, ProductDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}", model);
+    public Task Update(Guid productId, ProductDto model) => HttpClient.PutAsJsonAsync($"{Path}/{productId}", model);
 
     public Task<ProductDto> Get(Guid productId) => HttpClient.GetFromJsonAsync<ProductDto>($"{Path}/{productId}");
 

@@ -1,19 +1,19 @@
 @page "/orders"
-<div class="d-flex align-items-center mb-3">
-    <div>
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="#">PAGES</a>
-            </li>
-            <li class="breadcrumb-item active">ORDERS</li>
-        </ul>
-        <h1 class="page-header mb-0">Orders</h1>
-    </div>
+@inherits AppBaseViewModelObservableComponent<OrderIndexViewModel>
+@inject IStringLocalizer<Index> L
 
-    <div class="ms-auto">
-        <a href="#" class="btn btn-primary"><i class="fa fa-plus-circle fa-fw me-1"></i> Create Orders</a>
-    </div>
-</div>
+
+<OsPageTitle>
+    <TitleSection>
+        <span>@L["Breadcrumb.OrdersList"]</span>
+    </TitleSection>
+    <ButtonsSection>
+        <NavLink href="orders/add" class="btn btn-primary">
+            <Icon Name="IconName.PlusCircle" Class="fa-fw me-1"/>@L["CreateOrder"]
+        </NavLink>
+    </ButtonsSection>
+</OsPageTitle>
+
 
 <div class="mb-md-4 mb-3 d-md-flex">
     <div class="mt-md-0 mt-2">

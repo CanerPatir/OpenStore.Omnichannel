@@ -144,6 +144,14 @@
           <Generator>ResXFileCodeGenerator</Generator>
           <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
         </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Orders\Index.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Index.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Pages\Orders\Create.tr-TR.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Create.tr-TR.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -291,6 +299,16 @@
           <DesignTime>True</DesignTime>
           <AutoGen>True</AutoGen>
           <DependentUpon>Index.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Orders\Index.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Index.tr-TR.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Pages\Orders\Create.tr-TR.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Create.tr-TR.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 

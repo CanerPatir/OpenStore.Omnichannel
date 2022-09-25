@@ -9,6 +9,7 @@ using Microsoft.Extensions.Localization;
 using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Panel.ViewModels.Collections;
 using OpenStore.Omnichannel.Panel.ViewModels.Inventory;
+using OpenStore.Omnichannel.Panel.ViewModels.Orders;
 using OpenStore.Omnichannel.Panel.ViewModels.Products;
 using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
 
@@ -75,6 +76,9 @@ public static class WebAssemblyHostBuilderExtensions
         builder.Services.AddSingleton<CollectionIndexViewModel>();
         builder.Services.AddSingleton<CollectionCreateViewModel>();
         builder.Services.AddSingleton<CollectionUpdateViewModel>();
+        builder.Services.AddSingleton<OrderIndexViewModel>();
+        builder.Services.AddSingleton<OrderCreateViewModel>();
+        builder.Services.AddSingleton<OrderUpdateViewModel>();
 
         return builder;
     }

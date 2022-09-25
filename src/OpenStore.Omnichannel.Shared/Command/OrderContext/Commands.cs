@@ -18,4 +18,4 @@ public record CreatePreorderCommand(IEnumerable<CreatePreorderCommand.OrderLineI
         , bool RequiresShipping);
 };
 
-public record Fulfill(Guid Id, string TrackingNumber, string CarrierIdentifier, IDictionary<Guid, int> LineItemQuantities) : ICommand<Guid>;
+public record FulfillOrder(Guid Id, string TrackingNumber, string CarrierIdentifier, IDictionary<Guid, int> LineItemQuantities) : ICommand<Guid>;

@@ -1,3 +1,5 @@
+using OpenStore.Omnichannel.Shared.Enums;
+
 namespace OpenStore.Omnichannel.Shared.Dto.Management.Order;
 
 public class OrderDto

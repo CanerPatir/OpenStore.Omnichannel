@@ -44,5 +44,11 @@ namespace OpenStore.Omnichannel.Panel.Resources.Pages.Orders {
                 resourceCulture = value;
             }
         }
+        
+        internal static string Button_Save {
+            get {
+                return ResourceManager.GetString("Button.Save", resourceCulture);
+            }
+        }
     }
 }

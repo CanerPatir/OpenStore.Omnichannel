@@ -1,81 +1,24 @@
 using OpenStore.Omnichannel.Panel.Services;
-using OpenStore.Omnichannel.Shared.Dto.Management.Product;
+using OpenStore.Omnichannel.Shared.Dto.Management.Order;
 
-namespace OpenStore.Omnichannel.Panel.ViewModels.Products;
+namespace OpenStore.Omnichannel.Panel.ViewModels.Orders;
 
-public abstract class ProductViewModelBase : BaseViewModel
+public abstract class OrderViewModelBase : BaseViewModel
 {
-    private ProductDto _product;
-    private bool _archiving;
-    private bool _unArchiving;
+    private OrderDto _order;
 
-    public virtual ProductDto Product
+    public virtual OrderDto Order
     {
-        get => _product;
-        protected set => SetValue(ref _product, value);
+        get => _order;
+        protected set => SetValue(ref _order, value);
     }
 
-    public bool Archiving
-    {
-        get => _archiving;
-        private set => SetValue(ref _archiving, value);
-    }
-
-    public bool UnArchiving
-    {
-        get => _unArchiving;
-        private set => SetValue(ref _unArchiving, value);
-    }
-
-    public bool IsNull => Product is null;
+    public bool IsNull => Order is null;
 
     protected IApiClient ApiClient { get; }
 
-    protected ProductViewModelBase(IApiClient apiClient)
+    protected OrderViewModelBase(IApiClient apiClient)
     {
         ApiClient = apiClient;
-    }
-
-    public async Task Archive()
-    {
-        Archiving = true;
-        try
-        {
-            await ApiClient.Product.Archive(Product.Id.Value);
-            Product.Status = ProductStatus.Archived;
-        }
-        finally
-        {
-            Archiving = false;
-        }
-    }
-
-    public async Task UnArchive()
-    {
-        UnArchiving = true;
-        try
-        {
-            await ApiClient.Product.UnArchive(Product.Id.Value);
-            Product.Status = ProductStatus.Active;
-        }
-        finally
-        {
-            UnArchiving = false;
-        }
-    }
-
-    public void ChangeProductMeta(string html, string description)
-    {
-        Product.Description = html;
-
-        if (Product.IsCreate)
-        {
-            Product.Handle = new SlugHelper().GenerateSlug(Product.Title);
-            Product.MetaTitle = Product.Title;
-            Product.MetaDescription = description;
-        }
-
-
-        OnPropertyChanged();
     }
 }

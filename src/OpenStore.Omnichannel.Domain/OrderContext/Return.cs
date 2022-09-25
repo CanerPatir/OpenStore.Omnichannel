@@ -4,6 +4,7 @@
 // ReSharper disable ReturnTypeCanBeEnumerable.Global
 
 using System.ComponentModel.DataAnnotations.Schema;
+using OpenStore.Omnichannel.Shared.Enums;
 
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
@@ -14,7 +15,7 @@ public class Return : AuditableEntity
     public Guid OrderId { get; protected set; }
     public virtual Order Order { get; protected set; }
 
-    public ReturnStatus Status { get; protected set; }
+    public OrderReturnStatus Status { get; protected set; }
     public ReturnReason Reason { get; protected set; }
     public string OtherReasonDescription { get; protected set; }
 
@@ -36,18 +37,18 @@ public class Return : AuditableEntity
     {
         return new()
         {
-            Status = ReturnStatus.InProgress,
+            Status = OrderReturnStatus.InProgress,
             
         };
     }
 
     public void Refund()
     {
-        Status = ReturnStatus.Refunded;
+        Status = OrderReturnStatus.Refunded;
     }
 
     public void MarkAsReturned()
     {
-        Status = ReturnStatus.Returned;
+        Status = OrderReturnStatus.Returned;
     }
 }
