@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public enum FulfillmentStatus
+public enum OrderFulfillmentStatus
 {
     Fulfilled,
     Unfulfilled,

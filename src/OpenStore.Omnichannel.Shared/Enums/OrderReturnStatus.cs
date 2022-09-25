@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public enum ReturnStatus
+public enum OrderReturnStatus
 {
     InProgress,
     Refunded,

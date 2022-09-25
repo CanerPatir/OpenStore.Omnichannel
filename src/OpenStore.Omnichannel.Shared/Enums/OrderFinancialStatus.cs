@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Domain.OrderContext;
 
-public enum FinancialStatus
+public enum OrderFinancialStatus
 {
     Pending,
     Paid,
