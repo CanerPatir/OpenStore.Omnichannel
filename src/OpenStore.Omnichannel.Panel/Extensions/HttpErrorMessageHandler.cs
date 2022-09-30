@@ -10,18 +10,15 @@ namespace OpenStore.Omnichannel.Panel.Extensions;
 public class HttpErrorMessageHandler : DelegatingHandler
 {
     private readonly NavigationManager _navigationManager;
-    private readonly SignOutSessionStateManager _signOutSessionStateManager;
     private readonly DialogService _dialogService;
     private readonly IStringLocalizer<App> _sharedLocalizer;
 
     public HttpErrorMessageHandler(
         NavigationManager navigationManager,
-        SignOutSessionStateManager signOutSessionStateManager,
         DialogService dialogService,
         IStringLocalizer<App> sharedLocalizer)
     {
         _navigationManager = navigationManager;
-        _signOutSessionStateManager = signOutSessionStateManager;
         _dialogService = dialogService;
         _sharedLocalizer = sharedLocalizer;
     }
@@ -64,10 +61,9 @@ public class HttpErrorMessageHandler : DelegatingHandler
         }
     }
 
-    private async Task SignOut()
+    private void SignOut()
     {
-        await _signOutSessionStateManager.SetSignOutState();
-        _navigationManager.NavigateTo("authentication/logout");
+        _navigationManager.NavigateToLogout("authentication/logout");
     }
 
     private async Task HandleError(HttpResponseMessage response, CancellationToken cancellationToken = default)
@@ -114,7 +110,7 @@ public class HttpErrorMessageHandler : DelegatingHandler
         // if (ex.IsUnauthorized && ex.IsInvalidToken)
         if (ex.IsUnauthorized)
         {
-            await SignOut();
+            SignOut();
         }
 
         switch (ex.StatusCode)

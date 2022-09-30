@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        
     </PropertyGroup>
     
     <ItemGroup>
@@ -42,9 +41,6 @@
         </Content>
         <Content Include="Views\Catalog\AllProducts.cshtml.js">
             <DependentUpon>AllProducts.cshtml</DependentUpon>
-        </Content>
-        <Content Update="Views\Home\Index.cshtml.js">
-            <DependentUpon>Index.cshtml</DependentUpon>
         </Content>
         <Content Include="Views\Home\Index.cshtml.js" />
     </ItemGroup>

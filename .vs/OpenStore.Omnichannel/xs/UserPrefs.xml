@@ -1,21 +1,41 @@
 ﻿<Properties StartupConfiguration="{64D507E4-EEA0-4F01-A7C5-A100407868E9}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.src.Presentation.UI.OpenStore.Omnichannel.Panel PreferredExecutionTarget="/Applications/Opera.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.src.OpenStore.Omnichannel.Panel PreferredExecutionTarget="/Applications/Opera.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/OpenStore.Omnichannel.Panel/Pages/Products/Variant/CreateVariantOptionEditor.razor">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/OpenStore.Omnichannel.Panel/OpenStore.Omnichannel.Panel.csproj">
     <Files>
-      <File FileName="src/OpenStore.Omnichannel.Panel/Pages/Products/Variant/CreateVariantOptionEditor.razor" Line="1" Column="1" />
+      <File FileName="src/OpenStore.Omnichannel.Panel/Pages/Products/Variant/CreateVariantOptionEditor.razor" Line="67" Column="14" />
+      <File FileName="src/OpenStore.Omnichannel.Panel/Pages/Products/Create.razor" Line="82" Column="38" />
+      <File FileName="src/OpenStore.Omnichannel.Panel/OpenStore.Omnichannel.Panel.csproj" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="OpenStore.Omnichannel" expanded="True">
             <Node name="src" expanded="True">
-              <Node name="Application" expanded="True">
-                <Node name="ReadModel" expanded="True" />
+              <Node name="Core" expanded="True">
+                <Node name="3-Infrastructure" expanded="True">
+                  <Node name="OpenStore.Omnichannel.Infrastructure" expanded="True">
+                    <Node name="Dependencies" expanded="True" />
+                  </Node>
+                </Node>
               </Node>
-              <Node name="OpenStore.Omnichannel.Panel" expanded="True">
-                <Node name="Pages" expanded="True">
-                  <Node name="Products" expanded="True">
-                    <Node name="Variant" expanded="True" />
+              <Node name="Presentation" expanded="True">
+                <Node name="Api" expanded="True">
+                  <Node name="OpenStore.Omnichannel" expanded="True" />
+                </Node>
+                <Node name="UI" expanded="True">
+                  <Node name="OpenStore.Omnichannel.Panel" expanded="True">
+                    <Node name="Pages" expanded="True">
+                      <Node name="Products" expanded="True">
+                        <Node name="Variant" expanded="True" />
+                      </Node>
+                    </Node>
                   </Node>
                 </Node>
               </Node>
@@ -24,9 +44,6 @@
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
           <Node name="OpenStore.Omnichannel" expanded="True" selected="True" />
@@ -34,10 +51,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
 </Properties>

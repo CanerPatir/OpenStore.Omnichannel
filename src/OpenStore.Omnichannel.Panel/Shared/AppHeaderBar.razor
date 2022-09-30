@@ -98,13 +98,10 @@
 </div>
 
 @code {
-    
-    [Inject]
-    private SignOutSessionStateManager SignOutManager { get; init; }
+     
 
-    private async void BeginSignOut()
+    private void BeginSignOut()
     {
-        await SignOutManager.SetSignOutState();
-        Navigation.NavigateTo("authentication/logout");
+         Navigation.NavigateToLogout("authentication/logout");
     }
 }

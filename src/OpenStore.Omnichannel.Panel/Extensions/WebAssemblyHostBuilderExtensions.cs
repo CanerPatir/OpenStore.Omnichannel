@@ -46,10 +46,9 @@ public static class WebAssemblyHostBuilderExtensions
             .AddHttpMessageHandler(sp =>
             {
                 var navigationManager = sp.GetRequiredService<NavigationManager>();
-                var signOutSessionStateManager = sp.GetRequiredService<SignOutSessionStateManager>();
                 var alertService = sp.GetRequiredService<DialogService>();
                 var sharedLocalizer = sp.GetRequiredService<IStringLocalizer<App>>();
-                return new HttpErrorMessageHandler(navigationManager, signOutSessionStateManager, alertService, sharedLocalizer);
+                return new HttpErrorMessageHandler(navigationManager, alertService, sharedLocalizer);
             })
             .AddHttpMessageHandler(sp =>
             {
