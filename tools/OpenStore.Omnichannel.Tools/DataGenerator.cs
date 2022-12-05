@@ -36,7 +36,7 @@ public class DataGenerator : BackgroundService
         // }
         using var scope = _serviceProvider.CreateScope();
         await using var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            
+
         var pendingMigrations = await context.Database.GetPendingMigrationsAsync(stoppingToken);
         try
         {
@@ -47,10 +47,10 @@ public class DataGenerator : BackgroundService
             Console.WriteLine(e);
         }
 
-        await GenerateProducts(stoppingToken, context);
+        await GenerateProducts(context, stoppingToken);
     }
 
-    private static async Task GenerateProducts(CancellationToken stoppingToken, ApplicationDbContext context)
+    private static async Task GenerateProducts(ApplicationDbContext context, CancellationToken cancellationToken)
     {
         var faker = new ProductDtoFaker();
 
@@ -58,16 +58,18 @@ public class DataGenerator : BackgroundService
         {
             var product = Product.Create(new CreateProduct(faker.Generate()), id => context.ProductMedias.Single(x => x.Id == id));
 
-            await context.Products.AddAsync(product, stoppingToken);
+            await context.Products.AddAsync(product, cancellationToken);
         }
 
-        await context.SaveChangesAsync(stoppingToken);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    private sealed class ProductDtoFaker : Faker<ProductDto> {
-        public ProductDtoFaker() {
-            RuleFor(o => o.Title, f => f.Commerce.ProductName()); 
-            RuleFor(o => o.Description, f => f.Commerce.ProductDescription()); 
+    private sealed class ProductDtoFaker : Faker<ProductDto>
+    {
+        public ProductDtoFaker()
+        {
+            RuleFor(o => o.Title, f => f.Commerce.ProductName());
+            RuleFor(o => o.Description, f => f.Commerce.ProductDescription());
             RuleFor(o => o.Handle, f => f.Commerce.ProductAdjective());
         }
     }

@@ -9,9 +9,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Seeders;
 
 public static class DataSeeder
 {
-    private static readonly Guid DefaultAdminId = new("a2a9a91d-1019-473a-8750-59f51ef0c61a");
     private const string DefaultAdminUserEmail = "admin@openstore.com";
     private const string DefaultAdminUserPassword = "Qwer1234";
+    private static readonly Guid DefaultAdminId = new("a2a9a91d-1019-473a-8750-59f51ef0c61a");
     private static readonly string[] DefaultRoles = ApplicationRoles.AsArray;
 
     public static async Task SeedAsync(IServiceProvider hostServices)
@@ -78,7 +78,7 @@ public static class DataSeeder
 
     private static async Task<ApplicationUser> CreateDefaultAdminUser(UserManager<ApplicationUser> userManager)
     {
-        var user = new ApplicationUser()
+        var user = new ApplicationUser
         {
             Id = DefaultAdminId,
             UserName = DefaultAdminUserEmail,

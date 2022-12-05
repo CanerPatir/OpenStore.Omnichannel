@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
- using OpenStore.Data.EntityFramework.EntityConfiguration;
+using OpenStore.Data.EntityFramework.EntityConfiguration;
 using OpenStore.Omnichannel.Domain.OrderContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.OrderContext;
@@ -12,11 +12,11 @@ public class OrderConfiguration : BaseEntityTypeConfiguration<Guid, Order>
         base.Configure(builder);
         builder.HasIndex(x => x.Number).IsUnique();
         builder.Property(x => x.Number).ValueGeneratedOnAdd();
-        
+
         builder.Property(x => x.Tags).HasField("_tags");
         builder.Property(x => x.Discounts).HasField("_discounts");
         builder.Property(x => x.TimelineItems).HasField("_timelineItems");
-        
+
         builder.Property(x => x.Tags).HasJsonConversion();
         builder.Property(x => x.Discounts).HasJsonConversion();
         builder.Property(x => x.TimelineItems).HasJsonConversion();
@@ -25,12 +25,12 @@ public class OrderConfiguration : BaseEntityTypeConfiguration<Guid, Order>
             .WithOne(x => x.Order)
             .HasForeignKey(x => x.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         builder.HasMany(x => x.Fulfillments)
             .WithOne(x => x.Order)
             .HasForeignKey(x => x.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         builder.HasMany(x => x.LineItems)
             .WithOne(x => x.Order)
             .HasForeignKey(x => x.OrderId)

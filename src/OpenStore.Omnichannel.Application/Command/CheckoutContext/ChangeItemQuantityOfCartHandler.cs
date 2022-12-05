@@ -16,10 +16,7 @@ public class ChangeItemQuantityOfCartHandler : CommandHandler<ChangeItemQuantity
     protected override async Task Handle(ChangeItemQuantityOfCart command, CancellationToken cancellationToken)
     {
         var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
-        if (shoppingCart is null)
-        {
-            throw new ApplicationException(Msg.Application.CartNotExists);
-        }
+        if (shoppingCart is null) throw new ApplicationException(Msg.Application.CartNotExists);
         shoppingCart.ChangeItemQuantity(command);
         await _repository.SaveChangesAsync(cancellationToken);
     }

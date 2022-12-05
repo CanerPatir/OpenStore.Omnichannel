@@ -20,12 +20,8 @@ public class AddItemsToCollectionHandler : CommandHandler<AddItemsToCollection>
         var productCollection = await _repository.Query
             .Include(x => x.ProductItems)
             .SingleOrDefaultAsync(x => x.Id == productCollectionId, cancellationToken);
-        
-        foreach (var productId in productIds)
-        {
-            productCollection.AddProduct(productId);
-        }
+
+        foreach (var productId in productIds) productCollection.AddProduct(productId);
         await _repository.SaveChangesAsync(cancellationToken);
- 
     }
 }

@@ -24,6 +24,5 @@ public class CategoryConfiguration : BaseEntityTypeConfiguration<Guid, Category>
             .HasForeignKey(x => x.CategoryId)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
-        
     }
 }

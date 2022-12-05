@@ -19,17 +19,11 @@ public class MakeProductAsMultiVariantHandler : ICommandHandler<MakeProductAsMul
     {
         var product = await _repository.GetAsync(command.ProductId, cancellationToken);
 
-        if (!product.HasMultipleVariants)
-        {
-            await _variantRepository.Remove(product.Variants.First());
-        }
+        if (!product.HasMultipleVariants) await _variantRepository.Remove(product.Variants.First());
 
         var variants = product.MakeMultiVariant(command);
         var idVariants = new List<Variant>();
-        foreach (var variant in variants)
-        {
-            idVariants.Add(await _variantRepository.InsertAsync(variant, cancellationToken));
-        }
+        foreach (var variant in variants) idVariants.Add(await _variantRepository.InsertAsync(variant, cancellationToken));
 
         await _repository.SaveChangesAsync(cancellationToken);
 

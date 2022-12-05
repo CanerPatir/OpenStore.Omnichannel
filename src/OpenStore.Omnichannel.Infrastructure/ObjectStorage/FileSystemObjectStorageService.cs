@@ -11,8 +11,8 @@ public class FileSystemObjectStorageService : IObjectStorageService
     private const string RootDir = "content";
 
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly IWebHostEnvironment _webHostEnvironment;
     private readonly ILogger<FileSystemObjectStorageService> _logger;
+    private readonly IWebHostEnvironment _webHostEnvironment;
 
     public FileSystemObjectStorageService(
         IHttpContextAccessor httpContextAccessor,
@@ -28,10 +28,7 @@ public class FileSystemObjectStorageService : IObjectStorageService
     public async Task<(string host, string path)> Write(string fileName, byte[] content)
     {
         var dir = Path.Combine(_webHostEnvironment.WebRootPath, RootDir);
-        if (!Directory.Exists(dir))
-        {
-            Directory.CreateDirectory(dir);
-        }
+        if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
         await using var fs = File.Create(Path.Combine(dir, fileName));
         await fs.WriteAsync(content.AsMemory(0, content.Length));

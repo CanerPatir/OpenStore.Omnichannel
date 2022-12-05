@@ -1,7 +1,7 @@
 @using System.IO
 @using OpenStore.Omnichannel.Shared.Dto
 @using OpenStore.Omnichannel.Shared.Dto.Management
- 
+
 
 @inject IStringLocalizer<MediaEditor> L
 
@@ -56,7 +56,7 @@
     async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
         _dropClass = string.Empty;
-        var files = e.FileCount > 1 ? e.GetMultipleFiles() : new[] {e.File};
+        var files = e.FileCount > 1 ? e.GetMultipleFiles() : new[] { e.File };
 
         var dtoList = new List<FileUploadDto>();
         var index = Model.Medias.Count();
@@ -71,7 +71,7 @@
 
         var mediaDtoList = Model.IsCreate ? await ApiClient.Media.UploadProductMedia(dtoList) : await ApiClient.Product.AssignProductMedia(Model.Id.Value, dtoList);
 
-        // todo: move to store
+    // todo: move to store
         var model = new List<ProductMediaDto>();
         model.AddRange(Model.Medias);
         model.AddRange(mediaDtoList);

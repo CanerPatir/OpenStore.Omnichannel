@@ -1,43 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
+namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite;
+
+public partial class Migration202111281457 : Migration
 {
-    public partial class Migration202111281457 : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.CreateTable(
-                name: "ShoppingCarts",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UserId = table.Column<Guid>(type: "TEXT", nullable: true),
-                    IsAuthenticated = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Items = table.Column<string>(type: "TEXT", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                    Version = table.Column<long>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCarts", x => x.Id);
-                });
+        migrationBuilder.CreateTable(
+            "ShoppingCarts",
+            table => new
+            {
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                UserId = table.Column<Guid>("TEXT", nullable: true),
+                IsAuthenticated = table.Column<bool>("INTEGER", nullable: false),
+                Items = table.Column<string>("TEXT", nullable: true),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false)
+            },
+            constraints: table => { table.PrimaryKey("PK_ShoppingCarts", x => x.Id); });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCarts_UserId",
-                table: "ShoppingCarts",
-                column: "UserId",
-                unique: true);
-        }
+        migrationBuilder.CreateIndex(
+            "IX_ShoppingCarts_UserId",
+            "ShoppingCarts",
+            "UserId",
+            unique: true);
+    }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "ShoppingCarts");
-        }
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropTable(
+            "ShoppingCarts");
     }
 }

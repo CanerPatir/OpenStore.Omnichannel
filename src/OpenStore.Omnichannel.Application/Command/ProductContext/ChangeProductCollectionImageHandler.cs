@@ -7,8 +7,8 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
 public class ChangeProductCollectionImageHandler : ICommandHandler<ChangeProductCollectionImage, ProductCollectionMediaDto>
 {
-    private readonly ICrudRepository<ProductCollection> _repository;
     private readonly IObjectStorageService _objectStorageService;
+    private readonly ICrudRepository<ProductCollection> _repository;
 
     public ChangeProductCollectionImageHandler(ICrudRepository<ProductCollection> repository, IObjectStorageService objectStorageService)
     {
@@ -27,6 +27,8 @@ public class ChangeProductCollectionImageHandler : ICommandHandler<ChangeProduct
         return dto;
     }
 
-    private static string FileNameStrategy(string fileName) =>
-        $"{Path.GetFileNameWithoutExtension(fileName)}_{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(fileName)}";
+    private static string FileNameStrategy(string fileName)
+    {
+        return $"{Path.GetFileNameWithoutExtension(fileName)}_{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(fileName)}";
+    }
 }

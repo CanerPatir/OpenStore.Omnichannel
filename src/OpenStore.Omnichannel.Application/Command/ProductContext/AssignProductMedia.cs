@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
+using OpenStore.Application.Exceptions;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
@@ -10,8 +11,8 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 public class AssignProductMediaHandler : ICommandHandler<AssignProductMedia, IEnumerable<ProductMediaDto>>
 {
     private readonly IMediator _mediator;
-    private readonly ICrudRepository<Product> _repository;
     private readonly ICrudRepository<ProductMedia> _productMediaRepository;
+    private readonly ICrudRepository<Product> _repository;
 
     public AssignProductMediaHandler(IMediator mediator
         , ICrudRepository<Product> repository
@@ -29,6 +30,11 @@ public class AssignProductMediaHandler : ICommandHandler<AssignProductMedia, IEn
         var product = await _repository.Query
             .Include(x => x.Medias)
             .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+        if (product is null)
+        {
+            throw new ResourceNotFoundException(Msg.ResourceNotFound);
+        }
 
         foreach (var dto in list)
         {

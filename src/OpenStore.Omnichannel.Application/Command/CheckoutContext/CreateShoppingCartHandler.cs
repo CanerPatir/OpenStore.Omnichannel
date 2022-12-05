@@ -22,10 +22,7 @@ public class CreateShoppingCartHandler : ICommandHandler<CreateShoppingCart, Gui
                 .Query
                 .SingleOrDefaultAsync(x => x.UserId == command.UserId.Value, cancellationToken);
 
-            if (existingCart is not null)
-            {
-                return existingCart.Id;
-            }
+            if (existingCart is not null) return existingCart.Id;
         }
 
         var newShoppingCart = ShoppingCart.Create(command);

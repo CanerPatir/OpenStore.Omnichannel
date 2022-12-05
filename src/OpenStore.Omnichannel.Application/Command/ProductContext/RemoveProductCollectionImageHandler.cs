@@ -6,8 +6,8 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
 public class RemoveProductCollectionImageHandler : CommandHandler<RemoveProductCollectionImage>
 {
-    private readonly ICrudRepository<ProductCollection> _repository;
     private readonly IObjectStorageService _objectStorageService;
+    private readonly ICrudRepository<ProductCollection> _repository;
 
     public RemoveProductCollectionImageHandler(ICrudRepository<ProductCollection> repository, IObjectStorageService objectStorageService)
     {

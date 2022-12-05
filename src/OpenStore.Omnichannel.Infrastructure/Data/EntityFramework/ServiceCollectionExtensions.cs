@@ -29,10 +29,7 @@ internal static class ServiceCollectionExtensions
         void Opts(DbContextOptionsBuilder opts)
         {
             opts.UseLazyLoadingProxies();
-            if (environment.IsDevelopment())
-            {
-                opts.EnableSensitiveDataLogging();
-            }
+            if (environment.IsDevelopment()) opts.EnableSensitiveDataLogging();
 
             opts.UseOpenIddict<ApplicationClient,
                 ApplicationAuthorization,
@@ -43,16 +40,16 @@ internal static class ServiceCollectionExtensions
         switch (dataSource)
         {
             case EntityFrameworkDataSource.SqLite:
-                services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(configuration, migrationAssembly: migrationAssemblyName, optionsBuilder: Opts);
+                services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.PostgreSql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, PostgreSqlDbContext>(configuration, migrationAssembly: migrationAssemblyName, optionsBuilder: Opts);
+                services.AddOpenStoreEfCore<ApplicationDbContext, PostgreSqlDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.MySql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, MySqlDbContext>(configuration, migrationAssembly: migrationAssemblyName, optionsBuilder: Opts);
+                services.AddOpenStoreEfCore<ApplicationDbContext, MySqlDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.MsSql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, MsSqlDbContext>(configuration, migrationAssembly: migrationAssemblyName, optionsBuilder: Opts);
+                services.AddOpenStoreEfCore<ApplicationDbContext, MsSqlDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -75,7 +72,7 @@ internal static class ServiceCollectionExtensions
             cfg.CreateMap<ProductDto, Product>().ReverseMap();
             cfg.CreateMap<VariantDto, Variant>().ReverseMap()
                 .ForMember(x => x.Quantity, opts => opts.MapFrom(v => v.Inventory != null ? v.Inventory.Quantity : 0))
-                .ForMember(x => x.ContinueSellingWhenOutOfStock, opts => opts.MapFrom(v => (v.Inventory != null) && v.Inventory.ContinueSellingWhenOutOfStock))
+                .ForMember(x => x.ContinueSellingWhenOutOfStock, opts => opts.MapFrom(v => v.Inventory != null && v.Inventory.ContinueSellingWhenOutOfStock))
                 ;
             cfg.CreateMap<ProductOptionDto, ProductOption>().ReverseMap();
             cfg.CreateMap<ProductCollectionDto, ProductCollection>().ReverseMap();

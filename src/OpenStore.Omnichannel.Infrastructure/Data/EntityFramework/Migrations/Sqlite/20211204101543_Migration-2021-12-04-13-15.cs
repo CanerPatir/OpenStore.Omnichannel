@@ -1,105 +1,104 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
+namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite;
+
+public partial class Migration202112041315 : Migration
 {
-    public partial class Migration202112041315 : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "ProductCollections",
-                newName: "Title");
+        migrationBuilder.RenameColumn(
+            "Name",
+            "ProductCollections",
+            "Title");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Media_Extension",
-                table: "ProductCollections",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<string>(
+            "Media_Extension",
+            "ProductCollections",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Media_Filename",
-                table: "ProductCollections",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<string>(
+            "Media_Filename",
+            "ProductCollections",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Media_Host",
-                table: "ProductCollections",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<string>(
+            "Media_Host",
+            "ProductCollections",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Media_Path",
-                table: "ProductCollections",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<string>(
+            "Media_Path",
+            "ProductCollections",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<int>(
-                name: "Media_Position",
-                table: "ProductCollections",
-                type: "INTEGER",
-                nullable: true);
+        migrationBuilder.AddColumn<int>(
+            "Media_Position",
+            "ProductCollections",
+            "INTEGER",
+            nullable: true);
 
-            migrationBuilder.AddColumn<long>(
-                name: "Media_Size",
-                table: "ProductCollections",
-                type: "INTEGER",
-                nullable: true);
+        migrationBuilder.AddColumn<long>(
+            "Media_Size",
+            "ProductCollections",
+            "INTEGER",
+            nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Media_Title",
-                table: "ProductCollections",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<string>(
+            "Media_Title",
+            "ProductCollections",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "Media_Type",
-                table: "ProductCollections",
-                type: "TEXT",
-                nullable: true);
-        }
+        migrationBuilder.AddColumn<string>(
+            "Media_Type",
+            "ProductCollections",
+            "TEXT",
+            nullable: true);
+    }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "Media_Extension",
-                table: "ProductCollections");
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropColumn(
+            "Media_Extension",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Filename",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Filename",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Host",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Host",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Path",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Path",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Position",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Position",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Size",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Size",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Title",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Title",
+            "ProductCollections");
 
-            migrationBuilder.DropColumn(
-                name: "Media_Type",
-                table: "ProductCollections");
+        migrationBuilder.DropColumn(
+            "Media_Type",
+            "ProductCollections");
 
-            migrationBuilder.RenameColumn(
-                name: "Title",
-                table: "ProductCollections",
-                newName: "Name");
-        }
+        migrationBuilder.RenameColumn(
+            "Title",
+            "ProductCollections",
+            "Name");
     }
 }

@@ -14,7 +14,7 @@ public class ProductCollectionConfiguration : BaseEntityTypeConfiguration<Guid, 
 
         builder.Property(x => x.Handle).IsRequired().HasMaxLength(MediumStringLength);
         builder.Property(x => x.Title).IsRequired().HasMaxLength(DefaultStringLength);
-        
+
         builder.OwnsOne(p => p.Media);
     }
 }

@@ -1,67 +1,66 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
+namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite;
+
+public partial class Migration202110262134 : Migration
 {
-    public partial class Migration202110262134 : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "ContinueSellingWhenOutOfStock",
-                table: "Variant");
+        migrationBuilder.DropColumn(
+            "ContinueSellingWhenOutOfStock",
+            "Variant");
 
-            migrationBuilder.AddColumn<DateTime>(
-                name: "CreatedAt",
-                table: "Inventories",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+        migrationBuilder.AddColumn<DateTime>(
+            "CreatedAt",
+            "Inventories",
+            "TEXT",
+            nullable: false,
+            defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
-            migrationBuilder.AddColumn<string>(
-                name: "CreatedBy",
-                table: "Inventories",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<string>(
+            "CreatedBy",
+            "Inventories",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<DateTime>(
-                name: "UpdatedAt",
-                table: "Inventories",
-                type: "TEXT",
-                nullable: true);
+        migrationBuilder.AddColumn<DateTime>(
+            "UpdatedAt",
+            "Inventories",
+            "TEXT",
+            nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "UpdatedBy",
-                table: "Inventories",
-                type: "TEXT",
-                nullable: true);
-        }
+        migrationBuilder.AddColumn<string>(
+            "UpdatedBy",
+            "Inventories",
+            "TEXT",
+            nullable: true);
+    }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "CreatedAt",
-                table: "Inventories");
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropColumn(
+            "CreatedAt",
+            "Inventories");
 
-            migrationBuilder.DropColumn(
-                name: "CreatedBy",
-                table: "Inventories");
+        migrationBuilder.DropColumn(
+            "CreatedBy",
+            "Inventories");
 
-            migrationBuilder.DropColumn(
-                name: "UpdatedAt",
-                table: "Inventories");
+        migrationBuilder.DropColumn(
+            "UpdatedAt",
+            "Inventories");
 
-            migrationBuilder.DropColumn(
-                name: "UpdatedBy",
-                table: "Inventories");
+        migrationBuilder.DropColumn(
+            "UpdatedBy",
+            "Inventories");
 
-            migrationBuilder.AddColumn<bool>(
-                name: "ContinueSellingWhenOutOfStock",
-                table: "Variant",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: false);
-        }
+        migrationBuilder.AddColumn<bool>(
+            "ContinueSellingWhenOutOfStock",
+            "Variant",
+            "INTEGER",
+            nullable: false,
+            defaultValue: false);
     }
 }

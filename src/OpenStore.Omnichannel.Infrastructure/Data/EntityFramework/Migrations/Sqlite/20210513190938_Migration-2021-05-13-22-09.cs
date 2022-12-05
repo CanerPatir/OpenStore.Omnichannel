@@ -7,14 +7,14 @@ public partial class Migration202105132209 : Migration
     protected override void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.DropForeignKey(
-            name: "FK_Inventories_Variant_VariantId",
-            table: "Inventories");
+            "FK_Inventories_Variant_VariantId",
+            "Inventories");
 
         migrationBuilder.AddForeignKey(
-            name: "FK_Inventories_Variant_VariantId",
-            table: "Inventories",
-            column: "VariantId",
-            principalTable: "Variant",
+            "FK_Inventories_Variant_VariantId",
+            "Inventories",
+            "VariantId",
+            "Variant",
             principalColumn: "Id",
             onDelete: ReferentialAction.Cascade);
     }
@@ -22,14 +22,14 @@ public partial class Migration202105132209 : Migration
     protected override void Down(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.DropForeignKey(
-            name: "FK_Inventories_Variant_VariantId",
-            table: "Inventories");
+            "FK_Inventories_Variant_VariantId",
+            "Inventories");
 
         migrationBuilder.AddForeignKey(
-            name: "FK_Inventories_Variant_VariantId",
-            table: "Inventories",
-            column: "VariantId",
-            principalTable: "Variant",
+            "FK_Inventories_Variant_VariantId",
+            "Inventories",
+            "VariantId",
+            "Variant",
             principalColumn: "Id",
             onDelete: ReferentialAction.Restrict);
     }

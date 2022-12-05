@@ -18,6 +18,5 @@ public class ChangeVariantMediaHandler : CommandHandler<ChangeVariantMedia>
         var product = await _repository.GetRequired(command.ProductId, cancellationToken);
         product.ChangeVariantMedia(command);
         await _repository.SaveChangesAsync(cancellationToken);
-        
     }
 }

@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenStore.Data.EntityFramework.EntityConfiguration;
-using OpenStore.Omnichannel.Domain.InventoryContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ProductContext;
@@ -22,7 +21,7 @@ public class VariantConfiguration : BaseEntityTypeConfiguration<Guid, Variant>
         builder.Property(x => x.Barcode).HasMaxLength(StringLengthConstants.DefaultStringLength);
         builder.Property(x => x.Sku).HasMaxLength(StringLengthConstants.DefaultStringLength);
 
-        builder.HasOne<Inventory>(x => x.Inventory)
+        builder.HasOne(x => x.Inventory)
             .WithOne(x => x.Variant)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);

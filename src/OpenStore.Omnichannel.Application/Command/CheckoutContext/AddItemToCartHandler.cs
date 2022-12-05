@@ -16,10 +16,7 @@ public class AddItemToCartHandler : ICommandHandler<AddItemToCart, Guid>
     public async Task<Guid> Handle(AddItemToCart command, CancellationToken cancellationToken)
     {
         var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
-        if (shoppingCart is null)
-        {
-            throw new ApplicationException(Msg.Application.CartNotExists);
-        }
+        if (shoppingCart is null) throw new ApplicationException(Msg.Application.CartNotExists);
 
         var itemId = shoppingCart.AddItem(command);
         await _repository.SaveChangesAsync(cancellationToken);

@@ -21,10 +21,7 @@ public class DeleteVariantsHandler : CommandHandler<DeleteVariants>
         var (productId, variantIds) = command;
         var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == productId, cancellationToken);
         var deleteVariants = product.DeleteVariants(command);
-        foreach (var deleteVariant in deleteVariants)
-        {
-            await _variantRepository.Remove(deleteVariant);
-        }
+        foreach (var deleteVariant in deleteVariants) await _variantRepository.Remove(deleteVariant);
 
         await _repository.SaveChangesAsync(cancellationToken);
     }

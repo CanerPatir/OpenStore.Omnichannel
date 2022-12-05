@@ -6,9 +6,9 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
 public class DeleteProductMediaHandler : CommandHandler<DeleteProductMedia>
 {
-    private readonly ICrudRepository<Product> _repository;
-    private readonly ICrudRepository<ProductMedia> _productMediaRepository;
     private readonly IObjectStorageService _objectStorageService;
+    private readonly ICrudRepository<ProductMedia> _productMediaRepository;
+    private readonly ICrudRepository<Product> _repository;
 
     public DeleteProductMediaHandler(
         ICrudRepository<Product> repository,

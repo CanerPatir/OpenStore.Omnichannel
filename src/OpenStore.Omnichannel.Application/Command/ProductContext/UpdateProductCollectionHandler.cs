@@ -19,12 +19,8 @@ public class UpdateProductCollectionHandler : CommandHandler<UpdateProductCollec
     {
         var productCollection = await _repository.GetAsync(command.ProductCollectionId, cancellationToken);
         if (productCollection.Handle != command.Model.Handle)
-        {
             if (await _repository.Query.AnyAsync(x => x.Handle == command.Model.Handle && x.Id != command.ProductCollectionId, cancellationToken))
-            {
                 throw new DomainException(Msg.Domain.ProductCollection.ProductCollectionHandleAlreadyExists);
-            }
-        }
         productCollection.Update(command);
 
         await _repository.SaveChangesAsync(cancellationToken);

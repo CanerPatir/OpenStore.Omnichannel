@@ -7,777 +7,777 @@ public partial class Migration202105062116 : Migration
     protected override void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.CreateTable(
-            name: "Brands",
-            columns: table => new
+            "Brands",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                Title = table.Column<string>(type: "TEXT", nullable: true),
-                DisplayTitle = table.Column<string>(type: "TEXT", nullable: true),
-                Description = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                Title = table.Column<string>("TEXT", nullable: true),
+                DisplayTitle = table.Column<string>("TEXT", nullable: true),
+                Description = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_Brands", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "Categories",
-            columns: table => new
+            "Categories",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ParentId = table.Column<Guid>(type: "TEXT", nullable: true),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                Title = table.Column<string>(type: "TEXT", nullable: true),
-                DisplayTitle = table.Column<string>(type: "TEXT", nullable: true),
-                Description = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ParentId = table.Column<Guid>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                Title = table.Column<string>("TEXT", nullable: true),
+                DisplayTitle = table.Column<string>("TEXT", nullable: true),
+                Description = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_Categories", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_Categories_Categories_ParentId",
-                    column: x => x.ParentId,
-                    principalTable: "Categories",
-                    principalColumn: "Id",
+                    "FK_Categories_Categories_ParentId",
+                    x => x.ParentId,
+                    "Categories",
+                    "Id",
                     onDelete: ReferentialAction.Restrict);
             });
 
         migrationBuilder.CreateTable(
-            name: "DataProtectionKeys",
-            columns: table => new
+            "DataProtectionKeys",
+            table => new
             {
-                Id = table.Column<int>(type: "INTEGER", nullable: false)
+                Id = table.Column<int>("INTEGER", nullable: false)
                     .Annotation("Sqlite:Autoincrement", true),
-                FriendlyName = table.Column<string>(type: "TEXT", nullable: true),
-                Xml = table.Column<string>(type: "TEXT", nullable: true)
+                FriendlyName = table.Column<string>("TEXT", nullable: true),
+                Xml = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_DataProtectionKeys", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "OpenIddictApplications",
-            columns: table => new
+            "OpenIddictApplications",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ClientId = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                ClientSecret = table.Column<string>(type: "TEXT", nullable: true),
-                ConcurrencyToken = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                ConsentType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                DisplayName = table.Column<string>(type: "TEXT", nullable: true),
-                DisplayNames = table.Column<string>(type: "TEXT", nullable: true),
-                Permissions = table.Column<string>(type: "TEXT", nullable: true),
-                PostLogoutRedirectUris = table.Column<string>(type: "TEXT", nullable: true),
-                Properties = table.Column<string>(type: "TEXT", nullable: true),
-                RedirectUris = table.Column<string>(type: "TEXT", nullable: true),
-                Requirements = table.Column<string>(type: "TEXT", nullable: true),
-                Type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ClientId = table.Column<string>("TEXT", maxLength: 100, nullable: true),
+                ClientSecret = table.Column<string>("TEXT", nullable: true),
+                ConcurrencyToken = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                ConsentType = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                DisplayName = table.Column<string>("TEXT", nullable: true),
+                DisplayNames = table.Column<string>("TEXT", nullable: true),
+                Permissions = table.Column<string>("TEXT", nullable: true),
+                PostLogoutRedirectUris = table.Column<string>("TEXT", nullable: true),
+                Properties = table.Column<string>("TEXT", nullable: true),
+                RedirectUris = table.Column<string>("TEXT", nullable: true),
+                Requirements = table.Column<string>("TEXT", nullable: true),
+                Type = table.Column<string>("TEXT", maxLength: 50, nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_OpenIddictApplications", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "OpenIddictScopes",
-            columns: table => new
+            "OpenIddictScopes",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ConcurrencyToken = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                Description = table.Column<string>(type: "TEXT", nullable: true),
-                Descriptions = table.Column<string>(type: "TEXT", nullable: true),
-                DisplayName = table.Column<string>(type: "TEXT", nullable: true),
-                DisplayNames = table.Column<string>(type: "TEXT", nullable: true),
-                Name = table.Column<string>(type: "TEXT", maxLength: 191, nullable: true),
-                Properties = table.Column<string>(type: "TEXT", nullable: true),
-                Resources = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ConcurrencyToken = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                Description = table.Column<string>("TEXT", nullable: true),
+                Descriptions = table.Column<string>("TEXT", nullable: true),
+                DisplayName = table.Column<string>("TEXT", nullable: true),
+                DisplayNames = table.Column<string>("TEXT", nullable: true),
+                Name = table.Column<string>("TEXT", maxLength: 191, nullable: true),
+                Properties = table.Column<string>("TEXT", nullable: true),
+                Resources = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_OpenIddictScopes", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "OutBoxMessages",
-            columns: table => new
+            "OutBoxMessages",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                Committed = table.Column<bool>(type: "INTEGER", nullable: false),
-                AggregateId = table.Column<string>(type: "TEXT", nullable: false),
-                Type = table.Column<string>(type: "TEXT", nullable: false),
-                Payload = table.Column<string>(type: "TEXT", nullable: false),
-                Timestamp = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CorrelationId = table.Column<string>(type: "TEXT", nullable: true),
-                CommittedBy = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Committed = table.Column<bool>("INTEGER", nullable: false),
+                AggregateId = table.Column<string>("TEXT", nullable: false),
+                Type = table.Column<string>("TEXT", nullable: false),
+                Payload = table.Column<string>("TEXT", nullable: false),
+                Timestamp = table.Column<DateTimeOffset>("TEXT", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CorrelationId = table.Column<string>("TEXT", nullable: true),
+                CommittedBy = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_OutBoxMessages", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "Roles",
-            columns: table => new
+            "Roles",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                Name = table.Column<string>(type: "TEXT", maxLength: 191, nullable: true),
-                NormalizedName = table.Column<string>(type: "TEXT", maxLength: 191, nullable: true),
-                ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                Name = table.Column<string>("TEXT", maxLength: 191, nullable: true),
+                NormalizedName = table.Column<string>("TEXT", maxLength: 191, nullable: true),
+                ConcurrencyStamp = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_Roles", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "SaleChannel",
-            columns: table => new
+            "SaleChannel",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                Description = table.Column<string>(type: "TEXT", nullable: true),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Name = table.Column<string>("TEXT", maxLength: 255, nullable: false),
+                Description = table.Column<string>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table => { table.PrimaryKey("PK_SaleChannel", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "Users",
-            columns: table => new
+            "Users",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                BirthDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                Name = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                Surname = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                Tckn = table.Column<string>(type: "TEXT", maxLength: 11, nullable: true),
-                PhotoPath = table.Column<string>(type: "TEXT", nullable: true),
-                Gender = table.Column<int>(type: "INTEGER", nullable: true),
-                RowVersion = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                UserName = table.Column<string>(type: "TEXT", maxLength: 191, nullable: true),
-                NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 191, nullable: true),
-                Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
-                SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
-                ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
-                PhoneNumber = table.Column<string>(type: "TEXT", maxLength: 15, nullable: true),
-                PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
-                TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
-                LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                BirthDate = table.Column<DateTime>("TEXT", nullable: true),
+                Name = table.Column<string>("TEXT", maxLength: 255, nullable: false),
+                Surname = table.Column<string>("TEXT", maxLength: 255, nullable: false),
+                Tckn = table.Column<string>("TEXT", maxLength: 11, nullable: true),
+                PhotoPath = table.Column<string>("TEXT", nullable: true),
+                Gender = table.Column<int>("INTEGER", nullable: true),
+                RowVersion = table.Column<byte[]>("BLOB", rowVersion: true, nullable: true),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", maxLength: 255, nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", maxLength: 255, nullable: true),
+                UserName = table.Column<string>("TEXT", maxLength: 191, nullable: true),
+                NormalizedUserName = table.Column<string>("TEXT", maxLength: 191, nullable: true),
+                Email = table.Column<string>("TEXT", maxLength: 256, nullable: true),
+                NormalizedEmail = table.Column<string>("TEXT", maxLength: 256, nullable: true),
+                EmailConfirmed = table.Column<bool>("INTEGER", nullable: false),
+                PasswordHash = table.Column<string>("TEXT", nullable: true),
+                SecurityStamp = table.Column<string>("TEXT", nullable: true),
+                ConcurrencyStamp = table.Column<string>("TEXT", nullable: true),
+                PhoneNumber = table.Column<string>("TEXT", maxLength: 15, nullable: true),
+                PhoneNumberConfirmed = table.Column<bool>("INTEGER", nullable: false),
+                TwoFactorEnabled = table.Column<bool>("INTEGER", nullable: false),
+                LockoutEnd = table.Column<DateTimeOffset>("TEXT", nullable: true),
+                LockoutEnabled = table.Column<bool>("INTEGER", nullable: false),
+                AccessFailedCount = table.Column<int>("INTEGER", nullable: false)
             },
             constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
         migrationBuilder.CreateTable(
-            name: "BrandMedias",
-            columns: table => new
+            "BrandMedias",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                BrandId = table.Column<Guid>(type: "TEXT", nullable: true),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                Host = table.Column<string>(type: "TEXT", nullable: true),
-                Path = table.Column<string>(type: "TEXT", nullable: true),
-                Type = table.Column<string>(type: "TEXT", nullable: true),
-                Extension = table.Column<string>(type: "TEXT", nullable: true),
-                Filename = table.Column<string>(type: "TEXT", nullable: true),
-                Title = table.Column<string>(type: "TEXT", nullable: true),
-                Position = table.Column<int>(type: "INTEGER", nullable: false),
-                Size = table.Column<long>(type: "INTEGER", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                BrandId = table.Column<Guid>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                Host = table.Column<string>("TEXT", nullable: true),
+                Path = table.Column<string>("TEXT", nullable: true),
+                Type = table.Column<string>("TEXT", nullable: true),
+                Extension = table.Column<string>("TEXT", nullable: true),
+                Filename = table.Column<string>("TEXT", nullable: true),
+                Title = table.Column<string>("TEXT", nullable: true),
+                Position = table.Column<int>("INTEGER", nullable: false),
+                Size = table.Column<long>("INTEGER", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_BrandMedias", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_BrandMedias_Brands_BrandId",
-                    column: x => x.BrandId,
-                    principalTable: "Brands",
-                    principalColumn: "Id",
+                    "FK_BrandMedias_Brands_BrandId",
+                    x => x.BrandId,
+                    "Brands",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "Products",
-            columns: table => new
+            "Products",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                Handle = table.Column<string>(type: "TEXT", maxLength: 512, nullable: false),
-                Title = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                Description = table.Column<string>(type: "TEXT", nullable: true),
-                HasMultipleVariants = table.Column<bool>(type: "INTEGER", nullable: false),
-                Status = table.Column<int>(type: "INTEGER", nullable: false),
-                MetaTitle = table.Column<string>(type: "TEXT", nullable: true),
-                MetaDescription = table.Column<string>(type: "TEXT", nullable: true),
-                Tags = table.Column<string>(type: "TEXT", nullable: true),
-                IsPhysicalProduct = table.Column<bool>(type: "INTEGER", nullable: false),
-                Weight = table.Column<decimal>(type: "TEXT", precision: 9, scale: 2, nullable: true),
-                WeightUnit = table.Column<string>(type: "TEXT", nullable: true),
-                HsCode = table.Column<string>(type: "TEXT", nullable: true),
-                BrandId = table.Column<Guid>(type: "TEXT", nullable: true),
-                Options = table.Column<string>(type: "TEXT", nullable: true),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                SoftDeleted = table.Column<bool>(type: "INTEGER", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Handle = table.Column<string>("TEXT", maxLength: 512, nullable: false),
+                Title = table.Column<string>("TEXT", maxLength: 255, nullable: false),
+                Description = table.Column<string>("TEXT", nullable: true),
+                HasMultipleVariants = table.Column<bool>("INTEGER", nullable: false),
+                Status = table.Column<int>("INTEGER", nullable: false),
+                MetaTitle = table.Column<string>("TEXT", nullable: true),
+                MetaDescription = table.Column<string>("TEXT", nullable: true),
+                Tags = table.Column<string>("TEXT", nullable: true),
+                IsPhysicalProduct = table.Column<bool>("INTEGER", nullable: false),
+                Weight = table.Column<decimal>("TEXT", precision: 9, scale: 2, nullable: true),
+                WeightUnit = table.Column<string>("TEXT", nullable: true),
+                HsCode = table.Column<string>("TEXT", nullable: true),
+                BrandId = table.Column<Guid>("TEXT", nullable: true),
+                Options = table.Column<string>("TEXT", nullable: true),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                SoftDeleted = table.Column<bool>("INTEGER", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_Products", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_Products_Brands_BrandId",
-                    column: x => x.BrandId,
-                    principalTable: "Brands",
-                    principalColumn: "Id",
+                    "FK_Products_Brands_BrandId",
+                    x => x.BrandId,
+                    "Brands",
+                    "Id",
                     onDelete: ReferentialAction.Restrict);
             });
 
         migrationBuilder.CreateTable(
-            name: "CategoryMedias",
-            columns: table => new
+            "CategoryMedias",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                CategoryId = table.Column<Guid>(type: "TEXT", nullable: true),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                Host = table.Column<string>(type: "TEXT", nullable: true),
-                Path = table.Column<string>(type: "TEXT", nullable: true),
-                Type = table.Column<string>(type: "TEXT", nullable: true),
-                Extension = table.Column<string>(type: "TEXT", nullable: true),
-                Filename = table.Column<string>(type: "TEXT", nullable: true),
-                Title = table.Column<string>(type: "TEXT", nullable: true),
-                Position = table.Column<int>(type: "INTEGER", nullable: false),
-                Size = table.Column<long>(type: "INTEGER", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                CategoryId = table.Column<Guid>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                Host = table.Column<string>("TEXT", nullable: true),
+                Path = table.Column<string>("TEXT", nullable: true),
+                Type = table.Column<string>("TEXT", nullable: true),
+                Extension = table.Column<string>("TEXT", nullable: true),
+                Filename = table.Column<string>("TEXT", nullable: true),
+                Title = table.Column<string>("TEXT", nullable: true),
+                Position = table.Column<int>("INTEGER", nullable: false),
+                Size = table.Column<long>("INTEGER", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_CategoryMedias", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_CategoryMedias_Categories_CategoryId",
-                    column: x => x.CategoryId,
-                    principalTable: "Categories",
-                    principalColumn: "Id",
+                    "FK_CategoryMedias_Categories_CategoryId",
+                    x => x.CategoryId,
+                    "Categories",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "OpenIddictAuthorizations",
-            columns: table => new
+            "OpenIddictAuthorizations",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ApplicationId = table.Column<Guid>(type: "TEXT", nullable: true),
-                ConcurrencyToken = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                Properties = table.Column<string>(type: "TEXT", nullable: true),
-                Scopes = table.Column<string>(type: "TEXT", nullable: true),
-                Status = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                Subject = table.Column<string>(type: "TEXT", maxLength: 400, nullable: true),
-                Type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ApplicationId = table.Column<Guid>("TEXT", nullable: true),
+                ConcurrencyToken = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                CreationDate = table.Column<DateTime>("TEXT", nullable: true),
+                Properties = table.Column<string>("TEXT", nullable: true),
+                Scopes = table.Column<string>("TEXT", nullable: true),
+                Status = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                Subject = table.Column<string>("TEXT", maxLength: 400, nullable: true),
+                Type = table.Column<string>("TEXT", maxLength: 50, nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_OpenIddictAuthorizations", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_OpenIddictAuthorizations_OpenIddictApplications_ApplicationId",
-                    column: x => x.ApplicationId,
-                    principalTable: "OpenIddictApplications",
-                    principalColumn: "Id",
+                    "FK_OpenIddictAuthorizations_OpenIddictApplications_ApplicationId",
+                    x => x.ApplicationId,
+                    "OpenIddictApplications",
+                    "Id",
                     onDelete: ReferentialAction.Restrict);
             });
 
         migrationBuilder.CreateTable(
-            name: "RoleClaims",
-            columns: table => new
+            "RoleClaims",
+            table => new
             {
-                Id = table.Column<int>(type: "INTEGER", nullable: false)
+                Id = table.Column<int>("INTEGER", nullable: false)
                     .Annotation("Sqlite:Autoincrement", true),
-                RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
-                ClaimType = table.Column<string>(type: "TEXT", nullable: true),
-                ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
+                RoleId = table.Column<Guid>("TEXT", nullable: false),
+                ClaimType = table.Column<string>("TEXT", nullable: true),
+                ClaimValue = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_RoleClaims", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_RoleClaims_Roles_RoleId",
-                    column: x => x.RoleId,
-                    principalTable: "Roles",
-                    principalColumn: "Id",
+                    "FK_RoleClaims_Roles_RoleId",
+                    x => x.RoleId,
+                    "Roles",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "UserClaims",
-            columns: table => new
+            "UserClaims",
+            table => new
             {
-                Id = table.Column<int>(type: "INTEGER", nullable: false)
+                Id = table.Column<int>("INTEGER", nullable: false)
                     .Annotation("Sqlite:Autoincrement", true),
-                UserId = table.Column<Guid>(type: "TEXT", nullable: false),
-                ClaimType = table.Column<string>(type: "TEXT", nullable: true),
-                ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
+                UserId = table.Column<Guid>("TEXT", nullable: false),
+                ClaimType = table.Column<string>("TEXT", nullable: true),
+                ClaimValue = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_UserClaims", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_UserClaims_Users_UserId",
-                    column: x => x.UserId,
-                    principalTable: "Users",
-                    principalColumn: "Id",
+                    "FK_UserClaims_Users_UserId",
+                    x => x.UserId,
+                    "Users",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "UserLogins",
-            columns: table => new
+            "UserLogins",
+            table => new
             {
-                LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
-                ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
-                ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
-                UserId = table.Column<Guid>(type: "TEXT", nullable: false)
+                LoginProvider = table.Column<string>("TEXT", nullable: false),
+                ProviderKey = table.Column<string>("TEXT", nullable: false),
+                ProviderDisplayName = table.Column<string>("TEXT", nullable: true),
+                UserId = table.Column<Guid>("TEXT", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
                 table.ForeignKey(
-                    name: "FK_UserLogins_Users_UserId",
-                    column: x => x.UserId,
-                    principalTable: "Users",
-                    principalColumn: "Id",
+                    "FK_UserLogins_Users_UserId",
+                    x => x.UserId,
+                    "Users",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "UserRoles",
-            columns: table => new
+            "UserRoles",
+            table => new
             {
-                UserId = table.Column<Guid>(type: "TEXT", nullable: false),
-                RoleId = table.Column<Guid>(type: "TEXT", nullable: false)
+                UserId = table.Column<Guid>("TEXT", nullable: false),
+                RoleId = table.Column<Guid>("TEXT", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
                 table.ForeignKey(
-                    name: "FK_UserRoles_Roles_RoleId",
-                    column: x => x.RoleId,
-                    principalTable: "Roles",
-                    principalColumn: "Id",
+                    "FK_UserRoles_Roles_RoleId",
+                    x => x.RoleId,
+                    "Roles",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
                 table.ForeignKey(
-                    name: "FK_UserRoles_Users_UserId",
-                    column: x => x.UserId,
-                    principalTable: "Users",
-                    principalColumn: "Id",
+                    "FK_UserRoles_Users_UserId",
+                    x => x.UserId,
+                    "Users",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "UserTokens",
-            columns: table => new
+            "UserTokens",
+            table => new
             {
-                UserId = table.Column<Guid>(type: "TEXT", nullable: false),
-                LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
-                Name = table.Column<string>(type: "TEXT", nullable: false),
-                Value = table.Column<string>(type: "TEXT", nullable: true)
+                UserId = table.Column<Guid>("TEXT", nullable: false),
+                LoginProvider = table.Column<string>("TEXT", nullable: false),
+                Name = table.Column<string>("TEXT", nullable: false),
+                Value = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                 table.ForeignKey(
-                    name: "FK_UserTokens_Users_UserId",
-                    column: x => x.UserId,
-                    principalTable: "Users",
-                    principalColumn: "Id",
+                    "FK_UserTokens_Users_UserId",
+                    x => x.UserId,
+                    "Users",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "CategoryProducts",
-            columns: table => new
+            "CategoryProducts",
+            table => new
             {
-                CategoryId = table.Column<Guid>(type: "TEXT", nullable: false),
-                ProductId = table.Column<Guid>(type: "TEXT", nullable: false)
+                CategoryId = table.Column<Guid>("TEXT", nullable: false),
+                ProductId = table.Column<Guid>("TEXT", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_CategoryProducts", x => new { x.CategoryId, x.ProductId });
                 table.ForeignKey(
-                    name: "FK_CategoryProducts_Categories_CategoryId",
-                    column: x => x.CategoryId,
-                    principalTable: "Categories",
-                    principalColumn: "Id",
+                    "FK_CategoryProducts_Categories_CategoryId",
+                    x => x.CategoryId,
+                    "Categories",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
                 table.ForeignKey(
-                    name: "FK_CategoryProducts_Products_ProductId",
-                    column: x => x.ProductId,
-                    principalTable: "Products",
-                    principalColumn: "Id",
+                    "FK_CategoryProducts_Products_ProductId",
+                    x => x.ProductId,
+                    "Products",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "ProductMedias",
-            columns: table => new
+            "ProductMedias",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ProductId = table.Column<Guid>(type: "TEXT", nullable: true),
-                VariantIds = table.Column<string>(type: "TEXT", nullable: true),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                Host = table.Column<string>(type: "TEXT", nullable: true),
-                Path = table.Column<string>(type: "TEXT", nullable: true),
-                Type = table.Column<string>(type: "TEXT", nullable: true),
-                Extension = table.Column<string>(type: "TEXT", nullable: true),
-                Filename = table.Column<string>(type: "TEXT", nullable: true),
-                Title = table.Column<string>(type: "TEXT", nullable: true),
-                Position = table.Column<int>(type: "INTEGER", nullable: false),
-                Size = table.Column<long>(type: "INTEGER", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ProductId = table.Column<Guid>("TEXT", nullable: true),
+                VariantIds = table.Column<string>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true),
+                Host = table.Column<string>("TEXT", nullable: true),
+                Path = table.Column<string>("TEXT", nullable: true),
+                Type = table.Column<string>("TEXT", nullable: true),
+                Extension = table.Column<string>("TEXT", nullable: true),
+                Filename = table.Column<string>("TEXT", nullable: true),
+                Title = table.Column<string>("TEXT", nullable: true),
+                Position = table.Column<int>("INTEGER", nullable: false),
+                Size = table.Column<long>("INTEGER", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_ProductMedias", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_ProductMedias_Products_ProductId",
-                    column: x => x.ProductId,
-                    principalTable: "Products",
-                    principalColumn: "Id",
+                    "FK_ProductMedias_Products_ProductId",
+                    x => x.ProductId,
+                    "Products",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "SaleChannelProducts",
-            columns: table => new
+            "SaleChannelProducts",
+            table => new
             {
-                ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
-                SaleChannelId = table.Column<Guid>(type: "TEXT", nullable: false)
+                ProductId = table.Column<Guid>("TEXT", nullable: false),
+                SaleChannelId = table.Column<Guid>("TEXT", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_SaleChannelProducts", x => new { x.SaleChannelId, x.ProductId });
                 table.ForeignKey(
-                    name: "FK_SaleChannelProducts_Products_ProductId",
-                    column: x => x.ProductId,
-                    principalTable: "Products",
-                    principalColumn: "Id",
+                    "FK_SaleChannelProducts_Products_ProductId",
+                    x => x.ProductId,
+                    "Products",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
                 table.ForeignKey(
-                    name: "FK_SaleChannelProducts_SaleChannel_SaleChannelId",
-                    column: x => x.SaleChannelId,
-                    principalTable: "SaleChannel",
-                    principalColumn: "Id",
+                    "FK_SaleChannelProducts_SaleChannel_SaleChannelId",
+                    x => x.SaleChannelId,
+                    "SaleChannel",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "Variant",
-            columns: table => new
+            "Variant",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ProductId = table.Column<Guid>(type: "TEXT", nullable: false),
-                Option1 = table.Column<string>(type: "TEXT", nullable: true),
-                Option2 = table.Column<string>(type: "TEXT", nullable: true),
-                Option3 = table.Column<string>(type: "TEXT", nullable: true),
-                Price = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
-                CompareAtPrice = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: true),
-                Cost = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: true),
-                CalculateTaxAdditionally = table.Column<bool>(type: "INTEGER", nullable: false),
-                Sku = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                Barcode = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true),
-                TrackQuantity = table.Column<bool>(type: "INTEGER", nullable: false),
-                ContinueSellingWhenOutOfStock = table.Column<bool>(type: "INTEGER", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false),
-                CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                UpdatedBy = table.Column<string>(type: "TEXT", nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ProductId = table.Column<Guid>("TEXT", nullable: false),
+                Option1 = table.Column<string>("TEXT", nullable: true),
+                Option2 = table.Column<string>("TEXT", nullable: true),
+                Option3 = table.Column<string>("TEXT", nullable: true),
+                Price = table.Column<decimal>("TEXT", precision: 18, scale: 2, nullable: false),
+                CompareAtPrice = table.Column<decimal>("TEXT", precision: 18, scale: 2, nullable: true),
+                Cost = table.Column<decimal>("TEXT", precision: 18, scale: 2, nullable: true),
+                CalculateTaxAdditionally = table.Column<bool>("INTEGER", nullable: false),
+                Sku = table.Column<string>("TEXT", maxLength: 255, nullable: true),
+                Barcode = table.Column<string>("TEXT", maxLength: 255, nullable: true),
+                TrackQuantity = table.Column<bool>("INTEGER", nullable: false),
+                ContinueSellingWhenOutOfStock = table.Column<bool>("INTEGER", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_Variant", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_Variant_Products_ProductId",
-                    column: x => x.ProductId,
-                    principalTable: "Products",
-                    principalColumn: "Id",
+                    "FK_Variant_Products_ProductId",
+                    x => x.ProductId,
+                    "Products",
+                    "Id",
                     onDelete: ReferentialAction.Cascade);
             });
 
         migrationBuilder.CreateTable(
-            name: "OpenIddictTokens",
-            columns: table => new
+            "OpenIddictTokens",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                ApplicationId = table.Column<Guid>(type: "TEXT", nullable: true),
-                AuthorizationId = table.Column<Guid>(type: "TEXT", nullable: true),
-                ConcurrencyToken = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                CreationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                Payload = table.Column<string>(type: "TEXT", nullable: true),
-                Properties = table.Column<string>(type: "TEXT", nullable: true),
-                RedemptionDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                ReferenceId = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                Status = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true),
-                Subject = table.Column<string>(type: "TEXT", maxLength: 400, nullable: true),
-                Type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: true)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                ApplicationId = table.Column<Guid>("TEXT", nullable: true),
+                AuthorizationId = table.Column<Guid>("TEXT", nullable: true),
+                ConcurrencyToken = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                CreationDate = table.Column<DateTime>("TEXT", nullable: true),
+                ExpirationDate = table.Column<DateTime>("TEXT", nullable: true),
+                Payload = table.Column<string>("TEXT", nullable: true),
+                Properties = table.Column<string>("TEXT", nullable: true),
+                RedemptionDate = table.Column<DateTime>("TEXT", nullable: true),
+                ReferenceId = table.Column<string>("TEXT", maxLength: 100, nullable: true),
+                Status = table.Column<string>("TEXT", maxLength: 50, nullable: true),
+                Subject = table.Column<string>("TEXT", maxLength: 400, nullable: true),
+                Type = table.Column<string>("TEXT", maxLength: 50, nullable: true)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_OpenIddictTokens", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
-                    column: x => x.ApplicationId,
-                    principalTable: "OpenIddictApplications",
-                    principalColumn: "Id",
+                    "FK_OpenIddictTokens_OpenIddictApplications_ApplicationId",
+                    x => x.ApplicationId,
+                    "OpenIddictApplications",
+                    "Id",
                     onDelete: ReferentialAction.Restrict);
                 table.ForeignKey(
-                    name: "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
-                    column: x => x.AuthorizationId,
-                    principalTable: "OpenIddictAuthorizations",
-                    principalColumn: "Id",
+                    "FK_OpenIddictTokens_OpenIddictAuthorizations_AuthorizationId",
+                    x => x.AuthorizationId,
+                    "OpenIddictAuthorizations",
+                    "Id",
                     onDelete: ReferentialAction.Restrict);
             });
 
         migrationBuilder.CreateTable(
-            name: "Inventories",
-            columns: table => new
+            "Inventories",
+            table => new
             {
-                Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                VariantId = table.Column<Guid>(type: "TEXT", nullable: false),
-                Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                AvailableQuantity = table.Column<int>(type: "INTEGER", nullable: false),
-                ContinueSellingWhenOutOfStock = table.Column<bool>(type: "INTEGER", nullable: false),
-                Version = table.Column<long>(type: "INTEGER", nullable: false)
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                VariantId = table.Column<Guid>("TEXT", nullable: false),
+                Quantity = table.Column<int>("INTEGER", nullable: false),
+                AvailableQuantity = table.Column<int>("INTEGER", nullable: false),
+                ContinueSellingWhenOutOfStock = table.Column<bool>("INTEGER", nullable: false),
+                Version = table.Column<long>("INTEGER", nullable: false)
             },
             constraints: table =>
             {
                 table.PrimaryKey("PK_Inventories", x => x.Id);
                 table.ForeignKey(
-                    name: "FK_Inventories_Variant_VariantId",
-                    column: x => x.VariantId,
-                    principalTable: "Variant",
-                    principalColumn: "Id",
+                    "FK_Inventories_Variant_VariantId",
+                    x => x.VariantId,
+                    "Variant",
+                    "Id",
                     onDelete: ReferentialAction.Restrict);
             });
 
         migrationBuilder.CreateIndex(
-            name: "IX_BrandMedias_BrandId",
-            table: "BrandMedias",
-            column: "BrandId");
+            "IX_BrandMedias_BrandId",
+            "BrandMedias",
+            "BrandId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Categories_ParentId",
-            table: "Categories",
-            column: "ParentId");
+            "IX_Categories_ParentId",
+            "Categories",
+            "ParentId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_CategoryMedias_CategoryId",
-            table: "CategoryMedias",
-            column: "CategoryId");
+            "IX_CategoryMedias_CategoryId",
+            "CategoryMedias",
+            "CategoryId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_CategoryProducts_ProductId",
-            table: "CategoryProducts",
-            column: "ProductId");
+            "IX_CategoryProducts_ProductId",
+            "CategoryProducts",
+            "ProductId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Inventories_VariantId",
-            table: "Inventories",
-            column: "VariantId",
+            "IX_Inventories_VariantId",
+            "Inventories",
+            "VariantId",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_OpenIddictApplications_ClientId",
-            table: "OpenIddictApplications",
-            column: "ClientId",
+            "IX_OpenIddictApplications_ClientId",
+            "OpenIddictApplications",
+            "ClientId",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_OpenIddictAuthorizations_ApplicationId_Status_Subject_Type",
-            table: "OpenIddictAuthorizations",
-            columns: new[] { "ApplicationId", "Status", "Subject", "Type" });
+            "IX_OpenIddictAuthorizations_ApplicationId_Status_Subject_Type",
+            "OpenIddictAuthorizations",
+            new[] { "ApplicationId", "Status", "Subject", "Type" });
 
         migrationBuilder.CreateIndex(
-            name: "IX_OpenIddictScopes_Name",
-            table: "OpenIddictScopes",
-            column: "Name",
+            "IX_OpenIddictScopes_Name",
+            "OpenIddictScopes",
+            "Name",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_OpenIddictTokens_ApplicationId_Status_Subject_Type",
-            table: "OpenIddictTokens",
-            columns: new[] { "ApplicationId", "Status", "Subject", "Type" });
+            "IX_OpenIddictTokens_ApplicationId_Status_Subject_Type",
+            "OpenIddictTokens",
+            new[] { "ApplicationId", "Status", "Subject", "Type" });
 
         migrationBuilder.CreateIndex(
-            name: "IX_OpenIddictTokens_AuthorizationId",
-            table: "OpenIddictTokens",
-            column: "AuthorizationId");
+            "IX_OpenIddictTokens_AuthorizationId",
+            "OpenIddictTokens",
+            "AuthorizationId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_OpenIddictTokens_ReferenceId",
-            table: "OpenIddictTokens",
-            column: "ReferenceId",
+            "IX_OpenIddictTokens_ReferenceId",
+            "OpenIddictTokens",
+            "ReferenceId",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_ProductMedias_ProductId",
-            table: "ProductMedias",
-            column: "ProductId");
+            "IX_ProductMedias_ProductId",
+            "ProductMedias",
+            "ProductId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Products_BrandId",
-            table: "Products",
-            column: "BrandId");
+            "IX_Products_BrandId",
+            "Products",
+            "BrandId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Products_Handle",
-            table: "Products",
-            column: "Handle",
+            "IX_Products_Handle",
+            "Products",
+            "Handle",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_RoleClaims_RoleId",
-            table: "RoleClaims",
-            column: "RoleId");
+            "IX_RoleClaims_RoleId",
+            "RoleClaims",
+            "RoleId");
 
         migrationBuilder.CreateIndex(
-            name: "RoleNameIndex",
-            table: "Roles",
-            column: "NormalizedName",
+            "RoleNameIndex",
+            "Roles",
+            "NormalizedName",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_SaleChannelProducts_ProductId",
-            table: "SaleChannelProducts",
-            column: "ProductId");
+            "IX_SaleChannelProducts_ProductId",
+            "SaleChannelProducts",
+            "ProductId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_UserClaims_UserId",
-            table: "UserClaims",
-            column: "UserId");
+            "IX_UserClaims_UserId",
+            "UserClaims",
+            "UserId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_UserLogins_UserId",
-            table: "UserLogins",
-            column: "UserId");
+            "IX_UserLogins_UserId",
+            "UserLogins",
+            "UserId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_UserRoles_RoleId",
-            table: "UserRoles",
-            column: "RoleId");
+            "IX_UserRoles_RoleId",
+            "UserRoles",
+            "RoleId");
 
         migrationBuilder.CreateIndex(
-            name: "EmailIndex",
-            table: "Users",
-            column: "NormalizedEmail");
+            "EmailIndex",
+            "Users",
+            "NormalizedEmail");
 
         migrationBuilder.CreateIndex(
-            name: "UserNameIndex",
-            table: "Users",
-            column: "NormalizedUserName",
+            "UserNameIndex",
+            "Users",
+            "NormalizedUserName",
             unique: true);
 
         migrationBuilder.CreateIndex(
-            name: "IX_Variant_Barcode",
-            table: "Variant",
-            column: "Barcode");
+            "IX_Variant_Barcode",
+            "Variant",
+            "Barcode");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Variant_ProductId",
-            table: "Variant",
-            column: "ProductId");
+            "IX_Variant_ProductId",
+            "Variant",
+            "ProductId");
 
         migrationBuilder.CreateIndex(
-            name: "IX_Variant_Sku",
-            table: "Variant",
-            column: "Sku");
+            "IX_Variant_Sku",
+            "Variant",
+            "Sku");
     }
 
     protected override void Down(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.DropTable(
-            name: "BrandMedias");
+            "BrandMedias");
 
         migrationBuilder.DropTable(
-            name: "CategoryMedias");
+            "CategoryMedias");
 
         migrationBuilder.DropTable(
-            name: "CategoryProducts");
+            "CategoryProducts");
 
         migrationBuilder.DropTable(
-            name: "DataProtectionKeys");
+            "DataProtectionKeys");
 
         migrationBuilder.DropTable(
-            name: "Inventories");
+            "Inventories");
 
         migrationBuilder.DropTable(
-            name: "OpenIddictScopes");
+            "OpenIddictScopes");
 
         migrationBuilder.DropTable(
-            name: "OpenIddictTokens");
+            "OpenIddictTokens");
 
         migrationBuilder.DropTable(
-            name: "OutBoxMessages");
+            "OutBoxMessages");
 
         migrationBuilder.DropTable(
-            name: "ProductMedias");
+            "ProductMedias");
 
         migrationBuilder.DropTable(
-            name: "RoleClaims");
+            "RoleClaims");
 
         migrationBuilder.DropTable(
-            name: "SaleChannelProducts");
+            "SaleChannelProducts");
 
         migrationBuilder.DropTable(
-            name: "UserClaims");
+            "UserClaims");
 
         migrationBuilder.DropTable(
-            name: "UserLogins");
+            "UserLogins");
 
         migrationBuilder.DropTable(
-            name: "UserRoles");
+            "UserRoles");
 
         migrationBuilder.DropTable(
-            name: "UserTokens");
+            "UserTokens");
 
         migrationBuilder.DropTable(
-            name: "Categories");
+            "Categories");
 
         migrationBuilder.DropTable(
-            name: "Variant");
+            "Variant");
 
         migrationBuilder.DropTable(
-            name: "OpenIddictAuthorizations");
+            "OpenIddictAuthorizations");
 
         migrationBuilder.DropTable(
-            name: "SaleChannel");
+            "SaleChannel");
 
         migrationBuilder.DropTable(
-            name: "Roles");
+            "Roles");
 
         migrationBuilder.DropTable(
-            name: "Users");
+            "Users");
 
         migrationBuilder.DropTable(
-            name: "Products");
+            "Products");
 
         migrationBuilder.DropTable(
-            name: "OpenIddictApplications");
+            "OpenIddictApplications");
 
         migrationBuilder.DropTable(
-            name: "Brands");
+            "Brands");
     }
 }

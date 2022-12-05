@@ -10,7 +10,7 @@ public class FulfillmentConfiguration : BaseEntityTypeConfiguration<Guid, Fulfil
     public override void Configure(EntityTypeBuilder<Fulfillment> builder)
     {
         base.Configure(builder);
-        
+
         builder.OwnsOne(x => x.ShippingAddress);
 
         builder.HasMany(x => x.FulfillmentItems)

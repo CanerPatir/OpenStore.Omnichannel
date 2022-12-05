@@ -23,7 +23,7 @@ public static class ServiceCollectionExtensions
     private const string ElasticSearchConfigSectionKey = "elasticsearch";
 
     /// <summary>
-    /// Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
+    ///     Adds memory cache, ef dbContext pool, identity data dependencies and authorization policies
     /// </summary>
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IMvcBuilder mvcBuilder,
         IHostEnvironment environment,

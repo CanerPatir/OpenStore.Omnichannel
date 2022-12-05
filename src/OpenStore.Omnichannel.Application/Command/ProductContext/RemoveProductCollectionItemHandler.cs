@@ -21,11 +21,8 @@ public class RemoveProductCollectionItemHandler : CommandHandler<RemoveProductCo
         var productCollection = await _repository.Query
             .Include(x => x.ProductItems)
             .SingleOrDefaultAsync(x => x.Id == productCollectionId, cancellationToken);
-     
-        if (productCollection is null)
-        {
-            throw new ResourceNotFoundException();
-        }
+
+        if (productCollection is null) throw new ResourceNotFoundException();
 
         productCollection.RemoveItem(command);
         await _repository.SaveChangesAsync(cancellationToken);

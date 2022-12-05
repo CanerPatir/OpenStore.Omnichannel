@@ -21,9 +21,6 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
     {
     }
 
-    // DataProtection
-    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
-
     // Product context
     public DbSet<Product> Products { get; set; }
     public DbSet<ProductMedia> ProductMedias { get; set; }
@@ -45,12 +42,15 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
     public DbSet<Category> Categories { get; set; }
     public DbSet<CategoryMedia> CategoryMedias { get; set; }
     public DbSet<CategoryProduct> CategoryProducts { get; set; }
-
-    public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
     public DbSet<ApplicationUserAddress> UserAddresses { get; set; }
 
     // Oms Context
     public DbSet<Order> Orders { get; set; }
+
+    // DataProtection
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+
+    public DbSet<OutBoxMessage> OutBoxMessages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -59,8 +59,8 @@ public abstract class ApplicationDbContext : IdentityDbContext<ApplicationUser, 
         builder.ConfigureSoftDelete();
 
         // Identity entities
-        builder.Entity<ApplicationUser>(entity => entity.ToTable(name: "Users"));
-        builder.Entity<ApplicationRole>(entity => entity.ToTable(name: "Roles"));
+        builder.Entity<ApplicationUser>(entity => entity.ToTable("Users"));
+        builder.Entity<ApplicationRole>(entity => entity.ToTable("Roles"));
         builder.Entity<IdentityUserRole<Guid>>(entity => entity.ToTable("UserRoles"));
         builder.Entity<IdentityUserClaim<Guid>>(entity => entity.ToTable("UserClaims"));
         builder.Entity<IdentityUserLogin<Guid>>(entity => entity.ToTable("UserLogins"));

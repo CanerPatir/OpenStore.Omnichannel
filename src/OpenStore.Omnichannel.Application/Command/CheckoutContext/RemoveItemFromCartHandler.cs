@@ -16,14 +16,8 @@ public class RemoveItemFromCartHandler : CommandHandler<RemoveItemFromCart>
     protected override async Task Handle(RemoveItemFromCart command, CancellationToken cancellationToken)
     {
         var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
-        if (shoppingCart is null)
-        {
-            throw new ApplicationException(Msg.Application.CartNotExists);
-        }
-        if (shoppingCart.RemoveItem(command) == 0)
-        {
-            return;
-        }
+        if (shoppingCart is null) throw new ApplicationException(Msg.Application.CartNotExists);
+        if (shoppingCart.RemoveItem(command) == 0) return;
         await _repository.SaveChangesAsync(cancellationToken);
     }
 }

@@ -11,12 +11,8 @@ internal static class RepositoryExtensions
     {
         var entity = await repository.GetAsync(id, cancellationToken);
 
-        if (entity == default)
-        {
-            throw new ResourceNotFoundException("Required resource not found");
-        }
+        if (entity == default) throw new ResourceNotFoundException("Required resource not found");
 
         return entity;
     }
-
 }

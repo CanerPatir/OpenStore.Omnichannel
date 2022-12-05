@@ -29,11 +29,11 @@ public class ProductConfiguration : BaseEntityTypeConfiguration<Guid, Product>
             .HasForeignKey(x => x.ProductId)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         builder.HasMany(x => x.Variants)
             .WithOne(x => x.Product)
             .HasForeignKey(x => x.ProductId)
-            .IsRequired(true)
+            .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -13,16 +13,24 @@ public static class ApplicationUserClaimsPrincipalExtensions
     }
 
     public static string GetFullName(this ClaimsPrincipal principal)
-        => principal.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Name)?.Value;
+    {
+        return principal.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Name)?.Value;
+    }
 
     public static string GetPhotoPath(this ClaimsPrincipal principal)
-        => principal.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Picture)?.Value;
+    {
+        return principal.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Picture)?.Value;
+    }
 
     public static string GetEmail(this ClaimsPrincipal principal)
-        => principal.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Email)?.Value;
+    {
+        return principal.Claims.FirstOrDefault(c => c.Type == OpenIddictConstants.Claims.Email)?.Value;
+    }
 
     public static IEnumerable<string> GetRoles(this ClaimsPrincipal principal)
-        => principal.Claims.Where(c => c.Type == OpenIddictConstants.Claims.Role).Select(r => r.Value);
+    {
+        return principal.Claims.Where(c => c.Type == OpenIddictConstants.Claims.Role).Select(r => r.Value);
+    }
 
     public static Guid GetId(this ClaimsPrincipal principal)
     {

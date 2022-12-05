@@ -8,9 +8,9 @@ namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
 public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEnumerable<ProductMediaDto>>
 {
-    private readonly ICrudRepository<ProductMedia> _repository;
     private readonly IOpenStoreObjectMapper _mapper;
     private readonly IObjectStorageService _objectStorageService;
+    private readonly ICrudRepository<ProductMedia> _repository;
 
     public CreateProductMediaHandler(
         ICrudRepository<ProductMedia> repository,
@@ -33,16 +33,15 @@ public class CreateProductMediaHandler : ICommandHandler<CreateProductMedia, IEn
 
         var medias = await Task.WhenAll(mediasTasks);
 
-        foreach (var media in medias)
-        {
-            await _repository.InsertAsync(media, cancellationToken);
-        }
+        foreach (var media in medias) await _repository.InsertAsync(media, cancellationToken);
 
         await _repository.SaveChangesAsync(cancellationToken);
 
         return medias.Select(x => _mapper.Map<ProductMediaDto>(x));
     }
 
-    private static string FileNameStrategy(string fileName) =>
-        $"{Path.GetFileNameWithoutExtension(fileName)}_{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(fileName)}";
+    private static string FileNameStrategy(string fileName)
+    {
+        return $"{Path.GetFileNameWithoutExtension(fileName)}_{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(fileName)}";
+    }
 }

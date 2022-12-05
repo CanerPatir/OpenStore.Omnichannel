@@ -1,68 +1,63 @@
-﻿using System;
+﻿#nullable disable
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
+namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite;
 
-namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.Sqlite
+public partial class Migration202112022303 : Migration
 {
-    public partial class Migration202112022303 : Migration
+    protected override void Up(MigrationBuilder migrationBuilder)
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.CreateTable(
-                name: "ProductCollections",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Version = table.Column<long>(type: "INTEGER", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCollections", x => x.Id);
-                });
+        migrationBuilder.CreateTable(
+            "ProductCollections",
+            table => new
+            {
+                Id = table.Column<Guid>("TEXT", nullable: false),
+                Name = table.Column<string>("TEXT", nullable: true),
+                Description = table.Column<string>("TEXT", nullable: true),
+                Version = table.Column<long>("INTEGER", nullable: false),
+                CreatedAt = table.Column<DateTime>("TEXT", nullable: false),
+                CreatedBy = table.Column<string>("TEXT", nullable: true),
+                UpdatedAt = table.Column<DateTime>("TEXT", nullable: true),
+                UpdatedBy = table.Column<string>("TEXT", nullable: true)
+            },
+            constraints: table => { table.PrimaryKey("PK_ProductCollections", x => x.Id); });
 
-            migrationBuilder.CreateTable(
-                name: "ProductCollectionItem",
-                columns: table => new
-                {
-                    ProductCollectionId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    ProductId = table.Column<Guid>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCollectionItem", x => new { x.ProductCollectionId, x.ProductId });
-                    table.ForeignKey(
-                        name: "FK_ProductCollectionItem_ProductCollections_ProductCollectionId",
-                        column: x => x.ProductCollectionId,
-                        principalTable: "ProductCollections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductCollectionItem_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id");
-                });
+        migrationBuilder.CreateTable(
+            "ProductCollectionItem",
+            table => new
+            {
+                ProductCollectionId = table.Column<Guid>("TEXT", nullable: false),
+                ProductId = table.Column<Guid>("TEXT", nullable: false)
+            },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_ProductCollectionItem", x => new { x.ProductCollectionId, x.ProductId });
+                table.ForeignKey(
+                    "FK_ProductCollectionItem_ProductCollections_ProductCollectionId",
+                    x => x.ProductCollectionId,
+                    "ProductCollections",
+                    "Id",
+                    onDelete: ReferentialAction.Cascade);
+                table.ForeignKey(
+                    "FK_ProductCollectionItem_Products_ProductId",
+                    x => x.ProductId,
+                    "Products",
+                    "Id");
+            });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductCollectionItem_ProductId",
-                table: "ProductCollectionItem",
-                column: "ProductId");
-        }
+        migrationBuilder.CreateIndex(
+            "IX_ProductCollectionItem_ProductId",
+            "ProductCollectionItem",
+            "ProductId");
+    }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "ProductCollectionItem");
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropTable(
+            "ProductCollectionItem");
 
-            migrationBuilder.DropTable(
-                name: "ProductCollections");
-        }
+        migrationBuilder.DropTable(
+            "ProductCollections");
     }
 }
