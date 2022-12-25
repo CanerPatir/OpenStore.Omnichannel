@@ -98,13 +98,13 @@ public class Startup : ModuleStartup
             .AddServer(options =>
             {
                 // Enable the authorization, logout, token and userinfo endpoints.
-                options.SetAuthorizationEndpointUris("/connect/authorize")
-                    // .SetDeviceEndpointUris("/connect/device")
-                    .SetLogoutEndpointUris("/connect/logout")
-                    .SetTokenEndpointUris("/connect/token")
-                    .SetUserinfoEndpointUris("/connect/userinfo")
-                    .SetIntrospectionEndpointUris("/connect/introspect")
-                    .SetVerificationEndpointUris("/connect/verify");
+                options.SetAuthorizationEndpointUris("connect/authorize")
+                    // .SetDeviceEndpointUris("connect/device")
+                    .SetLogoutEndpointUris("connect/logout")
+                    .SetTokenEndpointUris("connect/token")
+                    .SetUserinfoEndpointUris("connect/userinfo")
+                    .SetIntrospectionEndpointUris("connect/introspect")
+                    .SetVerificationEndpointUris("connect/verify");
 
                 // Note: the Mvc.Client sample only uses the code flow and the password flow, but you
                 // can enable the other flows if you need to support implicit or client credentials.

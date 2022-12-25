@@ -5,20 +5,20 @@
     </PropertyGroup>
     <ItemGroup>
         <!--        <PackageReference Include="AutoMapper.Collection.EntityFrameworkCore" Version="7.1.3" />-->
-        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="3.7.5"/>
-        <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="$(NetPackagesVersion)"/>
-        <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)"/>
-        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="$(OpenIddictVersion)"/>
-        <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)"/>
-        <PackageReference Include="OpenStore.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)"/>
+        <PackageReference Include="EFCoreSecondLevelCacheInterceptor" Version="3.8.1" />
+        <PackageReference Include="Microsoft.AspNetCore.DataProtection.EntityFrameworkCore" Version="$(NetPackagesVersion)" />
+        <PackageReference Include="OpenIddict.AspNetCore" Version="$(OpenIddictVersion)" />
+        <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="$(OpenIddictVersion)" />
+        <PackageReference Include="OpenStore.Infrastructure" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="OpenStore.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj"/>
-        <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj"/>
-        <ProjectReference Include="..\OpenStore.Omnichannel.Projections\OpenStore.Omnichannel.Projections.csproj"/>
-        <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Sql\OpenStore.Omnichannel.ReadModel.Sql.csproj"/>
+        <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.Projections\OpenStore.Omnichannel.Projections.csproj" />
+        <ProjectReference Include="..\OpenStore.Omnichannel.ReadModel.Sql\OpenStore.Omnichannel.ReadModel.Sql.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Data\EntityFramework\Migrations"/>
+        <Folder Include="Data\EntityFramework\Migrations" />
     </ItemGroup>
 </Project>
