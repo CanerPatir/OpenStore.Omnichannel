@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OpenStore.Infrastructure.Web;
-using OpenStore.Omnichannel.Domain.CheckoutContext;
 using OpenStore.Omnichannel.Shared.Command.CheckoutContext;
 using OpenStore.Omnichannel.Shared.Query.Storefront;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;

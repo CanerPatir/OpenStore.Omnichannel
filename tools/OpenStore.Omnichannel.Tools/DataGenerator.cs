@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Bogus;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Context;
 using OpenStore.Omnichannel.Shared.Command.ProductContext;

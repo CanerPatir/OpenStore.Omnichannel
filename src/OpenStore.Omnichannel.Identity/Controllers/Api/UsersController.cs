@@ -6,8 +6,6 @@ using OpenStore.Omnichannel.Domain.IdentityContext;
 using OpenStore.Omnichannel.Identity.Services;
 using OpenStore.Omnichannel.Infrastructure.Authentication;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
-using OpenStore.Omnichannel.Shared.Dto.Management;
-using OpenStore.Omnichannel.Shared.Request;
 using OpenStore.Omnichannel.Shared.Request.IdentityContext;
 
 namespace OpenStore.Omnichannel.Identity.Controllers.Api;

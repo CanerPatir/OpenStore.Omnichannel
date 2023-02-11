@@ -2,7 +2,6 @@ using System.Net;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using OpenIddict.Abstractions;
 
 namespace OpenStore.Omnichannel.Storefront.Infrastructure;
 

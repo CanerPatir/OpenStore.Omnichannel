@@ -6,7 +6,6 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Query.Management.ProductContext;
-using OpenStore.Omnichannel.Shared.Request;
 using OpenStore.Omnichannel.Shared.Request.ProductContext;
 using OpenStore.Shared;
 

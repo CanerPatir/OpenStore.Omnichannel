@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace OpenStore.Omnichannel.Identity.Helpers;
+﻿namespace OpenStore.Omnichannel.Identity.Helpers;
 
 public static class AsyncEnumerableExtensions
 {

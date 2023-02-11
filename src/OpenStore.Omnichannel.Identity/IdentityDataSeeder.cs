@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using NetBox.Extensions;
+﻿using NetBox.Extensions;
 using OpenIddict.Abstractions;
 using OpenIddict.Core;
 using OpenStore.Omnichannel.Domain.IdentityContext;
