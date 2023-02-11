@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Panel.Services;
+using OpenStore.Omnichannel.Shared.HttpClient.Management;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
 using OpenStore.Shared;
 

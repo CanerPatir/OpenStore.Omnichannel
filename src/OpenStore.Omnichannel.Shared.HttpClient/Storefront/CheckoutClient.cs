@@ -1,16 +1,17 @@
 using System.Net;
+using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
-namespace OpenStore.Omnichannel.Storefront.Services.Clients;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 
 public class CheckoutClient
 {
-    public CheckoutClient(HttpClient httpClient)
+    public CheckoutClient(System.Net.Http.HttpClient httpClient)
     {
         HttpClient = httpClient;
     }
 
-    private HttpClient HttpClient { get; }
+    private System.Net.Http.HttpClient HttpClient { get; }
 
     private string Path => "api-sf/checkout";
     private string ShoppingCartPath => $"{Path}/shopping-cart";

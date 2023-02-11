@@ -61,6 +61,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infrastructure", "3-Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3D6A7B2F-7BF0-472F-84C6-BC92241B44FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Shared.HttpClient", "src\OpenStore.Omnichannel.Shared.HttpClient\OpenStore.Omnichannel.Shared.HttpClient.csproj", "{EF05E062-B577-42A6-A642-1DA80DFD12E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,7 @@ Global
 		{04A10496-F6A7-4BAC-A822-459DDB6ED9AA} = {3D6A7B2F-7BF0-472F-84C6-BC92241B44FE}
 		{9B5C0D4E-2F84-4EF2-A170-56939E9F4C0A} = {3D6A7B2F-7BF0-472F-84C6-BC92241B44FE}
 		{AB8B936D-924A-4430-9AA3-9F523D0A1875} = {73CDCE53-8C9B-4D33-AE02-BC18C01AE54F}
+		{EF05E062-B577-42A6-A642-1DA80DFD12E5} = {BEFA76BE-3AC8-41AB-9819-C910F1FB9A5A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{64D507E4-EEA0-4F01-A7C5-A100407868E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -144,5 +147,9 @@ Global
 		{7757D4D0-E97A-47A6-BE61-4C49DF2693CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7757D4D0-E97A-47A6-BE61-4C49DF2693CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7757D4D0-E97A-47A6-BE61-4C49DF2693CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF05E062-B577-42A6-A642-1DA80DFD12E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF05E062-B577-42A6-A642-1DA80DFD12E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF05E062-B577-42A6-A642-1DA80DFD12E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF05E062-B577-42A6-A642-1DA80DFD12E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

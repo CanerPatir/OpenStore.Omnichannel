@@ -1,17 +1,16 @@
 using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
-using OpenStore.Omnichannel.Shared.Request;
 using OpenStore.Omnichannel.Shared.Request.ProductContext;
 using OpenStore.Shared;
 
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 public class ProductHttpStore : HttpStore
 {
     protected override string Path => "api/products";
 
-    public ProductHttpStore(HttpClient httpClient) : base(httpClient)
+    public ProductHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
     {
     }
 

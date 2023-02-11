@@ -1,4 +1,4 @@
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 public interface IApiClient
 {
@@ -13,7 +13,7 @@ public interface IApiClient
 
 public class ApiClient : IApiClient
 {
-    private readonly HttpClient _httpClient;
+    private readonly System.Net.Http.HttpClient _httpClient;
 
     public ProductHttpStore Product { get; }
     public MediaHttpStore Media { get; }
@@ -22,7 +22,7 @@ public class ApiClient : IApiClient
     public CollectionHttpStore Collection { get; }
     public OrderHttpStore Order { get; }
 
-    public ApiClient(HttpClient httpClient)
+    public ApiClient(System.Net.Http.HttpClient httpClient)
     {
         _httpClient = httpClient;
         Product = new ProductHttpStore(httpClient);

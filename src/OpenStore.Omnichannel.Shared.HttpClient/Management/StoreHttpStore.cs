@@ -1,11 +1,11 @@
 using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 public class StoreHttpStore : HttpStore
 {
-    public StoreHttpStore(HttpClient httpClient) : base(httpClient)
+    public StoreHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
     {
     }
 

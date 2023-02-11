@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
-using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
+using OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Collections;
 

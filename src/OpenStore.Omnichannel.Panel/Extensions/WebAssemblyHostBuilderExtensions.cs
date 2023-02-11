@@ -12,12 +12,12 @@ using OpenStore.Omnichannel.Panel.ViewModels.Inventory;
 using OpenStore.Omnichannel.Panel.ViewModels.Orders;
 using OpenStore.Omnichannel.Panel.ViewModels.Products;
 using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
+using OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 namespace OpenStore.Omnichannel.Panel.Extensions;
 
 public static class WebAssemblyHostBuilderExtensions
 {
-    private const string ClientName = "main";
 
     public static WebAssemblyHostBuilder AddServices(this WebAssemblyHostBuilder builder)
     {
@@ -33,16 +33,7 @@ public static class WebAssemblyHostBuilderExtensions
 
         var clientBaseAddress = new Uri(new Uri(builder.Configuration.GetValue<string>("ApiGateway")).GetLeftPart(UriPartial.Authority));
         builder.Services
-            .AddHttpClient(ClientName)
-            .ConfigureHttpClient((sp, client) => { client.BaseAddress = clientBaseAddress; })
-            // .AddTransientHttpErrorPolicy(p =>
-            // {
-            //     return p.WaitAndRetryAsync(new[]
-            //     {
-            //         TimeSpan.FromSeconds(1),
-            //         TimeSpan.FromSeconds(4)
-            //     });
-            // })
+            .AddManagementApiClient(clientBaseAddress)
             .AddHttpMessageHandler(sp =>
             {
                 var navigationManager = sp.GetRequiredService<NavigationManager>();
@@ -57,14 +48,7 @@ public static class WebAssemblyHostBuilderExtensions
                 return handler.ConfigureHandler(new[] { clientBaseAddress.ToString() });
             })
             ;
-
-        builder.Services.AddSingleton<IApiClient, ApiClient>(sp =>
-        {
-            var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient(ClientName);
-            return new ApiClient(httpClient);
-        });
-
+        
         builder.Services.AddSingleton<DialogService>();
         builder.Services.AddSingleton<ProductCreateViewModel>();
         builder.Services.AddSingleton<ProductUpdateViewModel>();

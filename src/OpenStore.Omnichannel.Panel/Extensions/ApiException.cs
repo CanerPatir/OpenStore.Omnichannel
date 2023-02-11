@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text;
 
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Panel.Extensions;
 
 public class ApiException : Exception
 {

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="System.Net.Http.Json" Version="$(NetExtensionsPackageVersion)" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="7.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\OpenStore.Omnichannel.Shared\OpenStore.Omnichannel.Shared.csproj" />
+    </ItemGroup>
+</Project>

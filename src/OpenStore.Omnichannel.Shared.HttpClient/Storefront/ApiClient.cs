@@ -1,17 +1,17 @@
-namespace OpenStore.Omnichannel.Storefront.Services.Clients;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 
-public interface IApiClient
+public interface IStorefrontApiClient
 {
     CatalogClient Catalog { get; }
     CheckoutClient Checkout { get; }
     UserClient User { get; }
 }
 
-public class ApiClient : IApiClient
+public class StorefrontApiClient : IStorefrontApiClient
 {
     internal const string ApiClientKey = "OpenStoreApiClient";
 
-    public ApiClient(IHttpClientFactory clientFactory)
+    public StorefrontApiClient(IHttpClientFactory clientFactory)
     {
         var httpClient = clientFactory.CreateClient(ApiClientKey);
         Catalog = new CatalogClient(httpClient);

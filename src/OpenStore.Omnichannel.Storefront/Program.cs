@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Localization.Json;
+using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 using OpenStore.Omnichannel.Storefront.Infrastructure;
 using OpenStore.Omnichannel.Storefront.Services;
-using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -99,16 +99,9 @@ services
     });
 
 var apiConfiguration = builder.Configuration.GetSection("Api").Get<ApiConfiguration>();
-services.AddHttpClient(ApiClient.ApiClientKey, client =>
-{
-    client.BaseAddress = new Uri(apiConfiguration.Url);
-    client.Timeout = TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds);
-})
-    .AddPolicyHandler(RetryPolicy.GetApiRetryPolicy())
-    .AddHttpMessageHandler(sp => new AuthenticateHttpClientHandler(sp.GetRequiredService<IHttpContextAccessor>()))
-    ;
 
-services.AddSingleton<IApiClient, ApiClient>();
+services.AddStorefrontApiClient(new Uri(apiConfiguration.Url), TimeSpan.FromMilliseconds(apiConfiguration.TimeoutMilliseconds))
+    .AddHttpMessageHandler(sp => new AuthenticateHttpClientHandler(sp.GetRequiredService<IHttpContextAccessor>()));
 
 var app = builder.Build();
 

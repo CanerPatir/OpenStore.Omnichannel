@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Authentication;
-using OpenIddict.Abstractions;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
-using OpenStore.Omnichannel.Storefront.Services.Clients;
+using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 
 public class UserBffService : BffService
 {
-    private readonly IApiClient _apiClient;
+    private readonly IStorefrontApiClient _apiClient;
 
-    public UserBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public UserBffService(IStorefrontApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _apiClient = apiClient;
     }

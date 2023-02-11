@@ -2,7 +2,7 @@ using System.Net;
 using Polly;
 using Polly.Extensions.Http;
 
-namespace OpenStore.Omnichannel.Storefront.Infrastructure;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 
 internal static class RetryPolicy
 {

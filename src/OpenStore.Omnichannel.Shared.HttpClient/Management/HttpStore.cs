@@ -1,13 +1,13 @@
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 public abstract class HttpStore
 {
-    protected HttpStore(HttpClient httpClient)
+    protected HttpStore(System.Net.Http.HttpClient httpClient)
     {
         HttpClient = httpClient;
     }
 
-    protected HttpClient HttpClient { get; }
+    protected System.Net.Http.HttpClient HttpClient { get; }
 
     protected abstract string Path { get; }
 

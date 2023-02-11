@@ -1,13 +1,13 @@
-using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Identity;
 
-namespace OpenStore.Omnichannel.Storefront.Services.Clients;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 
 public class UserClient
 {
-    private readonly HttpClient _httpClient;
+    private readonly System.Net.Http.HttpClient _httpClient;
 
-    public UserClient(HttpClient httpClient)
+    public UserClient(System.Net.Http.HttpClient httpClient)
     {
         _httpClient = httpClient;
     }

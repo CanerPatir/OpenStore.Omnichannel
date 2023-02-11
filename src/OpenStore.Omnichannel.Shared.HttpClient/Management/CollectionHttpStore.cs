@@ -1,14 +1,13 @@
-using System.Collections;
 using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Shared;
 
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 public class CollectionHttpStore : HttpStore
 {
-    public CollectionHttpStore(HttpClient httpClient) : base(httpClient)
+    public CollectionHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
     {
     }
 

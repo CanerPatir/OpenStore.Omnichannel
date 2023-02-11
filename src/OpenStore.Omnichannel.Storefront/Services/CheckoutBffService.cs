@@ -1,16 +1,16 @@
 using OpenIddict.Abstractions;
+using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 using OpenStore.Omnichannel.Storefront.Models.Checkout;
-using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 
 public class CheckoutBffService : BffService
 {
     private const string CartCookieKey = "CartCookieKey";
-    private readonly IApiClient _apiClient;
+    private readonly IStorefrontApiClient _apiClient;
 
-    public CheckoutBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public CheckoutBffService(IStorefrontApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _apiClient = apiClient;
     }

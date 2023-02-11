@@ -1,5 +1,5 @@
-using OpenStore.Omnichannel.Panel.Services;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
+using OpenStore.Omnichannel.Shared.HttpClient.Management;
 using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Collections;

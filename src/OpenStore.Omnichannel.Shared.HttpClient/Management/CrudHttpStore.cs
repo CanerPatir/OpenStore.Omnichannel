@@ -1,17 +1,17 @@
 using System.Net.Http.Json;
 
-namespace OpenStore.Omnichannel.Panel.Services;
+namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
 
 public abstract class CrudHttpStore<TDto> : CrudHttpStore<TDto, Guid>
 {
-    protected CrudHttpStore(HttpClient httpClient) : base(httpClient)
+    protected CrudHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
     {
     }
 }
 
 public abstract class CrudHttpStore<TDto, TKey> : HttpStore
 {
-    protected CrudHttpStore(HttpClient httpClient) : base(httpClient)
+    protected CrudHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
     {
     }
 

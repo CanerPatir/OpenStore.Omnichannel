@@ -1,6 +1,6 @@
+using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 using OpenStore.Omnichannel.Storefront.Models.Catalog;
-using OpenStore.Omnichannel.Storefront.Services.Clients;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 
@@ -8,9 +8,9 @@ public class ProductBffService : BffService
 {
     private const int BatchSize = 50;
 
-    private readonly IApiClient _apiClient;
+    private readonly IStorefrontApiClient _apiClient;
 
-    public ProductBffService(IApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
+    public ProductBffService(IStorefrontApiClient apiClient, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
         _apiClient = apiClient;
     }
@@ -32,7 +32,7 @@ public class ProductBffService : BffService
         var getAllProductsResult = await _apiClient.Catalog.GetAllProducts(BatchSize, page == 1 ? 0 : BatchSize * page, cancellationToken);
         return getAllProductsResult.Items;
     }
-    
+
     public async Task<ProductDetailViewModel> GetProductDetailViewModel(string handle, CancellationToken cancellationToken)
     {
         var productDetailResult = await _apiClient.Catalog.GetProductDetail(handle, cancellationToken);
