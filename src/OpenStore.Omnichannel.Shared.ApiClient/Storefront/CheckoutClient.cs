@@ -2,18 +2,16 @@ using System.Net;
 using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Storefront;
 
-public class CheckoutClient
+public class CheckoutClient : BaseClient
 {
-    public CheckoutClient(System.Net.Http.HttpClient httpClient)
+    public CheckoutClient(HttpClient httpClient) : base(httpClient)
     {
-        HttpClient = httpClient;
     }
 
-    private System.Net.Http.HttpClient HttpClient { get; }
 
-    private string Path => "api-sf/checkout";
+    protected override string Path => "api-sf/checkout";
     private string ShoppingCartPath => $"{Path}/shopping-cart";
     private string OrderSummaryPath => $"{Path}/order-summary";
 
@@ -34,20 +32,20 @@ public class CheckoutClient
 
     public async Task<Guid> AddItemToCart(Guid cartId, Guid variantId, int quantity, CancellationToken cancellationToken = default)
     {
-        var resp = await HttpClient.PostAsync($"{ShoppingCartPath}/{cartId}/items?variantId={variantId}&quantity={quantity}", null, cancellationToken);
+        var resp = await HttpClient.PostAsync(Combine(ShoppingCartPath, $"{cartId}/items?variantId={variantId}&quantity={quantity}"), null, cancellationToken);
         resp.EnsureSuccessStatusCode();
         return await resp.Content.ReadFromJsonAsync<Guid>(cancellationToken: cancellationToken);
     }
 
     public async Task RemoveItemFromCart(Guid cartId, Guid itemId, CancellationToken cancellationToken = default)
     {
-        var response = await HttpClient.DeleteAsync($"{ShoppingCartPath}/{cartId}/items/{itemId}", cancellationToken);
+        var response = await HttpClient.DeleteAsync(Combine(ShoppingCartPath, $"{cartId}/items/{itemId}"), cancellationToken);
         response.EnsureSuccessStatusCode();
     }
 
     public async Task ChangeItemQuantityOfCart(Guid cartId, Guid itemId, int quantity, CancellationToken cancellationToken = default)
     {
-        var response = await HttpClient.PostAsync($"{ShoppingCartPath}/{cartId}/items/{itemId}?quantity={quantity}", null, cancellationToken);
+        var response = await HttpClient.PostAsync(Combine(ShoppingCartPath, $"{cartId}/items/{itemId}?quantity={quantity}"), null, cancellationToken);
         response.EnsureSuccessStatusCode();
     }
 
@@ -55,7 +53,7 @@ public class CheckoutClient
     {
         try
         {
-            return await HttpClient.GetFromJsonAsync<ShoppingCartQueryResult>($"{ShoppingCartPath}/{cartId}", cancellationToken);
+            return await HttpClient.GetFromJsonAsync<ShoppingCartQueryResult>(Combine(ShoppingCartPath, $"{cartId}"), cancellationToken);
         }
         catch (HttpRequestException e) when (e.StatusCode == HttpStatusCode.NotFound)
         {
@@ -64,5 +62,4 @@ public class CheckoutClient
     }
 
     #endregion
- 
 }

@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\OpenStore.Omnichannel.Shared.HttpClient\OpenStore.Omnichannel.Shared.HttpClient.csproj" />
+      <ProjectReference Include="..\OpenStore.Omnichannel.Shared.ApiClient\OpenStore.Omnichannel.Shared.ApiClient.csproj" />
     </ItemGroup>
 
     <ItemGroup>

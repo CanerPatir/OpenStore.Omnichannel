@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using OpenStore.Infrastructure.Localization;
 using OpenStore.Infrastructure.Localization.Json;
-using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
+using OpenStore.Omnichannel.Shared.ApiClient.Storefront;
 using OpenStore.Omnichannel.Storefront.Infrastructure;
 using OpenStore.Omnichannel.Storefront.Services;
 

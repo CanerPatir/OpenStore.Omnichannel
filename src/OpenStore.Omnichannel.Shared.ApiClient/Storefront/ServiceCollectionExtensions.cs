@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Storefront;
 
 public static class ServiceCollectionExtensions
 {
@@ -9,12 +9,12 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IStorefrontApiClient, StorefrontApiClient>();
 
-      return  services.AddHttpClient(StorefrontApiClient.ApiClientKey, client =>
+      return  services.AddHttpClient(StorefrontApiClient.ClientName, client =>
             {
                 client.BaseAddress = clientBaseAddress;
                 client.Timeout = timeout;
             })
-            .AddPolicyHandler(RetryPolicy.GetApiRetryPolicy())
+            .AddPolicyHandler(StorefrontApiRetryPolicy.GetApiRetryPolicy())
             ;
     }
 }

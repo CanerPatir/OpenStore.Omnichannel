@@ -1,11 +1,11 @@
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
 using OpenStore.Shared;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Management;
 
-public class InventoryHttpStore : HttpStore
+public class InventoryHttpClient : BaseClient
 {
-    public InventoryHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
+    public InventoryHttpClient(HttpClient httpClient) : base(httpClient)
     {
     }
 

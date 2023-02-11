@@ -61,7 +61,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infrastructure", "3-Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3D6A7B2F-7BF0-472F-84C6-BC92241B44FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Shared.HttpClient", "src\OpenStore.Omnichannel.Shared.HttpClient\OpenStore.Omnichannel.Shared.HttpClient.csproj", "{EF05E062-B577-42A6-A642-1DA80DFD12E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenStore.Omnichannel.Shared.ApiClient", "src\OpenStore.Omnichannel.Shared.ApiClient\OpenStore.Omnichannel.Shared.ApiClient.csproj", "{EF05E062-B577-42A6-A642-1DA80DFD12E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
 using OpenStore.Omnichannel.Shared.Dto.Identity;
-using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
+using OpenStore.Omnichannel.Shared.ApiClient.Storefront;
 
 namespace OpenStore.Omnichannel.Storefront.Services;
 

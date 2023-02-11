@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Shared.HttpClient.Storefront;
+using OpenStore.Omnichannel.Shared.ApiClient.Storefront;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
 using OpenStore.Omnichannel.Storefront.Models.Catalog;
 

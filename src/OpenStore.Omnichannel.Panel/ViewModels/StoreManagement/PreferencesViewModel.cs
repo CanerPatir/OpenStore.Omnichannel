@@ -1,4 +1,4 @@
-using OpenStore.Omnichannel.Shared.HttpClient.Management;
+using OpenStore.Omnichannel.Shared.ApiClient.Management;
 using OpenStore.Omnichannel.Shared.Query.Management.StoreContext.Result;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;

@@ -1,24 +1,21 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Management;
 
 public static class ServiceCollectionExtensions
 {
-    private const string ClientName = "main";
-
     public static IHttpClientBuilder AddManagementApiClient(this IServiceCollection services, Uri clientBaseAddress)
     {
-      
         services.AddSingleton<IApiClient, ApiClient>(sp =>
         {
             var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
-            var httpClient = httpClientFactory.CreateClient(ClientName);
+            var httpClient = httpClientFactory.CreateClient(ApiClient.ClientName);
             return new ApiClient(httpClient);
         });
-        
+
         return services
-            .AddHttpClient(ClientName)
-            .ConfigureHttpClient((sp, client) => { client.BaseAddress = clientBaseAddress; })
+                .AddHttpClient(ApiClient.ClientName)
+                .ConfigureHttpClient((sp, client) => { client.BaseAddress = clientBaseAddress; })
             // .AddTransientHttpErrorPolicy(p =>
             // {
             //     return p.WaitAndRetryAsync(new[]
@@ -27,9 +24,6 @@ public static class ServiceCollectionExtensions
             //         TimeSpan.FromSeconds(4)
             //     });
             // })
-           
             ;
-
-        
     }
 }

@@ -4,15 +4,15 @@ using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Request.ProductContext;
 using OpenStore.Shared;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Management;
 
-public class ProductHttpStore : HttpStore
+public class ProductClient : BaseClient
 {
-    protected override string Path => "api/products";
-
-    public ProductHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
+    public ProductClient(HttpClient httpClient) : base(httpClient)
     {
     }
+
+    protected override string Path => "api/products";
 
     public async Task<Guid> Create(ProductDto model)
     {

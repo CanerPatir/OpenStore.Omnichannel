@@ -1,5 +1,5 @@
 using OpenStore.Omnichannel.Panel.Services;
-using OpenStore.Omnichannel.Shared.HttpClient.Management;
+using OpenStore.Omnichannel.Shared.ApiClient.Management;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Orders;
 

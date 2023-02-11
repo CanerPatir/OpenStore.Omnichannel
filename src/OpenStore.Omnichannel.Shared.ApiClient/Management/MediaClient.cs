@@ -2,11 +2,11 @@ using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Management;
 
-public class MediaHttpStore : HttpStore
+public class MediaClient : BaseClient
 {
-    public MediaHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
+    public MediaClient(HttpClient httpClient) : base(httpClient)
     {
     }
 

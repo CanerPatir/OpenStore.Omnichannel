@@ -2,9 +2,9 @@ using System.Net;
 using Polly;
 using Polly.Extensions.Http;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Storefront;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Storefront;
 
-internal static class RetryPolicy
+internal static class StorefrontApiRetryPolicy
 {
     public static IAsyncPolicy<HttpResponseMessage> GetApiRetryPolicy()
     {

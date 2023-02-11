@@ -1,5 +1,5 @@
 using OpenStore.Omnichannel.Shared.Dto.Management.Order;
-using OpenStore.Omnichannel.Shared.HttpClient.Management;
+using OpenStore.Omnichannel.Shared.ApiClient.Management;
 using OpenStore.Shared;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Orders;

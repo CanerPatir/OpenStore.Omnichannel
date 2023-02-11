@@ -2,13 +2,13 @@ using System.Net.Http.Json;
 using OpenStore.Omnichannel.Shared.Dto.Management.Order;
 using OpenStore.Shared;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Management;
 
-public class OrderHttpStore : HttpStore
+public class OrderClient : BaseClient
 {
     protected override string Path => "api/orders";
 
-    public OrderHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
+    public OrderClient(HttpClient httpClient) : base(httpClient)
     {
     }
 

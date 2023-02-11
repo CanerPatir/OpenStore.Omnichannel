@@ -12,7 +12,7 @@ using OpenStore.Omnichannel.Panel.ViewModels.Inventory;
 using OpenStore.Omnichannel.Panel.ViewModels.Orders;
 using OpenStore.Omnichannel.Panel.ViewModels.Products;
 using OpenStore.Omnichannel.Panel.ViewModels.StoreManagement;
-using OpenStore.Omnichannel.Shared.HttpClient.Management;
+using OpenStore.Omnichannel.Shared.ApiClient.Management;
 
 namespace OpenStore.Omnichannel.Panel.Extensions;
 

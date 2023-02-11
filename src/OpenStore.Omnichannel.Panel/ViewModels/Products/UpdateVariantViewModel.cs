@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using OpenStore.Omnichannel.Shared.Dto;
 using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
-using OpenStore.Omnichannel.Shared.HttpClient.Management;
+using OpenStore.Omnichannel.Shared.ApiClient.Management;
 
 namespace OpenStore.Omnichannel.Panel.ViewModels.Products;
 

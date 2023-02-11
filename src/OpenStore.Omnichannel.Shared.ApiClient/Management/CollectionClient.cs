@@ -3,11 +3,11 @@ using OpenStore.Omnichannel.Shared.Dto.Management;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Shared;
 
-namespace OpenStore.Omnichannel.Shared.HttpClient.Management;
+namespace OpenStore.Omnichannel.Shared.ApiClient.Management;
 
-public class CollectionHttpStore : HttpStore
+public class CollectionClient : BaseClient
 {
-    public CollectionHttpStore(System.Net.Http.HttpClient httpClient) : base(httpClient)
+    public CollectionClient(HttpClient httpClient) : base(httpClient)
     {
     }
 
