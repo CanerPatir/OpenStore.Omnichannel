@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ProductContext;
 
-public class ProductMediaConfiguration : BaseEntityTypeConfiguration<Guid, ProductMedia>
+public class ProductMediaEntityConfiguration : BaseEntityTypeConfiguration<Guid, ProductMedia>
 {
     public override void Configure(EntityTypeBuilder<ProductMedia> builder)
     {

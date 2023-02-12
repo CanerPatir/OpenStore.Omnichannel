@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ProductContext;
 
-public class VariantConfiguration : BaseEntityTypeConfiguration<Guid, Variant>
+public class VariantEntityConfiguration : BaseEntityTypeConfiguration<Guid, Variant>
 {
     public override void Configure(EntityTypeBuilder<Variant> builder)
     {

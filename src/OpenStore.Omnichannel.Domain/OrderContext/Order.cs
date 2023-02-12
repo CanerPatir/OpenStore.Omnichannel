@@ -80,7 +80,7 @@ public class Order : AggregateRoot<Guid>, IAuditableEntity, ISoftDeleteEntity
     {
     }
 
-    public static Order CreatePreorder(CreatePreorderCommand command)
+    public static Order CreatePreorder(CreatePreorder command)
     {
         var order = new Order()
         {

@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.ChannelContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ChannelContext;
 
-public class SaleChannelProductConfiguration : IEntityTypeConfiguration<SaleChannelProduct>
+public class SaleChannelProductEntityConfiguration : IEntityTypeConfiguration<SaleChannelProduct>
 {
     public void Configure(EntityTypeBuilder<SaleChannelProduct> builder)
     {

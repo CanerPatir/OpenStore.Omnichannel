@@ -1,6 +1,6 @@
 namespace OpenStore.Omnichannel.Shared.Command.OrderContext;
 
-public record CreatePreorderCommand(IEnumerable<CreatePreorderCommand.OrderLineItem> LineItems)
+public record CreatePreorder(IEnumerable<CreatePreorder.OrderLineItem> LineItems)
 {
     public record OrderLineItem(Guid ProductId
         , Guid VariantId

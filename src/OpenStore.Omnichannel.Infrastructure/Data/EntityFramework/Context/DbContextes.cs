@@ -16,9 +16,9 @@ public class MySqlDbContext : ApplicationDbContext
     }
 }
 
-public class PostgreSqlDbContext : ApplicationDbContext
+public class PostgresDbContext : ApplicationDbContext
 {
-    public PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options) : base(options)
+    public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options)
     {
     }
 }

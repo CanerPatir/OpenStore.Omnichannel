@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.InventoryContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.InventoryContext;
 
-public class InventoryConfiguration : IEntityTypeConfiguration<Inventory>
+public class InventoryEntityConfiguration : IEntityTypeConfiguration<Inventory>
 {
     public void Configure(EntityTypeBuilder<Inventory> builder)
     {

@@ -5,8 +5,11 @@ namespace OpenStore.Omnichannel.Domain.StoreContext;
 
 public class StorePreferences : AuditableEntity
 {
-    public string Name { get; set; }
-    public virtual StorePreferencesContact Contact { get; set; }
+    public string Name { get; protected set; }
+
+    public CurrencyCode DefaultCurrency { get; protected set; }
+    
+    public virtual StorePreferencesContact Contact { get; protected set; }
 
     public StorePreferences()
     {

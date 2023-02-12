@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Domain.OrderContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.OrderContext;
 
-public class OrderLineItemConfiguration : BaseEntityTypeConfiguration<Guid, OrderLineItem>
+public class OrderLineItemEntityConfiguration : BaseEntityTypeConfiguration<Guid, OrderLineItem>
 {
     public override void Configure(EntityTypeBuilder<OrderLineItem> builder)
     {

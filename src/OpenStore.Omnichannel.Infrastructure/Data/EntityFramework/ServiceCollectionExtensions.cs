@@ -43,7 +43,7 @@ internal static class ServiceCollectionExtensions
                 services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.PostgreSql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, PostgreSqlDbContext>(configuration, migrationAssemblyName, Opts);
+                services.AddOpenStoreEfCore<ApplicationDbContext, PostgresDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.MySql:
                 services.AddOpenStoreEfCore<ApplicationDbContext, MySqlDbContext>(configuration, migrationAssemblyName, Opts);

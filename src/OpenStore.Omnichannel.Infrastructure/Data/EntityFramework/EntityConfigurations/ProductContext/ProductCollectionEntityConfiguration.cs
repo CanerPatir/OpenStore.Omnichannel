@@ -5,7 +5,7 @@ using static OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityCon
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ProductContext;
 
-public class ProductCollectionConfiguration : BaseEntityTypeConfiguration<Guid, ProductCollection>
+public class ProductCollectionEntityConfiguration : BaseEntityTypeConfiguration<Guid, ProductCollection>
 {
     public override void Configure(EntityTypeBuilder<ProductCollection> builder)
     {

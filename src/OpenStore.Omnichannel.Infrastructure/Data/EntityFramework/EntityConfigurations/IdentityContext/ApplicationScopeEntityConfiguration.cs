@@ -5,12 +5,10 @@ using static OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityCon
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.IdentityContext;
 
-public class ApplicationRoleConfiguration : IEntityTypeConfiguration<ApplicationRole>
+public class ApplicationScopeEntityConfiguration : IEntityTypeConfiguration<ApplicationScope>
 {
-    public void Configure(EntityTypeBuilder<ApplicationRole> builder)
+    public void Configure(EntityTypeBuilder<ApplicationScope> builder)
     {
-        builder.ToTable("Roles");
         builder.Property(x => x.Name).HasMaxLength(_191_);
-        builder.Property(x => x.NormalizedName).HasMaxLength(_191_);
     }
 }

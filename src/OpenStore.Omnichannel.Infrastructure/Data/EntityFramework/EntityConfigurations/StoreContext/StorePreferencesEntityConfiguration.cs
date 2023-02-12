@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.StoreContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.StoreContext;
 
-public class StorePreferencesConfiguration : BaseEntityTypeConfiguration<Guid, StorePreferences>
+public class StorePreferencesEntityConfiguration : BaseEntityTypeConfiguration<Guid, StorePreferences>
 {
     public override void Configure(EntityTypeBuilder<StorePreferences> builder)
     {

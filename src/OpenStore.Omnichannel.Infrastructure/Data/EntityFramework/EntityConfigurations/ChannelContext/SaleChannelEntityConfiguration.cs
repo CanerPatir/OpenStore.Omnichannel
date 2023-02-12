@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.ChannelContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ChannelContext;
 
-public class SaleChannelConfiguration : BaseEntityTypeConfiguration<Guid, SaleChannel>
+public class SaleChannelEntityConfiguration : BaseEntityTypeConfiguration<Guid, SaleChannel>
 {
     public override void Configure(EntityTypeBuilder<SaleChannel> builder)
     {

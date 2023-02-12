@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.ProductContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.ProductContext;
 
-public class ProductCollectionItemConfiguration : IEntityTypeConfiguration<ProductCollectionItem>
+public class ProductCollectionItemEntityConfiguration : IEntityTypeConfiguration<ProductCollectionItem>
 {
     public void Configure(EntityTypeBuilder<ProductCollectionItem> builder)
     {

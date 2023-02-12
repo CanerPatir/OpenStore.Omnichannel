@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Domain.LookupContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.LookupContext;
 
-public class CategoryProductConfiguration : IEntityTypeConfiguration<CategoryProduct>
+public class CategoryProductEntityConfiguration : IEntityTypeConfiguration<CategoryProduct>
 {
     public void Configure(EntityTypeBuilder<CategoryProduct> builder)
     {

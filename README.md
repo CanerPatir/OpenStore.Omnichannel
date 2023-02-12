@@ -11,6 +11,15 @@
 - Api -> https://localhost:5001
 - Identity -> https://localhost:5001/identity/
 
+## Roadmap
+- [ ] Order
+- [ ] Site builder
+- [ ] Platform integration
+- [ ] Catalog
+- [ ] Storefront
+- [ ] Multi tenancy
+
+
 ## Marketplace Integration
 
 - Attribute Mapping
@@ -51,7 +60,7 @@ https://www.creative-tim.com/product/soft-ui-dashboard?utm_medium=social&utm_sou
 ## see also 
 - open telemetry, zipkin, jeager, promotheus, grafana 
 - aot compalation 
-- 
+- grapesJs
 
 
 ## Code Convention Dictionary

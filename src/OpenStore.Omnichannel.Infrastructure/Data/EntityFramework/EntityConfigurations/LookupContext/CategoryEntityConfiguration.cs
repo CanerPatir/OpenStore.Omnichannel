@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Domain.LookupContext;
 
 namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.EntityConfigurations.LookupContext;
 
-public class CategoryConfiguration : BaseEntityTypeConfiguration<Guid, Category>
+public class CategoryEntityConfiguration : BaseEntityTypeConfiguration<Guid, Category>
 {
     public override void Configure(EntityTypeBuilder<Category> builder)
     {
