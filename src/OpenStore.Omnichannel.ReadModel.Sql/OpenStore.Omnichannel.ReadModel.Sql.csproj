@@ -1,15 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        
-    </PropertyGroup>
-
     <ItemGroup>
-        <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj" />
-    </ItemGroup>
+        <ProjectReference Include="..\OpenStore.Omnichannel.Application\OpenStore.Omnichannel.Application.csproj"/>
 
+    </ItemGroup>
     <ItemGroup>
-      <Folder Include="Management" />
+        <PackageReference Include="OpenStore.Data.EntityFramework" Version="$(OpenStoreBuildingBlocksVersion)"/>
     </ItemGroup>
-
 </Project>

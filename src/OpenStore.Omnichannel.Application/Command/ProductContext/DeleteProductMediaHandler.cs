@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class DeleteProductMediaHandler : CommandHandler<DeleteProductMedia>
+public class DeleteProductMediaHandler : ICommandHandler<DeleteProductMedia>
 {
     private readonly IObjectStorageService _objectStorageService;
     private readonly ICrudRepository<ProductMedia> _productMediaRepository;
@@ -21,7 +21,7 @@ public class DeleteProductMediaHandler : CommandHandler<DeleteProductMedia>
         _objectStorageService = objectStorageService;
     }
 
-    protected override async Task Handle(DeleteProductMedia command, CancellationToken cancellationToken)
+    public async Task Handle(DeleteProductMedia command, CancellationToken cancellationToken)
     {
         var product = await _repository.GetAsync(command.Id, cancellationToken);
         product.DeleteMedia(command);

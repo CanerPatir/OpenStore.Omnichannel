@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
 using OpenStore.Application.Exceptions;
+using OpenStore.Data.EntityFramework.ReadOnly;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Query.Management.ProductContext;
@@ -9,9 +10,9 @@ namespace OpenStore.Omnichannel.ReadModel.Sql.Management.ProductContext;
 
 public class GetProductCollectionItemsQueryHandler : IQueryHandler<GetProductCollectionItemsQuery, IEnumerable<ProductCollectionItemDto>>
 {
-    private readonly ICrudRepository<ProductCollection> _repository;
+    private readonly IReadOnlyRepository<ProductCollection> _repository;
 
-    public GetProductCollectionItemsQueryHandler(ICrudRepository<ProductCollection> repository)
+    public GetProductCollectionItemsQueryHandler(IReadOnlyRepository<ProductCollection> repository)
     {
         _repository = repository;
     }
@@ -22,7 +23,6 @@ public class GetProductCollectionItemsQueryHandler : IQueryHandler<GetProductCol
             .Include(x => x.ProductItems)
                 .ThenInclude(x => x.Product)
                     .ThenInclude(x => x.Medias)
-            .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == query.ProductCollectionId, cancellationToken);
 
         if (productCollection is null)

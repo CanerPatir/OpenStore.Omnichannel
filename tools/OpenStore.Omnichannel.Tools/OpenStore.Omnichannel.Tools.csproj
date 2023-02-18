@@ -7,8 +7,8 @@
 
     <ItemGroup>
         <PackageReference Include="Bogus" Version="34.0.2" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="$(NetExtensionsPackageVersion)" />
-        <PackageReference Include="Sylvan.Data.Csv" Version="1.2.5" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+        <PackageReference Include="Sylvan.Data.Csv" Version="1.2.7" />
     </ItemGroup>
 
     <ItemGroup>

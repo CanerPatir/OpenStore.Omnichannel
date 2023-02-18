@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class AddItemsToCollectionHandler : CommandHandler<AddItemsToCollection>
+public class AddItemsToCollectionHandler : ICommandHandler<AddItemsToCollection>
 {
     private readonly ICrudRepository<ProductCollection> _repository;
 
@@ -14,7 +14,7 @@ public class AddItemsToCollectionHandler : CommandHandler<AddItemsToCollection>
         _repository = repository;
     }
 
-    protected override async Task Handle(AddItemsToCollection command, CancellationToken cancellationToken)
+    public async Task Handle(AddItemsToCollection command, CancellationToken cancellationToken)
     {
         var (productCollectionId, productIds) = command;
         var productCollection = await _repository.Query

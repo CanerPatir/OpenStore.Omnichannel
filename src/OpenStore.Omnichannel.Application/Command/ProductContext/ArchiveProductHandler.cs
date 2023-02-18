@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class ArchiveProductHandler : CommandHandler<ArchiveProduct>
+public class ArchiveProductHandler : ICommandHandler<ArchiveProduct>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -13,7 +13,7 @@ public class ArchiveProductHandler : CommandHandler<ArchiveProduct>
         _repository = repository;
     }
 
-    protected override async Task Handle(ArchiveProduct command, CancellationToken cancellationToken)
+    public async Task Handle(ArchiveProduct command, CancellationToken cancellationToken)
     {
         var product = await _repository.GetAsync(command.Id, cancellationToken);
         product.Archive();

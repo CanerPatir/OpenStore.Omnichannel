@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
+using OpenStore.Data.EntityFramework.ReadOnly;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Query.Storefront;
 using OpenStore.Omnichannel.Shared.Query.Storefront.Result;
@@ -8,9 +9,9 @@ namespace OpenStore.Omnichannel.ReadModel.Sql.Storefront;
 
 public class GetAllProductsQueryHandler : IQueryHandler<GetAllProductsQuery, AllProductsQueryResult>
 {
-    private readonly ICrudRepository<Product> _repository;
+    private readonly IReadOnlyRepository<Product> _repository;
 
-    public GetAllProductsQueryHandler(ICrudRepository<Product> repository)
+    public GetAllProductsQueryHandler(IReadOnlyRepository<Product> repository)
     {
         _repository = repository;
     }

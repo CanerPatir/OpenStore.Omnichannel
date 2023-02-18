@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
+using OpenStore.Data.EntityFramework.ReadOnly;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Dto.Management.Product;
 using OpenStore.Omnichannel.Shared.Query.Management.ProductContext;
@@ -9,10 +10,10 @@ namespace OpenStore.Omnichannel.ReadModel.Sql.Management.ProductContext;
 
 public class GetProductCollectionEligibleItemsQueryHandler : IQueryHandler<GetProductCollectionEligibleItemsQuery, IEnumerable<ProductCollectionItemDto>>
 {
-    private readonly ICrudRepository<ProductCollection> _repository;
+    private readonly IReadOnlyRepository<ProductCollection> _repository;
     private readonly IMediator _mediator;
 
-    public GetProductCollectionEligibleItemsQueryHandler(ICrudRepository<ProductCollection> repository, IMediator mediator)
+    public GetProductCollectionEligibleItemsQueryHandler(IReadOnlyRepository<ProductCollection> repository, IMediator mediator)
     {
         _repository = repository;
         _mediator = mediator;

@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class DeleteVariantsHandler : CommandHandler<DeleteVariants>
+public class DeleteVariantsHandler : ICommandHandler<DeleteVariants>
 {
     private readonly ICrudRepository<Product> _repository;
     private readonly ICrudRepository<Variant> _variantRepository;
@@ -16,7 +16,7 @@ public class DeleteVariantsHandler : CommandHandler<DeleteVariants>
         _variantRepository = variantRepository;
     }
 
-    protected override async Task Handle(DeleteVariants command, CancellationToken cancellationToken)
+    public async Task Handle(DeleteVariants command, CancellationToken cancellationToken)
     {
         var (productId, variantIds) = command;
         var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == productId, cancellationToken);

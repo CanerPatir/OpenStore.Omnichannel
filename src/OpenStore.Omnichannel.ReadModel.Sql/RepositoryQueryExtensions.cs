@@ -8,19 +8,6 @@ namespace OpenStore.Omnichannel.ReadModel.Sql;
 
 internal static class RepositoryQueryExtensions
 {
-    public static async Task<T> GetRequired<T>(this ICrudRepository<T> repository, Guid id, CancellationToken cancellationToken = default)
-        where T : class, IEntity
-    {
-        var entity = await repository.GetAsync(id, cancellationToken);
-
-        if (entity == default)
-        {
-            throw new ResourceNotFoundException("Required resource not found");
-        }
-
-        return entity;
-    }
-
     public static async Task<PagedList<TDto>> GetPaged<T, TDto>(this IQueryable<T> query,
         int pageNumber,
         int pageSize,
@@ -36,7 +23,6 @@ internal static class RepositoryQueryExtensions
             ;
 
         var items = await query
-            // .AsNoTracking()
             .ToListAsync(cancellationToken);
 
         return new PagedList<TDto>(items.Select(mapper), count, pageNumber, pageSize);

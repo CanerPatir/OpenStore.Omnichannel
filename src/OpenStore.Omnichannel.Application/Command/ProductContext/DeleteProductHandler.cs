@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class DeleteProductHandler : CommandHandler<DeleteProduct>
+public class DeleteProductHandler : ICommandHandler<DeleteProduct>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -13,7 +13,7 @@ public class DeleteProductHandler : CommandHandler<DeleteProduct>
         _repository = repository;
     }
 
-    protected override async Task Handle(DeleteProduct command, CancellationToken cancellationToken)
+    public async Task Handle(DeleteProduct command, CancellationToken cancellationToken)
     {
         var product = await _repository.GetAsync(command.Id, cancellationToken);
         product.Delete();

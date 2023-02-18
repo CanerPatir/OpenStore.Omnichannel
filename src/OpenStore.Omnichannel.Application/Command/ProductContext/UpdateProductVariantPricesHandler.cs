@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class UpdateProductVariantPricesHandler : CommandHandler<UpdateProductVariantPrices>
+public class UpdateProductVariantPricesHandler : ICommandHandler<UpdateProductVariantPrices>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -14,7 +14,7 @@ public class UpdateProductVariantPricesHandler : CommandHandler<UpdateProductVar
         _repository = repository;
     }
 
-    protected override async Task Handle(UpdateProductVariantPrices command, CancellationToken cancellationToken)
+    public async Task Handle(UpdateProductVariantPrices command, CancellationToken cancellationToken)
     {
         var product = await _repository.Query.Include(x => x.Variants).SingleOrDefaultAsync(x => x.Id == command.ProductId, cancellationToken);
         product.UpdateVariantPrices(command);

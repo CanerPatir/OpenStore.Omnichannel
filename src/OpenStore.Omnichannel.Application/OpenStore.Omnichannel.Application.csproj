@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="OpenStore.Application" Version="$(OpenStoreBuildingBlocksVersion)"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EfPackageVersion)"/>
+        <PackageReference Include="OpenStore.Application" Version="$(OpenStoreBuildingBlocksVersion)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EfPackageVersion)" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj"/>
+        <ProjectReference Include="..\OpenStore.Omnichannel.Domain\OpenStore.Omnichannel.Domain.csproj" />
     </ItemGroup>
 </Project>

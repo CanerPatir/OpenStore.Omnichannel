@@ -40,16 +40,16 @@ internal static class ServiceCollectionExtensions
         switch (dataSource)
         {
             case EntityFrameworkDataSource.SqLite:
-                services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(configuration, migrationAssemblyName, Opts);
+                services.AddOpenStoreEfCoreWithReadReplica<ApplicationDbContext, SqliteDbContext, ReadOnlyApplicationDbContext, ReadOnlySqliteDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.PostgreSql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, PostgresDbContext>(configuration, migrationAssemblyName, Opts);
+                services.AddOpenStoreEfCoreWithReadReplica<ApplicationDbContext, PostgresDbContext, ReadOnlyApplicationDbContext, ReadOnlyPostgresDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.MySql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, MySqlDbContext>(configuration, migrationAssemblyName, Opts);
+                services.AddOpenStoreEfCoreWithReadReplica<ApplicationDbContext, MySqlDbContext, ReadOnlyApplicationDbContext, ReadOnlyMsSqlDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             case EntityFrameworkDataSource.MsSql:
-                services.AddOpenStoreEfCore<ApplicationDbContext, MsSqlDbContext>(configuration, migrationAssemblyName, Opts);
+                services.AddOpenStoreEfCoreWithReadReplica<ApplicationDbContext, MsSqlDbContext, ReadOnlyApplicationDbContext, ReadOnlyMsSqlDbContext>(configuration, migrationAssemblyName, Opts);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Shared.Command.InventoryContext;
 
 namespace OpenStore.Omnichannel.Application.Command.InventoryContext;
 
-public class AddInventoryQuantityHandler : CommandHandler<AddInventoryQuantity>
+public class AddInventoryQuantityHandler : ICommandHandler<AddInventoryQuantity>
 {
     private readonly ICrudRepository<Inventory> _repository;
 
@@ -13,7 +13,7 @@ public class AddInventoryQuantityHandler : CommandHandler<AddInventoryQuantity>
         _repository = repository;
     }
 
-    protected override async Task Handle(AddInventoryQuantity command, CancellationToken cancellationToken)
+    public async Task Handle(AddInventoryQuantity command, CancellationToken cancellationToken)
     {
         var inventory = await _repository.GetAsync(command.Id, cancellationToken);
 

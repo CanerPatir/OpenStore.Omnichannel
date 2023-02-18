@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Shared.Command.CheckoutContext;
 
 namespace OpenStore.Omnichannel.Application.Command.CheckoutContext;
 
-public class ChangeItemQuantityOfCartHandler : CommandHandler<ChangeItemQuantityOfCart>
+public class ChangeItemQuantityOfCartHandler : ICommandHandler<ChangeItemQuantityOfCart>
 {
     private readonly ICrudRepository<ShoppingCart> _repository;
 
@@ -13,7 +13,7 @@ public class ChangeItemQuantityOfCartHandler : CommandHandler<ChangeItemQuantity
         _repository = repository;
     }
 
-    protected override async Task Handle(ChangeItemQuantityOfCart command, CancellationToken cancellationToken)
+    public async Task Handle(ChangeItemQuantityOfCart command, CancellationToken cancellationToken)
     {
         var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
         if (shoppingCart is null) throw new ApplicationException(Msg.Application.CartNotExists);

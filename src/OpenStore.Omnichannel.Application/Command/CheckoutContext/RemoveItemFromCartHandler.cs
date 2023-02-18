@@ -4,7 +4,7 @@ using OpenStore.Omnichannel.Shared.Command.CheckoutContext;
 
 namespace OpenStore.Omnichannel.Application.Command.CheckoutContext;
 
-public class RemoveItemFromCartHandler : CommandHandler<RemoveItemFromCart>
+public class RemoveItemFromCartHandler : ICommandHandler<RemoveItemFromCart>
 {
     private readonly ICrudRepository<ShoppingCart> _repository;
 
@@ -13,7 +13,7 @@ public class RemoveItemFromCartHandler : CommandHandler<RemoveItemFromCart>
         _repository = repository;
     }
 
-    protected override async Task Handle(RemoveItemFromCart command, CancellationToken cancellationToken)
+    public async Task Handle(RemoveItemFromCart command, CancellationToken cancellationToken)
     {
         var shoppingCart = await _repository.GetAsync(command.CartId, cancellationToken);
         if (shoppingCart is null) throw new ApplicationException(Msg.Application.CartNotExists);

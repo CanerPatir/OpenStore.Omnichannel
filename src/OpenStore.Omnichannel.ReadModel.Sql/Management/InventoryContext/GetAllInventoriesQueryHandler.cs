@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
+using OpenStore.Data.EntityFramework.ReadOnly;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext;
 using OpenStore.Omnichannel.Shared.Query.Management.InventoryContext.Result;
@@ -9,9 +10,9 @@ namespace OpenStore.Omnichannel.ReadModel.Sql.Management.InventoryContext;
 
 public class GetAllInventoriesQueryHandler : IQueryHandler<GetAllInventoriesQuery, PagedList<InventoryListItemDto>>
 {
-    private readonly ICrudRepository<Variant> _repository;
+    private readonly IReadOnlyRepository<Variant> _repository;
 
-    public GetAllInventoriesQueryHandler(ICrudRepository<Variant> repository)
+    public GetAllInventoriesQueryHandler(IReadOnlyRepository<Variant> repository)
     {
         _repository = repository;
     }
@@ -37,7 +38,6 @@ public class GetAllInventoriesQueryHandler : IQueryHandler<GetAllInventoriesQuer
         q = q.OrderBy(x => x.ProductId);
 
         return q
-            .AsNoTracking()
             .GetPaged(
                 pageRequest.PageNumber,
                 pageRequest.PageSize,

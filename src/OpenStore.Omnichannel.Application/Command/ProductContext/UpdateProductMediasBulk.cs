@@ -5,7 +5,7 @@ using OpenStore.Omnichannel.Shared.Command.ProductContext;
 
 namespace OpenStore.Omnichannel.Application.Command.ProductContext;
 
-public class UpdateProductMediasBulkHandler : CommandHandler<UpdateProductMedias>
+public class UpdateProductMediasBulkHandler : ICommandHandler<UpdateProductMedias>
 {
     private readonly ICrudRepository<Product> _repository;
 
@@ -14,7 +14,7 @@ public class UpdateProductMediasBulkHandler : CommandHandler<UpdateProductMedias
         _repository = repository;
     }
 
-    protected override async Task Handle(UpdateProductMedias command, CancellationToken cancellationToken)
+    public async Task Handle(UpdateProductMedias command, CancellationToken cancellationToken)
     {
         var product = await _repository.Query
             .Include(x => x.Medias)

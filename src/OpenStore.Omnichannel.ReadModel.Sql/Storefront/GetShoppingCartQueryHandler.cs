@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OpenStore.Application.Crud;
+using OpenStore.Data.EntityFramework.ReadOnly;
 using OpenStore.Omnichannel.Domain.CheckoutContext;
 using OpenStore.Omnichannel.Domain.ProductContext;
 using OpenStore.Omnichannel.Shared.Query.Storefront;
@@ -9,10 +10,10 @@ namespace OpenStore.Omnichannel.ReadModel.Sql.Storefront;
 
 public class GetShoppingCartQueryHandler : IQueryHandler<GetShoppingCartQuery, ShoppingCartQueryResult>
 {
-    private readonly ICrudRepository<ShoppingCart> _repository;
-    private readonly ICrudRepository<Variant> _variantRepository;
+    private readonly IReadOnlyRepository<ShoppingCart> _repository;
+    private readonly IReadOnlyRepository<Variant> _variantRepository;
 
-    public GetShoppingCartQueryHandler(ICrudRepository<ShoppingCart> repository, ICrudRepository<Variant> variantRepository)
+    public GetShoppingCartQueryHandler(IReadOnlyRepository<ShoppingCart> repository, IReadOnlyRepository<Variant> variantRepository)
     {
         _repository = repository;
         _variantRepository = variantRepository;
