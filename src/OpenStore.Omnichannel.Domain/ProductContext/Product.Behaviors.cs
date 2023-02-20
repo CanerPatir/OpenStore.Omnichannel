@@ -123,7 +123,7 @@ public partial class Product
     {
         if (attacher is null) throw new ArgumentNullException(nameof(attacher));
 
-        var productMedia = attacher.Invoke(productMediaDto.Id);
+        var productMedia = attacher(productMediaDto.Id);
         _medias.Add(productMedia);
 
         ApplyChange(new MediaAssignedToProduct(Id, productMediaDto));

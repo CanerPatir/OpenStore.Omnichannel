@@ -104,6 +104,6 @@
 
     private string GetNextClass() => CurrentPage >= PageCount ? "disabled" : "";
 
-    private object GetPrevClass() => (CurrentPage <= 1) ? "disabled" : "";
+    private object GetPrevClass() => CurrentPage <= 1 ? "disabled" : "";
 
 }

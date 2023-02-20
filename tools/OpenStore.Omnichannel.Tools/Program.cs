@@ -7,7 +7,8 @@ var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
         // services.AddHostedService<DataGenerator>();
-        services.AddHostedService<AddressImporter>();
+        // services.AddHostedService<AddressImporter>();
+        services.AddHostedService<SampleProductDataFeeder>();
         services.AddOpenStoreEfCore<ApplicationDbContext, SqliteDbContext>(hostContext.Configuration);
         services.AddSingleton<IOpenStoreUserContextAccessor, NullUserContextAccessor>();
     })

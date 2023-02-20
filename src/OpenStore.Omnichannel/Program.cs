@@ -95,7 +95,7 @@ app.UseSubApplication<OpenStore.Omnichannel.Identity.Startup>("/identity");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();    
+app.MapControllers();
 
 DataSeeder.SeedAsync(app.Services).Wait();
 

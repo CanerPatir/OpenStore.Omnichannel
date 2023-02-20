@@ -42,10 +42,7 @@ public class SlugHelper
         return str;
     }
 
-    private static string CleanWhiteSpace(string str, bool collapse)
-    {
-        return Regex.Replace(str, collapse ? @"\s+" : @"\s", " ");
-    }
+    private static string CleanWhiteSpace(string str, bool collapse) => Regex.Replace(str, collapse ? @"\s+" : @"\s", " ");
 
     private static string RemoveDiacritics(string str)
     {
@@ -61,7 +58,7 @@ public class SlugHelper
             }
         }
 
-        return (sb.ToString().Normalize(NormalizationForm.FormC));
+        return sb.ToString().Normalize(NormalizationForm.FormC);
     }
 
     private static string ApplyReplacements(string str, Dictionary<string, string> replacements)

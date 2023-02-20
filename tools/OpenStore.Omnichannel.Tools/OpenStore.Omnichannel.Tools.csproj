@@ -14,4 +14,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\OpenStore.Omnichannel.Infrastructure\OpenStore.Omnichannel.Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="content" />
+    </ItemGroup>
 </Project>

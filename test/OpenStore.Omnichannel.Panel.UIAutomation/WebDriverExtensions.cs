@@ -9,7 +9,7 @@ public static class WebDriverExtensions
     {
         var yPos = element.Location.Y;
         var windowSize = driver.Manage().Window.Size.Height;
-        var scrollPosition = yPos - (windowSize / 2);
+        var scrollPosition = yPos - windowSize / 2;
         ((IJavaScriptExecutor) driver).ExecuteScript("window.scrollTo(0, arguments[0]);", scrollPosition);
     }
 

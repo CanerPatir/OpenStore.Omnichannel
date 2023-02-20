@@ -39,7 +39,7 @@ public partial class Product : AggregateRoot<Guid>, IAuditableEntity, ISoftDelet
     public virtual IReadOnlyCollection<Variant> Variants => _variants;
     public virtual IReadOnlyCollection<ProductMedia> Medias => _medias;
 
-    [NotMapped] public ProductMedia FirstMedia => Medias.OrderBy(x => x.Position).FirstOrDefault();
+    [NotMapped] public ProductMedia FirstMedia => Medias.MinBy(x => x.Position);
 
     #region auditable members
 

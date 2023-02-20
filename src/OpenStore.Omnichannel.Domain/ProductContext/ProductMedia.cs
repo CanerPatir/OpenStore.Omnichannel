@@ -9,7 +9,7 @@ public class ProductMedia : MediaEntity
 {
     private readonly List<Guid> _variantIds = new();
 
-    public Guid? ProductId { get; set; }
+    public Guid? ProductId { get; protected set; }
 
     public IReadOnlyCollection<Guid> VariantIds => _variantIds;
 
@@ -63,21 +63,27 @@ public class ProductMedia : MediaEntity
         Size = productMediaDto.Size;
     }
 
-    public void RemoveVariant(Variant variant)
+    public void RemoveVariant(Variant variant) => RemoveVariant(variant.Id);
+    
+    public void RemoveVariant(Guid variantId)
     {
-        if (_variantIds.All(x => x != variant.Id))
+        if (_variantIds.All(x => x != variantId))
         {
             return;
         }
-        _variantIds.Remove(variant.Id);
+
+        _variantIds.Remove(variantId);
     }
 
-    public void AddVariant(Variant variant)
+    public void AddVariant(Variant variant) => AddVariant(variant.Id);
+
+    public void AddVariant(Guid variantId)
     {
-        if (_variantIds.Any(x => x == variant.Id))
+        if (_variantIds.Any(x => x == variantId))
         {
             return;
         }
-        _variantIds.Add(variant.Id);
+
+        _variantIds.Add(variantId);
     }
 }

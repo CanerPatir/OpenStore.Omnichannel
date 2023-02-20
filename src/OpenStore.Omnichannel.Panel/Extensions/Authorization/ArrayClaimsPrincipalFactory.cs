@@ -26,7 +26,7 @@ public class ArrayClaimsPrincipalFactory<TAccount> : AccountClaimsPrincipalFacto
             {
                 var name = kvp.Key;
                 var value = kvp.Value;
-                if (value != null && (value is JsonElement element && element.ValueKind == JsonValueKind.Array))
+                if (value != null && value is JsonElement element && element.ValueKind == JsonValueKind.Array)
                 {
                     claimsIdentity.RemoveClaim(claimsIdentity.FindFirst(kvp.Key));
 

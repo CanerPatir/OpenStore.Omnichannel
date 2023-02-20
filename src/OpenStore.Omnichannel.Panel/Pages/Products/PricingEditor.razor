@@ -71,7 +71,7 @@
             return null;
         }
 
-        var margin = (Model.Price - Model.Cost.Value);
+        var margin = Model.Price - Model.Cost.Value;
         return $"% {margin * 100 / Model.Cost.Value:F1}";
     }
 

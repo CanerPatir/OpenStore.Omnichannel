@@ -69,7 +69,7 @@ public class UpdateVariantViewModel : BaseViewModel
     // ReSharper disable once MemberCanBePrivate.Global
     public Guid VariantId => Model.Id.Value;
 
-    public string DisplayImageUrl => Product.Medias.OrderBy(x => x.Position).FirstOrDefault()?.Url;
+    public string DisplayImageUrl => Product.Medias.MinBy(x => x.Position)?.Url;
 
     public ProductMediaDto VariantDisplayImage => GetVariantDisplayImage(Model);
 

@@ -34,7 +34,7 @@ public class AddressImporter : BackgroundService
 
         // ref: https://www.kaggle.com/juanmah/world-cities
         // Blank string if not a capital, otherwise: - primary - country's capital (e.g. Washington D.C.) - admin - first-level admin
-        await using var csv = await CsvDataReader.CreateAsync("worldcities.csv");
+        await using var csv = await CsvDataReader.CreateAsync("WorldCities.csv");
 
         // "city","city_ascii","lat","lng","country","iso2","iso3","admin_name","capital","population","id"
         var city = csv.GetOrdinal("city");
