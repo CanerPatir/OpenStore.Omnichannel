@@ -11,6 +11,7 @@ namespace OpenStore.Omnichannel.Tools;
 
 public class SampleProductDataFeeder : BackgroundService
 {
+    private const bool Download = false;
     private readonly ILogger<SampleProductDataFeeder> _logger;
     private readonly IServiceProvider _serviceProvider;
 
@@ -177,22 +178,40 @@ public class SampleProductDataFeeder : BackgroundService
 
     private async Task<IEnumerable<ProductMedia>> DownloadImage(ApplicationDbContext context, IList<string> urls, Guid variantID)
     {
-        await Task.WhenAll(urls.Select(ImageDownloadHelper.Download));
+        if (Download)
+        {
+            await Task.WhenAll(urls.Select(ImageDownloadHelper.Download));
+        }
+        
         return urls
             .Select(url => Path.GetFileName(new Uri(url).PathAndQuery))
-            .Select(fileName => ProductMedia.Create(
+            .Select(fileName =>
+            {
+                var path = $"/content/{fileName}";
+
+                var media = context.ProductMedias.FirstOrDefault(x => x.Path == path);
+                if (media is not null)
+                {
+                    return media;
+                }
+
+                return ProductMedia.Create(
                     "https://localhost:5001",
-                    $"/content/{fileName}",
+                    path,
                     "image/jpeg",
                     Path.GetExtension(fileName),
                     fileName,
                     0,
                     null,
                     Path.GetFileNameWithoutExtension(fileName)
-                )
-            )
+                );
+            })
             .ForEach(media => media.AddVariant(variantID))
-            .Select(media => context.ProductMedias.Add(media).Entity)
+            .Select(media =>
+            {
+                var existingMedia = context.ProductMedias.FirstOrDefault(x => x.Id == media.Id);
+                return existingMedia ?? context.ProductMedias.Add(media).Entity;
+            })
             .ToList();
     }
 
