@@ -3,7 +3,7 @@
     <PropertyGroup>
         <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
         <RunAOTCompilation>true</RunAOTCompilation>
-        <BlazoriseVersion>1.2.5</BlazoriseVersion>
+        <BlazoriseVersion>1.3.3</BlazoriseVersion>
     </PropertyGroup>
 
     <ItemGroup>

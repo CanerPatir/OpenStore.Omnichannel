@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+        <PackageReference Include="System.Net.Http.Json" Version="$(NetPackagesVersion)" />
         <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="$(NetPackagesVersion)" />
-        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="$(NetPackagesVersion)" />
     </ItemGroup>
 
     <ItemGroup>
