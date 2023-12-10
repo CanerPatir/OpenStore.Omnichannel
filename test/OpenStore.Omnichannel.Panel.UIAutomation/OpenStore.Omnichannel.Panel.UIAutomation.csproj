@@ -7,13 +7,13 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
-        <PackageReference Include="Selenium.Support" Version="4.15.0" />
-        <PackageReference Include="Selenium.WebDriver" Version="4.15.0" />
+        <PackageReference Include="Selenium.Support" Version="4.16.2" />
+        <PackageReference Include="Selenium.WebDriver" Version="4.16.2" />
         <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="120.0.6099.2800-beta" />
         <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="4.0.31-beta" />
         <PackageReference Include="SpecFlow.xUnit" Version="4.0.31-beta" />
         <PackageReference Include="WebDriver.ChromeDriver" Version="26.14.313457.1" />
-        <PackageReference Include="xunit" Version="2.6.2" />
+        <PackageReference Include="xunit" Version="2.6.3" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.4">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
