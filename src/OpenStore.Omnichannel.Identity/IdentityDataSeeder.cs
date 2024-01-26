@@ -55,7 +55,7 @@ public class IdentityDataSeeder
             {
                 OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange
             },
-            Type = OpenIddictConstants.ClientTypes.Public
+            ClientType = OpenIddictConstants.ClientTypes.Public
         };
 
 
@@ -97,7 +97,7 @@ public class IdentityDataSeeder
             {
                 OpenIddictConstants.Requirements.Features.ProofKeyForCodeExchange
             },
-            Type = OpenIddictConstants.ClientTypes.Confidential
+            ClientType = OpenIddictConstants.ClientTypes.Confidential
         };
 
         openIddictApplicationDescriptor.PostLogoutRedirectUris.AddRange(_identityConfig.WebPostLogoutRedirectUris);
