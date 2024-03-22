@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.WebUtilities;
+using System.Web;
 using OpenStore.Omnichannel;
 using OpenStore.Shared;
 
@@ -27,6 +27,9 @@ public static class HttpClientExtensions
             query.Add("FilterTerm", request.FilterTerm);
         }
 
-        return await httpClient.GetFromJsonAsync<PagedList<T>>(QueryHelpers.AddQueryString(path, query));
+        var queryEncoded = HttpUtility.UrlEncode(string.Join("&",
+            query.Select(kvp =>
+                $"{kvp.Key}={kvp.Value}")));
+        return await httpClient.GetFromJsonAsync<PagedList<T>>($"{path.TrimEnd('/').TrimEnd('?')}?{queryEncoded}");
     }
 }
