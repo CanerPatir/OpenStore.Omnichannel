@@ -15,7 +15,11 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true);
 
             modelBuilder.Entity("Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey", b =>
                 {
@@ -309,11 +313,19 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ApplicationType")
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ClientId")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ClientSecret")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClientType")
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyToken")
@@ -331,6 +343,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<string>("DisplayNames")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("JsonWebKeySet")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Permissions")
                         .HasColumnType("TEXT");
 
@@ -346,8 +361,7 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<string>("Requirements")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Type")
-                        .HasMaxLength(50)
+                    b.Property<string>("Settings")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -905,6 +919,291 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.ToTable("CategoryProducts");
                 });
 
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Fulfillment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CarrierIdentifier")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("ShippingRequired")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Fulfillment");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.FulfillmentItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("FulfillmentId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderLineItemId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FulfillmentId");
+
+                    b.HasIndex("OrderLineItemId");
+
+                    b.ToTable("FulfillmentItem");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CancelReason")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("CancelledAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ClosedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discounts")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("FinancialStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsCancelled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsPreorder")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Number")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ProcessedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TimelineItems")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Number")
+                        .IsUnique();
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.OrderLineItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("RequiresShipping")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Sku")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TaxLines")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Taxable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("VariantId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderLineItem");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Return", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CarrierIdentifier")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OtherReasonDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Reason")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("ShippingRequired")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Return");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.ReturnItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("OrderLineItemId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("ReturnId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("Version")
+                        .IsConcurrencyToken()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderLineItemId");
+
+                    b.HasIndex("ReturnId");
+
+                    b.ToTable("ReturnItem");
+                });
+
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.ProductContext.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1193,6 +1492,9 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("DefaultCurrency")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
@@ -1375,6 +1677,413 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Fulfillment", b =>
+                {
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.Order", "Order")
+                        .WithMany("Fulfillments")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.AddressInfo", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<Guid>("FulfillmentId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressDescription")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressName")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<Guid>("ApplicationUserAddressId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("District")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Firstname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PhoneNumber")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PostCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Surname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Town")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("FulfillmentId");
+
+                            b1.ToTable("Fulfillment");
+
+                            b1.WithOwner()
+                                .HasForeignKey("FulfillmentId");
+                        });
+
+                    b.Navigation("Order");
+
+                    b.Navigation("ShippingAddress");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.FulfillmentItem", b =>
+                {
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.Fulfillment", "Fulfillment")
+                        .WithMany("FulfillmentItems")
+                        .HasForeignKey("FulfillmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.OrderLineItem", "OrderLineItem")
+                        .WithMany("FulfillmentItems")
+                        .HasForeignKey("OrderLineItemId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("Fulfillment");
+
+                    b.Navigation("OrderLineItem");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Order", b =>
+                {
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.ClientInfo", "ClientDetails", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AcceptLanguage")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("BrowserIp")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("UserAgent")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.CustomerInfo", "Customer", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Currency")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("CustomerLocale")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Email")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Firstname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Phone")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Surname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.AddressInfo", "BillingAddress", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressDescription")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressName")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<Guid>("ApplicationUserAddressId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("District")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Firstname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PhoneNumber")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PostCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Surname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Town")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.AddressInfo", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressDescription")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AddressName")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<Guid>("ApplicationUserAddressId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("District")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Firstname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PhoneNumber")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("PostCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Surname")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Town")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.PriceInfo", "TotalPrice", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("CurrencyCode")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.PriceInfo", "TotalShippingPrice", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("CurrencyCode")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.PriceInfo", "TotalTax", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("CurrencyCode")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.Payment", "Payment", b1 =>
+                        {
+                            b1.Property<Guid>("OrderId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("AvsResultCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("CreditCardBin")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("CreditCardCompany")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("CreditCardNumber")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("CvvResultCode")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("Type")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.Navigation("BillingAddress");
+
+                    b.Navigation("ClientDetails");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Payment");
+
+                    b.Navigation("ShippingAddress");
+
+                    b.Navigation("TotalPrice");
+
+                    b.Navigation("TotalShippingPrice");
+
+                    b.Navigation("TotalTax");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.OrderLineItem", b =>
+                {
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.Order", "Order")
+                        .WithMany("LineItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.PriceInfo", "Price", b1 =>
+                        {
+                            b1.Property<Guid>("OrderLineItemId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("CurrencyCode")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("OrderLineItemId");
+
+                            b1.ToTable("OrderLineItem");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderLineItemId");
+                        });
+
+                    b.OwnsOne("OpenStore.Omnichannel.Domain.OrderContext.PriceInfo", "Tax", b1 =>
+                        {
+                            b1.Property<Guid>("OrderLineItemId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<decimal>("Amount")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<int>("CurrencyCode")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("OrderLineItemId");
+
+                            b1.ToTable("OrderLineItem");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderLineItemId");
+                        });
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Price");
+
+                    b.Navigation("Tax");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Return", b =>
+                {
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.Order", "Order")
+                        .WithMany("Returns")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.ReturnItem", b =>
+                {
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.OrderLineItem", "OrderLineItem")
+                        .WithMany("ReturnItems")
+                        .HasForeignKey("OrderLineItemId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.HasOne("OpenStore.Omnichannel.Domain.OrderContext.Return", "Return")
+                        .WithMany("ReturnItems")
+                        .HasForeignKey("ReturnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderLineItem");
+
+                    b.Navigation("Return");
+                });
+
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.ProductContext.Product", b =>
                 {
                     b.HasOne("OpenStore.Omnichannel.Domain.LookupContext.Brand", "Brand")
@@ -1533,6 +2242,32 @@ namespace OpenStore.Omnichannel.Infrastructure.Data.EntityFramework.Migrations.S
                     b.Navigation("Children");
 
                     b.Navigation("Medias");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Fulfillment", b =>
+                {
+                    b.Navigation("FulfillmentItems");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Order", b =>
+                {
+                    b.Navigation("Fulfillments");
+
+                    b.Navigation("LineItems");
+
+                    b.Navigation("Returns");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.OrderLineItem", b =>
+                {
+                    b.Navigation("FulfillmentItems");
+
+                    b.Navigation("ReturnItems");
+                });
+
+            modelBuilder.Entity("OpenStore.Omnichannel.Domain.OrderContext.Return", b =>
+                {
+                    b.Navigation("ReturnItems");
                 });
 
             modelBuilder.Entity("OpenStore.Omnichannel.Domain.ProductContext.Product", b =>
