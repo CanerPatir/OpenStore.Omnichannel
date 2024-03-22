@@ -76,9 +76,7 @@ public sealed class CreateProduct : BaseStep
 
         Assert.Equal($"Thanks for getting in touch {_testData.MyMessage.Name}!", HeaderText.Text);
 
-        var paragraph = "";
-        foreach (var p in ParagraphText)
-            paragraph += p.Text + " ";
+        var paragraph = ParagraphText.Aggregate("", (current, p) => current + (p.Text + " "));
 
         Assert.Equal($"We'll get back to you about {_testData.MyMessage.Subject} as soon as possible. ", paragraph);
     }

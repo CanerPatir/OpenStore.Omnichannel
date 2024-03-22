@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+set -e
 
+#configJson=$(<src/OpenStore.Omnichannel/appsettings.json)
+#echo $configJson
 ACTIVE_CONN=$(python -c 'import sys, json; print(json.load(sys.stdin)["Data"]["ActiveConnection"])' < src/OpenStore.Omnichannel/appsettings.json)
 echo $ACTIVE_CONN
 case $ACTIVE_CONN in
@@ -30,4 +33,4 @@ echo $MIG_NAME
 echo $ACTIVE_CONTEXT
 echo $ACTIVE_FOLDER
 dotnet-ef migrations add $MIG_NAME --project ./src/OpenStore.Omnichannel.Infrastructure --startup-project ./src/OpenStore.Omnichannel --context $ACTIVE_CONTEXT --output-dir Data/EntityFramework/Migrations/$ACTIVE_FOLDER
-# dotnet-ef database update --context $ACTIVE_CONTEXT --project ./OpenStore.Omnichannel
+# dotnet-ef database update --context $ACTIVE_CONTEXT --project ./src/OpenStore.Omnichannel
