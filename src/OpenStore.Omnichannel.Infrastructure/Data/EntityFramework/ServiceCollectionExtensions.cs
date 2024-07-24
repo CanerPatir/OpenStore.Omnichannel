@@ -86,6 +86,6 @@ internal static class ServiceCollectionExtensions
 
     private static void AddInMemoryCacheServiceProvider(IServiceCollection services)
     {
-        services.AddEFSecondLevelCache(opts => opts.UseMemoryCacheProvider(CacheExpirationMode.Absolute, TimeSpan.FromMinutes(15)).DisableLogging());
+        services.AddEFSecondLevelCache(opts => opts.UseMemoryCacheProvider(CacheExpirationMode.Absolute, TimeSpan.FromMinutes(15)).ConfigureLogging(false));
     }
 }
